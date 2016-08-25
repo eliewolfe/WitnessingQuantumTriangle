@@ -61,7 +61,7 @@
 \DeclareDocumentCommand{\probvec}{O{} O{}}{\ifthenelse{\equal{#1}{}}{\mathcal{P}}{\mathcal{P}_{#1}}\ifthenelse{\equal{#2}{}}{}{\!\br{#2}}} % probability distribution vector
 
 % === To allow for labeling of rows and columns of a matrix ===
-\usepackage{kbordermatrix}
+\usepackage{../packages/kbordermatrix}
 \renewcommand{\kbldelim}{(} % Left delimiter
 \renewcommand{\kbrdelim}{)} % Right delimiter
 
