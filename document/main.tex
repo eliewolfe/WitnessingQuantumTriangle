@@ -31,13 +31,21 @@
 \newcommand{\perm}{\Omega}
 \newcommand{\Hilb}{\mathcal{H}}
 \newcommand{\ancestralindep}{\perp}
-\newcommand{\valprod}{\circ}
+\newcommand{\valprod}{\times}
+\newcommand{\bigvalprod}{\prod}
+\newcommand{\com}{\mathrel{\Yright\hspace{-0.2em}\Yleft}}
+\newcommand{\ext}{\mathrel{\Yright}}
+\newcommand{\res}{\mathrel{\Yleft}}
+\newcommand{\gelem}{\varphi}
+\newcommand{\action}[1]{\gelem\bs{#1}}
+\newcommand{\mscenario}{\mathcal{M}}
+\newcommand{\jointvar}{\mathcal{J}}
 % When I introduce a new term or definition
 \newcommand{\term}[1]{\textcolor{Mahogany}{\textbf{#1}}}
 
 % === Mathematical operators that are denoted with words ===
 \newcommand{\setoperator}[1]{%
-\expandafter\DeclareDocumentCommand\csname#1\endcsname{O{} O{} m}{{\mathsf{#1}_{##1}^{##2}\!}\br{##3}}%
+\expandafter\DeclareDocumentCommand\csname#1\endcsname{O{} O{} m}{{\mathsf{#1}_{##1}^{##2}}\br{##3}}%
 }
 
 \setoperator{Pa} % Parents of a node
@@ -55,10 +63,12 @@
 \setoperator{Aut} % graph automorphism
 \setoperator{Orb} % Group Orbits
 \setoperator{Perm} % Permutation group
+\setoperator{Out} % Outcome space
+\setoperator{Dom} % Domian
 
-\newcommand{\outc}[1]{o\!\bs{#1}} % Fritz's BBTII notation for observed outcomes
-\DeclareDocumentCommand{\prob}{O{} O{}}{\ifthenelse{\equal{#1}{}}{P}{P_{#1}}\ifthenelse{\equal{#2}{}}{}{\!\br{#2}}} % probability distribution
-\DeclareDocumentCommand{\probvec}{O{} O{}}{\ifthenelse{\equal{#1}{}}{\mathcal{P}}{\mathcal{P}_{#1}}\ifthenelse{\equal{#2}{}}{}{\!\br{#2}}} % probability distribution vector
+\newcommand{\outc}[1]{o\bs{#1}} % Fritz's BBTII notation for observed outcomes
+\DeclareDocumentCommand{\prob}{O{} O{}}{\ifthenelse{\equal{#1}{}}{P}{P_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution
+\DeclareDocumentCommand{\probvec}{O{} O{}}{\ifthenelse{\equal{#1}{}}{\mathcal{P}}{\mathcal{P}_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution vector
 
 % === To allow for labeling of rows and columns of a matrix ===
 \usepackage{kbordermatrix}
@@ -88,34 +98,92 @@
     \section{Definitions \& Notation}
     \comment[TC]{This entire section should be integrated into the body when logical to do so.}
     \begin{definition}
-        Borrowing the notation from \cite{Fritz_2014}, each random variable $v$ has a set of all possible outcomes called the \term{outcome space} or \term{valuation space} and is denoted $O_v$. When referencing a \textit{specific} element of $O_v$ or \textit{valuation} of $v$, the notation $\outc{v}$ is used. This notation generalizes to set of random variables $V = \bc{v_1, \ldots, v_{\abs{V}}}$;
-        a specific outcome of $\outc{V} \in O_V$ is used to reference a particular tuple or vector of outcomes,
-        \[ \outc{V} \defined \br{\outc{v_1}, \outc{v_2}, \ldots, \outc{v_{\abs{V}}} } = \br{\outc{v}}_{v \in V} \eq \label{eq:outcomespace}\]
-        It is important to note that the ordering of events in \cref{eq:outcomespace} is irrelevant. Similarly, the outcome space $O_V$ for a set of random variables $V$ is the \term{valuation product} `$\valprod$' of the individual outcome spaces,
-        \[ O_V \defined O_{v_1} \valprod \cdots \valprod O_{v_{\abs{V}}} \]
-        Where `$\valprod$' is defined such that for $A \cap B = \emptyset$,
-        \[ \outc{A} \valprod \outc{B} \defined \br{\outc{a_1}, \ldots, \outc{a_{\abs{A}}}, \outc{b_1}, \ldots, \outc{b_{\abs{B}}}} = \br{\outc{v}}_{v \in A \cup B} \]
-        Often `$\valprod$' will be omitted where there is little ambiguity. When referencing the probability that a set of variables $V$ has outcome $\outc{V}$ (say $v_1 = 0, v_2 = 3$), we intend for the following class of notations to be used interchangeably.
-        \[ \prob[V][\outc{V}] = \prob[][\outc{V}] = \prob[][\outc{v_1}\outc{v_2}] = \prob[][v_1 = 0, v_2 = 3] = \prob[][v_2 = 3, v_1 = 0] = \prob[v_1, v_2][03] \]
+        Following common notation used in \cite{Fritz_2011}, we use the notation $\bs{k} = \bc{1, \ldots, k}$ to be a finite index set. Moreover, when referencing a finite set with $k$ elements, we can write,
+        \[ A_{\bs{k}} \defined \bc{A_i}_{i \in \bs{k}} = \bc{A_1, \ldots, A_k} \]
+    \end{definition}
+    \begin{definition}
+        \label{def:outcome_space}
+        Each random variable $v$ has a set of possible outcomes which are labeled by \term{outcome labels} $O_v$. The set of all outcomes themselves is its \term{outcome space} and is represented by the set of all functions from $v$ to $O_v$\footnote{Using functional language for outcome events is necessary for a sheaf-theoretic treatment of contextuality \cite{Abramsky_2011}.},
+        \[ \Out{v} \defined \bc{f : \bc{v} \to O_v} \]
+        Each of these functions has a singular domain ($v$) and thus can be concisely written in a compact form $\bc{v \mapsto o}$ where $o \in O_v$ represents some generic outcome label. Each function $f$ should be interpreted as the \textit{event} that $v$ obtains the outcome $o$, as well as the function that takes $v$ to $o$ $\bc{v \mapsto f\br{v} = o}$. Evidently $\Out{v}$ is isomorphic to $O_v$, and in many cases the two can be considered equivalent; however we make this particular semantic distinction now in preparation of \cref{sec:symmetry}.
+    \end{definition}
+
+    \begin{definition}
+        This notation generalizes to more than one variable. Letting $V = \bc{v_1, v_2}$, we define $\Out{V}$ to be the set of all joint valuations of $v_1$ and $v_2$.
+        % Where the valuation product between outcome spaces is defined as follows,\footnote{At this level, a valuation product behaves analogously to a Cartesian product. However in \cref{def:extendable_set}, we define the a valuation product between outcomes and outcomes spaces.}
+        \[ \Out{V} = \Out{\bc{v_1, v_2}} \defined \bc{f : \bc{v_1, v_2} \to \bc{O_{v_1}, O_{v_2}} \mid f\br{v_i} \in O_{v_i}, i \in \bc{1,2}}  \]
+        As a natural generalization, when considering a larger set of random variables $V = \bc{v_i}_{i \in \bs{k}}$ we define the joint outcome space in an analogous way,
+        \[ \Out{V} \defined \bc{f: \bc{v_i}_{i \in \bs{k}} \to \bc{O_{v_i}}_{i \in \bs{k}} \mid \forall i \in \bs{k} : f\br{v_i} \in O_{v_i} } \eq \label{eq:outcome_space}\]
+        Each outcome $f$ can be compactly represented as a set of mappings over each element of $V$.
+        \[ f = \bc{v_1 \mapsto f\br{v_1}, \ldots, v_k \mapsto f\br{v_k}} = \bc{v_i\mapsto f\br{v_i}}_{i \in \bs{k}} \]
+        The domain of $f$ refers to the set of random variables it valuates and is denoted as $\Dom{f}$. If $f \in \Out{V}$, then $\Dom{f} = V$.
+        % Where the joint outcome labels are elements of a Cartesian product,
+        % \[ O_V \defined O_{v_1} \times \cdots \times O_{v_{\abs{V}}}  \]
+
+        % And a generic, unspecified joint outcome in $\Out{V}$ is written as $\outc{V}$ in a similar fashion to \cref{def:outcome_space} and is represented by a tuple of individual outcomes.
+        % \[ \outc{V} \defined \br{\outc{v_1}, \ldots, \outc{v_{k}}} = \br{\outc{v}}_{v \in V} \eq \label{eq:outcomespace}\]
+        % It is important to note that the ordering of events in \cref{eq:outcomespace} is irrelevant.
+         % The definition of a valuation product can also be extended to outcomes themselves. Let $A$ and $B$ be sets of random variables and let $\outc{A} \in \Out{A}$ and $\outc{B} \in \Out{B}$. If $$
+    \end{definition}
+
+    \begin{example}
+        Interpreting $f \in \Out{V}$ as an \textit{event} or \textit{outcome} on $V$, a probability distribution $\prob[V]$ over $V$ will assign a non-negative probability $\prob[V][f]$ to $f$. Let $V = \bc{v_1, v_2}$ with each $v \in V$ having $3$ distinct outcomes $O_v = \bc{0,1,2}$. Furthermore let $f \in \Out{V}$ be the outcome $\br{v_1 \mapsto 2, v_2 \mapsto 1}$. The following class of notations will be considered interchangeable,
+        \[ \prob[V][f] = \prob[v_1, v_2][f] = \prob[][v_1 \mapsto f_1\br{v_1}, v_2 \mapsto f_2\br{v_2}] = \prob[][v_1 \mapsto 2, v_2 \mapsto 1] = \prob[v_1v_2][21] \]
+        Each of which should be read as ``the probability that $v_1$ gets outcome $2$ AND $v_2$ gets outcome $1$''.
+    \end{example}
+
+    \begin{remark}
+        \label{rem:domain_dist}
+        In each of the above notations, $\prob[V]$ always represents a probability distribution over the \textit{domain} of $f \in \Out{V}$. In cases where the subscript is omitted, it should be assumed to be over the domain of $f$.
+        \[ \prob[V][f] = \prob[\Dom{f}][f] = \prob[][f] \]
+    \end{remark}
+
+    \begin{definition}
+        \label{def:restriction}
+        Let $V = \bc{v_1, \ldots, v_k}$ be a set of random variables and $W \subseteq V$ be a subset of $V$. Moreover, let $f \in \Out{V}$ be a joint outcome over $V$; assigning a unique label to each variable in $V$. The \term{restriction of $f$ onto $W$} (denoted $f|_{W} \in \Out{W}$) is the outcome of $\Out{W}$ that \textit{agrees} with each of $f$'s assignments for variables in $W$.
+        \[ \forall v \in W : f\br{v} = f|_{W}\br{v} \]
+    \end{definition}
+
+    \begin{definition}
+        \label{def:outcome_compatible}
+        Consider two sets of random variables $V$ and $W$ and two specific outcomes $f_V \in \Out{V}$ and $f_W \in \Out{W}$. The outcomes $f_V$ and $f_W$ are said to be \term{compatible} if they agree on their valuations of $V \cap W$. Compatibility will be denoted with `$\com$'.
+        \[ f_V \com f_W \iff {f_V}|_{V\cap W} = {f_W}|_{V\cap W} \]
+        Compatibility is a reflexive and symmetric, but \textit{not} transitive. There are two cases when compatibility is transitive; whenever $V \cap W = \emptyset$ or $V = W$. Whenever $V \cap W = \emptyset$, $f_V$ and $f_W$ can be said to be \textit{trivially} compatible. Moreover if $V = W$, compatibility becomes ordinary equivalence,
+        \[ V = W \quad \textrm{and} \quad f_V \com f_W \iff f_V = f_W \]
     \end{definition}
 
     \begin{definition}
         \label{def:extendable}
-        An outcome $\outc{V}$ is said to be \term{extendable} to an outcome $\outc{W}$ (where $V \subseteq W$) if there exists an outcome $\outc{W\setminus V}$ such that $\outc{W} = \outc{W\setminus V} \valprod \outc{V}$.
-        \[ \Ext{\outc{V} \to \outc{W}} \iff \exists \outc{W\setminus V} \mid \outc{W} = \outc{W\setminus V} \valprod \outc{V} \]
-        The idea being that a \textit{less specific} outcome $\outc{V}$ can be made \textit{more specific} by assigning outcomes to the remaining random variables in $W \setminus V$. If such an outcome $\outc{W\setminus V}$ exists, it is unique.
+        Let $f_V \in \Out{V}$ and $f_W \in \Out{W}$ be outcomes of $V$ and $W$ respectively as in \cref{def:outcome_compatible}. If $f_V$ and $f_W$ are compatible, and $W \subseteq V$ then $f_W$ is said to be \term{extendable} to $f_V$ and is denoted `$\ext$'.
+        \[ f_W \ext f_V \iff f_W \com f_V \quad \textrm{and} \quad W \subseteq V \iff {f_W} = {f_V}|_{W} \]
+        The dual language is also appropriate: $f_W$ is a \term{restriction} of $f_V$ (denoted $f_V \res f_W$) if and only if $f_W$ is extendable to $f_V$. If $f_W \ext f_V$ then there exists a unique element $f_{V \setminus W} \in \Out{V \setminus W}$ such that $f_V$ can be reconstructed by gluing together $f_{V \setminus W}$ and $f_W$.
+        \[ \forall v \in V : f_V\br{v} = \begin{cases}
+            f_W\br{v} & v \in W \\
+            f_{V\setminus W}\br{v} & v \in V \setminus W
+        \end{cases}  \]
     \end{definition}
+
+    \begin{remark}
+        The notation `$g \com h$' is used to indicate compatibility between $g \in \Out{V}$ and $h \in \Out{W}$ because of the following observation; $g$ and $h$ are compatible if and only if they are extendable to some outcome $f \in \Out{V \cup W}$.
+        \[ g \com h \iff \exists f \in \Out{V \cup W} \mid g \ext f \res h \]
+        In fact, such an $f$ is uniquely defined,
+        \[ \forall v \in V : f\br{v} = \begin{cases}
+            g\br{v} & v \in V \\
+            h\br{v} & v \in W
+        \end{cases} \]
+    \end{remark}
 
     \begin{definition}
-        The set of all extendable outcomes of $\outc{V}$ in $O_{W}$ is called the \term{extendable set} and can be written as,
-        \[ \Ext[W]{\outc{V}} \defined \outc{V} \valprod O_{W\setminus V} \defined \bc{\outc{W} \in O_{W} \mid \Ext{\outc{V} \to \outc{W}}} \]
-        The extendable set of $\outc{V}$ in $W$ is the set of all outcomes of $O_W$ that \textit{agree} with $\outc{V}$ about valuations for variables in $V$. In this language, two outcomes $\outc{V}$ and $\outc{W}$ are \term{compatible} if they are both extendable to some outcome $\outc{V \cup W}$. Equivalently, $\outc{V}$ and $\outc{W}$ agree on their valuations of $V \cap W$.
-        \[ \Com{\outc{V}, \outc{W}} \iff \exists \outc{V \cup W} \mid \Ext{\outc{V} \to \outc{V \cup W}}, \Ext{\outc{W} \to \outc{V \cup W}} \]
+        \label{def:extendable_set}
+        The set of all extendable outcomes of $f \in \Out{W}$ into $V$ is called the \term{extendable set of $f$ into $V$} and can be written as,
+        \[ \Ext[V]{f} \defined \bc{g \in \Out{V} \mid f \ext g} \subseteq \Out{V} \]
+        The extendable set of $f$ into $V$ is the subset of outcomes in $\Out{V}$ that \textit{agree} with $f$ about valuations for variables in $W$.
     \end{definition}
 
+
     \begin{example}
-        Consider two sets of random variables $V = \bc{a, b}$ and $W = \bc{a, b, c}$. Clearly $V \subseteq W$; a prerequisite for extendability. Also take all individual outcome spaces to be finite and of order 3: $O_a = O_b = O_c = \bc{1,2,3}$. Then $\outc{V} = \outc{\bc{a,b}} = \br{a = 1, b = 2}$ is extendable to the outcome $\outc{W} = \br{a = 1, b = 2, c = 1}$, and the extendable set of $\outc{V}$ in $O_{W}$ is,
-        \[ \Ext[a,b,c]{a = 1, b = 2} = \bc{\br{a = 1, b = 2, c = 1}, \br{a = 1, b = 2, c = 2}, \br{a = 1, b = 2, c = 3}} \]
+        Let $W = \bc{a, b}$ and $V = \bc{a, b, c}$ be two sets of random variables. Clearly $W \subseteq V$; a prerequisite for extendability. Further impose that the outcome labels for each variable are the same: $O_a = O_b = O_c = \bc{0,1,2}$. As an example, let $f = \bc{a \mapsto f\br{a} = 1, b \mapsto f\br{b} = 2} \in \Out{W}$; $f$ is extendable to the outcome $g = \bc{a \mapsto g\br{a} = 1, b \mapsto g\br{b} = 2, c \mapsto g\br{c} = 1} \in \Out{V}$, and the extendable set of $f$ into $V$ is,
+        \[ \Ext[V]{f} = \Ext[a,b,c]{a \mapsto 1, b \mapsto 2} = \bc{\bc{a \mapsto 1, b \mapsto 2, c \mapsto 0}, \bc{a \mapsto 1, b \mapsto 2, c \mapsto 1}, \bc{a \mapsto 1, b \mapsto 2, c \mapsto 2}} \]
     \end{example}
 
     % \begin{definition}
@@ -203,21 +271,17 @@
     \end{definition}
 
     \begin{definition}
-        The \term{product distribution} two distributions is denoted as usual with $\times$ and is defined as,
-        \[ \br{\prob[v] \times \prob[w]}\br{\outc{v}, \outc{w}} \defined \prob[v][\outc{v}]\prob[w][\outc{w}] \]
-        A product distribution of $k$ distributions is defined recursively,
-        \[ \prod_{i=1}^{k} \prob[v_i] \defined \br{\prob[v_1] \times \cdots \times \prob[v_k]} \]
+        The \term{product distribution} of two disjoint distributions $\prob[V]$ and $\prob[W]$ (where $V \cap W = \emptyset$) is denoted as usual with $\prob[V] \times \prob[W]$ and is defined as,
+        \[ \forall f \in \Out{V \cup W} : \br{\prob[V] \times \prob[W]}\br{f} \defined \prob[V][f|_{V}]\cdot\prob[W][f|_{W}] \]
+        A product distribution of $k$ mutually disjoint distributions is defined as,
+        \[ \prod_{i\in\bs{k}} \prob[V_i] \defined \br{\prob[V_1] \times \cdots \times \prob[V_k]} \]
     \end{definition}
 
     \begin{definition}
-        The \term{marginalization} of a distribution $\prob[v \cup w]$ to the distribution $\prob[v]$ is denoted $\sum_{w} \prob[v \cup w] = \prob[v]$ and is defined such that,
-        \[ \forall \outc{v} \in O_v : \br{\sum_{w} \prob[v, w]}\br{\outc{v}} \defined \sum_{o\bs{w} \in O_w} \prob[v, w][\outc{v}, \outc{w}] \]
+        The \term{marginalization} of a distribution $\prob[V]$ to a distribution over $W \subseteq V$ is denoted $\sum_{V \setminus W} \prob[V]$ and is defined such that,
+        \[ \forall f \in \Out{W} : \br{\sum_{V \setminus W} \prob[V]}\br{f} \defined \sum_{g \in \Ext[V]{f}} \prob[V][g] \]
     \end{definition}
 
-    \begin{definition}
-        Following common notation used in \cite{Fritz_2011}, we use the notation $\bs{k} = \br{1, \ldots, k}$ to be a finite index set. Moreover, when referencing a finite set with $k$ elements, we can write,
-        \[ A_{\bs{k}} \defined \bc{A_i}_{i \in \bs{k}} = \bc{A_1, \ldots, A_k} \]
-    \end{definition}
 
     \todo[TC]{How many definitions do I need to write??}
 
@@ -284,7 +348,7 @@
 
     \section{Compatibility, Contextuality and the Marginal Problem}
     \label{sec:comp_con_mp}
-    In order to determine if a given marginal distribution $\prob[V]$ or set of marginal distributions $\prob[V_{\bs{k}}] \defined \bc{\prob[V_1], \ldots, \prob[V_k]}$ is compatible with a causal structure $\graph$, one should first formalize what is meant by \textit{compatible}.
+    In order to determine if a given marginal distribution $\prob[V]$ or set of marginal distributions $\bc{\prob[V_i]}_{i \in \bs{k}} \defined \bc{\prob[V_1], \ldots, \prob[V_k]}$ is compatible with a causal structure $\graph$, one should first formalize what is meant by \textit{compatible}.
 
     \begin{definition}
         A set of \term{causal parameters} for a particular causal structure $\graph$ is the specification of a conditional distribution for every node $n \in \nodes$ given it's parents in $\graph$.
@@ -301,38 +365,37 @@
             \item Finally marginalize over the observed nodes not in $V$ to obtain $\prob[V]$,
             \[ \prob[V] = \sum_{\nodes_O \setminus V} \prob[\nodes_O] \]
         \end{enumerate}
-        A set of marginal distributions $\prob[V_{\bs{k}}]$ is compatible with $\graph$ if each of the distributions can be made compatible by the \textit{same} choice of causal parameters.
-        A distribution $\prob[V]$ or set of distributions $\prob[V_{\bs{k}}]$ is said to be \term{incompatible} with a causal structure if there \textit{does not exist} a set of causal parameters with the above mentioned property.
+        A set of marginal distributions $\bc{\prob[V_{i}]}_{i \in \bs{k}}$ is compatible with $\graph$ if each distribution $\prob[V_{i}]$ can be made compatible by the \textit{same} choice of causal parameters.
+        A distribution $\prob[V]$ or set of distributions $\bc{\prob[V_{i}]}_{i \in \bs{k}}$ is said to be \term{incompatible} with a causal structure if there \textit{does not exist} a set of causal parameters with the above mentioned property.
 
         \todo[TC]{Source this?}
     \end{definition}
     Operations 2 and 3 of \cref{def:compatible} are related to the \textit{marginal problem}.
     \begin{definition}
         \label{def:marginal_problem}
-        \term{The Marginal Problem:} Given a set of distributions $\prob[V_{\bs{k}}] \defined \bc{\prob[V_1], \ldots, \prob[V_k]}$ where $V_i \subseteq \mathcal{V}$ for some set of random variables $\mathcal{V}$ and $k \geq 2$, does there exist a joint distribution $\prob[\mathcal{V}]$ such that each given distribution $\prob[V_i]$ can be obtained from marginalizing $\prob[\mathcal{V}]$?
-        \[ \forall i \in \bs{k} : \prob[V_i] = \sum_{\mathcal{V} \setminus V_i} \prob[\mathcal{V}] \]
-        Typically (although not strictly necessary), $\mathcal{V}$ is taken to mean the union of all $V_i$'s.
-        \[ \mathcal{V} = V_1 \cup \cdots \cup V_k = \bigcup_{i\in\bs{k}} V_i \eq \label{eq:marginals_union} \]
+        \term{The Marginal Problem:} Given a set of distributions $\bc{\prob[V_{i}]}_{i \in \bs{k}} \defined \bc{\prob[V_1], \ldots, \prob[V_k]}$ where $V_i \subseteq \jointvar$ for some set of random variables $\jointvar$, does there exist a joint distribution $\prob[\jointvar]$ such that each given distribution $\prob[V_i]$ can be obtained from marginalizing $\prob[\jointvar]$?
+        \[ \forall i \in \bs{k} : \prob[V_i] = \sum_{\jointvar \setminus V_i} \prob[\jointvar] \]
+        Typically (although not strictly necessary\footnote{Appending any additional variables to $\jointvar$ will not affect the existence of a joint distribution.}), $\jointvar$ is taken to mean the union of all $V_i$'s.
+        \[ \jointvar = V_1 \cup \cdots \cup V_k = \bigcup_{i\in\bs{k}} V_i \eq \label{eq:marginals_union} \]
     \end{definition}
 
     \todo[TC]{Mention polytope perspective and existing methods}
     \begin{definition}
         \label{def:marginal_model}
-        A reoccurring motif of these discussions will be the set of distributions $\prob[V_{\bs{k}}] \defined \bc{\prob[V_1], \ldots, \prob[V_k]}$ mentioned in \cref{def:marginal_problem}. In agreement with \cite{Fritz_2011} we will call this set of distributions a \term{marginal model} and denote it $\prob_{V_{\bs{k}}}$ provided that they are \textit{compatible}:
+        A reoccurring motif of these discussions will be the set of distributions $\bc{\prob[V_{i}]}_{i \in \bs{k}} \defined \bc{\prob[V_1], \ldots, \prob[V_k]}$ mentioned in \cref{def:marginal_problem}. In agreement with \cite{Fritz_2011} we call the set of subsets $\mscenario \defined \bc{V_1, \ldots, V_k}$ the marginal contexts or the \term{maximal marginal scenario}\footnote{Rigorously speaking as defined by \cite{Fritz_2011}, a marginal scenario forms an \textit{abstract simplicial complex} where it is required that $V' \in \mscenario$ whenever $V' \subseteq V_i$ for some $i \in \bs{k}$. ``Maximal'' refers to the restriction that $\forall i,j : V_i \not \subseteq V_j$.}. An individual $V_i \in \mscenario$ is a \term{marginal context}. The union of all contexts is denoted $\jointvar$ and is defined exactly as in \cref{eq:marginals_union}.
+        Moreover, we will call the set of distributions a \term{marginal model} and denote it $\prob^{\mscenario}$ provided that they are \textit{compatible} \todo[TC]{Mention quantum non-signalling and maybe $k \geq 3$}:
         \[ \forall i \neq j \text{ if } V_i \cap V_j \neq \emptyset \text{ then } \sum_{V_i \setminus V_j} \prob[V_i] = \sum_{V_j \setminus V_i} \prob[V_j]  \]
-        We call the set of subsets $V_{\bs{k}} \defined \bc{V_1, \ldots, V_k}$ the marginal contexts or the \term{maximal marginal scenario} $V_{\bs{k}}$\footnote{Rigorously speaking as defined by \cite{Fritz_2011}, a marginal scenario forms an \textit{abstract simplicial complex} where $V' \in V_{\bs{k}}$ whenever $V' \subseteq V_i$ for some $i$. ``Maximal'' refers to the restriction that $\forall i,j : V_i \not \subseteq V_j$.} and an individual $V_i$ a \term{marginal context}. The union of all contexts is denoted $\mathcal{V}$ and define it exactly as in \cref{eq:marginals_union}.
+        Following definition 2.3 in \cite{Fritz_2011}, a marginal model is said to be \term{contextual} if it \textit{does not} admit a joint distribution $\prob[\jointvar]$ and \term{non-contextual} otherwise.
 
-        Following definition 2.3 in \cite{Fritz_2011}, a marginal model is said to be \term{contextual} if it \textit{does not} admit a solution to the marginal problem and \term{non-contextual} otherwise.
-
-        In addition, we elect to define the \term{marginal outcomes} $O_{V_{\bs{k}}}$ to be the set of all outcomes belonging to outcomes of the marginal contexts.
-        \[ O_{V_{\bs{k}}} \defined O_{V_1} \cup \cdots \cup O_{V_k} = \bigcup_{i \in \bs{k}} O_{V_i} \]
-        % By an intended abuse of notation, we say that a particular outcome is an ``element'' of $O_{V_{\bs{k}}}$ if it is an element of $O_{V_i}$ for some $i \in \bs{k}$.
-        % \[ \outc{V_i} \in O_{V_{\bs{k}}} \]
-        Note that $O_{V_{\bs{k}}}$ is \textit{not} a valid outcome space, analogous to the fact that $P_{V_{\bs{k}}}$ is \textit{not} a probability distribution. Instead $O_{V_{\bs{k}}}$ is a collection of outcome spaces just as $P_{V_{\bs{k}}}$ is a collection of distributions.
+        In addition, we elect to define the \term{marginal outcomes} $\Out{\mscenario}$ to be the set of all outcomes belonging to outcomes $\Out{V_i}$ of the marginal context\footnote{Here `$\coprod$' refers to the \textit{disjoint union} of outcome contexts; when $i \neq j$, $\Out{V_i} \cap \Out{V_j} = \emptyset$ since $V_i \neq V_j$.}.
+        \[ \Out{\mscenario} \defined \coprod_{i \in \bs{k}} \Out{V_i} \]
+        % By an intended abuse of notation, we say that a particular outcome is an ``element'' of $O_{\mscenario}$ if it is an element of $O_{V_i}$ for some $i \in \bs{k}$.
+        % \[ \outc{V_i} \in O_{\mscenario} \]
+        Each marginal outcome $m \in \Out{\mscenario}$ belongs to a unique marginal outcome space $\Out{V_i}$. To make reference to the marginal context $V_i$ associated with $m$, recall \cref{rem:domain_dist}: the context for $m$ is precisely the domain of $m$ ($V_i = \Dom{m}$). Note that $\Out{\mscenario}$ is a slight abuse of notation; $\Out{\mscenario}$ is \textit{not} a valid outcome space, analogous to the fact that $P^{\mscenario}$ is \textit{not} a probability distribution. Instead $\Out{\mscenario}$ is a \textit{flattened} collection of outcome spaces just as $P^{\mscenario}$ is a collection of distributions. The \term{joint outcomes} $\Out{\jointvar}$ are defined in the usual fashion of \cref{def:outcome_space}.
     \end{definition}
 
     \begin{definition}
-        A \term{causal compatibility inequality} $\mathcal{I}_{V_{\bs{k}}}$ for a marginal scenario $V_{\bs{k}}$ is a probabilistic inequality that is obeyed for every compatible marginal model $\prob_{V_{\bs{k}}}$. Whenever the marginal scenario $V_{\bs{k}}$ in question is evident by context, the subscript of $\mathcal{I}_{V_{\bs{k}}}$ will be dropped leaving just $\mathcal{I}$.
+        A \term{causal compatibility inequality} $\mathcal{I}_{\mscenario}$ for a marginal scenario $\mscenario$ is a probabilistic inequality that is obeyed for every compatible marginal model $\prob^{\mscenario}$. Whenever the marginal scenario $\mscenario$ in question is evident by context, the subscript of $\mathcal{I}_{\mscenario}$ will be dropped leaving just $\mathcal{I}$.
     \end{definition}
     \todo[TC]{Discuss Compatibility, connection to cooperative games/resources, bell incompatibility?}
     \todo[TC]{Connection between contextuality and Compatibility via the marginal problem for causal parameters}
@@ -413,23 +476,23 @@
     \todo[TC]{Summarize Problem 2.17 in fritz BBT, make it more formal}
     \section{Certificate Inequalities}
     \label{sec:certificate_inequalities}
-    \subsection{Casting the Inflated Marginal Problem as a Linear Program}
-    After obtaining the maximal pre-injectable sets associated with a particular inflation, one can write the marginal problem of \cref{def:marginal_problem} as a linear program. The key observation is that marginalization is a \textit{linear} operator that can be performed via a matrix multiplication. To do this, we will define the \textit{marginalization matrix}.
+    \subsection{Casting the Marginal Problem as a Linear Program}
+    After obtaining the maximal pre-injectable sets associated with a particular inflation, one can write the marginal problem of \cref{def:marginal_problem} as a linear program. The key observation is that marginalization is a \textit{linear} operator that can be performed via a matrix multiplication. To do this, we will define the \textit{incidence matrix}.
     \begin{definition}
-        The \term{marginalization matrix} $M$ for a marginal scenario $V_{\bs{k}} = \bc{V_1, \dots, V_k}$ is a bit-wise matrix where the columns are indexed by \textit{joint} outcomes $\outc{\mathcal{V}} \in O_{\mathcal{V}}$ and the rows are indexed by \textit{marginal} outcomes corresponding to all outcomes $\outc{V_i} \in O_{V_{\bs{k}}}$. The entries of $M$ are populated whenever a row index is extendable to a column index.
-        \[ M\bs{\outc{V_i}, \outc{\mathcal{V}}} = \begin{cases}
-            1 & \Ext{\outc{V_i} \to \outc{\mathcal{V}}} \\
+        The \term{incidence matrix} $M$ for a marginal scenario $\mscenario = \bc{V_1, \dots, V_k}$ is a bit-wise matrix where the columns are indexed by \textit{joint} outcomes $j \in \Out{\jointvar}$ and the rows are indexed by \textit{marginal} outcomes $m \in \Out{\mscenario}$. The entries of $M$ are populated whenever a row index is extendable to a column index.
+        \[ M\bs{m, j} = \begin{cases}
+            1 & m \ext j \\
             0 & \text{otherwise}
         \end{cases} \]
-        The marginalization matrix has $\abs{O_\mathcal{V}}$ columns and $\abs{O_{V_{\bs{k}}}} = \sum_{i=1}^{k} \abs{O_{V_i}}$ rows. The number of non-zero entries of $M$ is a simple expression,
-        \[ \sum_{i=1}^{k} \abs{O_{V_i}}\abs{O_{\mathcal{V} \setminus V_i}} = \sum_{i=1}^{k} \abs{O_{\mathcal{V}}} = k\abs{O_{\mathcal{V}}} \]
-        This is due to the fact that each elements of $\bc{V_1, \ldots, V_k}$ contributes a single non-zero entry to each column of $M$, resulting in $k\abs{O_\mathcal{V}}$ total non-zero entries.
+        The incidence matrix has $\abs{\Out{\jointvar}}$ columns and $\abs{\Out{\mscenario}} = \sum_{i\in \bs{k}} \abs{\Out{V_i}}$ rows. The number of non-zero entries of $M$ is a simple expression,
+        \[ \sum_{i\in\bs{k}} \abs{\Out{V_i}}\abs{\Out{\jointvar \setminus V_i}} = \sum_{i\in \bs{k}} \abs{\Out{\jointvar}} = k\abs{\Out{\jointvar}} \]
+        This is due to the fact that each marginal context contributes a single non-zero entry to each column of $M$, resulting in $k\abs{\Out{\jointvar}}$ total non-zero entries.
     \end{definition}
     \todo[TC]{Computationally Efficient generation?}
 
     To illustrate this concretely, consider the following example:
     \begin{example}
-        Suppose one has $4$ binary random variables $\mathcal{V} = \bc{a,b,c}$ in mind and $2$ subsets $V_{\bs{2}} = \bc{\bc{a,c}, \bc{b}}$. Then the marginalization matrix is:
+        Suppose one has $4$ binary random variables $\jointvar = \bc{a,b,c}$ in mind and $2$ contexts $\mscenario = \bc{\bc{a,c}, \bc{b}}$. Then the incidence matrix is:
         \[ M = \kbordermatrix{
             (a,b,c) = & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
             (a=0, c=0) & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
@@ -444,18 +507,19 @@
     In order to describe how marginalization can be written as matrix multiplication $M \cdot x = b$, we need to describe how to define two more quantities:
 
     \begin{definition}
-        The \term{joint distribution vector} $\probvec[\mathcal{V}]$ for a probability distribution $\prob[\mathcal{V}]$ is the vector whose entries are the positive, real-valued probabilities that $\prob[\mathcal{V}]$ assigns to each outcome of $\outc{\mathcal{V}}$ of $O_\mathcal{V}$. $\probvec[\mathcal{V}]$ shares the same indices as the \textit{column} indices of $M$.
-        \[ \probvec[\mathcal{V}]^\intercal = \bs{\prob[\mathcal{V}][\outc{\mathcal{V}}]}_{o\bs{\mathcal{V}} \in O_{\mathcal{V}}} \]
+        The \term{joint distribution vector} $\probvec[\jointvar]$ for a probability distribution $\prob[\jointvar]$ is the vector whose entries are the positive, real-valued probabilities that $\prob[\jointvar]$ assigns to each joint outcome of $j \in \Out{\jointvar}$. $\probvec[\jointvar]$ shares the same indices as the \textit{column} indices of $M$.
+        \[ \forall j \in \Out{\jointvar} : \probvec[\jointvar]^\intercal\bs{j} = \prob[\jointvar][j] \]
     \end{definition}
     \begin{definition}
-        The \term{marginal distribution vector} $\probvec[V_{\bs{k}}]$ for a marginal model $\prob[V_{\bs{k}}] = \bc{P_{V_1}, \ldots, P_{V_k}}$ is the vector whose entries are probabilities over the set of marginal outcomes $O_{V_{\bs{k}}}$. $\probvec[V_{\bs{k}}]$ shares the same indices as the \textit{row} indices of $M$.
-        \[ \probvec[V_{\bs{k}}]^\intercal = \bs{\prob[V_i][\outc{V_i}] }_{o\bs{V_i} \in O_{V_{\bs{k}}}} \]
+        The \term{marginal distribution vector} $\probvec^{\mscenario}$ for a marginal model $\prob^{\mscenario} = \bc{P_{V_1}, \ldots, P_{V_k}}$ is the vector whose entries are probabilities over the set of marginal outcomes $\Out{\mscenario}$. $\probvec^{\mscenario}$ shares the same indices as the \textit{row} indices of $M$.
+        \[ \forall m \in \Out{\mscenario} : {\probvec^{\mscenario}}^\intercal\bs{m} = \prob[\Dom{m}][m] \]
+        Where $\Dom{m} \in \mscenario$ and $\prob[\Dom{m}] \in \prob^{\mscenario}$ as per \cref{rem:domain_dist}.
     \end{definition}
-    The marginal and joint distribution vectors are related via the marginalization matrix $M$. Given a joint distribution vector $\probvec[\mathcal{V}]$ one can obtain the marginal distribution vector $\probvec[V_{\bs{k}}]$ by multiplying $M$ by $\probvec[\mathcal{V}]$.
-    \[ \probvec[V_{\bs{k}}] = M \cdot \probvec[\mathcal{V}] \eq \label{eq:marginal_problem_matrix} \]
-    \todo[TC]{Discuss non-unique but consistent ordering of $M$, $\probvec[\mathcal{V}]$ and $\probvec[V_{\bs{k}}]$}
+    The marginal and joint distribution vectors are related via the incidence matrix $M$. Given a joint distribution vector $\probvec[\jointvar]$ one can obtain the marginal distribution vector $\probvec^{\mscenario}$ by multiplying $M$ by $\probvec[\jointvar]$.
+    \[ \probvec^{\mscenario} = M \cdot \probvec[\jointvar] \eq \label{eq:marginal_problem_matrix} \]
+    \todo[TC]{Discuss non-unique but consistent ordering of $M$, $\probvec[\jointvar]$ and $\probvec^{\mscenario}$}
 
-    The marginal problem can now be rephrased in the language of the marginalization matrix. Suppose one obtains a marginal distribution vector $\probvec[V_{\bs{k}}]$. The marginal problem becomes equivalent to the question: \textit{Does there exist a joint distribution vector $\probvec[\mathcal{V}]$ such that \cref{eq:marginal_problem_matrix} holds?}
+    The marginal problem can now be rephrased in the language of the incidence matrix. Suppose one obtains a marginal distribution vector $\probvec^{\mscenario}$. The marginal problem becomes equivalent to the question: \textit{Does there exist a joint distribution vector $\probvec[\jointvar]$ such that \cref{eq:marginal_problem_matrix} holds?}
 
     \begin{definition}
         \label{def:marginal_linear_program}
@@ -463,41 +527,41 @@
         \begin{alignat*}{2}
             & \text{minimize:} \quad&& \emptyset \cdot x\\
             & \text{subject to:} && x \succeq 0 \\
-            & && M \cdot x = \probvec[V_{\bs{k}}]
+            & && M \cdot x = \probvec^{\mscenario}
         \end{alignat*}
-        If this ``optimization''\footnote{``Optimization'' is presented in quotes here because the minimization objective is trivially always zero ($\emptyset$ denotes the null vector of all zero entries). The primal value of the linear program is of no interest, all that matters is its \textit{feasibility}.} is \textit{feasible}, then there exists a vector $x$ than can satisfy \cref{eq:marginal_problem_matrix} and is a valid joint distribution vector. Therefore feasibility implies that $\prob[\mathcal{V}] = x$, solving the marginal problem with positive result. Moreover if the marginal linear program is \textit{infeasible}, then there \textit{does not} exist a joint distribution $\prob[\mathcal{V}]$ over all random variables.
+        If this ``optimization''\footnote{``Optimization'' is presented in quotes here because the minimization objective is trivially always zero ($\emptyset$ denotes the null vector of all zero entries). The primal value of the linear program is of no interest, all that matters is its \textit{feasibility}.} is \textit{feasible}, then there exists a vector $x$ than can satisfy \cref{eq:marginal_problem_matrix} and is a valid joint distribution vector. Therefore feasibility implies that $\prob[\jointvar] = x$, solving the marginal problem with positive result. Moreover if the marginal linear program is \textit{infeasible}, then there \textit{does not} exist a joint distribution $\prob[\jointvar]$ over all random variables.
     \end{definition}
     \begin{definition}
         \label{def:dual_marginal_linear_program}
         \term{The Dual Marginal Linear Program} is the dual of \cref{def:marginal_linear_program} formulated via a procedure similar to \cite{Lahaie_2008}:
         \begin{alignat*}{2}
-            & \text{minimize:} \quad&& y \cdot \probvec[V_{\bs{k}}]\\
+            & \text{minimize:} \quad&& y \cdot \probvec^{\mscenario}\\
             & \text{subject to:} && y \cdot M \succeq 0
         \end{alignat*}
-        Where $y$ is a real valued vector with the same length as $\probvec[V_{\bs{k}}]$.
+        Where $y$ is a real valued vector with the same length as $\probvec^{\mscenario}$.
     \end{definition}
     \subsection{Infeasibility Certificates}
     \label{sec:infeasibility_certificates}
     The dual marginal linear program also provides an answer to the marginal problem. To prove this, first notice that the dual problem is \textit{never infeasible}; by choosing $y$ to be trivially the null vector $\emptyset$ of appropriate size, all constraints are satisfied. Secondly if $y \cdot M \succeq 0$ and $x \succeq 0$, then the following must hold if the primal is feasible:
-    \[ y \cdot \probvec[V_{\bs{k}}] =  y \cdot M \cdot x \geq 0 \eq \label{eq:dual_marginal_ineq} \]
-    Therefore the \textit{sign} of the dual value $d \defined \min \br{y \cdot \probvec[V_{\bs{k}}]}$ solves the marginal problem. If $d < 0$ then \cref{eq:dual_marginal_ineq} is violated and therefore the marginal problem has negative result. Likewise if $d$ satisfies \cref{eq:dual_marginal_ineq}, then a joint distribution $\prob[\mathcal{V}]$ exists. Before continuing, an important observation needs to be made. If $d \geq 0$, then it is exactly $d = 0$, due to the existence of the trivial $y = \emptyset$. This observation is an instance of the \textit{Complementary Slackness Property} of \cite{Bradley_1977}. \comment[TC]{Is this really the CSP?} Moreover, if $d < 0$, then it is unbounded $d = -\inf$. This latter point becomes clear upon recognizing that for any $y$ such that $d < 0$, another $y'$ can be constructed by multiplying $y$ by a real constant $\al$ greater than one such that,
+    \[ y \cdot \probvec^{\mscenario} =  y \cdot M \cdot x \geq 0 \eq \label{eq:dual_marginal_ineq} \]
+    Therefore the \textit{sign} of the dual value $d \defined \min \br{y \cdot \probvec^{\mscenario}}$ solves the marginal problem. If $d < 0$ then \cref{eq:dual_marginal_ineq} is violated and therefore the marginal problem has negative result. Likewise if $d$ satisfies \cref{eq:dual_marginal_ineq}, then a joint distribution $\prob[\jointvar]$ exists. Before continuing, an important observation needs to be made. If $d \geq 0$, then it is exactly $d = 0$, due to the existence of the trivial $y = \emptyset$. This observation is an instance of the \textit{Complementary Slackness Property} of \cite{Bradley_1977}. \comment[TC]{Is this really the CSP?} Moreover, if $d < 0$, then it is unbounded $d = -\inf$. This latter point becomes clear upon recognizing that for any $y$ such that $d < 0$, another $y'$ can be constructed by multiplying $y$ by a real constant $\al$ greater than one such that,
     \[ y' = \al y \mid \al > 1 \implies d' = \al d < d \]
     Since a more negative $d'$ can always be found, it must be that $d$ is unbounded. This is a demonstration of the fundamental \textit{Unboundedness Property} of \cite{Bradley_1977}; if the dual is unbounded, then the primal is infeasible.
 
     \comment[TC]{\href{http://web.stanford.edu/~ashishg/msande111/notes/chapter4.pdf}{Farkas's lemma} here?}
 
-    \begin{definition} An \term{infeasibility certificate} is any vector $y$ that satisfies the constraints of \cref{def:dual_marginal_linear_program} and also permits violation of \cref{eq:dual_marginal_ineq} for some marginal distribution vector $\probvec[V_{\bs{k}}]$.
-    \[ y \in \R^{\abs{O_{V_{\bs{k}}}}} : y \cdot M \succeq 0, \quad y \cdot \probvec[V_{\bs{k}}] < 0 \]
+    \begin{definition} An \term{infeasibility certificate} is any vector $y$ that satisfies the constraints of \cref{def:dual_marginal_linear_program} and also permits violation of \cref{eq:dual_marginal_ineq} for some marginal distribution vector $\probvec^{\mscenario}$.
+    \[ y \in \R^{\abs{\Out{\mscenario}}} : y \cdot M \succeq 0, \quad y \cdot \probvec^{\mscenario} < 0 \]
     Furthermore, any $y$ satisfying $y \cdot M \succeq 0$ induces a \term{certificate inequality} that constraints the space of marginal distribution vectors which takes the symbolic form of \cref{eq:dual_marginal_ineq},
-    \[ y \cdot \probvec[V_{\bs{k}}] \geq 0 \]
-    Where the entries of the certificate $y$ act as coefficients for the entries of $\probvec[V_{\bs{k}}]$.
+    \[ y \cdot \probvec^{\mscenario} \geq 0 \]
+    Where the entries of the certificate $y$ act as coefficients for the entries of $\probvec^{\mscenario}$.
     \end{definition}
     \todo[TC]{Discuss Infeasibility Certificates basis}
 
     \begin{example}
-        The marginal problem for the inflated causal structure $\graph'$ depicted in \cref{fig:inflated_triangle_scenario} concerns itself with the pre-injectable marginal scenario $\PreInj[\graph]{\graph'} = V_{\bs{12}} = \bc{\prob[V_1], \ldots, \prob[V_{12}]}$. The marginalization matrix $M$ has $16,896$ rows and $16,777,216$ columns.
+        The marginal problem for the inflated causal structure $\graph'$ depicted in \cref{fig:inflated_triangle_scenario} concerns itself with the pre-injectable marginal scenario $\mscenario = \PreInj[\graph]{\graph'} = \bc{V_1, \ldots, V_{12}}$. The incidence matrix $M$ has $16,896$ rows and $16,777,216$ columns.
         \begin{align*}
-            &\text{\# Rows} = \sum_{i=1}^{12} \abs{O_{V_i}} = \sum_{i=1}^{12} 4^{\abs{V_i}} = 4 \cdot 4^6 + 8 \cdot 4^3 = 16,896 \\
+            &\text{\# Rows} = \abs{\Out{\mscenario}} = \sum_{i=1}^{12} \abs{\Out{V_i}} = \sum_{i=1}^{12} 4^{\abs{V_i}} = 4 \cdot 4^6 + 8 \cdot 4^3 = 16,896 \\
             &\text{\# Columns} = \abs{O_{\nodes'}} = 4^{\abs{\nodes'}} = 4^{12} = 16,777,216
         \end{align*}
         With $12 \cdot 4^{12} = 201,326,592$ non-zero entries.
@@ -507,9 +571,9 @@
 
     \[ \mathcal{I}\tsb{Mosek-Cert}, \mathcal{I}\tsb{Cert} \]
 
-    \section{Logical Implications of Non-Contextuality}
+    \section{Covering Inequalities}
 
-    Section \ref{sec:certificate_inequalities} discusses how one can obtain a valid compatibility inequality that witnesses incompatibility for a particular marginal model $\prob_{V_{\bs{k}}}$ by writing the marginal problem as a linear program.
+    Section \ref{sec:certificate_inequalities} discusses how one can obtain a valid compatibility inequality that witnesses incompatibility for a particular marginal model $\prob^{\mscenario}$ by writing the marginal problem as a linear program.
     \todo[TC]{Motivate why certificates are not enough, want many solutions, want logical foundation}
     \subsection{Logical Implications \& Inequalities}
     \label{sec:implication_inequalities}
@@ -531,35 +595,35 @@
 
     \subsection{Implications in the Marginal Problem}
     \label{sec:implications_marginal_problem}
-    The question then remains, \textit{how does non-contextuality give rise to implications of the form of \cref{eq:1n_pi}?} Begin by making the principle assumption that a joint distribution \textit{does} exist for a marginal model $\prob[V_{\bs{k}}]$. This assumption induces logical \textit{tautologies} that take the form of \cref{eq:1n_pi}, which we call \term{marginal implications}, using the following train of logic.
+    The question then remains, \textit{how does non-contextuality give rise to implications of the form of \cref{eq:1n_pi}?} Begin by making the principle assumption that a joint distribution \textit{does} exist for a marginal model $\prob^{\mscenario}$. This assumption induces logical \textit{tautologies} that take the form of \cref{eq:1n_pi}, which we call \term{marginal implications}, using the following train of logic.
     \begin{enumerate}
-        \item Suppose a particular marginal outcome $a \in O_{V_{\bs{k}}}$ happens to occur.
-        \item Since a joint distribution exists, then $a$ refers to some \textit{incomplete} knowledge about a \textit{joint} event $j = \outc{\mathcal{V}} \in O_{\mathcal{V}}$ that actually occured. More precisely, this set of possible $j$'s is the extendable set of $a$ in $O_{\mathcal{V}}$.
-        \[ j \in \Ext[\mathcal{V}]{a} \]
-        \item Therefore whenever $a$ occurs, one of the elements $j$ of $\Ext[\mathcal{V}]{a}$ \textit{has} to occur.
-        \[ a \implies \bigvee_{j \in \Ext[\mathcal{V}]{a}} j \eq \label{eq:A_impies_extendable}\]
+        \item Suppose a particular marginal outcome $a \in O_{\mscenario}$ happens to occur.
+        \item Since a joint distribution exists, then $a$ refers to some \textit{incomplete} knowledge about a \textit{joint} event $j = \outc{\jointvar} \in O_{\jointvar}$ that actually occured. More precisely, this set of possible $j$'s is the extendable set of $a$ in $O_{\jointvar}$.
+        \[ j \in \Ext[\jointvar]{a} \]
+        \item Therefore whenever $a$ occurs, one of the elements $j$ of $\Ext[\jointvar]{a}$ \textit{has} to occur.
+        \[ a \implies \bigvee_{j \in \Ext[\jointvar]{a}} j \eq \label{eq:A_impies_extendable}\]
         \item Now suppose we could obtain a set of marginal outcomes $C = \bc{c_1, \ldots, c_m}$ each different from $a$ such that for every $j$, $\Ext{c \to j}$ for at least one element $c \in C$. If such a $C$ can be found, then the possibility of at least one $j$ occurring implies the possibility of at least one $c$ occurring.
-        \[ \bigvee_{j \in \Ext[\mathcal{V}]{a}} j \implies c_1 \vee \cdots \vee c_m = \bigvee_{i \in \bs{m}} c_i\eq \label{eq:extendable_implies_cover} \]
+        \[ \bigvee_{j \in \Ext[\jointvar]{a}} j \implies c_1 \vee \cdots \vee c_m = \bigvee_{i \in \bs{m}} c_i\eq \label{eq:extendable_implies_cover} \]
 
         \item Combing \cref{eq:A_impies_extendable} with \cref{eq:extendable_implies_cover}, one obtains \cref{eq:1n_pi}.
     \end{enumerate}
 
     \todo[TC]{Talk about why this is called hardy paradox}
 
-    Finding all marginal implications for a chosen marginal outcome $a$ corresponds to finding a set of marginal outcomes $C = \bc{c_1, \ldots, c_m}$ whose extendable sets \textit{cover} $\Ext[\mathcal{V}]{a}$. Formally this corresponds to a \term{set covering} problem \todo[TC]{cite} which we elected to cast as the equivalent \term{hypergraph transversal problem}.
+    Finding all marginal implications for a chosen marginal outcome $a$ corresponds to finding a set of marginal outcomes $C = \bc{c_1, \ldots, c_m}$ whose extendable sets \textit{cover} $\Ext[\jointvar]{a}$. Formally this corresponds to a \term{set covering} problem \todo[TC]{cite} which we elected to cast as the equivalent \term{hypergraph transversal problem}.
 
     \todo[TC]{Mention sufficient solution to the possibilistic marginal problem}
     \todo[TC]{Illustrate how it can distinguish more than possibilistic differences}
 
-    Given an antecedent $a$, we can construct a hypergraph $\hgraph_{a}$ called the \term{marginal hypergraph} with nodes $\nodes_a$ and $\edges_a$. The nodes of this hypergraph are the subset of marginal outcomes $\nodes_a \subseteq O^{V_{\bs{k}}}$ \textit{compatible} with $a$.
-    The edges are labeled by outcomes in $\Ext[\mathcal{V}]{a} \subseteq O_{\mathcal{V}}$, namely the set of $j$'s, and contain all nodes compatible with $j$.
+    Given an antecedent $a$, we can construct a hypergraph $\hgraph_{a}$ called the \term{marginal hypergraph} with nodes $\nodes_a$ and $\edges_a$. The nodes of this hypergraph are the subset of marginal outcomes $\nodes_a \subseteq O^{\mscenario}$ \textit{compatible} with $a$.
+    The edges are labeled by outcomes in $\Ext[\jointvar]{a} \subseteq O_{\jointvar}$, namely the set of $j$'s, and contain all nodes compatible with $j$.
     \begin{align*}
-        \nodes_a &= \bc{n \in O^{V_{\bs{k}}} \mid \Com{n, a}} \eq \label{eq:hgraph_nodes} \\
-        \edges_a &= \bc{\bc{n \in O^{V_{\bs{k}}} \mid \Com{n, j}} , j \in \Ext[\mathcal{V}]{a}} \eq \label{eq:hgraph_edges}
+        \nodes_a &= \bc{n \in O^{\mscenario} \mid \Com{n, a}} \eq \label{eq:hgraph_nodes} \\
+        \edges_a &= \bc{\bc{n \in O^{\mscenario} \mid \Com{n, j}} , j \in \Ext[\jointvar]{a}} \eq \label{eq:hgraph_edges}
     \end{align*}
     \begin{remark}
         \label{remark:trivial_transversal}
-        Note that every node is contained in some edge. To prove this, consider the definition of compatibility between outcomes. If every $n$ is compatible with $a$, then there exists some outcome $j \in \Ext[\mathcal{V}]{A}$ such that $\Ext{n \to j}$. Therefore since $\Ext{n \to j}$, $\Com{n, j}$; satisfying the central condition of \cref{eq:hgraph_edges}.
+        Note that every node is contained in some edge. To prove this, consider the definition of compatibility between outcomes. If every $n$ is compatible with $a$, then there exists some outcome $j \in \Ext[\jointvar]{A}$ such that $\Ext{n \to j}$. Therefore since $\Ext{n \to j}$, $\Com{n, j}$; satisfying the central condition of \cref{eq:hgraph_edges}.
     \end{remark}
 
     \subsection{Higher Order Marginal Implications}
@@ -597,66 +661,67 @@
     \todo[TC]{Weighted transversals and Optimizations}
     \todo[TC]{Seeding inequalities (huge advantage here)}
     \section{Deriving Symmetric Inequalities}
-    Symmetric compatibility inequalities are useful for a number of reasons. First, Bancal et. al. \cite{Bancal_2010} discuss computational advantages in considering symmetric versions of marginal polytopes mentioned in \cref{sec:comp_con_mp}; the number of extremal points typically grows exponentially in $\mathcal{V}$, but only polynomial for the symmetric polytope. They also note a number of interesting inequalities (such as CHSH \cite{CHSH_Original}) can be written in a way that is symmetric under the exchange of parties, demonstrating that quantum-non-trivial inequalities can be recovered from facets of a symmetric polytope. Second, numerical optimizations against inequalities invariant under exchange of parties will lead to one of two interesting cases: either the extremal distribution is invariant under exchange of parties or it is not. The latter case generates a family of incompatible distributions obtained by exchanging parties of the found extremal distribution\footnote{If the extremal distribution is not invariant under exchange of parties, there is indication that the space of accessible distributions is non-convex.}. In this section we discuss how to achieve computational advantage and its application to the inequality techniques mentioned in \cref{sec:certificate_inequalities} and \cref{sec:implication_inequalities}.
+    \label{sec:symmetry}
+    Symmetric compatibility inequalities are useful for a number of reasons. First, Bancal et. al. \cite{Bancal_2010} discuss computational advantages in considering symmetric versions of marginal polytopes mentioned in \cref{sec:comp_con_mp}; the number of extremal points typically grows exponentially in $\jointvar$, but only polynomial for the symmetric polytope. They also note a number of interesting inequalities (such as CHSH \cite{CHSH_Original}) can be written in a way that is symmetric under the exchange of parties, demonstrating that quantum-non-trivial inequalities can be recovered from facets of a symmetric polytope. Second, numerical optimizations against inequalities invariant under exchange of parties will lead to one of two interesting cases: either the extremal distribution is invariant under exchange of parties or it is not. The latter case generates a family of incompatible distributions obtained by exchanging parties of the found extremal distribution\footnote{If the extremal distribution is not invariant under exchange of parties, there is indication that the space of accessible distributions is non-convex.}. In this section we discuss how to achieve computational advantage and its application to the inequality techniques mentioned in \cref{sec:certificate_inequalities} and \cref{sec:implication_inequalities}.
     \subsection{Causal Symmetry}
-    The aim of this section is to formalize what types of symmetries are present in a particular causal structure $\graph$. The group of these causal symmetries will define, for each compatibility inequality $\mathcal{I}_{V_{\bs{k}}}$, a family of inequalities that are also valid incompatibility inequalities.
+    The aim of this section is to formalize what types of symmetries are present in a particular causal structure $\graph$. The group of these causal symmetries will define, for each compatibility inequality $\mathcal{I}_{\mscenario}$, a family of inequalities that are also valid incompatibility inequalities.
 
-    First consider the permutation group acting on a set of nodes $N \subseteq \nodes$ denoted $\Perm{N}$ to be the set of all bijective maps $\varphi$ from $N$ to $N$.
-    \[ \Perm{N} = \bc{\varphi \mid \varphi : N \to N} \]
-    The action of $\varphi \in \Perm{N}$ on a causal structure $\graph$ is defined via an the extension of $\varphi$ to the corresponding element in $\Perm{\nodes}$ that leaves nodes $n \in \nodes \setminus N$ invariant,
+    First consider the permutation group acting on a set of nodes $N \subseteq \nodes$ denoted $\Perm{N}$ to be the set of all bijective maps $\gelem$ from $N$ to $N$.
+    \[ \Perm{N} = \bc{\gelem \mid \gelem : N \to N} \]
+    The action of $\gelem \in \Perm{N}$ on a causal structure $\graph$ is defined via an the extension of $\gelem$ to the corresponding element in $\Perm{\nodes}$ that leaves nodes $n \in \nodes \setminus N$ invariant,
     \begin{align*}
-    \varphi\br{\graph} &\defined \br{\varphi\br{\nodes}, \varphi\br{\edges}} \\
-    \varphi\br{\nodes} &\defined \bc{\varphi\br{n} \mid n \in \nodes} = \nodes \\
-    \varphi\br{\edges} &\defined \bc{\varphi\br{e} \mid e \in \edges}
+    \action{\graph} &\defined \br{\action{\nodes}, \action{\edges}} \\
+    \action{\nodes} &\defined \bc{\action{n} \mid n \in \nodes} = \nodes \\
+    \action{\edges} &\defined \bc{\action{e} \mid e \in \edges}
     \end{align*}
-    To motivate a more general treatment of such symmetries, consider the Triangle Scenario of \cref{fig:triangle_scenario}. Due to the rotational and reflective symmetries of the Triangle Scenario, any permutation $\varphi \in \Perm{\nodes_O}$ of the observable nodes $\nodes_O = \bc{A, B, C}$ creates a new causal structure $\varphi\br{\graph}$ that is \textit{equivalent} to $\graph$ up to a relabeling of \textit{latent} nodes. By construction, any valid compatibility inequality $\mathcal{I}_{V_{\bs{k}}}$ for the marginal scenario $V_{\bs{k}} = \bc{V_1, \ldots, V_k}$ is \textit{independent} of the labeling of latent nodes. Therefore applying $\varphi$ to all distributions in $\mathcal{I}_{V_{\bs{k}}}$ yields $\varphi\br{\mathcal{I}_{V_{\bs{k}}}} \defined \varphi\br{\mathcal{I}}_{\varphi\br{V_{\bs{k}}}}$, another valid compatibility inequality for the permuted marginal scenario $\varphi\br{V_{\bs{k}}}$ defined as,
-    \[ \varphi\br{V_{\bs{k}}} = \bc{\varphi\br{V_1}, \ldots, \varphi\br{V_k}} \]
+    To motivate a more general treatment of such symmetries, consider the Triangle Scenario of \cref{fig:triangle_scenario}. Due to the rotational and reflective symmetries of the Triangle Scenario, any permutation $\gelem \in \Perm{\nodes_O}$ of the observable nodes $\nodes_O = \bc{A, B, C}$ creates a new causal structure $\action{\graph}$ that is \textit{equivalent} to $\graph$ up to a relabeling of \textit{latent} nodes. By construction, any valid compatibility inequality $\mathcal{I}_{\mscenario}$ for the marginal scenario $\mscenario = \bc{V_1, \ldots, V_k}$ is \textit{independent} of the labeling of latent nodes. Therefore applying $\gelem$ to all distributions in $\mathcal{I}_{\mscenario}$ yields $\action{\mathcal{I}_{\mscenario}} \defined \action{\mathcal{I}}_{\action{\mscenario}}$, another valid compatibility inequality for the permuted marginal scenario $\action{\mscenario}$ defined as,
+    \[ \action{\mscenario} = \bc{\action{V_1}, \ldots, \action{V_k}} \]
     % \begin{example}
     %     \todo[TC]{Above trivial example.}
     %     Consider the marginal scenario $V_{\bs{4}} = \bc{\bc{A,B,C}, \bc{A}, \bc{B}, \bc{C}}$ and the compatibility inequality $\mathcal{I}_{\bc{ABC, A, B, C}}$ for the Triangle Scenario in \cref{fig:triangle_scenario} with the following form,
     %     \[ \prob[ABC][002]\prob[ABC][003] \leq \prob[A][0]\prob[C][3] \]
-    %     Now consider $\varphi = \bc{A \to A, B \to C, C \to B}$. Since $\varphi\br{\graph} = \graph$, $\varphi\br{\mathcal{I}_{V_{\bs{k}}}}$ is also a valid compatibility inequality,
+    %     Now consider $\gelem = \bc{A \to A, B \to C, C \to B}$. Since $\action{\graph} = \graph$, $\action{\mathcal{I}_{\mscenario}}$ is also a valid compatibility inequality,
     % \end{example}
-    More generically, any permutation $\varphi$ that preserves the graphical structure of $\graph$ can be applied to $\mathcal{I}_{V_{\bs{k}}}$ to generate new and valid compatibility inequalities. Specifically this alludes to the \term{graph automorphism group} $\Aut{\graph}$ of $\graph$.
-    \[ \Aut{\graph} \defined \bc{\varphi \in \Perm{\nodes} \mid \varphi\br{\graph} = \graph} \]
-    In general, $\Aut{\graph}$ could include elements $\varphi$ that map latent nodes to observable nodes\footnote{In practice however, it is rare to be considering a causal structure $\graph$ where some latent node $n_L \in \nodes_L$ takes on an role indistinguishable from some observable node $n_O \in \nodes_O$, so this won't be an issue.}. This behaviour is \textit{undesired} for causal inference where the latent nodes will never appear in a marginal scenario. Instead, the subgroup of $\Aut{\graph}$ that never maps observable nodes to latent nodes is the \term{set-wise stabilizer} of $\Aut{\graph}$ for $\nodes_O$ and will be expressed with a subscript.
+    More generically, any permutation $\gelem$ that preserves the graphical structure of $\graph$ can be applied to $\mathcal{I}_{\mscenario}$ to generate new and valid compatibility inequalities. Specifically this alludes to the \term{graph automorphism group} $\Aut{\graph}$ of $\graph$.
+    \[ \Aut{\graph} \defined \bc{\gelem \in \Perm{\nodes} \mid \action{\graph} = \graph} \]
+    In general, $\Aut{\graph}$ could include elements $\gelem$ that map latent nodes to observable nodes\footnote{In practice however, it is rare to be considering a causal structure $\graph$ where some latent node $n_L \in \nodes_L$ takes on an role indistinguishable from some observable node $n_O \in \nodes_O$, so this won't be an issue.}. This behaviour is \textit{undesired} for causal inference where the latent nodes will never appear in a marginal scenario. Instead, the subgroup of $\Aut{\graph}$ that never maps observable nodes to latent nodes is the \term{set-wise stabilizer} of $\Aut{\graph}$ for $\nodes_O$ and will be expressed with a subscript.
 
     \begin{definition}
         The \term{causal symmetry group} for a causal structure $\graph$ is the graph automorphism subgroup that stabilizes the observable nodes.
-        \[ \Aut[\nodes_O]{\graph} = \bc{\varphi \in \Perm{\nodes} \mid \varphi\br{\graph} = \graph, \forall n \in \nodes_O :\varphi\br{n} \in \nodes_O} \]
-        Given any compatibility inequality $\mathcal{I}_{V_{\bs{k}}}$, each element $\varphi$ of the causal symmetry group defines a new valid compatibility inequality $\varphi\br{\mathcal{I}_{V_{\bs{k}}}} = \varphi\br{\mathcal{I}}_{\varphi\br{V_{\bs{k}}}}$.
+        \[ \Aut[\nodes_O]{\graph} = \bc{\gelem \in \Perm{\nodes} \mid \action{\graph} = \graph, \forall n \in \nodes_O :\action{n} \in \nodes_O} \]
+        Given any compatibility inequality $\mathcal{I}_{\mscenario}$, each element $\gelem$ of the causal symmetry group defines a new valid compatibility inequality $\action{\mathcal{I}_{\mscenario}} = \action{\mathcal{I}}_{\action{\mscenario}}$.
     \end{definition}
 
     The inflation technique discussed in \cref{sec:summary_inflation} allows one to derive compatibility inequalities for a causal structure $\graph$ by considering the marginal problem over the pre-injectable sets of $\graph'$ denoted $\PreInj[\graph]{\graph'} = \bc{V_1, \ldots, V_k}$. It is important to recall that due to \cref{lem:inflation}, inequalities $\mathcal{I}'$ for $\graph'$ are \textit{only} transferable to inequalities $\mathcal{I}$ for $\graph$ if $\mathcal{I}'$ is in terms of distributions over the pre-injectable sets $\mathcal{I}'_{\PreInj[\graph]{\graph'}}$. As a consequence of this observation, we need to consider a subgroup of the causal symmetry group that preserves the pre-injectable sets,
-    \[ \varphi\br{\PreInj[\graph]{\graph'}} = \PreInj[\graph]{\graph'} \eq \label{eq:preserved_preinj} \]
+    \[ \action{\PreInj[\graph]{\graph'}} = \PreInj[\graph]{\graph'} \eq \label{eq:preserved_preinj} \]
 
     \begin{definition}
-        The \term{restricted causal symmetry group} $\Phi$ for a causal structure $\graph$ and a marginal scenario $V_{\bs{k}}$ is the graph automorphism subgroup that stabilizes the marginal scenario $V_{\bs{k}}$.
-        \[ \Phi \defined \Aut[V_{\bs{k}}]{\graph} = \bc{\varphi \in \Perm{\nodes} \mid \varphi\br{\graph} = \graph, \forall V \in V_{\bs{k}} : \varphi\br{V} \in V_{\bs{k}}} \]
-        Given any compatibility inequality $\mathcal{I}_{V_{\bs{k}}}$ each element $\varphi$ of the causal symmetry group defines a new valid compatibility inequality $\varphi\br{\mathcal{I}_{V_{\bs{k}}}} = \varphi\br{\mathcal{I}}_{V_{\bs{k}}}$ over the \textit{same} marginal context $V_{\bs{k}}$.
+        The \term{restricted causal symmetry group} $\Phi$ for a causal structure $\graph$ and a marginal scenario $\mscenario$ is the graph automorphism subgroup that stabilizes the marginal scenario $\mscenario$.
+        \[ \Phi \defined \Aut[\mscenario]{\graph} = \bc{\gelem \in \Perm{\nodes} \mid \action{\graph} = \graph, \forall V \in \mscenario : \action{V} \in \mscenario} \]
+        Given any compatibility inequality $\mathcal{I}_{\mscenario}$ each element $\gelem$ of the causal symmetry group defines a new valid compatibility inequality $\action{\mathcal{I}_{\mscenario}} = \action{\mathcal{I}}_{\mscenario}$ over the \textit{same} marginal context $\mscenario$.
     \end{definition}
 
     The restricted causal symmetry group for the pre-injectable sets of an inflation $\graph'$ is the ideal symmetry group for use with the inflation technique. If one obtains a particular inequality $\mathcal{I}'_{\PreInj[\graph]{\graph'}}$ as well as the restricted causal symmetry group $\Phi$, an entire family of valid compatibility inequalities are also obtained.
-    \[ \bc{\varphi\br{\mathcal{I}'}_{\PreInj[\graph]{\graph'}} \mid \varphi \in \Phi} \text{ where } \Phi = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \]
+    \[ \bc{\action{\mathcal{I}'}_{\PreInj[\graph]{\graph'}} \mid \gelem \in \Phi} \text{ where } \Phi = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \]
     We have obtained $\Phi$ for the inflated triangle scenario \cref{fig:inflated_triangle_scenario}. $\Phi$ is an order $48$ group with the following $4$ generators:
     \begin{equation*}
     \begin{aligned}[c]
-    &\hspace{1mm}\varphi_1 \\
+    &\hspace{1mm}\gelem_1 \\
     A_1 &\to A_4 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_1 \\B_1 &\to B_4 \\B_2 &\to B_3 \\B_3 &\to B_2 \\B_4 &\to B_1 \\C_1 &\to C_4 \\C_2 &\to C_3 \\C_3 &\to C_2 \\C_4 &\to C_1
     \end{aligned}
     \quad
     \begin{aligned}[c]
-    &\hspace{1mm}\varphi_2 \\
+    &\hspace{1mm}\gelem_2 \\
     A_1 &\to A_1 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_4 \\B_1 &\to C_1 \\B_2 &\to C_3 \\B_3 &\to C_2 \\B_4 &\to C_4 \\C_1 &\to B_1 \\C_2 &\to B_3 \\C_3 &\to B_2 \\C_4 &\to B_4
     \end{aligned}
     \quad
     \begin{aligned}[c]
-    &\hspace{1mm}\varphi_3 \\
+    &\hspace{1mm}\gelem_3 \\
     A_1 &\to C_1 \\A_2 &\to C_2 \\A_3 &\to C_3 \\A_4 &\to C_4 \\B_1 &\to A_1 \\B_2 &\to A_2 \\B_3 &\to A_3 \\B_4 &\to A_4 \\C_1 &\to B_1 \\C_2 &\to B_2 \\C_3 &\to B_3 \\C_4 &\to B_4
     \end{aligned}
     \quad
     \begin{aligned}[c]
-    &\hspace{1mm}\varphi_4 \\
+    &\hspace{1mm}\gelem_4 \\
     A_1 &\to A_1 \\A_2 &\to A_2 \\A_3 &\to A_3 \\A_4 &\to A_4 \\B_1 &\to B_2 \\B_2 &\to B_1 \\B_3 &\to B_4 \\B_4 &\to B_3 \\C_1 &\to C_3 \\C_2 &\to C_4 \\C_3 &\to C_1 \\C_4 &\to C_2
     \end{aligned}
     \end{equation*}
@@ -664,28 +729,44 @@
     %  (0, 2, 1, 3, 8, 10, 9, 11, 4, 6, 5, 7),
     %  (8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 6, 7),
     %  (0, 1, 2, 3, 5, 4, 7, 6, 10, 11, 8, 9))
-    It is easy to verify that $\varphi_1, \varphi_2, \varphi_3, \varphi_4$ are all automorphisms of the inflated Triangle Scenario $\graph'$ of \cref{fig:inflated_triangle_scenario}. Moreover they stabilize the observable nodes, and the map pre-injectable sets of \cref{eq:pre-injectable_triangle_scenario} to the pre-injectable sets. Finally, in the Triangle Scenario we have that,
+    It is easy to verify that $\gelem_1, \gelem_2, \gelem_3, \gelem_4$ are all automorphisms of the inflated Triangle Scenario $\graph'$ of \cref{fig:inflated_triangle_scenario}. Moreover they stabilize the observable nodes, and the map pre-injectable sets of \cref{eq:pre-injectable_triangle_scenario} to the pre-injectable sets. Finally, in the Triangle Scenario we have that,
     \[ \Phi = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \sim \Aut[\nodes_O]{\graph} \]
-    To see this, $\varphi_1$ and $\varphi_4$ become the identity element $\mathbb{I}$ in $\Aut[\nodes_O]{\graph}$ upon removal of the copy-index, leaving $\varphi_2$ to generate reflections and $\varphi_3$ to generate rotations.
+    To see this, $\gelem_1$ and $\gelem_4$ become the identity element $\mathbb{I}$ in $\Aut[\nodes_O]{\graph}$ upon removal of the copy-index, leaving $\gelem_2$ to generate reflections and $\gelem_3$ to generate rotations.
     \subsection{Symmetric Marginal Polytope}
     Up until this point, we have discussed how new inequalities can be created from known ones by exploiting causal symmetry. Although very useful, we divert our attention to finding \textit{symmetric} inequalities themselves.
-    \[ \forall \varphi \in \Phi :  \varphi\br{\mathcal{I}_{V_{\bs{k}}}} = \mathcal{I}_{V_{\bs{k}}} \]
-    In order to do this, we must first define how elements $\varphi \in \Phi$ act on marginal outcomes $O_{V_{\bs{k}}}$.
+    \[ \forall \gelem \in \Phi :  \action{\mathcal{I}_{\mscenario}} = \mathcal{I}_{\mscenario} \]
+    In order to do this, we must first define how elements $\gelem \in \Phi$ act on marginal outcomes $O_{\mscenario}$.
+    \begin{definition}
+        Let $\jointvar = \bc{v_1, \ldots, v_k}$ be a collection of random variables and let $\gelem \in \Perm{\jointvar}$. $\jointvar$ is said to be \term{label invariant with respect to $\gelem$} if the outcome labels for each variable $v \in \jointvar$ are unchanged under the action of $\gelem$.
+        \[ \forall v \in \jointvar : O_{v} = O_{\action{v}} \]
+        Label invariance is a prerequisite for any kind of symmetry amoung random variables.
+    \end{definition}
+    \begin{definition}
+        Let $\jointvar = \br{v_1, \ldots v_k}$ be a collection of random variables along with a specific outcome $m \in \Out{V}$ where $V \subseteq \jointvar$. The action of $\gelem \in \Perm{\jointvar}$ on $m$ is a new outcome $\action{m} \in \Out{\action{V}}$ over $\action{V} \subseteq \jointvar$ defined as follows,
+        \[ \forall v \in V : \br{\action{m}}\br{\action{v}} \defined m \br{v} \]
+        The idea being that $\gelem$ modifies $m$ in such a way that permutes its domain while leaving its range invariant.
+    \end{definition}
     \begin{example}
-        Consider the outcome $\outc{ABC} = \br{A = 0, B = 1, C = 2} \in O_{ABC}$ where all variables have $4$ possible outcomes $\bc{0,1,2,3}$\footnote{Strictly speaking, the action of $\varphi$ is only well defined if each variable $v \in \mathcal{V}$ has the same outcome space $O_v$.} and the permutation $\varphi = \bc{A \to D, B \to C, C \to B, D \to A}$. We can act on $\outc{ABC}$ with $\varphi$ to obtain a different outcome which we denote $\varphi\br{\outc{ABC}}$,
-        \[ \varphi\br{\outc{ABC}} \defined \br{\varphi\br{A} = 0, \varphi\br{B} = 1, \varphi\br{C} = 2} = \br{D = 0, C = 1, B = 2} = \outc{BCD} \]
-        This notation can be misleading; when isolated $\outc{BCD}$ refers to an \textit{arbitrary} outcome of $O_{BCD}$, while in this context it is intended that $\outc{BCD}$ refers to the \textit{specific} outcome of $O_{BCD}$ that matches the numerical valuation of $\outc{ABC}$. Probabilistically, the action of $\varphi$ is defined as,
-        \[ \varphi\br{\prob[ABC]\br{012}} \defined \prob[\varphi\br{ABC}]\br{012} = \prob[DCB][012] = \prob[BCD][210] \]
+        Consider the outcome $m = \bc{A \mapsto 0, B \mapsto 1, C \mapsto 2} \in \Out{\bc{A,B,C}}$ where all variables have $4$ possible outcomes $O_A = O_B = O_C = \bc{0,1,2,3}$ and the permutation $\gelem = \bc{A \to D, B \to C, C \to B, D \to A}$.
+        The \textit{action} of $\gelem$ on $m$ is as follows,
+        \begin{align*}
+            \action{m} &= \action{\bc{A \mapsto m\br{A}, B \mapsto m\br{B}, C \mapsto m\br{C}}} \\
+            &= \bc{\action{A} \mapsto m\br{A}, \action{B} \mapsto m\br{B}, \action{C} \mapsto m\br{C}} \\
+            &= \bc{D \mapsto m\br{A}, C \mapsto m\br{B}, B \mapsto m\br{C}} \\
+            &= \bc{D \mapsto 0, C \mapsto 1, B \mapsto 2} \\
+            &= \bc{B \mapsto 2, C \mapsto 1, D \mapsto 0}
+        \end{align*}
+        Evidently, $\action{m} \in \Out{\bc{B, C, D}}$.
     \end{example}
 
-    Through repeated action of $\varphi \in \Phi$ on marginal outcomes $m \in O_{V_{\bs{k}}}$ and joint outcomes $j \in O_{\mathcal{V}}$, one can define group orbits of $\Phi$ in $O_{V_{\bs{k}}}$ and $O_{\mathcal{V}}$.
+    Through repeated action of $\gelem \in \Phi$ on marginal outcomes $m \in \Out{\mscenario}$ and joint outcomes $j \in \Out{\jointvar}$, one can define group orbits of $\Phi$ in $\Out{\mscenario}$ and $\Out{\jointvar}$.
     \begin{align*}
-    \Orb[\Phi]{m} &\defined \bc{\varphi\br{m} \in O_{V_{\bs{k}}} \mid \varphi \in \Phi} \\
-    \Orb[\Phi]{j} &\defined \bc{\varphi\br{j} \in O_{\mathcal{V}} \mid \varphi \in \Phi}
+        \Orb[\Phi]{m} &\defined \bc{\action{m} \mid \gelem \in \Phi} \\
+        \Orb[\Phi]{j} &\defined \bc{\action{j} \mid \gelem \in \Phi}
     \end{align*}
 
     \begin{definition}
-        The \term{symmetric marginalization matrix} $M_{\Phi}$ for a marginal scenario $V_{\bs{k}}$ and a particular restricted causal symmetry $\Phi$ is a contracted version of the marginalization matrix $M$ for $V_{\bs{k}}$. Each row of $M_{\Phi}$ corresponds to a marginal orbit $\Orb[\Phi]{m}$. Analogously each column of $M_{\Phi}$ corresponds to a joint orbit $\Orb[\Phi]{j}$. The entries of $M_{\Phi}$ are integers and correspond to summing over the rows and columns of $M$ that belong to each orbit.
+        The \term{symmetric incidence matrix} $M_{\Phi}$ for a marginal scenario $\mscenario$ and a particular restricted causal symmetry $\Phi$ is a contracted version of the incidence matrix $M$ for $\mscenario$. Each row of $M_{\Phi}$ corresponds to a marginal orbit $\Orb[\Phi]{m}$. Analogously each column of $M_{\Phi}$ corresponds to a joint orbit $\Orb[\Phi]{j}$. The entries of $M_{\Phi}$ are integers and correspond to summing over the rows and columns of $M$ that belong to each orbit.
         \[ M_{\Phi}\bs{\Orb[\Phi]{m}, \Orb[\Phi]{j}} = \sum_{\substack{j' \in \Orb[\Phi]{j} \\ m' \in \Orb[\Phi]{m}}} M\bs{m',j'} \]
     \end{definition}
 
@@ -752,7 +833,6 @@
     \appendix
     \section{Exemplary Inequalities}
     \section{Connections to Sheaf-Theoretic Treatment}
-    \section{Higher Order Logical Implications as a Complete Solution to the Marginal Problem}
     \section{Computationally Efficient Parametrization of the Unitary Group}
     Spengler, Huber and Hiesmayr \cite{Spengler_2010_Unitary} suggest the parameterization of the unitary group $\mathcal{U}\br{d}$ using a $d\times d$-matrix of real-valued parameters $\lambda_{n, m}$,
     \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} \exp\br{i P_n \lambda_{n,m}}\exp\br{i \si_{m,n} \lambda_{m,n}}}} \cdot \bs{\prod_{l=1}^{d} \exp\br{iP_l \lambda_{l,l}}}  \eq \label{eq:spengler_unitary} \]

@@ -7,6 +7,11 @@
 \usepackage{siunitx} % For units
 
 % Brackets
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
 \newcommand{\ba}[1]{\left< #1 \right>} % brackets angled
 \newcommand{\bs}[1]{\left[ #1 \right]} % brackets square
 \newcommand{\br}[1]{\left( #1 \right)} % brackets round
