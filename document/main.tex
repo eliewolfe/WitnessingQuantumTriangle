@@ -1,6 +1,10 @@
 % === Revtex Declaration ===
 \documentclass[aps, 10pt, english, twoside, pra, nofootinbib, longbibliography]{revtex4-1}
 
+\usepackage{silence}
+\WarningFilter{revtex4-1}{Repair the float}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 % === All of the Packages I use frequently ===
 \usepackage{../packages/shared}
 
@@ -12,6 +16,7 @@
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
@@ -34,12 +39,16 @@
 \newcommand{\valprod}{\times}
 \newcommand{\bigvalprod}{\prod}
 \newcommand{\com}{\mathrel{\Yright\hspace{-0.2em}\Yleft}}
-\newcommand{\ext}{\mathrel{\Yright}}
-\newcommand{\res}{\mathrel{\Yleft}}
+\newcommand{\ext}{\mathrel{\Yleft}}
+\newcommand{\res}{\mathrel{\Yright}}
 \newcommand{\gelem}{\varphi}
 \newcommand{\action}[1]{\gelem\bs{#1}}
 \newcommand{\mscenario}{\mathcal{M}}
 \newcommand{\jointvar}{\mathcal{J}}
+\newcommand{\mext}[1]{E_{#1}}
+\newcommand{\mul}[1]{\Gamma_{#1}}
+\newcommand{\isext}[2]{\delta_{#1 \ext #2}}
+\newcommand{\ts}{\mathcal{T}}
 % When I introduce a new term or definition
 \newcommand{\term}[1]{\textcolor{Mahogany}{\textbf{#1}}}
 
@@ -60,6 +69,7 @@
 \setoperator{Inj} % injectable sets
 \setoperator{ImInj} % images of the injectable sets
 \setoperator{PreInj} % Pre-injectable sets
+\setoperator{ImPreInj} % images of the Pre-injectable sets
 \setoperator{Aut} % graph automorphism
 \setoperator{Orb} % Group Orbits
 \setoperator{Perm} % Permutation group
@@ -109,9 +119,9 @@
     \end{definition}
 
     \begin{definition}
-        This notation generalizes to more than one variable. Letting $V = \bc{v_1, v_2}$, we define $\Out{V}$ to be the set of all joint valuations of $v_1$ and $v_2$.
+        % This notation generalizes to more than one variable. Letting $V = \bc{v_1, v_2}$, we define $\Out{V}$ to be the set of all joint valuations of $v_1$ and $v_2$.
         % Where the valuation product between outcome spaces is defined as follows,\footnote{At this level, a valuation product behaves analogously to a Cartesian product. However in \cref{def:extendable_set}, we define the a valuation product between outcomes and outcomes spaces.}
-        \[ \Out{V} = \Out{\bc{v_1, v_2}} \defined \bc{f : \bc{v_1, v_2} \to \bc{O_{v_1}, O_{v_2}} \mid f\br{v_i} \in O_{v_i}, i \in \bc{1,2}}  \]
+        % \[ \Out{V} = \Out{\bc{v_1, v_2}} \defined \bc{f : \bc{v_1, v_2} \to \bc{O_{v_1}, O_{v_2}} \mid f\br{v_i} \in O_{v_i}, i \in \bc{1,2}}  \]
         As a natural generalization, when considering a larger set of random variables $V = \bc{v_i}_{i \in \bs{k}}$ we define the joint outcome space in an analogous way,
         \[ \Out{V} \defined \bc{f: \bc{v_i}_{i \in \bs{k}} \to \bc{O_{v_i}}_{i \in \bs{k}} \mid \forall i \in \bs{k} : f\br{v_i} \in O_{v_i} } \eq \label{eq:outcome_space}\]
         Each outcome $f$ can be compactly represented as a set of mappings over each element of $V$.
@@ -164,13 +174,10 @@
     \end{definition}
 
     \begin{remark}
-        The notation `$g \com h$' is used to indicate compatibility between $g \in \Out{V}$ and $h \in \Out{W}$ because of the following observation; $g$ and $h$ are compatible if and only if they are extendable to some outcome $f \in \Out{V \cup W}$.
-        \[ g \com h \iff \exists f \in \Out{V \cup W} \mid g \ext f \res h \]
+        The notation `$g \com h$' is used to indicate compatibility between $g \in \Out{V}$ and $h \in \Out{W}$ because of the following observation; $g$ and $h$ are compatible if and only if extensions of some outcome $f \in \Out{V \cap W}$.
+        \[ g \com h \iff \exists f \in \Out{V \cap W} \mid g \res f \ext h \]
         In fact, such an $f$ is uniquely defined,
-        \[ \forall v \in V : f\br{v} = \begin{cases}
-            g\br{v} & v \in V \\
-            h\br{v} & v \in W
-        \end{cases} \]
+        \[ \forall v \in V \cap W : f\br{v} = g\br{v} = g\br{v} \]
     \end{remark}
 
     \begin{definition}
@@ -282,69 +289,11 @@
         \[ \forall f \in \Out{W} : \br{\sum_{V \setminus W} \prob[V]}\br{f} \defined \sum_{g \in \Ext[V]{f}} \prob[V][g] \]
     \end{definition}
 
+    \subsection{Preliminary Definitions}
+
+    Before discussing the present work, we
 
     \todo[TC]{How many definitions do I need to write??}
-
-    \section{Triangle Scenario}
-    \todo[TC]{Discuss the Triangle Scenario, previous work done on it, etc.}
-
-    Figure 8 of Appendix E \cite{Henson_2014}
-    Figure 1 of \cite{Inflation}
-
-
-    Focusing on the inflation depicted in \cref{fig:inflated_triangle_scenario}, we obtained the maximally pre-injectable sets through the procedure outlined in \cite{Inflation}.
-    \begin{equation*}
-        \eq \label{eq:pre-injectable_triangle_scenario}
-        \begin{gathered}
-            \textbf{Maximal Pre-injectable Sets} \\
-            \bc{A_1, B_1, C_1, A_4, B_4, C_4} \\
-            \bc{A_1, B_2, C_3, A_4, B_3, C_2} \\
-            \bc{A_2, B_3, C_1, A_3, B_2, C_4} \\
-            \bc{A_2, B_4, C_3, A_3, B_1, C_2} \\
-            \bc{A_1, B_3, C_4} \\
-            \bc{A_1, B_4, C_2} \\
-            \bc{A_2, B_1, C_4} \\
-            \bc{A_2, B_2, C_2} \\
-            \bc{A_3, B_3, C_3} \\
-            \bc{A_3, B_4, C_1} \\
-            \bc{A_4, B_1, C_3} \\
-            \bc{A_4, B_2, C_1}
-        \end{gathered}
-        \qquad
-        \begin{gathered}
-            \textbf{Ancestral Independences} \\
-            \bc{A_1, B_1, C_1} \ancestralindep \bc{A_4, B_4, C_4} \\
-            \bc{A_1, B_2, C_3} \ancestralindep \bc{A_4, B_3, C_2} \\
-            \bc{A_2, B_3, C_1} \ancestralindep \bc{A_3, B_2, C_4} \\
-            \bc{A_2, B_4, C_3} \ancestralindep \bc{A_3, B_1, C_2} \\
-            \bc{A_1} \ancestralindep \bc{B_3} \ancestralindep \bc{C_4} \\
-            \bc{A_1} \ancestralindep \bc{B_4} \ancestralindep \bc{C_2} \\
-            \bc{A_2} \ancestralindep \bc{B_1} \ancestralindep \bc{C_4} \\
-            \bc{A_2} \ancestralindep \bc{B_2} \ancestralindep \bc{C_2} \\
-            \bc{A_3} \ancestralindep \bc{B_3} \ancestralindep \bc{C_3} \\
-            \bc{A_3} \ancestralindep \bc{B_4} \ancestralindep \bc{C_1} \\
-            \bc{A_4} \ancestralindep \bc{B_1} \ancestralindep \bc{C_3} \\
-            \bc{A_4} \ancestralindep \bc{B_2} \ancestralindep \bc{C_1}
-        \end{gathered}
-    \end{equation*}
-    As can be counted, there are $12$ maximally pre-injectable sets which will be indexed $1$ through $12$ in the order seen above ($\bc{V_1, \ldots, V_{12}}$)
-
-    \begin{figure}
-    \begin{center}
-        \begin{minipage}[b]{.48\textwidth}
-            \centering
-            \scalebox{1.0}{\input{../figures/causal_structures/triangle_scenario}}
-            \caption{The casual structure of the Triangle Scenario. Three variables $A,B,C$ are observable and illustrated as triangles, while $X, Y, Z$ are latent variables illustrated as circles.}
-            \label{fig:triangle_scenario}
-        \end{minipage}\hspace{0.04\textwidth}%
-        \begin{minipage}[b]{.48\textwidth}
-            \centering
-            \scalebox{0.8}{\input{../figures/causal_structures/inflated_triangle_scenario}}
-            \caption{An inflated causal structure of the Triangle Scenario \cref{fig:triangle_scenario}.}
-            \label{fig:inflated_triangle_scenario}
-        \end{minipage}
-    \end{center}
-    \end{figure}
 
     \section{Compatibility, Contextuality and the Marginal Problem}
     \label{sec:comp_con_mp}
@@ -397,10 +346,84 @@
     \begin{definition}
         A \term{causal compatibility inequality} $\mathcal{I}_{\mscenario}$ for a marginal scenario $\mscenario$ is a probabilistic inequality that is obeyed for every compatible marginal model $\prob^{\mscenario}$. Whenever the marginal scenario $\mscenario$ in question is evident by context, the subscript of $\mathcal{I}_{\mscenario}$ will be dropped leaving just $\mathcal{I}$.
     \end{definition}
+
     \todo[TC]{Discuss Compatibility, connection to cooperative games/resources, bell incompatibility?}
     \todo[TC]{Connection between contextuality and Compatibility via the marginal problem for causal parameters}
     \todo[TC]{Discuss what is meant by a `complete' solution to the marginal problem}
     \todo[TC]{Maybe define the possibilistic marginal problem for later}
+
+    \section{The Triangle Scenario}
+    \label{sec:triangle_scenario}
+    \begin{figure}
+    \begin{center}
+        \begin{minipage}[b]{.48\textwidth}
+            \centering
+            \scalebox{1.0}{\input{../figures/causal_structures/triangle_scenario}}
+            \caption{The casual structure of the Triangle Scenario. Three variables $A,B,C$ are observable and illustrated as triangles, while $X, Y, Z$ are latent variables illustrated as circles.}
+            \label{fig:triangle_scenario}
+        \end{minipage}\hspace{0.04\textwidth}%
+        \begin{minipage}[b]{.48\textwidth}
+            \centering
+            \scalebox{0.8}{\input{../figures/causal_structures/inflated_triangle_scenario}}
+            \caption{An inflated causal structure of the Triangle Scenario \cref{fig:triangle_scenario}.}
+            \label{fig:inflated_triangle_scenario}
+        \end{minipage}
+    \end{center}
+    \end{figure}
+
+    The triangle scenario $\ts$ is a causal structure composed of $3$ parties $A, B, C$ arranged in a triangular configuration while pair-wise sharing latent variables $X, Y, Z$. It has that has been studied extensively in existing literature (see \cite[Fig. 1]{Steudel_2010}, \cite[Fig. 6]{Chaves_2014}, \cite[Fig. 8]{Branciard_2012}, \cite[Fig. 8, Appendix E]{Henson_2014}, \cite[Fig. 3]{Fritz_2012}, \cite[Fig. 1]{Inflation}, $\ldots$) and is reproduced here in \cref{fig:triangle_scenario} for convenience. At the time of publication for \cite{Branciard_2012} it was noted that characterizing locality in $\ts$ remained an open problem and that identifying locality constraints in this configuration seemed challenging. In \cite{Henson_2014}, $\ts$ was classified as an ``interesting'' causal structure.\footnote{Indicating that conditional independence relations are not a sufficient characterization of compatibility for $\ts$ \cite{Henson_2014}. Note that in $\ts$ there are \textit{zero} conditional independence relations over the observable nodes $A, B, C$.} Additionally $\ts$ is presented along with a family of entropic inequalities that constrain the set of compatible distributions \cite{Henson_2014}. Furthermore in \cite{Fritz_2012}, Fritz demonstrated that $\ts$ is the \textit{smallest} correlation scenario in which their exists quantum incompatible distributions by explicitly mentioning one (which we elect to call the \textit{Fritz distribution} in \cref{sec:fritz_dist}) and poses an important question asking if other incompatible quantum distributions exist. Finally in \cite{Inflation}, Wolfe et. al. make use of $\ts$ along with the Bell Scenario to demonstrate a novel technique for causal inference called the \textit{inflation technique} (summarized in \cref{sec:summary_inflation}). Wolfe et. al. validate the power and applicability of the inflation technique by proving incompatibility between $\ts$ and the $W$-type distribution; a quantum non-accessible distribution whose incompatibility is not witness-able by \textit{any} entropic inequalities or any other known constraints \cite{Inflation}. Moreover, a family of polynomial, $2$-outcome, compatibility inequalities are explicitly derived for an exemplary inflation of $\ts$ and $37$ non-trivial representatives are printed in \cite{Inflation}.
+
+    Identifying quantum-accessible distributions that are incompatible with the triangle scenario is of particular importance as it \todo[TC]{Discuss why we are doing this.}
+
+    As a preliminary search for quantum incompatibility in $\ts$, we performed numerical optimizations using bipartite qubit states and $2$-outcome POVM measurements (see \cref{sec:param_quantum_states} for details) against the $37$ compatibility inequalities printed in \cite{Inflation} as well as the entropic inequalities presented by \cite{Henson_2014}. Unfortunately, none of these inequalities could be violated. These early results suggest, although do not prove, that quantum non-locality is not present in $\ts$ for \textit{two-outcome} measurements. We make \textit{no claim} that this is a universal truth and simply take it as motivation to explore incompatibility in $\ts$ for a larger number of outcomes.
+
+    Specifically, we make use of the inflation technique for an inflated triangle scenario $\ts'$ depicted in \cref{fig:inflated_triangle_scenario} and cast the \textit{causal compatibility} problem as a \textit{marginal problem}. We develop a new technique which we call the \textit{extendable covering procedure (ECP)} to find a complete solution to the marginal problem that is suitable for large causal structures where the observable nodes are equipped with numerous outcomes. We use this technique to find numerous compatibility inequalities, some of which witness the incompatibility of the Fritz distribution. Before discussing the ECP, the Fritz distribution will be re-defined explicitly here, followed by a quick summary of the inflation technique of \cite{Inflation}. Following these summaries of existing work, we present the ECP and its connection to Hardy-type paradoxes \cite{Inflation,Liang_2011,Mansfield_2012}, certificate inequalities and logical Bell inequalities \cite{Abramsky_2011}. Moreover, the ECP can be adapted to derive symmetric inequalities or inequalities bounding any subspace of marginal models. To conclude, we subject our found inequalities to non-linear optimizations and discuss the implications of our results.
+
+    \section{The Fritz Distribution}
+    \label{sec:fritz_dist}
+    The \term{Fritz distribution} $P_F$ is a quantum-accessible distribution known to be incompatible with the Triangle Scenario \cite{Fritz_2012}. Explicitly, $P_F$ is a three-party ($A,B,C$), four-outcome ($1,2,3,4$) distribution that has form as follows:
+    \begin{align*}
+    \eq \label{eq:fritz_dist}
+    \begin{split}
+    \prob[F][111] = \prob[F][221] = \prob[F][412] = \prob[F][322] = \prob[F][233] = \prob[F][143] = \prob[F][344] = \prob[F][434] &= \f{1}{32}\br{2 + \sqrt{2}} \\
+    \prob[F][121] = \prob[F][211] = \prob[F][422] = \prob[F][312] = \prob[F][243] = \prob[F][133] = \prob[F][334] = \prob[F][444] &= \f{1}{32}\br{2 - \sqrt{2}}
+    \end{split}
+    \end{align*}
+    Here the notation $\prob[F][abc] = \prob[ABC][abc] = \prob[][A=a,B=b,C=c]$ is used. The Fritz distribution $\prob[F]$ can be realized with the following quantum configuration:
+    \begin{equation}
+    \begin{gathered}
+    \label{eq:fritz_quantum_realization}
+    \rho_{AB} = \ket{\Psi^+}\bra{\Psi^+} \quad \rho_{BC} = \rho_{CA} = \ket{\Phi^+}\bra{\Phi^+} \\
+    M_{A} = \bc{\ket{0\psi_0}\bra{0\psi_0}, \ket{0\psi_{\pi}}\bra{0\psi_{\pi}}, \ket{1\psi_{-\pi/2}}\bra{1\psi_{-\pi/2}}, \ket{1\psi_{\pi/2}}\bra{1\psi_{\pi/2}}} \\
+    M_{B} = \bc{\ket{\psi_{\pi/4}0}\bra{\psi_{\pi/4}0}, \ket{\psi_{5\pi/4}0}\bra{\psi_{5\pi/4}0}, \ket{\psi_{3\pi/4}1}\bra{\psi_{3\pi/4}1}, \ket{\psi_{-\pi/4}1}\bra{\psi_{-\pi/4}1}} \\
+    M_{C} = \bc{\ket{00}\bra{00}, \ket{01}\bra{01}, \ket{10}\bra{10}, \ket{11}\bra{11}}
+    \end{gathered}
+    \end{equation}
+    Where for convenience of notation $\psi_x$ is used to denote the superposition,
+    \[ \ket{\psi_x} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{ix}\ket{1}} \]
+    Additionally $\ket{\Psi^+} = \f{1}{\sqrt{2}}\br{\ket{01} + \ket{10}}$ and $\ket{\Phi^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}}$ are two maximally entangled Bell states.
+
+    Fritz first proved it's incompatibility \cite{Fritz_2012} by showing $C$ acts a moderator to ensure measurement pseudo-settings for $A$ and $B$ are independent, satisfying non-broadcasting requirements for the standard Bell scenario. In fact, by coarse-graining outcomes for $A$ and $B$ and treating $C$ as a measurement-setting moderator, $P_F$ maximally violates the CHSH inequality. To illustrate this, begin with the CHSH inequality \cite{CHSH_Original},
+    \[ \ba{AB|S_A=1, S_B=1} + \ba{AB|S_A=1, S_B=2} + \ba{AB|S_A=2, S_B=1} - \ba{AB|S_A=2, S_B=2} \leq 2 \eq \label{eq:CHSH}\]
+    Where $\ba{AB|S_A=i, S_B=j}$ is the correlation between $A$ and $B$ given the measurement settings for $A$ ($B$) is $i$ ($j$) respectively. Next each of $C$'s outcomes become the conditioned settings in \cref{eq:CHSH},
+    \[ \ba{AB|C=2} + \ba{AB|C=3} + \ba{AB|C=4} - \ba{AB|C=1} \leq 2 \eq \label{eq:chsh_c}\]
+    Finally, specifying the two outcome coarse-graining as $\bc{1,2,3,4} \rightarrow \bc{\br{1,4}, \br{2,3}}$ gives a definition of correlation,
+    \[ \ba{AB} \defined 2\bc{\prob[][11] + \prob[][14] + \prob[][41] + \prob[][44] + \prob[][22] + \prob[][23] + \prob[][32] + \prob[][33]} - 1 \]
+    Which when applied to the Fritz distribution \cref{eq:fritz_dist} gives the following correlations:
+    \begin{gather*}
+    \ba{AB|C=2} = 2 \bc{\f{1}{32}\bs{2\br{2+\sqrt{2}}+2\br{2-\sqrt{2}}}} - 1 = \f{\sqrt{2}}{2} \\
+    \ba{AB|C=3} = \ba{AB|C=4} = \f{\sqrt{2}}{2} \quad \ba{AB|C=1} = -\f{\sqrt{2}}{2}
+    \end{gather*}
+    Which when applied to \cref{eq:chsh_c} gives the familiar Tsirelson violation of $2\sqrt{2} \not\leq 2$ \cite{Cirelson_1980}.
+
+    Before continuing it is worth noting that \cref{eq:fritz_dist} is non-unique. Any distribution that is equal to \cref{eq:fritz_dist} via a permutation of outcomes or exchange of parties is also referred to as a Fritz distribution. Moreover, the quantum realization of \cref{eq:fritz_quantum_realization} is non-unique. In fact, \cref{eq:fritz_quantum_realization} is not the realization that Fritz originally had in mind. Nonetheless \cref{eq:fritz_dist} is taken as \textit{the} Fritz distribution for concreteness throughout this paper.
+
+    In \cite{Fritz_2012}, Fritz posits the following question: \textit{Find an example of non-classical quantum correlations in $\ts$ together with a proof of its non-classicality which does not hinge on Bell’s Theorem.}
+
+
+
+    \todo[TC]{Summarize Problem 2.17 in fritz BBT, make it more formal}
+
     \section{Summary of the Inflation Technique}
     \label{sec:summary_inflation}
     The causal inflation technique, first pioneered by Wolfe, Spekkens, and Fritz \cite{Inflation} and inspired by the \textit{do calculus} and \textit{twin networks} of Ref. \cite{Pearl_2009}, is a family of causal inference techniques that can be used to determine if a probability distribution is compatible or incompatible with a given causal structure. As a preliminary summary, the inflation technique begins by \textit{augmenting} a causal structure with additional copies of its nodes, producing an \textit{inflated} causal structure, and then exposes how causal inference tasks on the inflated causal structure can be used to make inferences on the original causal structure. Copies of the original nodes are distinguished by an additional subscript called the \term{copy-index}. For example node $A$ of \cref{fig:triangle_scenario} has copies $A_1, A_2, A_3, A_4$ in the inflation of \cref{fig:inflated_triangle_scenario}. Following the notions of Ref. \cite{Inflation}, all such copies are deemed equivalent via a \term{copy-index equivalence} relation denoted `$\sim$'. A copy-index is effectively arbitrary, so $A'$ will refer to an arbitrary inflated copy of $A$.
@@ -430,61 +453,61 @@
 
     The inflation lemma is the most important result of the causal inflation technique \cite{Inflation}. The contrapositive version of \cref{lem:inflation} is a powerful tool for determining compatibility. Any compatibility constraint on marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ of the inflated causal structure $\graph'$ correspond to valid compatibility constraints on marginal models $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ of the original causal structure. Corollary 5 of \cite{Inflation} proves this explicitly for incompatibility inequalities $\mathcal{I}$; which the remainder of this work focuses on.  Additionally, the inflation lemma holds when considering any subset of $\Inj[\graph]{\graph'}$ (analogously $\ImInj[\graph]{\graph'}$). Therefore, in situations where latent nodes are present in $\graph$, one only needs to consider injectable sets that are composed of \textit{observable nodes}.
 
-    In this work, we obtain inequalities that constrain the set of injectable marginal models $\bc{\prob[N'] \mid N' \in \ImInj[\graph]{\graph'}}$ for the inflated Triangle Scenario of \cref{fig:triangle_scenario} by considering the marginal problem (see \cref{sec:comp_con_mp}) for the set of \term{maximally pre-injectable sets}\footnote{The set of all pre-injectable sets forms a topological \textit{simplicial conplex}. `Maximal' refers to the pre-injectable sets that are no proper subset of another.}. As defined by \cite{Inflation}, a pre-injectable set $V$ is a subset of $\nodes'$ that can be written as the decomposed into the union of injectable sets $V = \bigcup_i N'_i$ where $\bc{N'_i \in \Inj[\graph]{\graph'}}$ that are mutually \term{ancestrally independent},
+    In this work, we obtain inequalities that constrain the set of injectable marginal models $\bc{\prob[N'] \mid N' \in \ImInj[\graph]{\graph'}}$ for the inflated Triangle Scenario of \cref{fig:triangle_scenario} by considering the marginal problem (see \cref{sec:comp_con_mp}) for the set of \term{maximally pre-injectable sets}\footnote{The set of all pre-injectable sets forms a topological \textit{simplicial conplex}. `Maximal' refers to the pre-injectable sets that are no proper subset of another.}. A pre-injectable set $V$ is a subset of $\nodes'$ that can be decomposed into the disjoint union of injectable sets $V = \coprod_i N'_i \mid N'_i \in \Inj[\graph]{\graph'}$ that are mutually \term{ancestrally independent},
     \[ \forall i,j : N'_i \ancestralindep N'_j \iff \An[\graph']{N'_i} \cap \An[\graph']{N'_j} = \emptyset  \]
     In doing so, any distribution over all nodes of a pre-injectable set $\prob[\cup_i N'_i]$ will factorize according to graphical $d$-separation conditions \cite{Pearl_2009},
     \[ \prob[V] = \prob[\cup_i N'_i] = \prod_{i}\prob[N'_i] \]
     This turns linear inequalities over the pre-injectable distributions into polynomial inequalities over the injectable distributions, allowing one to replace all such distributions with equivalent distributions over the original random variables of $\nodes$. $\PreInj[\graph]{\graph'}$ will denote the set of all pre-injectable sets.
 
-    \section{The Fritz Distribution}
-    The \term{Fritz distribution} $P_F$ is a quantum-accessible distribution known to be incompatible with the Triangle Scenario. Explicitly, $P_F$ is a three-party ($A,B,C$), four-outcome ($1,2,3,4$) distribution that has form as follows:
-    \begin{align*}
-    \eq \label{eq:fritz_dist}
-    \begin{split}
-    \prob[F][111] = \prob[F][221] = \prob[F][412] = \prob[F][322] = \prob[F][233] = \prob[F][143] = \prob[F][344] = \prob[F][434] &= \f{1}{32}\br{2 + \sqrt{2}} \\
-    \prob[F][121] = \prob[F][211] = \prob[F][422] = \prob[F][312] = \prob[F][243] = \prob[F][133] = \prob[F][334] = \prob[F][444] &= \f{1}{32}\br{2 - \sqrt{2}}
-    \end{split}
-    \end{align*}
-    Here the notation $\prob[F][abc] = \prob[ABC][abc] = \prob[][A=a,B=b,C=c]$ is used. The Fritz distribution $\prob[F]$ can be realized with the following quantum configuration:
-    \begin{equation}
-    \begin{gathered}
-    \label{eq:fritz_quantum_realization}
-    \rho_{AB} = \ket{\Psi^+}\bra{\Psi^+} \quad \rho_{BC} = \rho_{CA} = \ket{\Phi^+}\bra{\Phi^+} \\
-    M_{A} = \bc{\ket{0\psi_0}\bra{0\psi_0}, \ket{0\psi_{\pi}}\bra{0\psi_{\pi}}, \ket{1\psi_{-\pi/2}}\bra{1\psi_{-\pi/2}}, \ket{1\psi_{\pi/2}}\bra{1\psi_{\pi/2}}} \\
-    M_{B} = \bc{\ket{\psi_{\pi/4}0}\bra{\psi_{\pi/4}0}, \ket{\psi_{5\pi/4}0}\bra{\psi_{5\pi/4}0}, \ket{\psi_{3\pi/4}1}\bra{\psi_{3\pi/4}1}, \ket{\psi_{-\pi/4}1}\bra{\psi_{-\pi/4}1}} \\
-    M_{C} = \bc{\ket{00}\bra{00}, \ket{01}\bra{01}, \ket{10}\bra{10}, \ket{11}\bra{11}}
-    \end{gathered}
-    \end{equation}
-    Where for convenience of notation $\psi_x$ is used to denote the superposition,
-    \[ \ket{\psi_x} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{ix}\ket{1}} \]
-    Additionally $\ket{\Psi^+} = \f{1}{\sqrt{2}}\br{\ket{01} + \ket{10}}$ and $\ket{\Phi^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}}$ are two maximally entangled Bell states.
-    Fritz first proved it's incompatibility \cite{Fritz_2012} by showing $C$ acts a moderator to ensure measurement pseudo-settings for $A$ and $B$ are independent, satisfying non-broadcasting requirements for the standard Bell scenario. In fact, by coarse-graining outcomes for $A$ and $B$ and treating $C$ as a measurement-setting moderator, $P_F$ maximally violates the CHSH inequality. To illustrate this, begin with the CHSH inequality \cite{CHSH_Original},
-    \[ \ba{AB|S_A=1, S_B=1} + \ba{AB|S_A=1, S_B=2} + \ba{AB|S_A=2, S_B=1} - \ba{AB|S_A=2, S_B=2} \leq 2 \eq \label{eq:CHSH}\]
-    Where $\ba{AB|S_A=i, S_B=j}$ is the correlation between $A$ and $B$ given the measurement settings for $A$ ($B$) is $i$ ($j$) respectively. Next each of $C$'s outcomes become the conditioned settings in \cref{eq:CHSH},
-    \[ \ba{AB|C=2} + \ba{AB|C=3} + \ba{AB|C=4} - \ba{AB|C=1} \leq 2 \eq \label{eq:chsh_c}\]
-    Finally, specifying the two outcome coarse-graining as $\bc{1,2,3,4} \rightarrow \bc{\br{1,4}, \br{2,3}}$ gives a definition of correlation,
-    \[ \ba{AB} \defined 2\bc{\prob[][11] + \prob[][14] + \prob[][41] + \prob[][44] + \prob[][22] + \prob[][23] + \prob[][32] + \prob[][33]} - 1 \]
-    Which when applied to the Fritz distribution \cref{eq:fritz_dist} gives the following correlations:
-    \begin{gather*}
-    \ba{AB|C=2} = 2 \bc{\f{1}{32}\bs{2\br{2+\sqrt{2}}+2\br{2-\sqrt{2}}}} - 1 = \f{\sqrt{2}}{2} \\
-    \ba{AB|C=3} = \ba{AB|C=4} = \f{\sqrt{2}}{2} \quad \ba{AB|C=1} = -\f{\sqrt{2}}{2}
-    \end{gather*}
-    Which when applied to \cref{eq:chsh_c} gives the familiar Tsirelson violation of $2\sqrt{2} \not\leq 2$ \cite{Cirelson_1980}.
+    Focusing on the inflation $\ts'$ depicted in \cref{fig:inflated_triangle_scenario}, we obtained the injectable sets $\Inj[\ts]{\ts'}$ along with the maximally pre-injectable sets through a simple graphical procedure outlined in \cite{Inflation}.
+    \begin{equation*}
+        \eq \label{eq:pre-injectable_triangle_scenario}
+        \begin{gathered}
+            \textbf{Maximal Pre-injectable Sets} \\
+            \bc{A_1, B_1, C_1, A_4, B_4, C_4} \\
+            \bc{A_1, B_2, C_3, A_4, B_3, C_2} \\
+            \bc{A_2, B_3, C_1, A_3, B_2, C_4} \\
+            \bc{A_2, B_4, C_3, A_3, B_1, C_2} \\
+            \bc{A_1, B_3, C_4} \\
+            \bc{A_1, B_4, C_2} \\
+            \bc{A_2, B_1, C_4} \\
+            \bc{A_2, B_2, C_2} \\
+            \bc{A_3, B_3, C_3} \\
+            \bc{A_3, B_4, C_1} \\
+            \bc{A_4, B_1, C_3} \\
+            \bc{A_4, B_2, C_1}
+        \end{gathered}
+        \qquad
+        \begin{gathered}
+            \textbf{Ancestral Independences} \\
+            \bc{A_1, B_1, C_1} \ancestralindep \bc{A_4, B_4, C_4} \\
+            \bc{A_1, B_2, C_3} \ancestralindep \bc{A_4, B_3, C_2} \\
+            \bc{A_2, B_3, C_1} \ancestralindep \bc{A_3, B_2, C_4} \\
+            \bc{A_2, B_4, C_3} \ancestralindep \bc{A_3, B_1, C_2} \\
+            \bc{A_1} \ancestralindep \bc{B_3} \ancestralindep \bc{C_4} \\
+            \bc{A_1} \ancestralindep \bc{B_4} \ancestralindep \bc{C_2} \\
+            \bc{A_2} \ancestralindep \bc{B_1} \ancestralindep \bc{C_4} \\
+            \bc{A_2} \ancestralindep \bc{B_2} \ancestralindep \bc{C_2} \\
+            \bc{A_3} \ancestralindep \bc{B_3} \ancestralindep \bc{C_3} \\
+            \bc{A_3} \ancestralindep \bc{B_4} \ancestralindep \bc{C_1} \\
+            \bc{A_4} \ancestralindep \bc{B_1} \ancestralindep \bc{C_3} \\
+            \bc{A_4} \ancestralindep \bc{B_2} \ancestralindep \bc{C_1}
+        \end{gathered}
+    \end{equation*}
+    As can be counted, there are $12$ maximally pre-injectable sets $\ts'$ which will be indexed $1$ through $12$ in the order seen above ($\bc{V_1, \ldots, V_{12}}$). The maximally pre-injectable sets $\bc{V_i}_{i \in \bs{12}}$ form a maximal marginal scenario $\mscenario$ over the observable nodes of $\ts'$ when equipped with outcome labels. Using \cref{lem:inflation} inequalities $\mathcal{I}_{\PreInj[\ts]{\ts'}}$ constraining the set of contextual marginal models $\prob^{\mscenario}$ can be deflated into polynomial inequalities over $\mathcal{I}_{\ImInj[\ts]{\ts'}}$ bounding compatible marginal models over the images of the injectable sets in $\ts$.
+    \[ \ImInj[\ts]{\ts'} = \bc{\bc{A, B, C}, \bc{A}, \bc{B}, \bc{C}} \]
 
-    Before continuing it is worth noting that \cref{eq:fritz_dist} is non-unique. Any distribution that is equal to \cref{eq:fritz_dist} via a permutation of outcomes or exchange of parties is also referred to as a Fritz distribution. Moreover, the quantum realization of \cref{eq:fritz_quantum_realization} is non-unique. In fact, \cref{eq:fritz_quantum_realization} is not the realization that Fritz originally had in mind. Nonetheless \cref{eq:fritz_dist} is taken as \textit{the} Fritz distribution for concreteness throughout this paper.
-
-    \todo[TC]{Summarize Problem 2.17 in fritz BBT, make it more formal}
     \section{Certificate Inequalities}
     \label{sec:certificate_inequalities}
     \subsection{Casting the Marginal Problem as a Linear Program}
     After obtaining the maximal pre-injectable sets associated with a particular inflation, one can write the marginal problem of \cref{def:marginal_problem} as a linear program. The key observation is that marginalization is a \textit{linear} operator that can be performed via a matrix multiplication. To do this, we will define the \textit{incidence matrix}.
     \begin{definition}
         The \term{incidence matrix} $M$ for a marginal scenario $\mscenario = \bc{V_1, \dots, V_k}$ is a bit-wise matrix where the columns are indexed by \textit{joint} outcomes $j \in \Out{\jointvar}$ and the rows are indexed by \textit{marginal} outcomes $m \in \Out{\mscenario}$. The entries of $M$ are populated whenever a row index is extendable to a column index.
-        \[ M\bs{m, j} = \begin{cases}
+        \[ M\bs{m, j} = \de_{m \ext j} \defined \begin{cases}
             1 & m \ext j \\
             0 & \text{otherwise}
         \end{cases} \]
-        The incidence matrix has $\abs{\Out{\jointvar}}$ columns and $\abs{\Out{\mscenario}} = \sum_{i\in \bs{k}} \abs{\Out{V_i}}$ rows. The number of non-zero entries of $M$ is a simple expression,
+        Where $\de_{m \ext j}$ is an \textit{extendability indicator}. The incidence matrix has $\abs{\Out{\jointvar}}$ columns and $\abs{\Out{\mscenario}} = \sum_{i\in \bs{k}} \abs{\Out{V_i}}$ rows. The number of non-zero entries of $M$ is a simple expression,
         \[ \sum_{i\in\bs{k}} \abs{\Out{V_i}}\abs{\Out{\jointvar \setminus V_i}} = \sum_{i\in \bs{k}} \abs{\Out{\jointvar}} = k\abs{\Out{\jointvar}} \]
         This is due to the fact that each marginal context contributes a single non-zero entry to each column of $M$, resulting in $k\abs{\Out{\jointvar}}$ total non-zero entries.
     \end{definition}
@@ -492,19 +515,29 @@
 
     To illustrate this concretely, consider the following example:
     \begin{example}
-        Suppose one has $4$ binary random variables $\jointvar = \bc{a,b,c}$ in mind and $2$ contexts $\mscenario = \bc{\bc{a,c}, \bc{b}}$. Then the incidence matrix is:
+        \label{ex:marginal_matrix}
+        Let $\jointvar$ be $3$ binary variables $\jointvar = \bc{a,b,c}$ and consider the marginal scenario $\mscenario = \bc{\bc{a,c}, \bc{b}}$. The incidence matrix becomes:
         \[ M = \kbordermatrix{
-            (a,b,c) = & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
-            (a=0, c=0) & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
-            (a=0, c=1) & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 \\
-            (a=1, c=0) & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 \\
-            (a=1, c=1) & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
-            (b=0)      & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 \\
-            (b=1)      & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1
+            (a,b,c) \:\: \mapsto & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
+            (a\mapsto0, c\mapsto0) & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+            (a\mapsto0, c\mapsto1) & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+            (a\mapsto1, c\mapsto0) & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 \\
+            (a\mapsto1, c\mapsto1) & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+            (b\mapsto0)            & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 \\
+            (b\mapsto1)            & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1
         } \]
     \end{example}
 
-    In order to describe how marginalization can be written as matrix multiplication $M \cdot x = b$, we need to describe how to define two more quantities:
+    \begin{example}
+        The marginal problem for the inflated causal structure $\ts'$ depicted in \cref{fig:inflated_triangle_scenario} concerns itself with the pre-injectable marginal scenario $\mscenario = \PreInj[\ts]{\ts'} = \bc{V_1, \ldots, V_{12}}$. Equipping the observed nodes of $\ts'$ with $4$-element outcome labels, the incidence matrix $M$ has $16,896$ rows and $16,777,216$ columns.
+        \begin{align*}
+            &\text{\# Rows} = \abs{\Out{\mscenario}} = \sum_{i=1}^{12} \abs{\Out{V_i}} = \sum_{i=1}^{12} 4^{\abs{V_i}} = 4 \cdot 4^6 + 8 \cdot 4^3 = 16,896 \\
+            &\text{\# Columns} = \abs{\Out{\jointvar}} = 4^{\abs{\jointvar}} = 4^{12} = 16,777,216
+        \end{align*}
+        With $12 \cdot 4^{12} = 201,326,592$ non-zero entries. For obvious reasons, no attempt is made to reproduce it here.
+    \end{example}
+
+    In order to describe how marginalization can be written as matrix multiplication $M \cdot x = b$, two more quantities need to be described:
 
     \begin{definition}
         The \term{joint distribution vector} $\probvec[\jointvar]$ for a probability distribution $\prob[\jointvar]$ is the vector whose entries are the positive, real-valued probabilities that $\prob[\jointvar]$ assigns to each joint outcome of $j \in \Out{\jointvar}$. $\probvec[\jointvar]$ shares the same indices as the \textit{column} indices of $M$.
@@ -517,7 +550,10 @@
     \end{definition}
     The marginal and joint distribution vectors are related via the incidence matrix $M$. Given a joint distribution vector $\probvec[\jointvar]$ one can obtain the marginal distribution vector $\probvec^{\mscenario}$ by multiplying $M$ by $\probvec[\jointvar]$.
     \[ \probvec^{\mscenario} = M \cdot \probvec[\jointvar] \eq \label{eq:marginal_problem_matrix} \]
-    \todo[TC]{Discuss non-unique but consistent ordering of $M$, $\probvec[\jointvar]$ and $\probvec^{\mscenario}$}
+
+    \begin{remark}
+        The particular ordering of the rows and columns of $M$ carries no importance, but it \textit{must} be consistent between $M$, $\probvec[\jointvar]$ and $\probvec^{\mscenario}$. Throughout this work, a \textit{canonical ordering} is used: the marginal contexts are written in the same order as listed in the marginal scenario $\mscenario$ and outcomes within a marginal context are enumerated in a \textit{raveling} order; exemplified in \cref{ex:marginal_matrix}.
+    \end{remark}
 
     The marginal problem can now be rephrased in the language of the incidence matrix. Suppose one obtains a marginal distribution vector $\probvec^{\mscenario}$. The marginal problem becomes equivalent to the question: \textit{Does there exist a joint distribution vector $\probvec[\jointvar]$ such that \cref{eq:marginal_problem_matrix} holds?}
 
@@ -550,31 +586,160 @@
 
     \comment[TC]{\href{http://web.stanford.edu/~ashishg/msande111/notes/chapter4.pdf}{Farkas's lemma} here?}
 
-    \begin{definition} An \term{infeasibility certificate} is any vector $y$ that satisfies the constraints of \cref{def:dual_marginal_linear_program} and also permits violation of \cref{eq:dual_marginal_ineq} for some marginal distribution vector $\probvec^{\mscenario}$.
+    \begin{definition} An \term{infeasibility certificate} \cite{Andersen_2001} is any vector $y$ that satisfies the constraints of \cref{def:dual_marginal_linear_program} and also permits violation of \cref{eq:dual_marginal_ineq} for some marginal distribution vector $\probvec^{\mscenario}$.
     \[ y \in \R^{\abs{\Out{\mscenario}}} : y \cdot M \succeq 0, \quad y \cdot \probvec^{\mscenario} < 0 \]
     Furthermore, any $y$ satisfying $y \cdot M \succeq 0$ induces a \term{certificate inequality} that constraints the space of marginal distribution vectors which takes the symbolic form of \cref{eq:dual_marginal_ineq},
     \[ y \cdot \probvec^{\mscenario} \geq 0 \]
     Where the entries of the certificate $y$ act as coefficients for the entries of $\probvec^{\mscenario}$.
     \end{definition}
     \todo[TC]{Discuss Infeasibility Certificates basis}
-
-    \begin{example}
-        The marginal problem for the inflated causal structure $\graph'$ depicted in \cref{fig:inflated_triangle_scenario} concerns itself with the pre-injectable marginal scenario $\mscenario = \PreInj[\graph]{\graph'} = \bc{V_1, \ldots, V_{12}}$. The incidence matrix $M$ has $16,896$ rows and $16,777,216$ columns.
-        \begin{align*}
-            &\text{\# Rows} = \abs{\Out{\mscenario}} = \sum_{i=1}^{12} \abs{\Out{V_i}} = \sum_{i=1}^{12} 4^{\abs{V_i}} = 4 \cdot 4^6 + 8 \cdot 4^3 = 16,896 \\
-            &\text{\# Columns} = \abs{O_{\nodes'}} = 4^{\abs{\nodes'}} = 4^{12} = 16,777,216
-        \end{align*}
-        With $12 \cdot 4^{12} = 201,326,592$ non-zero entries.
-    \end{example}
-
     \todo[TC]{Discuss the certificate inequalities we found.}
 
     \[ \mathcal{I}\tsb{Mosek-Cert}, \mathcal{I}\tsb{Cert} \]
 
     \section{Covering Inequalities}
 
-    Section \ref{sec:certificate_inequalities} discusses how one can obtain a valid compatibility inequality that witnesses incompatibility for a particular marginal model $\prob^{\mscenario}$ by writing the marginal problem as a linear program.
+    Section \ref{sec:certificate_inequalities} discusses how one can obtain a valid compatibility inequality that witnesses incompatibility for a particular marginal model $\prob^{\mscenario}$ by writing the marginal problem as a linear program. It was demonstrated that every incompatible distribution is witness-able by some certificate inequality. However, when a particular marginal model $\prob^{\mscenario}$ is not known, a linear optimization offers no utility.
     \todo[TC]{Motivate why certificates are not enough, want many solutions, want logical foundation}
+    % Throughout this section, there will be a few omissions of notation to help clar
+
+    In this section, we will first summarize a method that can be used to obtain a complete solution to the \textit{possibilistic} marginal problem and indirectly offer a \textit{partial} solution to the \textit{probabilistic} marginal problem. Doing so corresponds to enumerating all
+    \subsection{Logical Covers}
+    In this section, we summarize the familiar notion of a logical cover
+    % \begin{lemma}
+    %     \label{lemma:logical_extenable_set}
+    %     Let $m \in \Out{\mscenario}$ be some marginal outcome of the marginal scenario $\mscenario$. If any marginal model $\prob^{\mscenario}$ is to be non-contextual, the following condition must hold.
+    %     \[ m \iff \bigvee_{j \in \Ext[\jointvar]{m}} j \]
+    %     The idea being that if a joint distribution exists, then the event $m$ represents partial knowledge of the entire system $\jointvar$; whenever $m$ occurs, exactly one of the extendable joint outcomes has to have occurred.
+    % \end{lemma}
+    Suppose one has a particular marginal outcome $a \in \Out{\mscenario}$ and a marginal model $\prob^{\mscenario}$ that assigns the probability $\prob[][a]$ to the outcome $a$. If the marginal model $\prob^{\mscenario}$ is to admit a joint distribution $\prob[\jointvar]$, then it must be that $\prob[][a]$ is equal to a marginalization over $a$'s extendable set into $\jointvar$.
+    \[ \prob[][a] = \sum_{j \in \Ext[\jointvar]{a}}\prob[\jointvar][j] \eq \label{eq:marginal_extendable_sum_a}\]
+    This corresponds to row $a$ of the incidence matrix $M$. Next consider a subset of marginal outcomes $C \subseteq \Out{\mscenario}$. Summing over the associated probabilities $\bc{\prob[][c]}_{c \in C}$ and applying \cref{eq:marginal_extendable_sum_a} yields,
+    \[ \sum_{c \in C}\prob[][c] = \sum_{c \in C}\sum_{j \in \Ext[\jointvar]{c}}\prob[\jointvar][j] \eq \label{eq:marginal_extendable_sum_cs} \]
+    If for all joint distributions $\prob[\jointvar]$ it can be demonstrated that the following holds,
+    \[ \sum_{c \in C}\sum_{j \in \Ext[\jointvar]{c}}\prob[\jointvar][j] \geq \sum_{j \in \Ext[\jointvar]{a}}\prob[\jointvar][j] \eq \label{eq:extendable_cover_first} \]
+    Then combining \cref{eq:marginal_extendable_sum_a,eq:marginal_extendable_sum_cs,eq:extendable_cover_first} yields a valid compatibility inequality for $\mscenario$.
+    \[ \prob[][a] \leq \sum_{c \in C}\prob[][c] \eq \label{eq:1ncover} \]
+    In order for \cref{eq:extendable_cover_first} to hold for \textit{all} joint distributions $\prob[\jointvar]$, it must hold on an algebraic level; each term on the right-hand side of \cref{eq:extendable_cover_first} also appears on the left-hand side of \cref{eq:extendable_cover_first}.\footnote{If there were a joint outcome $j^*$ present on the right-hand side of \cref{eq:extendable_cover_first} but not the left, then \cref{eq:extendable_cover_first} would be violated by the deterministic distribution $\prob[\jointvar][j^*] = 1$} Therefore, identifying all compatibility inequalities that can be written in the form of \cref{eq:1ncover} corresponds to identifying all sets $C \subseteq \Out{\mscenario}$ such that their joint distribution terms algebraically \textit{cover} the joint distribution terms for $a \in \Out{\mscenario}$.
+
+    The notion of forming a
+
+    \subsection{Extendable Covers}
+    We will now generalize the notion of a logical cover by considering more exotic antecedents corresponding to multiple marginal outcomes $A \subseteq \Out{\mscenario}$ along with weights $\mul{A}$ for each outcome. Afterwards we demonstrate that these generalized covers also admit non-trivial probabilistic compatibility inequalities.
+
+    \begin{definition}
+        A \term{multiplicity set} or \term{m-set} $\mul{S}$ for a marginal scenario $\mscenario$ is a function $\mul{S} : \Out{\mscenario} \to \Z_{\geq 0}$ that assigns to each marginal outcome $m \in \Out{\mscenario}$ a \textit{multiplicity} $\mul{S}\br{m} \in \Z_{\geq 0}$. The subscript $S$ is a subset of marginal outcome $S \subseteq \Out{\mscenario}$ indicating which marginal outcomes receive non-zero multiplicity.
+        \[ \forall s \in S : \mul{S}\br{s} \in \N  \quad \forall m \in \Out{\mscenario}\setminus S : \mul{S}\br{m} = 0 \]
+        We define the \term{extension of an m-set} $\mul{S}$ into $\jointvar$ to be the m-set $\mul{\mext{S}}$ which assigns multiplicities to \textit{joint} outcomes $j \in \Out{\jointvar}$. The extension of $S$ denoted $\mext{S}$ is the set of all joint outcomes that are extensions of marginal outcomes $s \in S$.
+        \[ \mext{S} = \bigcup_{s \in S} \Ext[\jointvar]{s} \]
+        While the multiplicity of each element $j \in \mext{S}$ corresponds to the sum over multiplicities $\mul{S}\br{s}$ where $j \in \Ext[\jointvar]{s}$.
+        \[ \forall j \in \mext{S} : \mul{\mext{S}}\br{j} = \sum_{s \in S} \mul{S}\br{s} \isext{s}{j} \eq \label{eq:joint_multiplicity}\]
+        With all other joint outcomes receiving a zero multiplicity $\forall j \not\in \mext{S} : \mul{\mext{S}}\br{j} = 0$.
+    \end{definition}
+    \begin{definition}
+        An m-set $\mul{C}$ is an \term{extendable cover} of an m-set $\mul{A}$ for a marginal scenario $\mscenario$ if and only if the following two conditions hold\footnote{In fact \cref{eq:multi_extenable_cover_def} implies \cref{eq:flat_extenable_cover_def} since $\forall j \not \in \mext{A} : \mul{\mext{A}}\br{j} = 0$.}:
+        \begin{gather*}
+            E_A \subseteq E_C \eq \label{eq:flat_extenable_cover_def}\\
+            \forall j \in E_A : \mul{\mext{A}}\br{j} \leq \mul{\mext{C}}\br{j} \eq \label{eq:multi_extenable_cover_def}
+        \end{gather*}
+    \end{definition}
+    Identifying extendable covers is of great importance because of the following theorem.
+    \begin{theorem}
+        If the m-set $\mul{C}$ is an extendable cover of the m-set $\mul{A}$ for a marginal scenario $\mscenario$, then the following is a valid compatibility $\mathcal{I}_{\mscenario}$ for the marginal scenario $\mscenario$.
+        \[ \sum_{a \in A}\mul{A}\br{a}\prob[][a] \leq \sum_{c \in C}\mul{C}\br{c}\prob[][c] \eq \label{eq:extendable_cover} \]
+    \end{theorem}
+    \begin{proof}
+        To prove that \cref{eq:extendable_cover} is a valid compatibility inequality $\mathcal{I}_{\mscenario}$ for all marginal models $\prob^\mscenario$, we will demonstrate that \cref{eq:extendable_cover} follows from the assumption that a joint distribution $\prob[\jointvar]$ exists.
+
+        For each m-set $\mul{S}$ write the weighted sum over the probabilities $\bc{\prob[][s]}_{s \in S}$ in terms of the joint distribution $\prob[\jointvar]$ using \cref{eq:joint_multiplicity}.
+        \begin{align*}
+        \eq \label{eq:derivation_cover}
+        \begin{split}
+        \sum_{s \in S} \mul{S}\br{s}\prob[][s] &= \sum_{s \in S} \mul{S} \br{s} \sum_{j \in \Ext[\jointvar]{s}} \prob[\jointvar][j] \\
+        &= \sum_{s \in S} \mul{S} \br{s} \sum_{j \in \Out{\jointvar}} \isext{s}{j} \prob[\jointvar][j] \\
+        &=  \sum_{j \in \Out{\jointvar}} \bs{\sum_{s \in S} \mul{S} \br{s} \isext{s}{j}} \prob[\jointvar][j] \\
+        &= \sum_{j \in E_{S}} \mul{\mext{S}}\br{j} \prob[\jointvar][j]
+        \end{split}
+        \end{align*}
+        First examine the substitution $S \to C$,
+        \[ \sum_{c \in C} \mul{C}\br{c}\prob[][c] = \sum_{j \in E_{C}} \mul{\mext{C}}\br{j} \prob[\jointvar][j] \]
+        By \cref{eq:flat_extenable_cover_def} $E_A \subseteq E_C$,
+        \[ \sum_{c \in C} \mul{C}\br{c}\prob[][c] = \sum_{j \in E_{A}} \mul{\mext{C}}\br{j} \prob[\jointvar][j] + \sum_{j \in E_{C} \setminus E_{A}} \mul{\mext{C}}\br{j} \prob[\jointvar][j] \]
+        Notice that the sum over $j \in E_{C} \setminus E_{A}$ is entirely positive since $\mul{\mext{C}}\br{j} \in \N$ and $\prob[\jointvar][j] \geq 0$. Moreover \cref{eq:multi_extenable_cover_def} gives $\mul{\mext{C}}\br{j} \geq \mul{\mext{A}}\br{j}$. Combining these observations along with \cref{eq:derivation_cover} for $S \to A$, one arrives at the inequality,
+        \[ \sum_{c \in C} \mul{C}\br{c}\prob[][c] \geq \sum_{j \in E_{A}} \mul{\mext{A}}\br{j} \prob[\jointvar][j] = \sum_{a \in A} \mul{A}\br{a}\prob[][a] \]
+        Which is equivalent to \cref{eq:extendable_cover}; every non-contextual marginal model $\prob^{\mscenario}$ must satisfy \cref{eq:extendable_cover}.
+    \end{proof}
+    % \begin{corollary}
+    %     If the m-set $\mul{C}$ is an extendable cover of the m-set $\br{A, \mulA}$ for a marginal scenario $\mscenario$, then the following is a valid compatibility $\mathcal{I}_{\mscenario}$ for the marginal scenario $\mscenario$.
+    %     \[ \sum_{a \in A}\prob[][a] \leq \sum_{c \in C}\prob[][c] \eq \label{eq:extendable_cover_flat} \]
+    % \end{corollary}
+    % \begin{proof}
+    %     This follows from the fact that if $\mul{C}$ is an extendable cover of $\br{A, \mulA}$, then $\br{C, \mathbf{1}_{C}}$ is an extendable cover of $\br{A, \mathbf{1}_{A}}$. Since $E_A \subseteq E_C$ is already trivially satisfied, all that remains is to demonstrate that \cref{eq:multi_extenable_cover_def} holds for unitary multiplicities $\mathbf{1}_A$ and $\mathbf{1}_C$.
+
+    %     First examine extension $\br{E_C, \mul{\mext{C}}}$ for the m-set $\mul{C}$ as defined by \cref{eq:joint_multiplicity},
+    %     \[ \forall j \in E_C : \mul{\mext{C}}\br{j} = \sum_{c \in C} \mulC\br{c} \isext{c}{j} \]
+
+
+    %     First apply \cref{lemma:logical_extenable_set} to an arbitrary set $S \in \bc{A, C}$,
+    %     \[ \bigvee_{s \in S} s \iff \bigvee_{s \in S} \bigvee_{j \in \Ext[\jointvar]{s}} j \iff \bigvee_{j \in E_S} j \eq \label{eq:logical_iff_ext}\]
+    %     Now since $E_A \subseteq E_C$ by \cref{eq:flat_extenable_cover_def} we have that,
+    %     \[ \bigvee_{j \in E_A} j \implies \bigvee_{j \in E_C} j \eq \label{eq:logical_cover}\]
+    %     Combining \cref{eq:logical_iff_ext,eq:logical_cover} one arrives at,
+    %     \[ \bigvee_{a \in A} a \implies \bigvee_{c \in C}c \]
+    % \end{proof}
+    % For a working example, let $\jointvar = \bc{a, b, c}$ be a set of binary random variables ($O = \bc{0,1}$) and $\mscenario = \bc{\bc{a,b},\bc{b,c},\bc{a,c}}$ be the marginal context.
+
+    \subsection{Complete Solution to The Marginal Problem}
+    \begin{theorem}
+        \label{thm:complete_solution_ext_cover}
+    \end{theorem}
+    \subsection{Extendable Cover Procedure}
+    The \term{extendable cover procedure} begins with an antecedent m-set $\mul{A}$ and iteratively produces consequent m-sets $\mul{C}$ that are extendable covers of $\mul{A}$. To facilitate this, we define a \term{partial consequent m-set} to be any marginal m-set $\mul{S}$ that \textit{has yet to} become an extendable cover of $\mul{A}$. Also define the null m-set $\mul{\emptyset}$ to be the m-set assigning zero multiplicity to each marginal outcome.
+
+
+    \begin{algorithm}[H]
+    \caption{The Extendable Cover Procedure (ECP)}
+    \label{alg:ecp}
+    \begin{algorithmic}
+      \State $\mul{S}^{0} = \mul{\emptyset}$
+    \end{algorithmic}
+    \end{algorithm}
+
+    % \begin{algorithm}
+    %   \caption{The Extendable Cover Procedure (ECP)
+    %     \label{alg:ecp}}
+    %   \begin{algorithmic}[1]
+    %     \Require{An antecedent m-set $\mul{A}$ and a partial consequent m-set $\mul{S}$.}
+    %     \Statex
+    %     \Function{ECP}{$\mul{A}, \mul{S}$}
+    %       % \Let{$z$}{$x \oplus y$} \Comment{$\oplus$: bitwise exclusive-or}
+    %       % \Let{$\delta$}{$0$}
+    %       % \For{$i \gets 1 \textrm{ to } n$}
+    %       %   \If{$z_i \neq 0$}
+    %       %     \Let{$\delta$}{$\delta + 1$}
+    %       %   \EndIf
+    %       % \EndFor
+    %       \State \Return{$\delta$}
+    %     \EndFunction
+    %   \end{algorithmic}
+    % \end{algorithm}
+
+    \todo[TC]{Trivial nodes}
+    \todo[TC]{Duplication under Deflation}
+    \todo[TC]{Memory}
+    \todo[TC]{Parallelization}
+    \todo[TC]{Simplicial Complex}
+    \subsubsection{Optimizations}
+
+
+    \subsubsection{Avoiding Trivial Inequalities}
+    A \term{trivial compatibility inequality} $\mathcal{I}_{\mscenario}$ is an inequality that is satisfied by all marginal models $\prob^{\mscenario}$, not just compatible ones. Trivial compatibility inequalities are of no importance Since the set of all extendable cover inequalities
+    \todo[TC]{}
+    \subsection{}
+    \subsection{Irreducible Covers}
+    \todo[TC]{Basis certificates}
+    \subsection{Limited Factorization}
+
     \subsection{Logical Implications \& Inequalities}
     \label{sec:implication_inequalities}
     Following the work conducted by Mansfield and Fritz \cite{Mansfield_2012}, we consider a possibilistic implications of the form,
@@ -829,6 +994,7 @@
     \todo[TC]{Linear optimization induces certificates which are incompatibility witnesses}
     \todo[TC]{There are quantum distributions in the Triangle Scenario that are incompatible and different from fritz in terms of entanglement but not possibilistic structure}
     \section{Open Questions \& Future Work}
+    The marginal problem has be well studied in various contexts \cite[\ldots]{Vorobev_1962,Inflation,Fritz_2011}. Reference \cite{Fritz_2011} contains an excellent summary of its connection to other fields of research including knowledge integration, database theory and coalition games in game theory.
     \todo[TC]{Lots of stuff}
     \appendix
     \section{Exemplary Inequalities}
@@ -876,6 +1042,7 @@
     \todo[TC]{Talk about inverse via haar measure}
 
     \section{Parametrization of Quantum States \& Measurements}
+    \label{sec:param_quantum_states}
     Throughout \cref{sec:optimizations}, we utilize a variety of parameterizations of quantum states and measurements in order to generate quantum-accessible probability distributions. There are numerous techniques that can used when parameterizing quantum states and measurements \cite{Petz_2015, Hedemann_2013,Spengler_2010_Unitary,Fujii_2005,James_2001} with applications \todo[TC]{Finish this sentence}. For our purposes, we need to parameterize the space of quantum-accessible distributions $\prob[\mathcal{Q}]$ that are \textit{realized} on the Triangle Scenario. We have implemented $\prob[\mathcal{Q}]$ under the following description.
     \[ \prob[ABC]\br{abc} = \Tr\bs{\Omega^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \Omega M_{A,a}\otimes M_{B,b} \otimes M_{C,c}} \eq \label{eq:triangle_quantum_distributions} \]
 
