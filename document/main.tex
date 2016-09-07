@@ -1,10 +1,10 @@
 % === Revtex Declaration ===
 \documentclass[aps, 10pt, english, twoside, pra, nofootinbib, longbibliography]{revtex4-1}
 
-\usepackage{silence}
-\WarningFilter{revtex4-1}{Repair the float}
-\usepackage{algorithm}
-\usepackage[noend]{algpseudocode}
+% \usepackage{silence}
+% \WarningFilter{revtex4-1}{Repair the float}
+% \usepackage{algorithm}
+% \usepackage[noend]{algpseudocode}
 % === All of the Packages I use frequently ===
 \usepackage{../packages/shared}
 
@@ -45,10 +45,14 @@
 \newcommand{\action}[1]{\gelem\bs{#1}}
 \newcommand{\mscenario}{\mathcal{M}}
 \newcommand{\jointvar}{\mathcal{J}}
-\newcommand{\mext}[1]{E_{#1}}
-\newcommand{\mul}[1]{\Gamma_{#1}}
+\newcommand{\mset}[1]{\gamma^{#1}}
+\newcommand{\extmset}[1]{\Gamma^{#1}}
+\newcommand{\supp}[1]{\si\br{#1}}
+
+% \newcommand{\mext}[1]{E_{#1}}
+% \newcommand{\mul}[1]{\Gamma_{#1}}
 \newcommand{\isext}[2]{\delta_{#1 \ext #2}}
-\newcommand{\ts}{\mathcal{T}}
+\newcommand{\ts}{{\graph}}
 % When I introduce a new term or definition
 \newcommand{\term}[1]{\textcolor{Mahogany}{\textbf{#1}}}
 
@@ -75,13 +79,15 @@
 \setoperator{Perm} % Permutation group
 \setoperator{Out} % Outcome space
 \setoperator{Dom} % Domian
+% \setoperator{Dom} % Domian
+% \setoperator{Dom} % Domian
 
 \newcommand{\outc}[1]{o\bs{#1}} % Fritz's BBTII notation for observed outcomes
 \DeclareDocumentCommand{\prob}{O{} O{}}{\ifthenelse{\equal{#1}{}}{P}{P_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution
 \DeclareDocumentCommand{\probvec}{O{} O{}}{\ifthenelse{\equal{#1}{}}{\mathcal{P}}{\mathcal{P}_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution vector
 
 % === To allow for labeling of rows and columns of a matrix ===
-\usepackage{kbordermatrix}
+\usepackage{../packages/kbordermatrix}
 \renewcommand{\kbldelim}{(} % Left delimiter
 \renewcommand{\kbrdelim}{)} % Right delimiter
 
@@ -98,7 +104,7 @@
     % \affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario, Canada}
     \date{\today}
     \begin{abstract}
-        Causal inference aims to identify which observable distributions are compatible with a given causal structure. Compatibility inequalities for the triangle scenario have been obtained and demonstrated to be violated by quantum configurations. Obtaining these inequalities has lead to the development of new computational techniques suitable for large causal structures with numerous outcomes. Numerical optimizations against these inequalities have found new quantum configurations that are incompatible with the triangle scenario, potentially suggesting new quantum resources qualitatively different from those known previously. \todo[TC]{Write a better abstract.}
+        Quantum correlations are often incompatible with a classical assumption of causal structure. This nonclassicality is often known as quantum nonlocality, and it is witnessed through the violation of causal compatability inequalities, such as Bell inequalities. Such inequalities were recently derived for the Triangle scenario [arXiv:1609.00672], begging the question: can these inequalities be violated by quantum correlations? Here we answer this affirmatively, and discuss specific Triangle scenario inequalities and quantum configurations which manifest nonclassical correlations. We also report the development of novel computational techniques suitable for large causal structures with numerous outcomes. Numerical optimzations reveal quantum resources potentially qualitatively different from those known previously.
     \end{abstract}
     \maketitle
     \tableofcontents
@@ -239,40 +245,6 @@
     \end{definition}
 
     \begin{definition}
-        \label{def:hypergraph}
-        A \term{hypergraph} denoted $\hgraph$ is an ordered tuple $\br{\nodes, \edges}$ of \textit{nodes} and \textit{hyperedges} respectively where the nodes can represent any object and the hyperedges are \textit{subsets} of nodes. For convenience of notation, one defines an index set over the nodes and hyperedges of a hypergraph $\hgraph$ denoted $\ind_\nodes$ and $\ind_\edges$ respectively.
-        \[ \hgraph = \br{\nodes, \edges} \quad \nodes = \bc{n_i \mid i \in \ind_\nodes} \quad \edges = \bc{e_i \mid i \in \ind_\edges, e_i \subseteq \nodes} \]
-        Note that whenever the hyperedge or node index is arbitrary, it will be omitted. There is a dual correspondence between hyperedges $e \in \edges$ and nodes $n \in \nodes$ in a Hypergraph. A hyperedge $e$ is viewed as a set of nodes $\bc{n_i}$, and a node $n$ can be viewed as the set of hyperedges $\bc{e_i}$ that contain it.
-    \end{definition}
-
-    \begin{definition}
-        \label{def:hgraph_trans}
-        A \term{hypergraph transversal} (or edge hitting set) $\trans$ of a hypergraph $\hgraph$ is a set of nodes $\trans \subseteq \nodes$ that have non-empty intersections with every hyperedge in $\edges$.
-        \[ \trans = \bc{n_i \in \nodes \mid i \in \ind_\trans } \quad \forall e \in \edges : \trans \cap e \neq \emptyset \]
-    \end{definition}
-
-    \begin{definition}
-        A \term{necessary node} of a transversal $\trans$ is a node $n$ such that $\trans \setminus n$ is no longer a valid transversal. The set of all necessary nodes is denoted $\Nec{\trans}$,
-        \[ \Nec{\trans} = \bc{n \in \trans \mid \exists e \in \edges : \br{\trans \setminus n} \cap e = \emptyset} \]
-        An \term{unnecessary node} of a transversal $\trans$ is any node that is \textit{not} necessary. The set of all unnecessary nodes is denoted $\UnNec{\trans}$,
-        \[ \UnNec{\trans} = \trans \setminus \Nec{\trans} \]
-        A \term{minimal hypergraph transversal} $\trans$ is any valid transversal of $\hgraph$ where every node $n$ is \textit{necessary}.
-        \[ \trans = \Nec{\trans} \]
-    \end{definition}
-
-    \begin{definition}
-        A \term{weighted hypergraph} $\hgraph_\weights$ is a regular hypergraph satisfying \cref{def:hypergraph} equipped with a set of weights $\weights$ ascribed to each node such that a weighted hypergraph is written as a triplet $\br{\weights, \nodes, \edges}$.
-        \[ \weights = \bc{w_i \mid i \in \ind_\nodes, w_i \in \R} \]
-        One would say that a particular node $n_i$ carries weight $w_i$ for each $i \in \ind_\nodes$.
-    \end{definition}
-
-    \begin{definition}
-        A \term{bounded transversal} of a weighted hypergraph $\hgraph_\weights$ is a transversal $\trans$ of the unweighted hypergraph $\hgraph$ and a real number $t$ (denoted $\trans_{\leq t}$) such that the sum of the node weights of the transversal is bounded by $t$.
-        \[ \trans_{\leq t} = \bc{n_i \mid i \in \ind_\trans} \quad \text{s.t.} \sum_{j\in\ind_\trans} w_j \leq t \]
-        One can definte analogous \term{(strictly) upper/lower bounded transversals} by considering modifications of the notation: $\trans_{< t}, \trans_{\geq t}, \trans_{> t}$.
-    \end{definition}
-
-    \begin{definition}
         A \term{causal structure} is simply a DAG with the extra classification of each node into one of two categories; the \term{latent nodes} and \term{observed nodes} denoted $\nodes_L$ and $\nodes_O$. The latent nodes correspond to random variables that are either hidden through some fundamental process or cannot/will not be measured. The observed nodes are random variables that are measurable. Every node is either latent or observed and no node is both:
         \[ \nodes_L \cap \nodes_O = \emptyset \qquad \nodes_L \cup \nodes_O = \nodes \]
     \end{definition}
@@ -288,12 +260,7 @@
         The \term{marginalization} of a distribution $\prob[V]$ to a distribution over $W \subseteq V$ is denoted $\sum_{V \setminus W} \prob[V]$ and is defined such that,
         \[ \forall f \in \Out{W} : \br{\sum_{V \setminus W} \prob[V]}\br{f} \defined \sum_{g \in \Ext[V]{f}} \prob[V][g] \]
     \end{definition}
-
-    \subsection{Preliminary Definitions}
-
-    Before discussing the present work, we
-
-    \todo[TC]{How many definitions do I need to write??}
+    \comment[TC]{How many definitions do I need to write??}
 
     \section{Compatibility, Contextuality and the Marginal Problem}
     \label{sec:comp_con_mp}
@@ -344,7 +311,7 @@
     \end{definition}
 
     \begin{definition}
-        A \term{causal compatibility inequality} $\mathcal{I}_{\mscenario}$ for a marginal scenario $\mscenario$ is a probabilistic inequality that is obeyed for every compatible marginal model $\prob^{\mscenario}$. Whenever the marginal scenario $\mscenario$ in question is evident by context, the subscript of $\mathcal{I}_{\mscenario}$ will be dropped leaving just $\mathcal{I}$.
+        A \term{causal compatibility inequality} $I_{\mscenario}$ for a marginal scenario $\mscenario$ is a probabilistic inequality that is obeyed for every compatible marginal model $\prob^{\mscenario}$. Whenever the marginal scenario $\mscenario$ in question is evident by context, the subscript of $I_{\mscenario}$ will be dropped leaving just $I$.
     \end{definition}
 
     \todo[TC]{Discuss Compatibility, connection to cooperative games/resources, bell incompatibility?}
@@ -375,9 +342,9 @@
 
     Identifying quantum-accessible distributions that are incompatible with the triangle scenario is of particular importance as it \todo[TC]{Discuss why we are doing this.}
 
-    As a preliminary search for quantum incompatibility in $\ts$, we performed numerical optimizations using bipartite qubit states and $2$-outcome POVM measurements (see \cref{sec:param_quantum_states} for details) against the $37$ compatibility inequalities printed in \cite{Inflation} as well as the entropic inequalities presented by \cite{Henson_2014}. Unfortunately, none of these inequalities could be violated. These early results suggest, although do not prove, that quantum non-locality is not present in $\ts$ for \textit{two-outcome} measurements. We make \textit{no claim} that this is a universal truth and simply take it as motivation to explore incompatibility in $\ts$ for a larger number of outcomes.
+    As a preliminary search for quantum incompatibility in $\ts$, we performed numerical optimizations using bipartite qubit density matrices and $2$-outcome POVM measurements (see \cref{sec:param_quantum_states} for details) against the $37$ compatibility inequalities printed in \cite{Inflation} as well as the entropic inequalities presented by \cite{Henson_2014}. Unfortunately, none of these inequalities could be violated. These early results suggest, although do not prove, that quantum non-locality is not present in $\ts$ for \textit{two-outcome} measurements. We make \textit{no claim} that this is a universal truth and simply take it as motivation to explore incompatibility in $\ts$ for a larger number of outcomes.
 
-    Specifically, we make use of the inflation technique for an inflated triangle scenario $\ts'$ depicted in \cref{fig:inflated_triangle_scenario} and cast the \textit{causal compatibility} problem as a \textit{marginal problem}. We develop a new technique which we call the \textit{extendable covering procedure (ECP)} to find a complete solution to the marginal problem that is suitable for large causal structures where the observable nodes are equipped with numerous outcomes. We use this technique to find numerous compatibility inequalities, some of which witness the incompatibility of the Fritz distribution. Before discussing the ECP, the Fritz distribution will be re-defined explicitly here, followed by a quick summary of the inflation technique of \cite{Inflation}. Following these summaries of existing work, we present the ECP and its connection to Hardy-type paradoxes \cite{Inflation,Liang_2011,Mansfield_2012}, certificate inequalities and logical Bell inequalities \cite{Abramsky_2011}. Moreover, the ECP can be adapted to derive symmetric inequalities or inequalities bounding any subspace of marginal models. To conclude, we subject our found inequalities to non-linear optimizations and discuss the implications of our results.
+    Specifically, we make use of the inflation technique for an inflated triangle scenario $\ts'$ depicted in \cref{fig:inflated_triangle_scenario} and cast the \textit{causal compatibility} problem as a \textit{marginal problem}. We develop a new technique which we call the \textit{extension covering procedure (ECP)} to find a complete solution to the marginal problem that is suitable for large causal structures where the observable nodes are equipped with numerous outcomes. We use this technique to find numerous compatibility inequalities, some of which witness the incompatibility of the Fritz distribution. Before discussing the ECP, the Fritz distribution will be re-defined explicitly here, followed by a quick summary of the inflation technique of \cite{Inflation}. Following these summaries of existing work, we present the ECP and its connection to Hardy-type paradoxes \cite{Inflation,Liang_2011,Mansfield_2012}, certificate inequalities and logical Bell inequalities \cite{Abramsky_2011}. Moreover, the ECP can be adapted to derive symmetric inequalities or inequalities bounding any subspace of marginal models. To conclude, we subject our found inequalities to non-linear optimizations and discuss the implications of our results.
 
     \section{The Fritz Distribution}
     \label{sec:fritz_dist}
@@ -451,7 +418,7 @@
         This is lemma 3 of \cite{Inflation}.
     \end{lemma}
 
-    The inflation lemma is the most important result of the causal inflation technique \cite{Inflation}. The contrapositive version of \cref{lem:inflation} is a powerful tool for determining compatibility. Any compatibility constraint on marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ of the inflated causal structure $\graph'$ correspond to valid compatibility constraints on marginal models $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ of the original causal structure. Corollary 5 of \cite{Inflation} proves this explicitly for incompatibility inequalities $\mathcal{I}$; which the remainder of this work focuses on.  Additionally, the inflation lemma holds when considering any subset of $\Inj[\graph]{\graph'}$ (analogously $\ImInj[\graph]{\graph'}$). Therefore, in situations where latent nodes are present in $\graph$, one only needs to consider injectable sets that are composed of \textit{observable nodes}.
+    The inflation lemma is the most important result of the causal inflation technique \cite{Inflation}. The contrapositive version of \cref{lem:inflation} is a powerful tool for determining compatibility. Any compatibility constraint on marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ of the inflated causal structure $\graph'$ correspond to valid compatibility constraints on marginal models $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ of the original causal structure. Corollary 5 of \cite{Inflation} proves this explicitly for incompatibility inequalities $I$; which the remainder of this work focuses on.  Additionally, the inflation lemma holds when considering any subset of $\Inj[\graph]{\graph'}$ (analogously $\ImInj[\graph]{\graph'}$). Therefore, in situations where latent nodes are present in $\graph$, one only needs to consider injectable sets that are composed of \textit{observable nodes}.
 
     In this work, we obtain inequalities that constrain the set of injectable marginal models $\bc{\prob[N'] \mid N' \in \ImInj[\graph]{\graph'}}$ for the inflated Triangle Scenario of \cref{fig:triangle_scenario} by considering the marginal problem (see \cref{sec:comp_con_mp}) for the set of \term{maximally pre-injectable sets}\footnote{The set of all pre-injectable sets forms a topological \textit{simplicial conplex}. `Maximal' refers to the pre-injectable sets that are no proper subset of another.}. A pre-injectable set $V$ is a subset of $\nodes'$ that can be decomposed into the disjoint union of injectable sets $V = \coprod_i N'_i \mid N'_i \in \Inj[\graph]{\graph'}$ that are mutually \term{ancestrally independent},
     \[ \forall i,j : N'_i \ancestralindep N'_j \iff \An[\graph']{N'_i} \cap \An[\graph']{N'_j} = \emptyset  \]
@@ -494,8 +461,9 @@
             \bc{A_4} \ancestralindep \bc{B_2} \ancestralindep \bc{C_1}
         \end{gathered}
     \end{equation*}
-    As can be counted, there are $12$ maximally pre-injectable sets $\ts'$ which will be indexed $1$ through $12$ in the order seen above ($\bc{V_1, \ldots, V_{12}}$). The maximally pre-injectable sets $\bc{V_i}_{i \in \bs{12}}$ form a maximal marginal scenario $\mscenario$ over the observable nodes of $\ts'$ when equipped with outcome labels. Using \cref{lem:inflation} inequalities $\mathcal{I}_{\PreInj[\ts]{\ts'}}$ constraining the set of contextual marginal models $\prob^{\mscenario}$ can be deflated into polynomial inequalities over $\mathcal{I}_{\ImInj[\ts]{\ts'}}$ bounding compatible marginal models over the images of the injectable sets in $\ts$.
+    As can be counted, there are $12$ maximally pre-injectable sets $\ts'$ which will be indexed $1$ through $12$ in the order seen above ($\bc{V_1, \ldots, V_{12}}$). The maximally pre-injectable sets $\bc{V_i}_{i \in \bs{12}}$ form a maximal marginal scenario $\mscenario$ over the observable nodes of $\ts'$ when equipped with outcome labels. Using \cref{lem:inflation} inequalities $I_{\PreInj[\ts]{\ts'}}$ constraining the set of contextual marginal models $\prob^{\mscenario}$ can be deflated into polynomial inequalities over $I_{\ImInj[\ts]{\ts'}}$ bounding compatible marginal models over the images of the injectable sets in $\ts$.
     \[ \ImInj[\ts]{\ts'} = \bc{\bc{A, B, C}, \bc{A}, \bc{B}, \bc{C}} \]
+    \comment[TC]{This is not all the images. I should clarify this.}
 
     \section{Certificate Inequalities}
     \label{sec:certificate_inequalities}
@@ -595,7 +563,7 @@
     \todo[TC]{Discuss Infeasibility Certificates basis}
     \todo[TC]{Discuss the certificate inequalities we found.}
 
-    \[ \mathcal{I}\tsb{Mosek-Cert}, \mathcal{I}\tsb{Cert} \]
+    \[ I\tsb{Mosek-Cert}, I\tsb{Cert} \]
 
     \section{Covering Inequalities}
 
@@ -605,113 +573,245 @@
 
     In this section, we will first summarize a method that can be used to obtain a complete solution to the \textit{possibilistic} marginal problem and indirectly offer a \textit{partial} solution to the \textit{probabilistic} marginal problem. Doing so corresponds to enumerating all
     \subsection{Logical Covers}
-    In this section, we summarize the familiar notion of a logical cover
-    % \begin{lemma}
-    %     \label{lemma:logical_extenable_set}
-    %     Let $m \in \Out{\mscenario}$ be some marginal outcome of the marginal scenario $\mscenario$. If any marginal model $\prob^{\mscenario}$ is to be non-contextual, the following condition must hold.
-    %     \[ m \iff \bigvee_{j \in \Ext[\jointvar]{m}} j \]
-    %     The idea being that if a joint distribution exists, then the event $m$ represents partial knowledge of the entire system $\jointvar$; whenever $m$ occurs, exactly one of the extendable joint outcomes has to have occurred.
-    % \end{lemma}
-    Suppose one has a particular marginal outcome $a \in \Out{\mscenario}$ and a marginal model $\prob^{\mscenario}$ that assigns the probability $\prob[][a]$ to the outcome $a$. If the marginal model $\prob^{\mscenario}$ is to admit a joint distribution $\prob[\jointvar]$, then it must be that $\prob[][a]$ is equal to a marginalization over $a$'s extendable set into $\jointvar$.
-    \[ \prob[][a] = \sum_{j \in \Ext[\jointvar]{a}}\prob[\jointvar][j] \eq \label{eq:marginal_extendable_sum_a}\]
-    This corresponds to row $a$ of the incidence matrix $M$. Next consider a subset of marginal outcomes $C \subseteq \Out{\mscenario}$. Summing over the associated probabilities $\bc{\prob[][c]}_{c \in C}$ and applying \cref{eq:marginal_extendable_sum_a} yields,
+    In this section, we summarize the familiar notion of logical implications as witnesses for contextuality. Let $a \in \Out{\mscenario}$ be a marginal outcome and let $C = \bc{c_1, \ldots, c_{\abs{C}}} \subseteq \Out{\mscenario}$ be a subset of marginal outcomes. The subset $C$ is a \term{logical cover} of $a$ if the following possibilistic statement holds for \textit{all} marginal models $\prob^{\mscenario}$.
+    \[ a \implies c_1 \vee \ldots \vee c_{\abs{C}} = \bigvee_{c \in C} c \eq \label{eq:1a_implication} \]
+    The marginal outcome $a$ will be referred to as the \textit{antecedent} and $C$ as the \textit{consequent set}. A marginal model $\prob^{\mscenario}$ satisfies \cref{eq:1a_implication} if there always exists at least one $c \in C$ that is possible ($\prob[][c] > 0$) whenever $a$ is possible. A marginal model $\prob^{\mscenario}$ violates \cref{eq:1a_implication} whenever \textit{none} of the outcomes in $C$ are possible while $a$ is nonetheless still possible. Marginal models that violate logical statements such as \cref{eq:1a_implication} are known as \term{Hardy Paradoxes} \cite{Inflation,Mansfield_2012,Mancinska_2014}. The concept of witnessing quantum incompatibility on a logical level has been analyzed thoroughly for decades \cite{Greenberger_1990,Abramsky_2012}; being motivated by a false sense of robustness compared to probabilistic constraints. Logical covers such as \cref{eq:1a_implication} are in one-to-one correspondence with a subset of probabilistic inequalties.
+
+    \begin{lemma}
+        \label{lemma:logical_extenable_set}
+        Let $a \in \Out{\mscenario}$ be some marginal outcome of the marginal scenario $\mscenario$. If any marginal model $\prob^{\mscenario}$ is to be non-contextual, the following condition must hold.
+        \[ a \iff \bigvee_{j \in \Ext[\jointvar]{a}} j \eq \label{eq:lemma_logical_extendable_set}\]
+    \end{lemma}
+    The idea being that if a joint distribution exists, then the event $a$ represents partial knowledge of the entire system $\jointvar$; whenever $a$ occurs, exactly one of the extendable joint outcomes has to have occurred. Likewise \cref{lemma:logical_extenable_set} applies to a collection of marginal outcomes $C \in \Out{\mscenario}$,
+    \[ \bigvee_{c \in C} c \iff \bigvee_{c \in C} \bigvee_{j \in \Ext[\jointvar]{c}} j \eq \label{eq:logical_extension_C}\]
+    If a subset $C$ can be constructed such that its extension \textit{covers} the extendable set of $a$,
+    \[ \Ext[\jointvar]{a} \subseteq \bigcup_{c \in C} \Ext[\jointvar]{c} \eq \label{eq:logical_containment} \]
+    Then the combination of \cref{eq:lemma_logical_extendable_set,eq:logical_extension_C,eq:logical_containment} yields \cref{eq:1a_implication}. Hence the motivation for calling \cref{eq:1a_implication} a logical cover.
+
+    The principle statement of \cref{lemma:logical_extenable_set} can be taken in a probabilistic form. If the marginal model $\prob^{\mscenario}$ is to admit a joint distribution $\prob[\jointvar]$, then it must be that the probability $\prob[][a]$ of any marginal outcome $a \in \Out{\mscenario}$ is equal to a marginalization over its extendable set into $\jointvar$.
+    \[ \prob[][a] = \sum_{j \in \Ext[\jointvar]{a}}\prob[\jointvar][j] \eq \label{eq:marginal_extendable_sum_a} \]
+    A logical cover $C \subseteq \Out{\mscenario}$ of $a$ has probabilistic extension,
     \[ \sum_{c \in C}\prob[][c] = \sum_{c \in C}\sum_{j \in \Ext[\jointvar]{c}}\prob[\jointvar][j] \eq \label{eq:marginal_extendable_sum_cs} \]
-    If for all joint distributions $\prob[\jointvar]$ it can be demonstrated that the following holds,
-    \[ \sum_{c \in C}\sum_{j \in \Ext[\jointvar]{c}}\prob[\jointvar][j] \geq \sum_{j \in \Ext[\jointvar]{a}}\prob[\jointvar][j] \eq \label{eq:extendable_cover_first} \]
-    Then combining \cref{eq:marginal_extendable_sum_a,eq:marginal_extendable_sum_cs,eq:extendable_cover_first} yields a valid compatibility inequality for $\mscenario$.
-    \[ \prob[][a] \leq \sum_{c \in C}\prob[][c] \eq \label{eq:1ncover} \]
-    In order for \cref{eq:extendable_cover_first} to hold for \textit{all} joint distributions $\prob[\jointvar]$, it must hold on an algebraic level; each term on the right-hand side of \cref{eq:extendable_cover_first} also appears on the left-hand side of \cref{eq:extendable_cover_first}.\footnote{If there were a joint outcome $j^*$ present on the right-hand side of \cref{eq:extendable_cover_first} but not the left, then \cref{eq:extendable_cover_first} would be violated by the deterministic distribution $\prob[\jointvar][j^*] = 1$} Therefore, identifying all compatibility inequalities that can be written in the form of \cref{eq:1ncover} corresponds to identifying all sets $C \subseteq \Out{\mscenario}$ such that their joint distribution terms algebraically \textit{cover} the joint distribution terms for $a \in \Out{\mscenario}$.
+    Since $C$ is a logical cover of $a$, the right-hand side of \cref{eq:marginal_extendable_sum_a} algebraically covers \cref{eq:marginal_extendable_sum_cs}\footnote{If there were a joint outcome $j^*$ present on the right-hand side of \cref{eq:marginal_extendable_sum_a} but not the right-hand side of \cref{eq:marginal_extendable_sum_cs}, then \cref{eq:1a_probabilistic} would be violated by the deterministic distribution $\prob[\jointvar][j^*] = 1$}. Therefore one recovers a probabilistic version of \cref{eq:1a_implication},
+    \[ \prob[][a] \leq \sum_{c \in C}\prob[][c] \eq \label{eq:1a_probabilistic} \]
+    \begin{remark}
+        It is also possible to recover \cref{eq:1a_probabilistic} from \cref{eq:1a_implication} directly, by putting \cref{eq:1a_implication} into disjunction normal form and assigning it a certain probability,
+        \[ \prob[][\neg a \vee \bigvee_{c \in C} c] = 1 \]
+        Then applying Boole's indentity and the negative rule $\prob[][\neg a] = 1 - \prob[][a]$ one recovers \cref{eq:1a_probabilistic}.
+    \end{remark}
+    \begin{remark}
+        The probabilistic logical cover \cref{eq:1a_probabilistic} is an \textit{upgraded} version of \cref{eq:1a_implication} in the following sense.
+        \begin{itemize}
+            \item Every non-contextual marginal model $\prob^{\mscenario}$ satisfies both \cref{eq:1a_probabilistic} and \cref{eq:1a_implication}.
+            \item Every contextual marginal model $\prob^{\mscenario}$ that violates \cref{eq:1a_implication} will also violate \cref{eq:1a_probabilistic}; but the converse is not necessarily true.
+        \end{itemize}
+    \end{remark}
 
-    The notion of forming a
+    Computationally enumerating all logical covers for a particular antecedent $a$ corresponds to a hypergraph transversal problem \cite{Inflation}, an idea we return to in the more general picture to follow.
 
-    \subsection{Extendable Covers}
-    We will now generalize the notion of a logical cover by considering more exotic antecedents corresponding to multiple marginal outcomes $A \subseteq \Out{\mscenario}$ along with weights $\mul{A}$ for each outcome. Afterwards we demonstrate that these generalized covers also admit non-trivial probabilistic compatibility inequalities.
+    \subsection{Extension Covers}
+    We will now generalize the notion of a logical cover by considering more exotic antecedents corresponding to multiple marginal outcomes along with weights $\mset{A}$ for each outcome. Afterwards we demonstrate that these generalized covers also admit non-trivial probabilistic compatibility inequalities.
 
     \begin{definition}
-        A \term{multiplicity set} or \term{m-set} $\mul{S}$ for a marginal scenario $\mscenario$ is a function $\mul{S} : \Out{\mscenario} \to \Z_{\geq 0}$ that assigns to each marginal outcome $m \in \Out{\mscenario}$ a \textit{multiplicity} $\mul{S}\br{m} \in \Z_{\geq 0}$. The subscript $S$ is a subset of marginal outcome $S \subseteq \Out{\mscenario}$ indicating which marginal outcomes receive non-zero multiplicity.
-        \[ \forall s \in S : \mul{S}\br{s} \in \N  \quad \forall m \in \Out{\mscenario}\setminus S : \mul{S}\br{m} = 0 \]
-        We define the \term{extension of an m-set} $\mul{S}$ into $\jointvar$ to be the m-set $\mul{\mext{S}}$ which assigns multiplicities to \textit{joint} outcomes $j \in \Out{\jointvar}$. The extension of $S$ denoted $\mext{S}$ is the set of all joint outcomes that are extensions of marginal outcomes $s \in S$.
-        \[ \mext{S} = \bigcup_{s \in S} \Ext[\jointvar]{s} \]
-        While the multiplicity of each element $j \in \mext{S}$ corresponds to the sum over multiplicities $\mul{S}\br{s}$ where $j \in \Ext[\jointvar]{s}$.
-        \[ \forall j \in \mext{S} : \mul{\mext{S}}\br{j} = \sum_{s \in S} \mul{S}\br{s} \isext{s}{j} \eq \label{eq:joint_multiplicity}\]
-        With all other joint outcomes receiving a zero multiplicity $\forall j \not\in \mext{S} : \mul{\mext{S}}\br{j} = 0$.
+        We first define the marginal indicator vector $\de_{m}$ to be the unit vector indexed by marginal outcomes $\Out{\mscenario}$ that is $1$ whenever the index is $m$, and $0$ otherwise.
+        \[ \de_{m}\br{m} = 1 \quad \forall m' \neq m : \de_{m} \br{m'} = 0 \]
+        Analogously defined is the joint indicator vector $\de_{j}$.
+        \[ \de_{j}\br{j} = 1 \quad \forall j' \neq j : \de_{j} \br{j'} = 0 \]
+    \end{definition}
+
+    We first recall that every non-contextual marginal model $\prob^{\mscenario}$ can be written as the convex combination of columns of the incidence matrix $M$.
+    \[ \probvec^{\mscenario} = M \cdot \probvec[\jointvar] = \sum_{j \in \Out{\jointvar}} \de_{m \ext j} \prob[\jointvar][j] \]
+    Thus we define the set of all non-contextual marginal models as $\mathcal{NC}$,
+    \[ \mathcal{NC} \defined \bc{\probvec^{\mscenario} \mid \probvec^{\mscenario} = \sum_{j} \mu_{j} \de_{j \res \mscenario}, \mu_j \geq 0, \sum_{j} \mu_{j} = 1} \]
+
+    \begin{definition}
+        Let $\mscenario$ be a marginal scenario and let $m \in \Out{\mscenario}$ be a marginal outcome. The \term{extension of $m$ onto $\jointvar$} is the function $\de_{m \ext \jointvar} : \Out{\jointvar} \to \bc{0, 1}$ that indicates membership of $\Ext[\jointvar]{m}$.
+        \[ \de_{m \ext \jointvar}\br{j} \defined \begin{cases}
+            1 & j \ext m \\
+            0 & \textrm{otherwise}
+        \end{cases} \]
+        As a vector indexed by joint outcomes $j \in \Out{\jointvar}$, $\de_{m \ext \jointvar}$ is precisely the $m$-th row of the incidence matrix.
     \end{definition}
     \begin{definition}
-        An m-set $\mul{C}$ is an \term{extendable cover} of an m-set $\mul{A}$ for a marginal scenario $\mscenario$ if and only if the following two conditions hold\footnote{In fact \cref{eq:multi_extenable_cover_def} implies \cref{eq:flat_extenable_cover_def} since $\forall j \not \in \mext{A} : \mul{\mext{A}}\br{j} = 0$.}:
+        Let $\mscenario$ be a marginal scenario and let $j \in \Out{\jointvar}$ be a joint outcome. The \term{restriction of $j$ onto $\mscenario$} is deterministic marginal model $\de_{j \res \mscenario} : \Out{\mscenario} \to \bc{0, 1}$.
+        \[ \de_{j \res \mscenario}\br{m} \defined \begin{cases}
+            1 & j \ext m  \\
+            0 & \textrm{otherwise}
+        \end{cases} \]
+        As a vector indexed by marginal outcomes $m \in \Out{\mscenario}$, $\de_{j \ext \mscenario}$ is precisely the $j$-th column of the incidence matrix.
+    \end{definition}
+
+
+
+    \begin{definition}
+        A \term{multiplicity set} or \term{m-set} $\mset{S}$ for a marginal scenario $\mscenario$ is a vector indexed by marginal outcomes $m \in \Out{\mscenario}$ whose entries are non-negative integers $\mset{S}_{m} \in \Z_{\geq 0}$. The \term{support} $\supp{\mset{S}}$ of an m-set is the set of marginal outcomes that are assigned strictly positive multiplicity.
+        \[ \supp{\mset{S}} \defined \bc{m \in \Out{\mscenario} \mid \mset{S}_m \in \N} \]
+    \end{definition}
+
+    \begin{definition}
+        The \term{extension of an m-set} $\mset{S}$ into $\jointvar$ denoted $\extmset{S}$ is a vector indexed by \textit{joint} outcomes $j \in \Out{\jointvar}$ and is defined as follows,
+        \[ \extmset{S}_{j} \defined \sum_{s \in \supp{\mset{S}}} \mset{S}_{s} \de_{s \ext j} \eq \label{eq:joint_multiplicity} \]
+        As an immediate consequence, the support of $\extmset{S}$ is immediately known,
+        \[ \supp{\extmset{S}} = \bigcup_{s \in \supp{\mset{S}}} \Ext[\jointvar]{s} \]
+    \end{definition}
+    \begin{definition}
+        An m-set $\mset{C}$ is an \term{extension cover} of an m-set $\mset{A}$ for a marginal scenario $\mscenario$ if and only if the following two conditions hold\footnote{In fact \cref{eq:multi_extenable_cover_def} implies \cref{eq:flat_extenable_cover_def} since $\forall j \not \in \supp{\extmset{A}} : \extmset{A}_j = 0$.}:
         \begin{gather*}
-            E_A \subseteq E_C \eq \label{eq:flat_extenable_cover_def}\\
-            \forall j \in E_A : \mul{\mext{A}}\br{j} \leq \mul{\mext{C}}\br{j} \eq \label{eq:multi_extenable_cover_def}
+            \supp{\extmset{A}} \subseteq \supp{\extmset{C}} \eq \label{eq:flat_extenable_cover_def}\\
+            \forall j \in \supp{\extmset{A}} : \extmset{A}_{j} \leq \extmset{C}_j \eq \label{eq:multi_extenable_cover_def}
         \end{gather*}
     \end{definition}
-    Identifying extendable covers is of great importance because of the following theorem.
+    Identifying extension covers is of great importance because of the following theorem.
     \begin{theorem}
-        If the m-set $\mul{C}$ is an extendable cover of the m-set $\mul{A}$ for a marginal scenario $\mscenario$, then the following is a valid compatibility $\mathcal{I}_{\mscenario}$ for the marginal scenario $\mscenario$.
-        \[ \sum_{a \in A}\mul{A}\br{a}\prob[][a] \leq \sum_{c \in C}\mul{C}\br{c}\prob[][c] \eq \label{eq:extendable_cover} \]
+        \label{thm:extendable_cover_ineq}
+        If the m-set $\mset{C}$ is an extension cover of the m-set $\mset{A}$ for a marginal scenario $\mscenario$, then the following is a valid compatibility $I_{\mscenario}$ for the marginal scenario $\mscenario$.
+        \[ \sum_{a \in \supp{\mset{A}}}\mset{A}_a\prob[][a] \leq \sum_{c \in \supp{\mset{C}}}\mset{C}_c\prob[][c] \eq \label{eq:extendable_cover} \]
     \end{theorem}
     \begin{proof}
-        To prove that \cref{eq:extendable_cover} is a valid compatibility inequality $\mathcal{I}_{\mscenario}$ for all marginal models $\prob^\mscenario$, we will demonstrate that \cref{eq:extendable_cover} follows from the assumption that a joint distribution $\prob[\jointvar]$ exists.
+        To prove that \cref{eq:extendable_cover} is a valid compatibility inequality $I_{\mscenario}$ for all marginal models $\prob^\mscenario$, we will demonstrate that \cref{eq:extendable_cover} follows from the assumption that a joint distribution $\prob[\jointvar]$ exists.
 
-        For each m-set $\mul{S}$ write the weighted sum over the probabilities $\bc{\prob[][s]}_{s \in S}$ in terms of the joint distribution $\prob[\jointvar]$ using \cref{eq:joint_multiplicity}.
+        For each m-set $\mset{S}$ write the weighted sum over the probabilities $\bc{\prob[][s]}_{s \in \supp{\mset{S}}}$ in terms of the joint distribution $\prob[\jointvar]$ using \cref{eq:joint_multiplicity}.
         \begin{align*}
         \eq \label{eq:derivation_cover}
         \begin{split}
-        \sum_{s \in S} \mul{S}\br{s}\prob[][s] &= \sum_{s \in S} \mul{S} \br{s} \sum_{j \in \Ext[\jointvar]{s}} \prob[\jointvar][j] \\
-        &= \sum_{s \in S} \mul{S} \br{s} \sum_{j \in \Out{\jointvar}} \isext{s}{j} \prob[\jointvar][j] \\
-        &=  \sum_{j \in \Out{\jointvar}} \bs{\sum_{s \in S} \mul{S} \br{s} \isext{s}{j}} \prob[\jointvar][j] \\
-        &= \sum_{j \in E_{S}} \mul{\mext{S}}\br{j} \prob[\jointvar][j]
+        \sum_{s \in \supp{\mset{S}}} \mset{S}_s\prob[][s] &= \sum_{s \in \supp{\mset{S}}} \mset{S}_s  \sum_{j \in \Ext[\jointvar]{s}} \prob[\jointvar][j] \\
+        &= \sum_{s \in \supp{\mset{S}}} \mset{S}_s \sum_{j \in \Out{\jointvar}} \isext{s}{j} \prob[\jointvar][j] \\
+        &= \sum_{j \in \Out{\jointvar}} \bs{\sum_{s \in \supp{\mset{S}}} \mset{S}_s  \isext{s}{j}} \prob[\jointvar][j] \\
+        &= \sum_{j \in \supp{\extmset{S}}} \extmset{S}_j \prob[\jointvar][j]
         \end{split}
         \end{align*}
         First examine the substitution $S \to C$,
-        \[ \sum_{c \in C} \mul{C}\br{c}\prob[][c] = \sum_{j \in E_{C}} \mul{\mext{C}}\br{j} \prob[\jointvar][j] \]
-        By \cref{eq:flat_extenable_cover_def} $E_A \subseteq E_C$,
-        \[ \sum_{c \in C} \mul{C}\br{c}\prob[][c] = \sum_{j \in E_{A}} \mul{\mext{C}}\br{j} \prob[\jointvar][j] + \sum_{j \in E_{C} \setminus E_{A}} \mul{\mext{C}}\br{j} \prob[\jointvar][j] \]
-        Notice that the sum over $j \in E_{C} \setminus E_{A}$ is entirely positive since $\mul{\mext{C}}\br{j} \in \N$ and $\prob[\jointvar][j] \geq 0$. Moreover \cref{eq:multi_extenable_cover_def} gives $\mul{\mext{C}}\br{j} \geq \mul{\mext{A}}\br{j}$. Combining these observations along with \cref{eq:derivation_cover} for $S \to A$, one arrives at the inequality,
-        \[ \sum_{c \in C} \mul{C}\br{c}\prob[][c] \geq \sum_{j \in E_{A}} \mul{\mext{A}}\br{j} \prob[\jointvar][j] = \sum_{a \in A} \mul{A}\br{a}\prob[][a] \]
+        \[ \sum_{c \in \supp{\mset{C}}} \mset{C}_c\prob[][c] = \sum_{j \in \supp{\extmset{C}}} \extmset{C}_j \prob[\jointvar][j] \]
+        By \cref{eq:flat_extenable_cover_def} $\supp{\extmset{A}} \subseteq \supp{\extmset{C}}$,
+        \[ \sum_{c \in \supp{\mset{C}}} \mset{C}_c\prob[][c] = \sum_{j \in \supp{\extmset{C}}} \extmset{C}_j \prob[\jointvar][j] + \sum_{j \in \supp{\extmset{C}} \setminus \supp{\extmset{A}}} \extmset{C}_j \prob[\jointvar][j] \]
+        Notice that the sum over $j \in \supp{\extmset{C}} \setminus \supp{\extmset{A}}$ is entirely positive since $\extmset{C}_j \in \N$ and $\prob[\jointvar][j] \geq 0$. Moreover \cref{eq:multi_extenable_cover_def} gives $\extmset{C}_j \geq \extmset{A}_j$. Combining these observations along with \cref{eq:derivation_cover} for $S \to A$, one arrives at the inequality,
+        \[ \sum_{c \in \supp{\mset{C}}} \mset{C}_c\prob[][c] \geq \sum_{j \in \supp{\extmset{A}}} \extmset{A}_j \prob[\jointvar][j] = \sum_{a \in \supp{\mset{A}}} \mset{A}_a\prob[][a] \]
         Which is equivalent to \cref{eq:extendable_cover}; every non-contextual marginal model $\prob^{\mscenario}$ must satisfy \cref{eq:extendable_cover}.
     \end{proof}
+    \begin{corollary}
+        \label{cor:linear_integer}
+        Every linear, integer coefficient compatibility inequality that is homogeneous is an extension covering inequality.
+    \end{corollary}
+    \begin{proof}
+        A proof is easy to see by contradiction. Let $I_{\mscenario} = \bc{\gamma \cdot \probvec^{\mscenario} \geq 0}$ where $\gamma_m \in \Z | \forall m \in \Out{\mscenario}$ be a homogeneous, linear, integer coefficient, compatibility inequality such that it is \textit{not} an extension covering inequality. Next seperate $\gamma$ into its positive and negative components,
+        \[ \gamma_m^{+} = \begin{cases}
+            \gamma_m & \gamma_m > 0 \\
+            0 & \gamma_m \leq 0
+        \end{cases}
+        \qquad
+        \gamma_m^{-} = \begin{cases}
+            -\gamma_m & \gamma_m < 0 \\
+            0 & \gamma_m \geq 0
+        \end{cases} \]
+        Such that both $\gamma^{+}$ and $\gamma^{-}$ are valid m-sets. Therefore $I_{\mscenario} = \bc{\br{\gamma^{+} - \gamma^{-}} \cdot \probvec^{\mscenario} \geq 0}$. Since this inequality is \textit{not} an extension cover, it must be that there exists at least one joint outcome $j' \in \Out{\jointvar}$ such that $\Gamma^{-}_{j'} > \Gamma^{+}_{j'}$. Consequently by \cref{eq:derivation_cover}, the deterministic distribution $\probvec^{\mscenario} = \de_{j' \res \mscenario}$ \textit{violates} $I_{\mscenario}$. However since $\de_{j' \res \mscenario} \in \mathcal{NC}$ and violates $I_{\mscenario}$, $I_{\mscenario}$ can not be a compatibility inequality; disagreeing with the assumption that it was.
+    \end{proof}
     % \begin{corollary}
-    %     If the m-set $\mul{C}$ is an extendable cover of the m-set $\br{A, \mulA}$ for a marginal scenario $\mscenario$, then the following is a valid compatibility $\mathcal{I}_{\mscenario}$ for the marginal scenario $\mscenario$.
-    %     \[ \sum_{a \in A}\prob[][a] \leq \sum_{c \in C}\prob[][c] \eq \label{eq:extendable_cover_flat} \]
+    %     If the m-set $\mset{C}$ is an extension cover of the m-set $\br{A, \mulA}$ for a marginal scenario $\mscenario$, then the following is a valid compatibility $I_{\mscenario}$ for the marginal scenario $\mscenario$.
+    %     \[ \sum_{a \in \supp{\mset{A}}}\prob[][a] \leq \sum_{c \in \supp{\mset{C}}}\prob[][c] \eq \label{eq:extendable_cover_flat} \]
     % \end{corollary}
     % \begin{proof}
-    %     This follows from the fact that if $\mul{C}$ is an extendable cover of $\br{A, \mulA}$, then $\br{C, \mathbf{1}_{C}}$ is an extendable cover of $\br{A, \mathbf{1}_{A}}$. Since $E_A \subseteq E_C$ is already trivially satisfied, all that remains is to demonstrate that \cref{eq:multi_extenable_cover_def} holds for unitary multiplicities $\mathbf{1}_A$ and $\mathbf{1}_C$.
+    %     This follows from the fact that if $\mset{C}$ is an extension cover of $\br{A, \mulA}$, then $\br{C, \mathbf{1}_{C}}$ is an extension cover of $\br{A, \mathbf{1}_{A}}$. Since $E_A \subseteq E_C$ is already trivially satisfied, all that remains is to demonstrate that \cref{eq:multi_extenable_cover_def} holds for unitary multiplicities $\mathbf{1}_A$ and $\mathbf{1}_C$.
 
-    %     First examine extension $\br{E_C, \mul{\mext{C}}}$ for the m-set $\mul{C}$ as defined by \cref{eq:joint_multiplicity},
-    %     \[ \forall j \in E_C : \mul{\mext{C}}\br{j} = \sum_{c \in C} \mulC\br{c} \isext{c}{j} \]
+    %     First examine extension $\br{E_C, \mul{\mext{C}}}$ for the m-set $\mset{C}$ as defined by \cref{eq:joint_multiplicity},
+    %     \[ \forall j \in E_C : \extmset{C}_j = \sum_{c \in \supp{\mset{C}}} \mulC\br{c} \isext{c}{j} \]
 
 
     %     First apply \cref{lemma:logical_extenable_set} to an arbitrary set $S \in \bc{A, C}$,
-    %     \[ \bigvee_{s \in S} s \iff \bigvee_{s \in S} \bigvee_{j \in \Ext[\jointvar]{s}} j \iff \bigvee_{j \in E_S} j \eq \label{eq:logical_iff_ext}\]
+    %     \[ \bigvee_{s \in \supp{\mset{S}}} s \iff \bigvee_{s \in \supp{\mset{S}}} \bigvee_{j \in \Ext[\jointvar]{s}} j \iff \bigvee_{j \in E_S} j \eq \label{eq:logical_iff_ext}\]
     %     Now since $E_A \subseteq E_C$ by \cref{eq:flat_extenable_cover_def} we have that,
     %     \[ \bigvee_{j \in E_A} j \implies \bigvee_{j \in E_C} j \eq \label{eq:logical_cover}\]
     %     Combining \cref{eq:logical_iff_ext,eq:logical_cover} one arrives at,
-    %     \[ \bigvee_{a \in A} a \implies \bigvee_{c \in C}c \]
+    %     \[ \bigvee_{a \in \supp{\mset{A}}} a \implies \bigvee_{c \in \supp{\mset{C}}}c \]
     % \end{proof}
     % For a working example, let $\jointvar = \bc{a, b, c}$ be a set of binary random variables ($O = \bc{0,1}$) and $\mscenario = \bc{\bc{a,b},\bc{b,c},\bc{a,c}}$ be the marginal context.
 
-    \subsection{Complete Solution to The Marginal Problem}
+    \subsection{Completeness of Extension Covers}
+    Corollary \ref{cor:linear_integer} alludes to completeness of extension covers. It vaguely suggests that every non-contextuality inequality needs to be an extension cover, otherwise there would exist a compatible and deterministic distribution that violates it. We will now demonstrate this completeness explicitly by first discussing what is required of a complete solution to the marginal problem.
+    \begin{definition}
+        A \term{complete solution to the marginal problem} is a finite set of $q$ vectors $\gamma_1, \ldots, \gamma_q$ together with $q$ real numbers $k \in \R$
+    \end{definition}
+    \begin{theorem}
+        \label{thm:complete_solution_log_cover}
+        The set of all logical covering inequalities forms a sufficient solution to the possibilistic marginal problem.
+    \end{theorem}
     \begin{theorem}
         \label{thm:complete_solution_ext_cover}
+        The set of all extension covering inequalities forms a sufficient solution to the probabilistic marginal problem.
     \end{theorem}
-    \subsection{Extendable Cover Procedure}
-    The \term{extendable cover procedure} begins with an antecedent m-set $\mul{A}$ and iteratively produces consequent m-sets $\mul{C}$ that are extendable covers of $\mul{A}$. To facilitate this, we define a \term{partial consequent m-set} to be any marginal m-set $\mul{S}$ that \textit{has yet to} become an extendable cover of $\mul{A}$. Also define the null m-set $\mul{\emptyset}$ to be the m-set assigning zero multiplicity to each marginal outcome.
+    \begin{proof}
+    \end{proof}
+    \begin{definition}
+        An extension cover $\mset{C}$ of $\mset{A}$ is said to be \term{minimal} if there does not exist an extension cover $\mset{C'}$ different from $\mset{C}$ such that,
+        \[ \forall j \in \Out{\jointvar} : \mset{C'}_j \leq \mset{C}_j \]
+    \end{definition}
+
+    If a more minimal extension cover $\mset{C'}$ does exists, then the inequality it defines (as per \cref{thm:extendable_cover_ineq} directly implies the inequality defined by $\mset{C}$.
+
+    \begin{definition}
+        An extension cover $\mset{C}$ of $\mset{A}$ is said to be \term{reducible} if there exists a \textit{partition} of $\mset{C}$ and $\mset{A}$,
+        \[ \mset{C} = \mset{C_1} + \mset{C_2} \qquad \mset{A} = \mset{A_1} + \mset{A_2} \]
+        Such that $\mset{C_1}$ is an extension cover for $\mset{A_1}$ and $\mset{C_2}$ is an extension cover for $\mset{A_2}$. If $\br{\mset{C}, \mset{A}}$ does \textit{not} admit a partition, then it is said to be \term{irreducible}.
+    \end{definition}
+
+    \todo[TC]{Basis certificates}
+
+    \subsection{Extension Cover Procedure}
+    The \term{extension cover procedure} begins with an antecedent m-set $\mset{A}$ and iteratively produces consequent m-sets $\mset{C}$ that are extension covers of $\mset{A}$. To facilitate this, we define a \term{partial consequent m-set} to be any marginal m-set $\mset{*C}$ that \textit{has yet to} become an extension cover of $\mset{A}$. Also define the null m-set $\mset{\emptyset}$ to be the m-set assigning zero multiplicity to each marginal outcome. As a preliminary insight, it is realatively easy to construct a valid extension cover of $\mset{A}$ by first beginning with $\mset{*C} = \mset{\emptyset}$ and iteratively increasing entries in $\mset{*C}$ until \cref{eq:multi_extenable_cover_def} is satisfied. To ensure efficient construction, it is wise to first identity a particular joint outcome $j'$ that violates \cref{eq:multi_extenable_cover_def} $\extmset{*C}_{j'} < \extmset{A}_{j'}$, and then append to $\extmset{*C}$ a marginal outcome $m$ ($\extmset{*C} \mapsto \extmset{*C} + \de_{m}$) that is extendable to $j'$. Eventually, enough marginal outcomes will be added to the partial extension cover $\extmset{*C}$ for \cref{eq:multi_extenable_cover_def} to hold.
+
+    This procedure can be generalized to find \textit{all} minimal extension covers for a chosen antecdent m-set $\mset{A}$ and is best formalized as a \textit{weighted hypergraph transversal} problem.
+
+    \subsubsection{Hypergraphs}
+    \begin{definition}
+        \label{def:hypergraph}
+        A \term{hypergraph} denoted $\hgraph$ is an ordered tuple $\br{\nodes, \edges}$ of \textit{nodes} and \textit{hyperedges} respectively where the nodes can represent any object and the hyperedges are \textit{subsets} of nodes. For convenience of notation, one defines an index set over the nodes and hyperedges of a hypergraph $\hgraph$ denoted $\ind_\nodes$ and $\ind_\edges$ respectively.
+        \[ \hgraph = \br{\nodes, \edges} \quad \nodes = \bc{n_i \mid i \in \ind_\nodes} \quad \edges = \bc{e_i \mid i \in \ind_\edges, e_i \subseteq \nodes} \]
+        Note that whenever the hyperedge or node index is arbitrary, it will be omitted. There is a dual correspondence between hyperedges $e \in \edges$ and nodes $n \in \nodes$ in a Hypergraph. A hyperedge $e$ is viewed as a set of nodes $\bc{n_i}$, and a node $n$ can be viewed as the set of hyperedges $\bc{e_i}$ that contain it.
+    \end{definition}
+
+    \begin{definition}
+        \label{def:hgraph_trans}
+        A \term{hypergraph transversal} (or edge hitting set) $\trans$ of a hypergraph $\hgraph$ is a set of nodes $\trans \subseteq \nodes$ that have non-empty intersections with every hyperedge in $\edges$.
+        \[ \trans = \bc{n_i \in \nodes \mid i \in \ind_\trans } \quad \forall e \in \edges : \trans \cap e \neq \emptyset \]
+    \end{definition}
+
+    \begin{definition}
+        A \term{necessary node} of a transversal $\trans$ is a node $n$ such that $\trans \setminus n$ is no longer a valid transversal. The set of all necessary nodes is denoted $\Nec{\trans}$,
+        \[ \Nec{\trans} = \bc{n \in \trans \mid \exists e \in \edges : \br{\trans \setminus n} \cap e = \emptyset} \]
+        An \term{unnecessary node} of a transversal $\trans$ is any node that is \textit{not} necessary. The set of all unnecessary nodes is denoted $\UnNec{\trans}$,
+        \[ \UnNec{\trans} = \trans \setminus \Nec{\trans} \]
+        A \term{minimal hypergraph transversal} $\trans$ is any valid transversal of $\hgraph$ where every node $n$ is \textit{necessary}.
+        \[ \trans = \Nec{\trans} \]
+    \end{definition}
+
+    \begin{definition}
+        A \term{weighted hypergraph} $\hgraph_\weights$ is a regular hypergraph satisfying \cref{def:hypergraph} equipped with a set of weights $\weights$ ascribed to each node such that a weighted hypergraph is written as a triplet $\br{\weights, \nodes, \edges}$.
+        \[ \weights = \bc{w_i \mid i \in \ind_\nodes, w_i \in \R} \]
+        One would say that a particular node $n_i$ carries weight $w_i$ for each $i \in \ind_\nodes$.
+    \end{definition}
+
+    \begin{definition}
+        A \term{bounded transversal} of a weighted hypergraph $\hgraph_\weights$ is a transversal $\trans$ of the unweighted hypergraph $\hgraph$ and a real number $t$ (denoted $\trans_{\leq t}$) such that the sum of the node weights of the transversal is bounded by $t$.
+        \[ \trans_{\leq t} = \bc{n_i \mid i \in \ind_\trans} \quad \text{s.t.} \sum_{j\in\ind_\trans} w_j \leq t \]
+        One can definte analogous \term{(strictly) upper/lower bounded transversals} by considering modifications of the notation: $\trans_{< t}, \trans_{\geq t}, \trans_{> t}$.
+    \end{definition}
 
 
-    \begin{algorithm}[H]
-    \caption{The Extendable Cover Procedure (ECP)}
-    \label{alg:ecp}
-    \begin{algorithmic}
-      \State $\mul{S}^{0} = \mul{\emptyset}$
-    \end{algorithmic}
-    \end{algorithm}
+
+    % \begin{algorithm}[H]
+    % \caption{The Extension Cover Procedure (ECP)}
+    % \label{alg:ecp}
+    % \begin{algorithmic}
+    %   \State $\mset{S}^{0} = \mul{\emptyset}$
+    % \end{algorithmic}
+    % \end{algorithm}
 
     % \begin{algorithm}
-    %   \caption{The Extendable Cover Procedure (ECP)
+    %   \caption{The Extension Cover Procedure (ECP)
     %     \label{alg:ecp}}
     %   \begin{algorithmic}[1]
-    %     \Require{An antecedent m-set $\mul{A}$ and a partial consequent m-set $\mul{S}$.}
+    %     \Require{An antecedent m-set $\mset{A}$ and a partial consequent m-set $\mset{S}$.}
     %     \Statex
-    %     \Function{ECP}{$\mul{A}, \mul{S}$}
+    %     \Function{ECP}{$\mset{A}, \mset{S}$}
     %       % \Let{$z$}{$x \oplus y$} \Comment{$\oplus$: bitwise exclusive-or}
     %       % \Let{$\delta$}{$0$}
     %       % \For{$i \gets 1 \textrm{ to } n$}
@@ -729,75 +829,12 @@
     \todo[TC]{Memory}
     \todo[TC]{Parallelization}
     \todo[TC]{Simplicial Complex}
-    \subsubsection{Optimizations}
+    \subsubsection{Advantages}
 
 
     \subsubsection{Avoiding Trivial Inequalities}
-    A \term{trivial compatibility inequality} $\mathcal{I}_{\mscenario}$ is an inequality that is satisfied by all marginal models $\prob^{\mscenario}$, not just compatible ones. Trivial compatibility inequalities are of no importance Since the set of all extendable cover inequalities
-    \todo[TC]{}
-    \subsection{}
-    \subsection{Irreducible Covers}
-    \todo[TC]{Basis certificates}
-    \subsection{Limited Factorization}
-
-    \subsection{Logical Implications \& Inequalities}
-    \label{sec:implication_inequalities}
-    Following the work conducted by Mansfield and Fritz \cite{Mansfield_2012}, we consider a possibilistic implications of the form,
-    \[ a \implies c_1 \lor \cdots \lor c_m = \bigvee_{i\in \bs{m}} c_i \eq \label{eq:1n_pi}\]
-    Where $a$ and each of the $c_i$'s are simply events or outcomes of a particular set of variables. The letter `$a$' is chosen for the event $a$ since it takes the place of the logical \term{antecedent} of \cref{eq:1n_pi}. Likewise, the letter `$c$' is chosen to represent logical \term{consequents}. We refer to the set of all $c_i$'s simply as $C = \bc{c_i \mid i \in \bs{m}}$. The implication \cref{eq:1n_pi} can be read as \textit{whenever $a$ occurs, at least one element of $c$ also occurs}.
-
-    It is possible to turn possibilistic implications into probabilistic inequalities by recognizing that the logical implication of \cref{eq:1n_pi} induces the inequality,
-    \[ \prob[][a] \leq \prob[][\bigvee_{i=1}^{m} c_i] \]
-    Furthermore utilizing Boole's inequality,
-    \[ \prob[][\bigvee_{i=1}^{m} c_i] \leq \sum_{i=1}^{m} \prob[][c_i] \eq \label{eq:booles} \]
-    Gives,
-    \[ \prob[][a] \leq \sum_{i=1}^{m} \prob[][c_i] \eq \label{eq:1n_ineq} \]
-    Such that whenever the inequality \cref{eq:1n_ineq} is violated, the implication in \cref{eq:1n_pi} is violated as well. Note that the converse is \textit{not} true; if the inequality \cref{eq:1n_ineq} holds true, it is still possible for there to be a violation of \cref{eq:1n_pi}.
-
-    \begin{remark}
-        An important result of Boole's inequality is that \cref{eq:booles} becomes an exact \textit{equality} whenever elements of $C$ are pairwise disjoint. Therefore, finding a set $C$ of pairwise disjoint events satisfying \cref{eq:1n_pi} will give rise to tighter inequalities.
-    \end{remark}
-
-    \subsection{Implications in the Marginal Problem}
-    \label{sec:implications_marginal_problem}
-    The question then remains, \textit{how does non-contextuality give rise to implications of the form of \cref{eq:1n_pi}?} Begin by making the principle assumption that a joint distribution \textit{does} exist for a marginal model $\prob^{\mscenario}$. This assumption induces logical \textit{tautologies} that take the form of \cref{eq:1n_pi}, which we call \term{marginal implications}, using the following train of logic.
-    \begin{enumerate}
-        \item Suppose a particular marginal outcome $a \in O_{\mscenario}$ happens to occur.
-        \item Since a joint distribution exists, then $a$ refers to some \textit{incomplete} knowledge about a \textit{joint} event $j = \outc{\jointvar} \in O_{\jointvar}$ that actually occured. More precisely, this set of possible $j$'s is the extendable set of $a$ in $O_{\jointvar}$.
-        \[ j \in \Ext[\jointvar]{a} \]
-        \item Therefore whenever $a$ occurs, one of the elements $j$ of $\Ext[\jointvar]{a}$ \textit{has} to occur.
-        \[ a \implies \bigvee_{j \in \Ext[\jointvar]{a}} j \eq \label{eq:A_impies_extendable}\]
-        \item Now suppose we could obtain a set of marginal outcomes $C = \bc{c_1, \ldots, c_m}$ each different from $a$ such that for every $j$, $\Ext{c \to j}$ for at least one element $c \in C$. If such a $C$ can be found, then the possibility of at least one $j$ occurring implies the possibility of at least one $c$ occurring.
-        \[ \bigvee_{j \in \Ext[\jointvar]{a}} j \implies c_1 \vee \cdots \vee c_m = \bigvee_{i \in \bs{m}} c_i\eq \label{eq:extendable_implies_cover} \]
-
-        \item Combing \cref{eq:A_impies_extendable} with \cref{eq:extendable_implies_cover}, one obtains \cref{eq:1n_pi}.
-    \end{enumerate}
-
-    \todo[TC]{Talk about why this is called hardy paradox}
-
-    Finding all marginal implications for a chosen marginal outcome $a$ corresponds to finding a set of marginal outcomes $C = \bc{c_1, \ldots, c_m}$ whose extendable sets \textit{cover} $\Ext[\jointvar]{a}$. Formally this corresponds to a \term{set covering} problem \todo[TC]{cite} which we elected to cast as the equivalent \term{hypergraph transversal problem}.
-
-    \todo[TC]{Mention sufficient solution to the possibilistic marginal problem}
-    \todo[TC]{Illustrate how it can distinguish more than possibilistic differences}
-
-    Given an antecedent $a$, we can construct a hypergraph $\hgraph_{a}$ called the \term{marginal hypergraph} with nodes $\nodes_a$ and $\edges_a$. The nodes of this hypergraph are the subset of marginal outcomes $\nodes_a \subseteq O^{\mscenario}$ \textit{compatible} with $a$.
-    The edges are labeled by outcomes in $\Ext[\jointvar]{a} \subseteq O_{\jointvar}$, namely the set of $j$'s, and contain all nodes compatible with $j$.
-    \begin{align*}
-        \nodes_a &= \bc{n \in O^{\mscenario} \mid \Com{n, a}} \eq \label{eq:hgraph_nodes} \\
-        \edges_a &= \bc{\bc{n \in O^{\mscenario} \mid \Com{n, j}} , j \in \Ext[\jointvar]{a}} \eq \label{eq:hgraph_edges}
-    \end{align*}
-    \begin{remark}
-        \label{remark:trivial_transversal}
-        Note that every node is contained in some edge. To prove this, consider the definition of compatibility between outcomes. If every $n$ is compatible with $a$, then there exists some outcome $j \in \Ext[\jointvar]{A}$ such that $\Ext{n \to j}$. Therefore since $\Ext{n \to j}$, $\Com{n, j}$; satisfying the central condition of \cref{eq:hgraph_edges}.
-    \end{remark}
-
-    \subsection{Higher Order Marginal Implications}
-
-    \todo[TC]{Discuss $(m,n)-type$ implications and the non-triviality}
-    \todo[TC]{Link to logical bell inequalities/completeness or not?}
-
-    \subsection{Hypergraph Transversals}
-    Section \ref{sec:implications_marginal_problem} demonstrates how finding possibilistic marginal implications can be casted as a hypergraph transversal problem. This section aims to summarize the general idea behind existing algorithms and also discusses some of the inequalities found using these algorithms. \todo[TC]{References here }
+    A \term{trivial compatibility inequality} $I_{\mscenario}$ is an inequality that is satisfied by all marginal models $\prob^{\mscenario}$, not just compatible ones. Trivial compatibility inequalities are of no importance Since the set of all extension cover inequalities
+    \todo[TC]{Targeted Seeds}
 
     \begin{definition}
         A \term{hypergraph transversal generation} is any algorithm that correctly generates the complete set of all minimal transversals of $\mathcal{H}$.
@@ -829,7 +866,7 @@
     \label{sec:symmetry}
     Symmetric compatibility inequalities are useful for a number of reasons. First, Bancal et. al. \cite{Bancal_2010} discuss computational advantages in considering symmetric versions of marginal polytopes mentioned in \cref{sec:comp_con_mp}; the number of extremal points typically grows exponentially in $\jointvar$, but only polynomial for the symmetric polytope. They also note a number of interesting inequalities (such as CHSH \cite{CHSH_Original}) can be written in a way that is symmetric under the exchange of parties, demonstrating that quantum-non-trivial inequalities can be recovered from facets of a symmetric polytope. Second, numerical optimizations against inequalities invariant under exchange of parties will lead to one of two interesting cases: either the extremal distribution is invariant under exchange of parties or it is not. The latter case generates a family of incompatible distributions obtained by exchanging parties of the found extremal distribution\footnote{If the extremal distribution is not invariant under exchange of parties, there is indication that the space of accessible distributions is non-convex.}. In this section we discuss how to achieve computational advantage and its application to the inequality techniques mentioned in \cref{sec:certificate_inequalities} and \cref{sec:implication_inequalities}.
     \subsection{Causal Symmetry}
-    The aim of this section is to formalize what types of symmetries are present in a particular causal structure $\graph$. The group of these causal symmetries will define, for each compatibility inequality $\mathcal{I}_{\mscenario}$, a family of inequalities that are also valid incompatibility inequalities.
+    The aim of this section is to formalize what types of symmetries are present in a particular causal structure $\graph$. The group of these causal symmetries will define, for each compatibility inequality $I_{\mscenario}$, a family of inequalities that are also valid incompatibility inequalities.
 
     First consider the permutation group acting on a set of nodes $N \subseteq \nodes$ denoted $\Perm{N}$ to be the set of all bijective maps $\gelem$ from $N$ to $N$.
     \[ \Perm{N} = \bc{\gelem \mid \gelem : N \to N} \]
@@ -839,35 +876,35 @@
     \action{\nodes} &\defined \bc{\action{n} \mid n \in \nodes} = \nodes \\
     \action{\edges} &\defined \bc{\action{e} \mid e \in \edges}
     \end{align*}
-    To motivate a more general treatment of such symmetries, consider the Triangle Scenario of \cref{fig:triangle_scenario}. Due to the rotational and reflective symmetries of the Triangle Scenario, any permutation $\gelem \in \Perm{\nodes_O}$ of the observable nodes $\nodes_O = \bc{A, B, C}$ creates a new causal structure $\action{\graph}$ that is \textit{equivalent} to $\graph$ up to a relabeling of \textit{latent} nodes. By construction, any valid compatibility inequality $\mathcal{I}_{\mscenario}$ for the marginal scenario $\mscenario = \bc{V_1, \ldots, V_k}$ is \textit{independent} of the labeling of latent nodes. Therefore applying $\gelem$ to all distributions in $\mathcal{I}_{\mscenario}$ yields $\action{\mathcal{I}_{\mscenario}} \defined \action{\mathcal{I}}_{\action{\mscenario}}$, another valid compatibility inequality for the permuted marginal scenario $\action{\mscenario}$ defined as,
+    To motivate a more general treatment of such symmetries, consider the Triangle Scenario of \cref{fig:triangle_scenario}. Due to the rotational and reflective symmetries of the Triangle Scenario, any permutation $\gelem \in \Perm{\nodes_O}$ of the observable nodes $\nodes_O = \bc{A, B, C}$ creates a new causal structure $\action{\graph}$ that is \textit{equivalent} to $\graph$ up to a relabeling of \textit{latent} nodes. By construction, any valid compatibility inequality $I_{\mscenario}$ for the marginal scenario $\mscenario = \bc{V_1, \ldots, V_k}$ is \textit{independent} of the labeling of latent nodes. Therefore applying $\gelem$ to all distributions in $I_{\mscenario}$ yields $\action{I_{\mscenario}} \defined \action{I}_{\action{\mscenario}}$, another valid compatibility inequality for the permuted marginal scenario $\action{\mscenario}$ defined as,
     \[ \action{\mscenario} = \bc{\action{V_1}, \ldots, \action{V_k}} \]
     % \begin{example}
     %     \todo[TC]{Above trivial example.}
-    %     Consider the marginal scenario $V_{\bs{4}} = \bc{\bc{A,B,C}, \bc{A}, \bc{B}, \bc{C}}$ and the compatibility inequality $\mathcal{I}_{\bc{ABC, A, B, C}}$ for the Triangle Scenario in \cref{fig:triangle_scenario} with the following form,
+    %     Consider the marginal scenario $V_{\bs{4}} = \bc{\bc{A,B,C}, \bc{A}, \bc{B}, \bc{C}}$ and the compatibility inequality $I_{\bc{ABC, A, B, C}}$ for the Triangle Scenario in \cref{fig:triangle_scenario} with the following form,
     %     \[ \prob[ABC][002]\prob[ABC][003] \leq \prob[A][0]\prob[C][3] \]
-    %     Now consider $\gelem = \bc{A \to A, B \to C, C \to B}$. Since $\action{\graph} = \graph$, $\action{\mathcal{I}_{\mscenario}}$ is also a valid compatibility inequality,
+    %     Now consider $\gelem = \bc{A \to A, B \to C, C \to B}$. Since $\action{\graph} = \graph$, $\action{I_{\mscenario}}$ is also a valid compatibility inequality,
     % \end{example}
-    More generically, any permutation $\gelem$ that preserves the graphical structure of $\graph$ can be applied to $\mathcal{I}_{\mscenario}$ to generate new and valid compatibility inequalities. Specifically this alludes to the \term{graph automorphism group} $\Aut{\graph}$ of $\graph$.
+    More generically, any permutation $\gelem$ that preserves the graphical structure of $\graph$ can be applied to $I_{\mscenario}$ to generate new and valid compatibility inequalities. Specifically this alludes to the \term{graph automorphism group} $\Aut{\graph}$ of $\graph$.
     \[ \Aut{\graph} \defined \bc{\gelem \in \Perm{\nodes} \mid \action{\graph} = \graph} \]
     In general, $\Aut{\graph}$ could include elements $\gelem$ that map latent nodes to observable nodes\footnote{In practice however, it is rare to be considering a causal structure $\graph$ where some latent node $n_L \in \nodes_L$ takes on an role indistinguishable from some observable node $n_O \in \nodes_O$, so this won't be an issue.}. This behaviour is \textit{undesired} for causal inference where the latent nodes will never appear in a marginal scenario. Instead, the subgroup of $\Aut{\graph}$ that never maps observable nodes to latent nodes is the \term{set-wise stabilizer} of $\Aut{\graph}$ for $\nodes_O$ and will be expressed with a subscript.
 
     \begin{definition}
         The \term{causal symmetry group} for a causal structure $\graph$ is the graph automorphism subgroup that stabilizes the observable nodes.
         \[ \Aut[\nodes_O]{\graph} = \bc{\gelem \in \Perm{\nodes} \mid \action{\graph} = \graph, \forall n \in \nodes_O :\action{n} \in \nodes_O} \]
-        Given any compatibility inequality $\mathcal{I}_{\mscenario}$, each element $\gelem$ of the causal symmetry group defines a new valid compatibility inequality $\action{\mathcal{I}_{\mscenario}} = \action{\mathcal{I}}_{\action{\mscenario}}$.
+        Given any compatibility inequality $I_{\mscenario}$, each element $\gelem$ of the causal symmetry group defines a new valid compatibility inequality $\action{I_{\mscenario}} = \action{I}_{\action{\mscenario}}$.
     \end{definition}
 
-    The inflation technique discussed in \cref{sec:summary_inflation} allows one to derive compatibility inequalities for a causal structure $\graph$ by considering the marginal problem over the pre-injectable sets of $\graph'$ denoted $\PreInj[\graph]{\graph'} = \bc{V_1, \ldots, V_k}$. It is important to recall that due to \cref{lem:inflation}, inequalities $\mathcal{I}'$ for $\graph'$ are \textit{only} transferable to inequalities $\mathcal{I}$ for $\graph$ if $\mathcal{I}'$ is in terms of distributions over the pre-injectable sets $\mathcal{I}'_{\PreInj[\graph]{\graph'}}$. As a consequence of this observation, we need to consider a subgroup of the causal symmetry group that preserves the pre-injectable sets,
+    The inflation technique discussed in \cref{sec:summary_inflation} allows one to derive compatibility inequalities for a causal structure $\graph$ by considering the marginal problem over the pre-injectable sets of $\graph'$ denoted $\PreInj[\graph]{\graph'} = \bc{V_1, \ldots, V_k}$. It is important to recall that due to \cref{lem:inflation}, inequalities $I'$ for $\graph'$ are \textit{only} transferable to inequalities $I$ for $\graph$ if $I'$ is in terms of distributions over the pre-injectable sets $I'_{\PreInj[\graph]{\graph'}}$. As a consequence of this observation, we need to consider a subgroup of the causal symmetry group that preserves the pre-injectable sets,
     \[ \action{\PreInj[\graph]{\graph'}} = \PreInj[\graph]{\graph'} \eq \label{eq:preserved_preinj} \]
 
     \begin{definition}
         The \term{restricted causal symmetry group} $\Phi$ for a causal structure $\graph$ and a marginal scenario $\mscenario$ is the graph automorphism subgroup that stabilizes the marginal scenario $\mscenario$.
         \[ \Phi \defined \Aut[\mscenario]{\graph} = \bc{\gelem \in \Perm{\nodes} \mid \action{\graph} = \graph, \forall V \in \mscenario : \action{V} \in \mscenario} \]
-        Given any compatibility inequality $\mathcal{I}_{\mscenario}$ each element $\gelem$ of the causal symmetry group defines a new valid compatibility inequality $\action{\mathcal{I}_{\mscenario}} = \action{\mathcal{I}}_{\mscenario}$ over the \textit{same} marginal context $\mscenario$.
+        Given any compatibility inequality $I_{\mscenario}$ each element $\gelem$ of the causal symmetry group defines a new valid compatibility inequality $\action{I_{\mscenario}} = \action{I}_{\mscenario}$ over the \textit{same} marginal context $\mscenario$.
     \end{definition}
 
-    The restricted causal symmetry group for the pre-injectable sets of an inflation $\graph'$ is the ideal symmetry group for use with the inflation technique. If one obtains a particular inequality $\mathcal{I}'_{\PreInj[\graph]{\graph'}}$ as well as the restricted causal symmetry group $\Phi$, an entire family of valid compatibility inequalities are also obtained.
-    \[ \bc{\action{\mathcal{I}'}_{\PreInj[\graph]{\graph'}} \mid \gelem \in \Phi} \text{ where } \Phi = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \]
+    The restricted causal symmetry group for the pre-injectable sets of an inflation $\graph'$ is the ideal symmetry group for use with the inflation technique. If one obtains a particular inequality $I'_{\PreInj[\graph]{\graph'}}$ as well as the restricted causal symmetry group $\Phi$, an entire family of valid compatibility inequalities are also obtained.
+    \[ \bc{\action{I'}_{\PreInj[\graph]{\graph'}} \mid \gelem \in \Phi} \text{ where } \Phi = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \]
     We have obtained $\Phi$ for the inflated triangle scenario \cref{fig:inflated_triangle_scenario}. $\Phi$ is an order $48$ group with the following $4$ generators:
     \begin{equation*}
     \begin{aligned}[c]
@@ -899,7 +936,7 @@
     To see this, $\gelem_1$ and $\gelem_4$ become the identity element $\mathbb{I}$ in $\Aut[\nodes_O]{\graph}$ upon removal of the copy-index, leaving $\gelem_2$ to generate reflections and $\gelem_3$ to generate rotations.
     \subsection{Symmetric Marginal Polytope}
     Up until this point, we have discussed how new inequalities can be created from known ones by exploiting causal symmetry. Although very useful, we divert our attention to finding \textit{symmetric} inequalities themselves.
-    \[ \forall \gelem \in \Phi :  \action{\mathcal{I}_{\mscenario}} = \mathcal{I}_{\mscenario} \]
+    \[ \forall \gelem \in \Phi :  \action{I_{\mscenario}} = I_{\mscenario} \]
     In order to do this, we must first define how elements $\gelem \in \Phi$ act on marginal outcomes $O_{\mscenario}$.
     \begin{definition}
         Let $\jointvar = \bc{v_1, \ldots, v_k}$ be a collection of random variables and let $\gelem \in \Perm{\jointvar}$. $\jointvar$ is said to be \term{label invariant with respect to $\gelem$} if the outcome labels for each variable $v \in \jointvar$ are unchanged under the action of $\gelem$.
@@ -935,24 +972,19 @@
         \[ M_{\Phi}\bs{\Orb[\Phi]{m}, \Orb[\Phi]{j}} = \sum_{\substack{j' \in \Orb[\Phi]{j} \\ m' \in \Orb[\Phi]{m}}} M\bs{m',j'} \]
     \end{definition}
 
-
-    \subsection{Symmetric Logical Implications}
     \subsection{Results}
 
-    \todo[TC]{Identify the desired symmetry group}
     \todo[TC]{How we obtained the desired symmetry group}
     \todo[TC]{Group orbits to symmetric marginal description matrix}
-    \todo[TC]{Infeasibility on symmetric marginal problem}
-    \todo[TC]{Hardy Transversals can't work on the symmetric marginal problem}
-    \todo[TC]{Symmetrizing non-symmetric inequalities through avoiding orbits}
-    \todo[TC]{higher order transversals on mutually impossible events}
+    \todo[TC]{representative antecedents completely solve the marginal problem}
+
     \section{Non-linear Optimizations}
     \label{sec:optimizations}
     \todo[TC]{Mention outlook on te importance of classification and determining interesting inequalities \cite{Bancal_2010}}
     Compatibility inequalities for a given causal structure are fantastic for finding incompatible distributions. In the inflation technique, this is no exception. Parameterizing a space distributions using a set of real-valued parameters $\lambda$, enables us to perform numerical optimizations against these inequalities in hopes that a particular set of parameters $\lambda$ is able to generate an incompatible distribution $\prob$. To illustrate this generic procedure and it's reliability, we will first examine the popular CHSH inequality.
     \subsection{Numerical Violations of The CHSH Inequality}
     The CHSH inequality \cite{CHSH_Original} can we viewed as a causal compatibility inequality for the iconic Bell Scenario (Fig. 19 of \cite{Wood_2012}, Fig. 11 of \cite{Inflation}, Fig. 1 a) of \cite{Tavakoli_2015}, etc.) corresponding to Bell's notion of local causality \cite{Wood_2012}. It constrains the set of 2-outcome bipartite distributions over local binary measurement settings for each party $\prob[AB\mid S_A S_B] \defined \bc{\prob[AB\mid 0 0], \prob[AB\mid 01], \prob[AB\mid 10], \prob[AB\mid 11]}$. Numerical optimization \textit{should} obtain the algebraic violation associated with the PR-Box correlations \cite{PR_1995}. Maintaining full generality, we simply need to parameterize these $4$ distributions using \cref{eq:uniform_param}, each requiring $4$ real-valued parameters. We define the optimization target for the CHSH inequality to be the left-hand-side of \cref{eq:CHSH},
-    \[ \mathcal{I}\tsb{CHSH} = \ba{AB|11} + \ba{AB|12} + \ba{AB|21} - \ba{AB|22} \]
+    \[ I\tsb{CHSH} = \ba{AB|11} + \ba{AB|12} + \ba{AB|21} - \ba{AB|22} \]
     Figure \ref{fig:CHSH_convex} demonstrates this optimization for $5$ random seed parameters $\lambda^0$, each converging to the expected value of $4$. Analogously, \cite{Cirelson_1980}
 
     \begin{figure}
@@ -964,13 +996,13 @@
         \begin{minipage}[b]{.48\textwidth}
             \centering
             \includegraphics{../figures/CHSH_convex.pdf}
-            \caption{Convex optimizations against $\mathcal{I}\tsb{CHSH}$ recover algebraic violation of $4$.}
+            \caption{Convex optimizations against $I\tsb{CHSH}$ recover algebraic violation of $4$.}
             \label{fig:CHSH_convex}
         \end{minipage}\hspace{0.04\textwidth}%
         \begin{minipage}[b]{.48\textwidth}
             \centering
             \includegraphics{../figures/CHSH_quantum.pdf}
-            \caption{Quantum optimizations against $\mathcal{I}\tsb{CHSH}$ recover maximum violation of $2\sqrt{2}$.}
+            \caption{Quantum optimizations against $I\tsb{CHSH}$ recover maximum violation of $2\sqrt{2}$.}
             \label{fig:CHSH_quantum}
         \end{minipage}
     \end{center}
