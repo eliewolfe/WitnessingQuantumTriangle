@@ -25,6 +25,11 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
+% === To allow for labeling of rows and columns of a matrix ===
+\usepackage{kbordermatrix}
+\renewcommand{\kbldelim}{(} % Left delimiter
+\renewcommand{\kbrdelim}{)} % Right delimiter
+
 % === Commonly re-occurring symbols ===
 \newcommand{\hgraph}{\mathcal{H}}
 \newcommand{\graph}{\mathcal{G}}
@@ -85,11 +90,6 @@
 \newcommand{\outc}[1]{o\bs{#1}} % Fritz's BBTII notation for observed outcomes
 \DeclareDocumentCommand{\prob}{O{} O{}}{\ifthenelse{\equal{#1}{}}{P}{P_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution
 \DeclareDocumentCommand{\probvec}{O{} O{}}{\ifthenelse{\equal{#1}{}}{\mathcal{P}}{\mathcal{P}_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution vector
-
-% === To allow for labeling of rows and columns of a matrix ===
-\usepackage{../packages/kbordermatrix}
-\renewcommand{\kbldelim}{(} % Left delimiter
-\renewcommand{\kbrdelim}{)} % Right delimiter
 
 % === Causal structure formatting for tikz ===
 \input{../figures/causal_structures/formatting}
