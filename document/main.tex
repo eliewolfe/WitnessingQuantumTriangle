@@ -38,7 +38,7 @@
 \newcommand{\edges}{\mathcal{E}}
 \newcommand{\trans}{\mathcal{T}}
 \newcommand{\ind}{\mathcal{I}}
-\newcommand{\perm}{\Omega}
+\newcommand{\netperm}{\Pi}
 \newcommand{\Hilb}{\mathcal{H}}
 \newcommand{\ancestralindep}{\perp}
 \newcommand{\valprod}{\times}
@@ -46,8 +46,10 @@
 \newcommand{\com}{\mathrel{\Yright\hspace{-0.2em}\Yleft}}
 \newcommand{\ext}{\mathrel{\Yleft}}
 \newcommand{\res}{\mathrel{\Yright}}
-\newcommand{\gelem}{\varphi}
-\newcommand{\action}[1]{\gelem\bs{#1}}
+\newcommand{\gep}{\varphi}
+\newcommand{\gp}{\Phi}
+\newcommand{\geo}{\omega}
+\newcommand{\go}{\Omega}
 \newcommand{\mscenario}{\mathcal{M}}
 \newcommand{\jointvar}{\mathcal{J}}
 \newcommand{\mset}[1]{\gamma^{#1}}
@@ -360,7 +362,7 @@
     \begin{equation}
     \begin{gathered}
     \label{eq:fritz_quantum_realization}
-    \rho_{AB} = \ket{\Psi^+}\bra{\Psi^+} \quad \rho_{BC} = \rho_{CA} = \ket{\Phi^+}\bra{\Phi^+} \\
+    \rho_{AB} = \ket{\Psi^+}\bra{\Psi^+} \quad \rho_{BC} = \rho_{CA} = \ket{\gp^+}\bra{\gp^+} \\
     M_{A} = \bc{\ket{0\psi_0}\bra{0\psi_0}, \ket{0\psi_{\pi}}\bra{0\psi_{\pi}}, \ket{1\psi_{-\pi/2}}\bra{1\psi_{-\pi/2}}, \ket{1\psi_{\pi/2}}\bra{1\psi_{\pi/2}}} \\
     M_{B} = \bc{\ket{\psi_{\pi/4}0}\bra{\psi_{\pi/4}0}, \ket{\psi_{5\pi/4}0}\bra{\psi_{5\pi/4}0}, \ket{\psi_{3\pi/4}1}\bra{\psi_{3\pi/4}1}, \ket{\psi_{-\pi/4}1}\bra{\psi_{-\pi/4}1}} \\
     M_{C} = \bc{\ket{00}\bra{00}, \ket{01}\bra{01}, \ket{10}\bra{10}, \ket{11}\bra{11}}
@@ -368,7 +370,7 @@
     \end{equation}
     Where for convenience of notation $\psi_x$ is used to denote the superposition,
     \[ \ket{\psi_x} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{ix}\ket{1}} \]
-    Additionally $\ket{\Psi^+} = \f{1}{\sqrt{2}}\br{\ket{01} + \ket{10}}$ and $\ket{\Phi^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}}$ are two maximally entangled Bell states.
+    Additionally $\ket{\Psi^+} = \f{1}{\sqrt{2}}\br{\ket{01} + \ket{10}}$ and $\ket{\gp^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}}$ are two maximally entangled Bell states.
 
     Fritz first proved it's incompatibility \cite{Fritz_2012} by showing $C$ acts a moderator to ensure measurement pseudo-settings for $A$ and $B$ are independent, satisfying non-broadcasting requirements for the standard Bell scenario. In fact, by coarse-graining outcomes for $A$ and $B$ and treating $C$ as a measurement-setting moderator, $P_F$ maximally violates the CHSH inequality. To illustrate this, begin with the CHSH inequality \cite{CHSH_Original},
     \[ \ba{AB|S_A=1, S_B=1} + \ba{AB|S_A=1, S_B=2} + \ba{AB|S_A=2, S_B=1} - \ba{AB|S_A=2, S_B=2} \leq 2 \eq \label{eq:CHSH}\]
@@ -484,15 +486,23 @@
     To illustrate this concretely, consider the following example:
     \begin{example}
         \label{ex:marginal_matrix}
-        Let $\jointvar$ be $3$ binary variables $\jointvar = \bc{a,b,c}$ and consider the marginal scenario $\mscenario = \bc{\bc{a,c}, \bc{b}}$. The incidence matrix becomes:
+        Let $\jointvar$ be $3$ binary variables $\jointvar = \bc{a,b,c}$ and consider the marginal scenario $\mscenario = \bc{\bc{a,b}, \bc{b,c}, \bc{a,c}}$. The incidence matrix becomes:
+        \newcommand{\kone}{\mathbf{1}}
+        \newcommand{\kzer}{\textcolor{gray}{0}}
         \[ M = \kbordermatrix{
             (a,b,c) \:\: \mapsto & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
-            (a\mapsto0, c\mapsto0) & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
-            (a\mapsto0, c\mapsto1) & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 \\
-            (a\mapsto1, c\mapsto0) & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 \\
-            (a\mapsto1, c\mapsto1) & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
-            (b\mapsto0)            & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 \\
-            (b\mapsto1)            & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1
+            (a\mapsto0, b\mapsto0) & \kone & \kone & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer \\
+            (a\mapsto0, b\mapsto1) & \kzer & \kzer & \kone & \kone & \kzer & \kzer & \kzer & \kzer \\
+            (a\mapsto1, b\mapsto0) & \kzer & \kzer & \kzer & \kzer & \kone & \kone & \kzer & \kzer \\
+            (a\mapsto1, b\mapsto1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kone \\
+            (b\mapsto0, c\mapsto0) & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer \\
+            (b\mapsto0, c\mapsto1) & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer \\
+            (b\mapsto1, c\mapsto0) & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer \\
+            (b\mapsto1, c\mapsto1) & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone \\
+            (a\mapsto0, c\mapsto0) & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer & \kzer \\
+            (a\mapsto0, c\mapsto1) & \kzer & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer \\
+            (a\mapsto1, c\mapsto0) & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone & \kzer \\
+            (a\mapsto1, c\mapsto1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone
         } \]
     \end{example}
 
@@ -843,7 +853,7 @@
     \begin{definition}
         Any hypergraph with strictly non-empty edges $\forall e \neq \emptyset$ will always admit the \term{trivial transversal} $\trans^*$ where all nodes are considered as members $\trans^* = \nodes$. Any hypergraph with empty edges will be called a \term{degenerate hypergraph} as it admits no transversals\footnote{Most authors require that all hypergraphs be non-degenerate \cite{Kavvadias_2005}.}.
     \end{definition}
-    Remark \ref{remark:trivial_transversal} guarantees that all marginal hypergraphs are non-degenerate. There are two distinct approaches to hypergraph transversal generation: \textit{top-down} and \textit{bottom-up}.
+    Remark ?? guarantees that all marginal hypergraphs are non-degenerate. There are two distinct approaches to hypergraph transversal generation: \textit{top-down} and \textit{bottom-up}.
     \begin{definition}
         A \term{top-down} hypergraph transversal generation refers to any algorithm that begins with the trivial transversal $\trans^*$ and iteratively removes unnecessary nodes from $\trans^*$.
     \end{definition}
@@ -854,7 +864,7 @@
 
     One should select a top-down method if the typical size of minimal transversals $\abs{\trans}$ is comparable to the number of nodes $\abs{\nodes}$, otherwise a bottom-up method will perform better.
     For our purposes we implemented a deep-first transversal algorithm similar to
-    Recalling \cref{remark:trivial_transversal}
+    Recalling
 
     \subsection{Weighted Hypergraph Transversals}
     In \cref{sec:certificate_inequalities} is was demonstrated that the Fritz distribution is witness-able via a certificate inequality. It is also possible to witness
@@ -862,68 +872,131 @@
 
     \todo[TC]{Weighted transversals and Optimizations}
     \todo[TC]{Seeding inequalities (huge advantage here)}
-    \section{Deriving Symmetric Inequalities}
+    \section{Marginal Symmetries}
     \label{sec:symmetry}
-    Symmetric compatibility inequalities are useful for a number of reasons. First, Bancal et. al. \cite{Bancal_2010} discuss computational advantages in considering symmetric versions of marginal polytopes mentioned in \cref{sec:comp_con_mp}; the number of extremal points typically grows exponentially in $\jointvar$, but only polynomial for the symmetric polytope. They also note a number of interesting inequalities (such as CHSH \cite{CHSH_Original}) can be written in a way that is symmetric under the exchange of parties, demonstrating that quantum-non-trivial inequalities can be recovered from facets of a symmetric polytope. Second, numerical optimizations against inequalities invariant under exchange of parties will lead to one of two interesting cases: either the extremal distribution is invariant under exchange of parties or it is not. The latter case generates a family of incompatible distributions obtained by exchanging parties of the found extremal distribution\footnote{If the extremal distribution is not invariant under exchange of parties, there is indication that the space of accessible distributions is non-convex.}. In this section we discuss how to achieve computational advantage and its application to the inequality techniques mentioned in \cref{sec:certificate_inequalities} and \cref{sec:implication_inequalities}.
+    Symmetric compatibility inequalities are useful for a number of reasons. First, Bancal et. al. \cite{Bancal_2010} discuss computational advantages in considering symmetric versions of marginal polytopes mentioned in \cref{sec:comp_con_mp}; the number of extremal points typically grows exponentially in $\jointvar$, but only polynomial for the symmetric polytope. They also note a number of interesting inequalities (such as CHSH \cite{CHSH_Original}) can be written in a way that is symmetric under the exchange of parties, demonstrating that quantum-non-trivial inequalities can be recovered from facets of a symmetric polytope. Second, numerical optimizations against inequalities invariant under exchange of parties will lead to one of two interesting cases: either the extremal distribution is invariant under exchange of parties or it is not. The latter case generates a family of incompatible distributions obtained by exchanging parties of the found extremal distribution\footnote{If the extremal distribution is not invariant under exchange of parties, there is indication that the space of accessible distributions is non-convex.}. In this section we discuss how to exploit symmetries in the extension covering procedure in order to reduce the computational search space. \\
+
+    To demonstrate what kinds of symmetries are valid, we present the following example:
+    \begin{example}
+        \label{ex:symmetries}
+        First consider the marginal scenario $\mscenario = \bc{\bc{a, b, c}, \bc{c, d}, \bc{a, d}}$ where each variable in $\jointvar = \bc{a,b,c,d}$ is binary. Moreover, let $I_{\mscenario}$ be the compatibility inequality,
+        \[ I_{\mscenario} = \bc{\prob[abc][010] \leq \prob[cd][00] + \prob[ad][01]}  \]
+        Intuitively, a compatibility is independent of outcome labels $O_a = O_b = O_c = O_d = \bc{0,1}$. Therefore new compatibility inequalities can be generated from $I_{\mscenario}$ by permuting its outcome labels. Let $\geo_v : O_v \to O_v : \bc{0,1} \mapsto \geo_v\bs{\bc{0,1}} = \bc{1,0}$ be a permutation of the outcome labels for variable $v$. Let $\geo = \geo_a \times \geo_c$ be the permutation of variables $a$ and $c$. The action of $\geo$ on outcome labels induces an action on the inequality $I_{\mscenario}$ itself,
+        \begin{align*}
+        \geo\bs{I_{\mscenario}} &= \bc{\prob[abc][\geo\bs{010}] \leq \prob[cd][\geo\bs{00}] + \prob[ad][\geo\bs{01}]} \\
+        &= \bc{\prob[abc][111] \leq \prob[cd][10] + \prob[ad][11]}
+        \end{align*}
+        The new inequality $\geo\bs{I_{\mscenario}}$ is also a valid compatibility inequality. By construction, any permutation $\geo$ over outcome labels leaves the marginal scenario invariant ($\geo\bs{\mscenario} = \mscenario$) and thus we may write $\geo\bs{I_{\mscenario}} = \geo\bs{I}_{\mscenario}$. \\
+
+        Alternatively, permutations of the variables themselves are also permitted. Let $\gep : \jointvar \to \jointvar : \bc{a,b,c,d} \mapsto \gep\bs{\bc{a,b,c,d}} = \bc{c,a,d,b}$ be a permutation of the variables $\jointvar$. Intuitively $\gep$ acts on $I_{\mscenario}$ in the following way,
+        \begin{align*}
+        \gep\bs{I_{\mscenario}} &= \bc{\prob[\gep\bs{abc}][010] \leq \prob[\gep\bs{cd}][00] + \prob[\gep\bs{ad}][01]} \\
+        &= \bc{\prob[cad][010] \leq \prob[db][00] + \prob[cb][01]} \\
+        &= \bc{\prob[acd][100] \leq \prob[bd][00] + \prob[bc][10]}
+        \end{align*}
+        In general (as in this example), permutations over all variables can modify the marginal scenario $\gep\bs{\mscenario} \neq \mscenario$; in general we write $\gep\bs{I_{\mscenario}} = \gep\bs{I}_{\gep\bs{\mscenario}}$.
+    \end{example}
+
+    \subsection{Outcome Label Symmetry}
+    As demonstrated by \cref{ex:symmetries}, permutations on outcome labels can be applied to inequalities themselves to generate new inequalities. To formalize this notion, let $\Perm{S}$ denote the \term{permutation group} acting on the set $S$ consisting of all bijective maps $s : S \to S$.
+    \[ \Perm{S} = \bc{s : S \to S} \]
+    \begin{definition}
+        Then (outcome) \term{label permutation group} $\go$ for a set of random variables $\mathcal{V} = \bc{v_1, \ldots, v_n}$ is the direct product of permutations over the outcome labels for each variable $v_i \in \mathcal{V}$,
+        \[ \go \defined \Perm{O_{v_1}} \times \cdots \times \Perm{O_{v_n}} = \prod_{v \in \mathcal{V}} \Perm{O_{v}} \]
+        The action of $\geo \in \go$ on an outcome $f \in \Out{\mathcal{V}}$ (denoted $\geo\bs{f}$) is defined as,
+        \[ \forall v \in \mathcal{V} : \br{\geo\bs{f}}\br{v} \defined \geo\bs{f\br{v}} \eq \label{eq:acto}\]
+    \end{definition}
+    \begin{lemma}
+        \label{lem:extendable_invariance_acto}
+        If a marginal outcome $m \in \Out{V} \subset \Out{\mscenario}$ is extendable to the joint outcome $j \in \Out{J}$, then $\geo\bs{m}$ is extendable to $\geo\bs{j}$ for any label permutation $\geo \in \go$.
+        \[ m \ext j \iff \geo\bs{m} \ext \geo\bs{j} \eq \label{eq:extendable_invariance_acto}\]
+    \end{lemma}
+    \begin{proof}
+        The proof should be clear by the definition of extendability (\cref{def:extendable}).
+        \[ m \ext j \iff \forall v \in \Dom{m} : j\br{v} = m\br{v} \]
+        Since $\Dom{m} = \Dom{\geo\bs{m}}$ and by \cref{eq:acto},
+        \[ \forall v \in \Dom{\geo\bs{m}}: \br{\geo\bs{j}}\br{v} = \geo\bs{j\br{v}} = \geo\bs{m\br{v}} = \br{\geo\bs{m}}\br{v} \]
+        We have that $\geo\bs{m} \ext \geo\bs{j}$. The left implication of \cref{eq:extendable_invariance_acto} follows by considering $\geo^{-1} \in \go$.
+    \end{proof}
+    \begin{corollary}
+        \label{coll:incidence_invariance}
+        Let $M$ be the incidence matrix for a marginal scenario $\mscenario$ and $\geo \in \go$ be a label permutation of the joint random variables $\jointvar$. By \cref{lem:extendable_invariance_acto}, the action of $\geo$ on $M$ leaves $M$ invariant ($\geo\bs{M} = M$),
+        \[ \geo\bs{M}_{m,j} \defined M_{\geo\bs{m},\geo\bs{j}} = \de_{\geo\bs{m} \ext \geo\bs{j}} = \de_{m \ext j} = M_{m,j} \]
+    \end{corollary}
+    \begin{theorem}
+        For each compatibility inequality $I_{\mscenario}$ and label permutation $\geo \in \go$, the inequality defined by $\geo\bs{I_{\mscenario}} = \geo\bs{I}_{\mscenario}$ is also a valid compatibility inequality for the marginal scenario $\mscenario$.
+    \end{theorem}
+    \begin{proof}
+        First let $I_{\mscenario} = \bc{\ga \cdot \probvec^{\mscenario} \geq 0}$ for the marginal scenario $\mscenario$ and $\ga$ is the certificate associated with $I_{\mscenario}$. Furthermore let $\geo\bs{I_{\mscenario}} = \geo\bs{I}_{\mscenario} = \bc{\ga \cdot \geo\bs{\probvec}^{\mscenario} \geq 0}$ be the inequality obtained after permuting $\probvec^{\mscenario}$ defined as,
+        \[ \forall m \in \Out{\mscenario} : \geo\bs{\probvec}^{\mscenario}_m \defined \probvec^{\mscenario}_{\geo\bs{m}} \]
+        It should be clear to see that $\geo\bs{I_{\mscenario}}$ can be rewritten as,
+        \[ \ga \cdot \geo\bs{\probvec}^{\mscenario} = \sum_{m \in \supp{\ga}} \ga_{m} \probvec^{\mscenario}_{\geo\bs{m}} = \sum_{\geo^{-1}\bs{m} \in \supp{\geo^{-1}\bs{\ga}}} \ga_{\geo^{-1}\bs{m}} \probvec^{\mscenario}_{m} = \geo^{-1}\bs{\ga} \cdot \probvec^{\mscenario} \]
+        Therefore the permuted inequality is equivalent to,
+        \[ \geo\bs{I}_{\mscenario} = \bc{\geo^{-1}\bs{\ga} \cdot \probvec^{\mscenario} \geq 0} \]
+        All that remains to be proven is that $\geo^{-1}\bs{\ga}$ forms a valid certificate for the incidence matrix $M$. Since $\geo \in \go$, then by \cref{coll:incidence_invariance},
+        \[ \br{\geo^{-1}\bs{\ga} \cdot M}_j = \sum_{m \in \supp{\geo^{-1}\bs{\ga}}} \geo^{-1}\bs{\ga}_m \de_{m\ext j} = \sum_{m \in \supp{\ga}} \bs{\ga}_m \de_{\geo\bs{m}\ext j} = \sum_{m \in \supp{\ga}} \bs{\ga}_m \de_{m\ext \geo^{-1}\bs{j}} = \br{\ga \cdot M}_{\geo^{-1}\bs{j}} \]
+        But since $I_{\mscenario}$ is a valid compatibility inequality, $\ga \cdot M \succeq 0$ and thus $\geo^{-1}\bs{\ga} \cdot M \succeq 0$ making $\geo\bs{I}_{\mscenario}$ a valid compatibility inequality as well.
+    \end{proof}
+
     \subsection{Causal Symmetry}
     The aim of this section is to formalize what types of symmetries are present in a particular causal structure $\graph$. The group of these causal symmetries will define, for each compatibility inequality $I_{\mscenario}$, a family of inequalities that are also valid incompatibility inequalities.
 
-    First consider the permutation group acting on a set of nodes $N \subseteq \nodes$ denoted $\Perm{N}$ to be the set of all bijective maps $\gelem$ from $N$ to $N$.
-    \[ \Perm{N} = \bc{\gelem \mid \gelem : N \to N} \]
-    The action of $\gelem \in \Perm{N}$ on a causal structure $\graph$ is defined via an the extension of $\gelem$ to the corresponding element in $\Perm{\nodes}$ that leaves nodes $n \in \nodes \setminus N$ invariant,
+    First consider the permutation group acting on a set of nodes $N \subseteq \nodes$ denoted $\Perm{N}$ to be the set of all bijective maps $\gep$ from $N$ to $N$.
+    \[ \Perm{N} = \bc{\gep \mid \gep : N \to N} \]
+    The action of $\gep \in \Perm{N}$ on a causal structure $\graph$ is defined via an the extension of $\gep$ to the corresponding element in $\Perm{\nodes}$ that leaves nodes $n \in \nodes \setminus N$ invariant,
     \begin{align*}
-    \action{\graph} &\defined \br{\action{\nodes}, \action{\edges}} \\
-    \action{\nodes} &\defined \bc{\action{n} \mid n \in \nodes} = \nodes \\
-    \action{\edges} &\defined \bc{\action{e} \mid e \in \edges}
+    \gep\bs{\graph} &\defined \br{\gep\bs{\nodes}, \gep\bs{\edges}} \\
+    \gep\bs{\nodes} &\defined \bc{\gep\bs{n} \mid n \in \nodes} = \nodes \\
+    \gep\bs{\edges} &\defined \bc{\gep\bs{e} \mid e \in \edges}
     \end{align*}
-    To motivate a more general treatment of such symmetries, consider the Triangle Scenario of \cref{fig:triangle_scenario}. Due to the rotational and reflective symmetries of the Triangle Scenario, any permutation $\gelem \in \Perm{\nodes_O}$ of the observable nodes $\nodes_O = \bc{A, B, C}$ creates a new causal structure $\action{\graph}$ that is \textit{equivalent} to $\graph$ up to a relabeling of \textit{latent} nodes. By construction, any valid compatibility inequality $I_{\mscenario}$ for the marginal scenario $\mscenario = \bc{V_1, \ldots, V_k}$ is \textit{independent} of the labeling of latent nodes. Therefore applying $\gelem$ to all distributions in $I_{\mscenario}$ yields $\action{I_{\mscenario}} \defined \action{I}_{\action{\mscenario}}$, another valid compatibility inequality for the permuted marginal scenario $\action{\mscenario}$ defined as,
-    \[ \action{\mscenario} = \bc{\action{V_1}, \ldots, \action{V_k}} \]
+    To motivate a more general treatment of such symmetries, consider the Triangle Scenario of \cref{fig:triangle_scenario}. Due to the rotational and reflective symmetries of the Triangle Scenario, any permutation $\gep \in \Perm{\nodes_O}$ of the observable nodes $\nodes_O = \bc{A, B, C}$ creates a new causal structure $\gep\bs{\graph}$ that is \textit{equivalent} to $\graph$ up to a relabeling of \textit{latent} nodes. By construction, any valid compatibility inequality $I_{\mscenario}$ for the marginal scenario $\mscenario = \bc{V_1, \ldots, V_k}$ is \textit{independent} of the labeling of latent nodes. Therefore applying $\gep$ to all distributions in $I_{\mscenario}$ yields $\gep\bs{I_{\mscenario}} \defined \gep\bs{I}_{\gep\bs{\mscenario}}$, another valid compatibility inequality for the permuted marginal scenario $\gep\bs{\mscenario}$ defined as,
+    \[ \gep\bs{\mscenario} = \bc{\gep\bs{V_1}, \ldots, \gep\bs{V_k}} \]
     % \begin{example}
     %     \todo[TC]{Above trivial example.}
     %     Consider the marginal scenario $V_{\bs{4}} = \bc{\bc{A,B,C}, \bc{A}, \bc{B}, \bc{C}}$ and the compatibility inequality $I_{\bc{ABC, A, B, C}}$ for the Triangle Scenario in \cref{fig:triangle_scenario} with the following form,
     %     \[ \prob[ABC][002]\prob[ABC][003] \leq \prob[A][0]\prob[C][3] \]
-    %     Now consider $\gelem = \bc{A \to A, B \to C, C \to B}$. Since $\action{\graph} = \graph$, $\action{I_{\mscenario}}$ is also a valid compatibility inequality,
+    %     Now consider $\gep = \bc{A \to A, B \to C, C \to B}$. Since $\gep\bs{\graph} = \graph$, $\gep\bs{I_{\mscenario}}$ is also a valid compatibility inequality,
     % \end{example}
-    More generically, any permutation $\gelem$ that preserves the graphical structure of $\graph$ can be applied to $I_{\mscenario}$ to generate new and valid compatibility inequalities. Specifically this alludes to the \term{graph automorphism group} $\Aut{\graph}$ of $\graph$.
-    \[ \Aut{\graph} \defined \bc{\gelem \in \Perm{\nodes} \mid \action{\graph} = \graph} \]
-    In general, $\Aut{\graph}$ could include elements $\gelem$ that map latent nodes to observable nodes\footnote{In practice however, it is rare to be considering a causal structure $\graph$ where some latent node $n_L \in \nodes_L$ takes on an role indistinguishable from some observable node $n_O \in \nodes_O$, so this won't be an issue.}. This behaviour is \textit{undesired} for causal inference where the latent nodes will never appear in a marginal scenario. Instead, the subgroup of $\Aut{\graph}$ that never maps observable nodes to latent nodes is the \term{set-wise stabilizer} of $\Aut{\graph}$ for $\nodes_O$ and will be expressed with a subscript.
+    More generically, any permutation $\gep$ that preserves the graphical structure of $\graph$ can be applied to $I_{\mscenario}$ to generate new and valid compatibility inequalities. Specifically this alludes to the \term{graph automorphism group} $\Aut{\graph}$ of $\graph$.
+    \[ \Aut{\graph} \defined \bc{\gep \in \Perm{\nodes} \mid \gep\bs{\graph} = \graph} \]
+    In general, $\Aut{\graph}$ could include elements $\gep$ that map latent nodes to observable nodes\footnote{In practice however, it is rare to be considering a causal structure $\graph$ where some latent node $n_L \in \nodes_L$ takes on an role indistinguishable from some observable node $n_O \in \nodes_O$, so this won't be an issue.}. This behaviour is \textit{undesired} for causal inference where the latent nodes will never appear in a marginal scenario. Instead, the subgroup of $\Aut{\graph}$ that never maps observable nodes to latent nodes is the \term{set-wise stabilizer} of $\Aut{\graph}$ for $\nodes_O$ and will be expressed with a subscript.
 
     \begin{definition}
         The \term{causal symmetry group} for a causal structure $\graph$ is the graph automorphism subgroup that stabilizes the observable nodes.
-        \[ \Aut[\nodes_O]{\graph} = \bc{\gelem \in \Perm{\nodes} \mid \action{\graph} = \graph, \forall n \in \nodes_O :\action{n} \in \nodes_O} \]
-        Given any compatibility inequality $I_{\mscenario}$, each element $\gelem$ of the causal symmetry group defines a new valid compatibility inequality $\action{I_{\mscenario}} = \action{I}_{\action{\mscenario}}$.
+        \[ \Aut[\nodes_O]{\graph} = \bc{\gep \in \Perm{\nodes} \mid \gep\bs{\graph} = \graph, \forall n \in \nodes_O :\gep\bs{n} \in \nodes_O} \]
+        Given any compatibility inequality $I_{\mscenario}$, each element $\gep$ of the causal symmetry group defines a new valid compatibility inequality $\gep\bs{I_{\mscenario}} = \gep\bs{I}_{\gep\bs{\mscenario}}$.
     \end{definition}
 
     The inflation technique discussed in \cref{sec:summary_inflation} allows one to derive compatibility inequalities for a causal structure $\graph$ by considering the marginal problem over the pre-injectable sets of $\graph'$ denoted $\PreInj[\graph]{\graph'} = \bc{V_1, \ldots, V_k}$. It is important to recall that due to \cref{lem:inflation}, inequalities $I'$ for $\graph'$ are \textit{only} transferable to inequalities $I$ for $\graph$ if $I'$ is in terms of distributions over the pre-injectable sets $I'_{\PreInj[\graph]{\graph'}}$. As a consequence of this observation, we need to consider a subgroup of the causal symmetry group that preserves the pre-injectable sets,
-    \[ \action{\PreInj[\graph]{\graph'}} = \PreInj[\graph]{\graph'} \eq \label{eq:preserved_preinj} \]
+    \[ \gep\bs{\PreInj[\graph]{\graph'}} = \PreInj[\graph]{\graph'} \eq \label{eq:preserved_preinj} \]
 
     \begin{definition}
-        The \term{restricted causal symmetry group} $\Phi$ for a causal structure $\graph$ and a marginal scenario $\mscenario$ is the graph automorphism subgroup that stabilizes the marginal scenario $\mscenario$.
-        \[ \Phi \defined \Aut[\mscenario]{\graph} = \bc{\gelem \in \Perm{\nodes} \mid \action{\graph} = \graph, \forall V \in \mscenario : \action{V} \in \mscenario} \]
-        Given any compatibility inequality $I_{\mscenario}$ each element $\gelem$ of the causal symmetry group defines a new valid compatibility inequality $\action{I_{\mscenario}} = \action{I}_{\mscenario}$ over the \textit{same} marginal context $\mscenario$.
+        The \term{restricted causal symmetry group} $\gp$ for a causal structure $\graph$ and a marginal scenario $\mscenario$ is the graph automorphism subgroup that stabilizes the marginal scenario $\mscenario$.
+        \[ \gp \defined \Aut[\mscenario]{\graph} = \bc{\gep \in \Perm{\nodes} \mid \gep\bs{\graph} = \graph, \forall V \in \mscenario : \gep\bs{V} \in \mscenario} \]
+        Given any compatibility inequality $I_{\mscenario}$ each element $\gep$ of the causal symmetry group defines a new valid compatibility inequality $\gep\bs{I_{\mscenario}} = \gep\bs{I}_{\mscenario}$ over the \textit{same} marginal context $\mscenario$.
     \end{definition}
 
-    The restricted causal symmetry group for the pre-injectable sets of an inflation $\graph'$ is the ideal symmetry group for use with the inflation technique. If one obtains a particular inequality $I'_{\PreInj[\graph]{\graph'}}$ as well as the restricted causal symmetry group $\Phi$, an entire family of valid compatibility inequalities are also obtained.
-    \[ \bc{\action{I'}_{\PreInj[\graph]{\graph'}} \mid \gelem \in \Phi} \text{ where } \Phi = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \]
-    We have obtained $\Phi$ for the inflated triangle scenario \cref{fig:inflated_triangle_scenario}. $\Phi$ is an order $48$ group with the following $4$ generators:
+    The restricted causal symmetry group for the pre-injectable sets of an inflation $\graph'$ is the ideal symmetry group for use with the inflation technique. If one obtains a particular inequality $I'_{\PreInj[\graph]{\graph'}}$ as well as the restricted causal symmetry group $\gp$, an entire family of valid compatibility inequalities are also obtained.
+    \[ \bc{\gep\bs{I'}_{\PreInj[\graph]{\graph'}} \mid \gep \in \gp} \text{ where } \gp = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \]
+    We have obtained $\gp$ for the inflated triangle scenario \cref{fig:inflated_triangle_scenario}. $\gp$ is an order $48$ group with the following $4$ generators:
     \begin{equation*}
     \begin{aligned}[c]
-    &\hspace{1mm}\gelem_1 \\
+    &\hspace{1mm}\gep_1 \\
     A_1 &\to A_4 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_1 \\B_1 &\to B_4 \\B_2 &\to B_3 \\B_3 &\to B_2 \\B_4 &\to B_1 \\C_1 &\to C_4 \\C_2 &\to C_3 \\C_3 &\to C_2 \\C_4 &\to C_1
     \end{aligned}
     \quad
     \begin{aligned}[c]
-    &\hspace{1mm}\gelem_2 \\
+    &\hspace{1mm}\gep_2 \\
     A_1 &\to A_1 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_4 \\B_1 &\to C_1 \\B_2 &\to C_3 \\B_3 &\to C_2 \\B_4 &\to C_4 \\C_1 &\to B_1 \\C_2 &\to B_3 \\C_3 &\to B_2 \\C_4 &\to B_4
     \end{aligned}
     \quad
     \begin{aligned}[c]
-    &\hspace{1mm}\gelem_3 \\
+    &\hspace{1mm}\gep_3 \\
     A_1 &\to C_1 \\A_2 &\to C_2 \\A_3 &\to C_3 \\A_4 &\to C_4 \\B_1 &\to A_1 \\B_2 &\to A_2 \\B_3 &\to A_3 \\B_4 &\to A_4 \\C_1 &\to B_1 \\C_2 &\to B_2 \\C_3 &\to B_3 \\C_4 &\to B_4
     \end{aligned}
     \quad
     \begin{aligned}[c]
-    &\hspace{1mm}\gelem_4 \\
+    &\hspace{1mm}\gep_4 \\
     A_1 &\to A_1 \\A_2 &\to A_2 \\A_3 &\to A_3 \\A_4 &\to A_4 \\B_1 &\to B_2 \\B_2 &\to B_1 \\B_3 &\to B_4 \\B_4 &\to B_3 \\C_1 &\to C_3 \\C_2 &\to C_4 \\C_3 &\to C_1 \\C_4 &\to C_2
     \end{aligned}
     \end{equation*}
@@ -931,45 +1004,45 @@
     %  (0, 2, 1, 3, 8, 10, 9, 11, 4, 6, 5, 7),
     %  (8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 6, 7),
     %  (0, 1, 2, 3, 5, 4, 7, 6, 10, 11, 8, 9))
-    It is easy to verify that $\gelem_1, \gelem_2, \gelem_3, \gelem_4$ are all automorphisms of the inflated Triangle Scenario $\graph'$ of \cref{fig:inflated_triangle_scenario}. Moreover they stabilize the observable nodes, and the map pre-injectable sets of \cref{eq:pre-injectable_triangle_scenario} to the pre-injectable sets. Finally, in the Triangle Scenario we have that,
-    \[ \Phi = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \sim \Aut[\nodes_O]{\graph} \]
-    To see this, $\gelem_1$ and $\gelem_4$ become the identity element $\mathbb{I}$ in $\Aut[\nodes_O]{\graph}$ upon removal of the copy-index, leaving $\gelem_2$ to generate reflections and $\gelem_3$ to generate rotations.
+    It is easy to verify that $\gep_1, \gep_2, \gep_3, \gep_4$ are all automorphisms of the inflated Triangle Scenario $\graph'$ of \cref{fig:inflated_triangle_scenario}. Moreover they stabilize the observable nodes, and the map pre-injectable sets of \cref{eq:pre-injectable_triangle_scenario} to the pre-injectable sets. Finally, in the Triangle Scenario we have that,
+    \[ \gp = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \sim \Aut[\nodes_O]{\graph} \]
+    To see this, $\gep_1$ and $\gep_4$ become the identity element $\mathbb{I}$ in $\Aut[\nodes_O]{\graph}$ upon removal of the copy-index, leaving $\gep_2$ to generate reflections and $\gep_3$ to generate rotations.
     \subsection{Symmetric Marginal Polytope}
     Up until this point, we have discussed how new inequalities can be created from known ones by exploiting causal symmetry. Although very useful, we divert our attention to finding \textit{symmetric} inequalities themselves.
-    \[ \forall \gelem \in \Phi :  \action{I_{\mscenario}} = I_{\mscenario} \]
-    In order to do this, we must first define how elements $\gelem \in \Phi$ act on marginal outcomes $O_{\mscenario}$.
+    \[ \forall \gep \in \gp :  \gep\bs{I_{\mscenario}} = I_{\mscenario} \]
+    In order to do this, we must first define how elements $\gep \in \gp$ act on marginal outcomes $O_{\mscenario}$.
     \begin{definition}
-        Let $\jointvar = \bc{v_1, \ldots, v_k}$ be a collection of random variables and let $\gelem \in \Perm{\jointvar}$. $\jointvar$ is said to be \term{label invariant with respect to $\gelem$} if the outcome labels for each variable $v \in \jointvar$ are unchanged under the action of $\gelem$.
-        \[ \forall v \in \jointvar : O_{v} = O_{\action{v}} \]
+        Let $\jointvar = \bc{v_1, \ldots, v_k}$ be a collection of random variables and let $\gep \in \Perm{\jointvar}$. $\jointvar$ is said to be \term{label invariant with respect to $\gep$} if the outcome labels for each variable $v \in \jointvar$ are unchanged under the action of $\gep$.
+        \[ \forall v \in \jointvar : O_{v} = O_{\gep\bs{v}} \]
         Label invariance is a prerequisite for any kind of symmetry amoung random variables.
     \end{definition}
     \begin{definition}
-        Let $\jointvar = \br{v_1, \ldots v_k}$ be a collection of random variables along with a specific outcome $m \in \Out{V}$ where $V \subseteq \jointvar$. The action of $\gelem \in \Perm{\jointvar}$ on $m$ is a new outcome $\action{m} \in \Out{\action{V}}$ over $\action{V} \subseteq \jointvar$ defined as follows,
-        \[ \forall v \in V : \br{\action{m}}\br{\action{v}} \defined m \br{v} \]
-        The idea being that $\gelem$ modifies $m$ in such a way that permutes its domain while leaving its range invariant.
+        Let $\jointvar = \br{v_1, \ldots v_k}$ be a collection of random variables along with a specific outcome $m \in \Out{V}$ where $V \subseteq \jointvar$. The action of $\gep \in \Perm{\jointvar}$ on $m$ is a new outcome $\gep\bs{m} \in \Out{\gep\bs{V}}$ over $\gep\bs{V} \subseteq \jointvar$ defined as follows,
+        \[ \forall v \in V : \br{\gep\bs{m}}\br{\gep\bs{v}} \defined m \br{v} \]
+        The idea being that $\gep$ modifies $m$ in such a way that permutes its domain while leaving its range invariant.
     \end{definition}
     \begin{example}
-        Consider the outcome $m = \bc{A \mapsto 0, B \mapsto 1, C \mapsto 2} \in \Out{\bc{A,B,C}}$ where all variables have $4$ possible outcomes $O_A = O_B = O_C = \bc{0,1,2,3}$ and the permutation $\gelem = \bc{A \to D, B \to C, C \to B, D \to A}$.
-        The \textit{action} of $\gelem$ on $m$ is as follows,
+        Consider the outcome $m = \bc{A \mapsto 0, B \mapsto 1, C \mapsto 2} \in \Out{\bc{A,B,C}}$ where all variables have $4$ possible outcomes $O_A = O_B = O_C = \bc{0,1,2,3}$ and the permutation $\gep = \bc{A \to D, B \to C, C \to B, D \to A}$.
+        The \textit{action} of $\gep$ on $m$ is as follows,
         \begin{align*}
-            \action{m} &= \action{\bc{A \mapsto m\br{A}, B \mapsto m\br{B}, C \mapsto m\br{C}}} \\
-            &= \bc{\action{A} \mapsto m\br{A}, \action{B} \mapsto m\br{B}, \action{C} \mapsto m\br{C}} \\
+            \gep\bs{m} &= \gep\bs{\bc{A \mapsto m\br{A}, B \mapsto m\br{B}, C \mapsto m\br{C}}} \\
+            &= \bc{\gep\bs{A} \mapsto m\br{A}, \gep\bs{B} \mapsto m\br{B}, \gep\bs{C} \mapsto m\br{C}} \\
             &= \bc{D \mapsto m\br{A}, C \mapsto m\br{B}, B \mapsto m\br{C}} \\
             &= \bc{D \mapsto 0, C \mapsto 1, B \mapsto 2} \\
             &= \bc{B \mapsto 2, C \mapsto 1, D \mapsto 0}
         \end{align*}
-        Evidently, $\action{m} \in \Out{\bc{B, C, D}}$.
+        Evidently, $\gep\bs{m} \in \Out{\bc{B, C, D}}$.
     \end{example}
 
-    Through repeated action of $\gelem \in \Phi$ on marginal outcomes $m \in \Out{\mscenario}$ and joint outcomes $j \in \Out{\jointvar}$, one can define group orbits of $\Phi$ in $\Out{\mscenario}$ and $\Out{\jointvar}$.
+    Through repeated action of $\gep \in \gp$ on marginal outcomes $m \in \Out{\mscenario}$ and joint outcomes $j \in \Out{\jointvar}$, one can define group orbits of $\gp$ in $\Out{\mscenario}$ and $\Out{\jointvar}$.
     \begin{align*}
-        \Orb[\Phi]{m} &\defined \bc{\action{m} \mid \gelem \in \Phi} \\
-        \Orb[\Phi]{j} &\defined \bc{\action{j} \mid \gelem \in \Phi}
+        \Orb[\gp]{m} &\defined \bc{\gep\bs{m} \mid \gep \in \gp} \\
+        \Orb[\gp]{j} &\defined \bc{\gep\bs{j} \mid \gep \in \gp}
     \end{align*}
 
     \begin{definition}
-        The \term{symmetric incidence matrix} $M_{\Phi}$ for a marginal scenario $\mscenario$ and a particular restricted causal symmetry $\Phi$ is a contracted version of the incidence matrix $M$ for $\mscenario$. Each row of $M_{\Phi}$ corresponds to a marginal orbit $\Orb[\Phi]{m}$. Analogously each column of $M_{\Phi}$ corresponds to a joint orbit $\Orb[\Phi]{j}$. The entries of $M_{\Phi}$ are integers and correspond to summing over the rows and columns of $M$ that belong to each orbit.
-        \[ M_{\Phi}\bs{\Orb[\Phi]{m}, \Orb[\Phi]{j}} = \sum_{\substack{j' \in \Orb[\Phi]{j} \\ m' \in \Orb[\Phi]{m}}} M\bs{m',j'} \]
+        The \term{symmetric incidence matrix} $M_{\gp}$ for a marginal scenario $\mscenario$ and a particular restricted causal symmetry $\gp$ is a contracted version of the incidence matrix $M$ for $\mscenario$. Each row of $M_{\gp}$ corresponds to a marginal orbit $\Orb[\gp]{m}$. Analogously each column of $M_{\gp}$ corresponds to a joint orbit $\Orb[\gp]{j}$. The entries of $M_{\gp}$ are integers and correspond to summing over the rows and columns of $M$ that belong to each orbit.
+        \[ M_{\gp}\bs{\Orb[\gp]{m}, \Orb[\gp]{j}} = \sum_{\substack{j' \in \Orb[\gp]{j} \\ m' \in \Orb[\gp]{m}}} M\bs{m',j'} \]
     \end{definition}
 
     \subsection{Results}
@@ -1076,7 +1149,7 @@
     \section{Parametrization of Quantum States \& Measurements}
     \label{sec:param_quantum_states}
     Throughout \cref{sec:optimizations}, we utilize a variety of parameterizations of quantum states and measurements in order to generate quantum-accessible probability distributions. There are numerous techniques that can used when parameterizing quantum states and measurements \cite{Petz_2015, Hedemann_2013,Spengler_2010_Unitary,Fujii_2005,James_2001} with applications \todo[TC]{Finish this sentence}. For our purposes, we need to parameterize the space of quantum-accessible distributions $\prob[\mathcal{Q}]$ that are \textit{realized} on the Triangle Scenario. We have implemented $\prob[\mathcal{Q}]$ under the following description.
-    \[ \prob[ABC]\br{abc} = \Tr\bs{\Omega^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \Omega M_{A,a}\otimes M_{B,b} \otimes M_{C,c}} \eq \label{eq:triangle_quantum_distributions} \]
+    \[ \prob[ABC]\br{abc} = \Tr\bs{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm M_{A,a}\otimes M_{B,b} \otimes M_{C,c}} \eq \label{eq:triangle_quantum_distributions} \]
 
     \subsection{Quantum States}
     The bipartite states $\br{\rho_{AB}, \rho_{BC}, \rho_{CA}}$ of \cref{eq:triangle_quantum_distributions} were taken to be two-qubit density matrices acting on $\Hilb^2 \otimes \Hilb^2$.\footnote{We also considered qutrit $\Hilb^3$ qutit $\Hilb^4$ states. However for $6$ $d$-dimensional $\Hilb^d$ states, the joint density matrix $\rho$ acts on $\br{\Hilb^d}^{\otimes 6}$ making it a $\br{d^6, d^6}$ matrix with $d^{12}$ entries. Computationally only $d = 2$ was feasible for our optimization tasks.} The space of all such states corresponds to the space of all $4\times 4$ positive semi-definite hermitian matrices with unitary trace. Throughout this section, we refer to these bipartite states simply as $\rho$ unless otherwise indicated. There are three distinct techniques that we have considered.
@@ -1092,7 +1165,7 @@
     Finally in cases where we wish to restrict ourselves to \textit{pure} bipartite states $\rho = \ket{\psi}\bra{\psi}$, we have the luxury to use a \term{Schmidt Parametrization}. This is accomplished via a Schmidt decomposition $\ket{\psi_{AB}} = \sum_{i}\sigma_i \ket{i_A}\otimes\ket{i_B}$ where normalization demands that $\sum_{i} \sigma_i^2 = 1$, $\bc{\ket{i_A}}$ and $\bc{\ket{i_B}}$ are orthonormal bases for $\Hilb_A$ and $\Hilb_B$ respectively \cite{Neilsen_Chaung_2011}. Additionally for qubit sources we can \textit{choose} our orthonormal bases to be the computational basis $\bc{\ket{0}, \ket{1}}$ and write,
     \[ \ket{\psi} = \cos^2\br{\lambda_1} \ket{0} \otimes \ket{0} + \sin^2\br{\lambda_1} \ket{1} \otimes \ket{1} \]
     Where only $1$ real-valued parameter $\lambda = \bc{\lambda_1}$ is required to parameterize all pure states up to local unitaries. Pure states are also attractive due to their computational advantage in computing \cref{eq:triangle_quantum_distributions}. If each state $\rho$ is decomposable into $\ket{\psi}\bra{\psi}$, then \cref{eq:triangle_quantum_distributions} can be written as,
-    \[ \prob[ABC]\br{abc} = \bramidket{\psi_{AB}\psi_{BC}\psi_{CA}}{\Omega M_{A,a}\otimes M_{B,b} \otimes M_{C,c} \Omega^\intercal}{\psi_{AB}\psi_{BC}\psi_{CA}} \eq \label{eq:pure_state_quantum_triangle} \]
+    \[ \prob[ABC]\br{abc} = \bramidket{\psi_{AB}\psi_{BC}\psi_{CA}}{\netperm M_{A,a}\otimes M_{B,b} \otimes M_{C,c} \netperm^\intercal}{\psi_{AB}\psi_{BC}\psi_{CA}} \eq \label{eq:pure_state_quantum_triangle} \]
     Avoiding the expensive matrix multiplications of \cref{eq:triangle_quantum_distributions}.
     \subsection{Measurements}
     With full generality, we consider a measurement $M$ to be a \term{projective-operator valued measure (POVM)} represented by a set of hermitian, positive semi-definite operators $\bc{M_i}_{i=1,\ldots,k}$\footnote{The $i$-th element of $M$ is referenced using a subscript $M_i$. The set of measurement elements for a particular party $X$ will be written $M_X$. When both party and element are to be referenced, we write $M_{X,i}$.} acting on $\Hilb^d$ summing to the identity,
@@ -1117,26 +1190,26 @@
     Specifically, the projective property each $M_i$ means that the global phase of $U$ is completely arbitrary; one only needs to consider parameterizing unitaries up to global phase \cref{eq:fast_spengler_unitary_gp}. This method was inspired by the \textit{measurement seeding} method of P{\'{a}}l and V{\'{e}}rtesi's \cite{Pal_2010} iterative optimization technique.
 
     Analogously to \cref{eq:pure_state_quantum_triangle}, projective measurements offer considerable computational advantage as \cref{eq:triangle_quantum_distributions} can be rewritten as,
-    \[ \prob[ABC]\br{abc} = \bramidket{m_{A,a}m_{B,b}m_{C,c}}{\Omega^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \Omega}{m_{A,a}m_{B,b}m_{C,c}} \eq \label{eq:pure_meas_quantum_triangle} \]
+    \[ \prob[ABC]\br{abc} = \bramidket{m_{A,a}m_{B,b}m_{C,c}}{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm}{m_{A,a}m_{B,b}m_{C,c}} \eq \label{eq:pure_meas_quantum_triangle} \]
 
     \subsection{Network Permutation Matrix}
     \begin{figure}
         \centering
         \includegraphics[trim={1cm 1.2cm 1.0cm 1cm},clip,width=0.4\textwidth]{../figures/perm_mtrx.pdf}
-        \caption{The network permutation matrix $\Omega$ for $\br{\Hilb^2}^{\otimes 6}$ realized on the triangle scenario. Black represents a value of $1$ and $0$ otherwise.}
+        \caption{The network permutation matrix $\netperm$ for $\br{\Hilb^2}^{\otimes 6}$ realized on the triangle scenario. Black represents a value of $1$ and $0$ otherwise.}
         \label{fig:perm_mtrx}
     \end{figure}
-    Finally, we introduce the \term{network permutation matrix} $\Omega$ for the Triangle Scenario of \cref{fig:triangle_scenario}. For bipartite qubit states, $\Omega$ becomes a $64\times64$ bit-wise matrix that acts on the measurements $M$ and is depicted in \cref{fig:perm_mtrx}. To illuminate its necessity, consider \cref{eq:triangle_quantum_distributions} without $\Omega$.
+    Finally, we introduce the \term{network permutation matrix} $\netperm$ for the Triangle Scenario of \cref{fig:triangle_scenario}. For bipartite qubit states, $\netperm$ becomes a $64\times64$ bit-wise matrix that acts on the measurements $M$ and is depicted in \cref{fig:perm_mtrx}. To illuminate its necessity, consider \cref{eq:triangle_quantum_distributions} without $\netperm$.
     \begin{align*}
     \prob[ABC]\br{abc} &\stackrel{?}{=} \Tr\bs{\br{\rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA}} \br{M^a_{A}\otimes M^b_{B} \otimes M^c_{C}}}\\
     &= \Tr\bs{\br{\rho_{AB}M^a_{A}}\otimes\br{\rho_{BC}M^b_{B}}\otimes\br{\rho_{CA}M^c_{C}}}\\
     &= \Tr\br{\rho_{AB}M^a_{A}}\Tr{\br{\rho_{BC}M^b_{B}}}\Tr{\br{\rho_{CA}M^c_{C}}}\\
     &= \prob[A\mid \rho_{AB}]\br{a}\prob[B\mid \rho_{BC}]\br{b}\prob[C\mid \rho_{CA}]\br{c}
     \end{align*}
-    On an operational level, this corresponds to $A$ making a measurement on \textit{both} subsystems of $\rho_{AB}$ and \textit{not} on any component of $\rho_{CA}$. This is analogously troubling for $B$ and $C$ as well. The network permutation matrix $\Omega$ corresponds to \textit{aligning} the underlying $6$-qubit joint state $\rho$ with the joint measurement $M$. To understand its effect, consider its effect on $6$-qubit pure state $\ket{q_1} \otimes \cdots \otimes \ket{q_6} = \ket{q_1q_2q_3q_4q_5q_6}$ where $\forall i : \ket{q_i} \in \Hilb^2$.
-    \[ \Omega\ket{q_1q_2q_3q_4q_5q_6} = \ket{q_2q_3q_4q_5q_6q_1} \]
-    $\Omega$ acts as a \textit{partial transpose} on $\br{\Hilb^2}^{\otimes 6}$ by shifting the underlying tensor structure one subsystem to the ``left''. It is uniquely defined by its action on all $2^6$ orthonormal basis elements of $\br{\Hilb^2}^{\otimes 6}$,
-    \[ \Omega \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
+    On an operational level, this corresponds to $A$ making a measurement on \textit{both} subsystems of $\rho_{AB}$ and \textit{not} on any component of $\rho_{CA}$. This is analogously troubling for $B$ and $C$ as well. The network permutation matrix $\netperm$ corresponds to \textit{aligning} the underlying $6$-qubit joint state $\rho$ with the joint measurement $M$. To understand its effect, consider its effect on $6$-qubit pure state $\ket{q_1} \otimes \cdots \otimes \ket{q_6} = \ket{q_1q_2q_3q_4q_5q_6}$ where $\forall i : \ket{q_i} \in \Hilb^2$.
+    \[ \netperm\ket{q_1q_2q_3q_4q_5q_6} = \ket{q_2q_3q_4q_5q_6q_1} \]
+    $\netperm$ acts as a \textit{partial transpose} on $\br{\Hilb^2}^{\otimes 6}$ by shifting the underlying tensor structure one subsystem to the ``left''. It is uniquely defined by its action on all $2^6$ orthonormal basis elements of $\br{\Hilb^2}^{\otimes 6}$,
+    \[ \netperm \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
     \subsection{Degeneracy}
     \todo[TC]{Discuss local unitary degeneracy}
     \section{Convex Parametrization of Finite Probability Distributions}
