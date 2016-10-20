@@ -1,0 +1,54 @@
+\tikzstyle{vertex} = [fill,shape=circle, inner sep=2pt, node distance=85pt]
+\tikzstyle{elabel} = [rounded corners=1pt, fill,fill opacity=0.4, shape=rectangle, inner sep=4pt, node distance=85pt]
+\tikzstyle{weight} = [shape=circle, fill=white, draw, inner sep=1pt, text=black]
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+\begin{tikzpicture}
+    \pgfmathsetmacro{\spacing}{1.3};
+    \pgfmathsetmacro{\pad}{0.2};
+    \draw (-\spacing, \spacing) node[vertex, label=above:$m_4$](m4){};
+    \draw (0, \spacing)         node[vertex, label=above:$m_5$](m5){};
+    \draw (\spacing, \spacing)  node[vertex, label=above:$m_2$](m2){};
+    \draw (-\spacing, 0)        node[vertex, label=below:$m_{12}$](m12){};
+    \draw (0, 0)                node[vertex, label=below:$m_{11}$](m11){};
+    \draw (\spacing, 0)         node[vertex, label=below:$m_{10}$](m10){};
+    \draw (-2*\spacing, 0)      node[vertex, label=below:$m_{6}$](m6){};
+
+    \draw (1*\spacing, 2*\spacing)  node[red, elabel, label=above:$j_{4}$](j4){};
+    \draw (-2*\spacing, 2*\spacing) node[green, elabel, label=above:$j_{6}$](j6){};
+    \draw (-1*\spacing, 2*\spacing) node[yellow, elabel, label=above:$j_{8}$](j8){};
+    \draw (0*\spacing, 2*\spacing)  node[blue, elabel, label=above:$j_{5}$](j5){};
+
+    \draw (-3*\spacing/2, \pad)        node[green, weight]{$1$};
+    \draw (-\spacing+\pad, \spacing/2) node[yellow, weight]{$2$};
+    \draw (0+\pad, \spacing/2)         node[blue, weight]{$1$};
+    \draw (+\spacing+\pad, \spacing/2) node[red, weight]{$2$};
+    \begin{pgfonlayer}{background}
+    \draw [rounded corners,fill, fill opacity=0.4, color=green]
+        ($ (m6) + (-\pad,+\pad) $)--
+        ($ (m6) + (-\pad,-\pad) $)--
+        ($ (m12) + (+\pad,-\pad) $)--
+        ($ (m12) + (+\pad,+\pad) $)--
+        cycle;
+    \draw [rounded corners,fill, fill opacity=0.4, color=blue]
+        ($ (m5) + (-\pad,+\pad) $)--
+        ($ (m5) + (+\pad,+\pad) $)--
+        ($ (m11) + (+\pad,-\pad) $)--
+        ($ (m11) + (-\pad,-\pad) $)--
+        cycle;
+    \draw [rounded corners,fill, fill opacity=0.4, color=yellow]
+        ($ (m4) + (-\pad,+\pad) $)--
+        ($ (m4) + (+\pad,+\pad) $)--
+        ($ (m12) + (+\pad,-\pad) $)--
+        ($ (m12) + (-\pad,-\pad) $)--
+        cycle;
+    \draw [rounded corners,fill, fill opacity=0.4, color=red]
+        ($ (m2) + (-\pad,+\pad) $)--
+        ($ (m2) + (+\pad,+\pad) $)--
+        ($ (m10) + (+\pad,-\pad) $)--
+        ($ (m10) + (-\pad,-\pad) $)--
+        cycle;
+    \end{pgfonlayer}
+\end{tikzpicture}
