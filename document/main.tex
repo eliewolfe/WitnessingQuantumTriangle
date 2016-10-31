@@ -54,8 +54,8 @@
 \newcommand{\go}{\Omega}
 \newcommand{\mscenario}{\mathcal{M}}
 \newcommand{\jointvar}{\mathcal{J}}
-\newcommand{\mset}{\gamma}
-\newcommand{\extmset}{\Gamma}
+% \newcommand{\mset}{\gamma}
+% \newcommand{\extmset}{\Gamma}
 \newcommand{\supp}[1]{\si\br{#1}}
 \newcommand{\kone}{\mathbf{1}}
 \newcommand{\kzer}{\textcolor{gray}{0}}
@@ -66,6 +66,7 @@
 \newcommand{\ts}{{\graph}}
 % When I introduce a new term or definition
 \newcommand{\term}[1]{\textcolor{Mahogany}{\textbf{#1}}}
+\newcommand{\tcdot}{} % Tentative cdot, not sure if I want to keep dots
 
 % === Mathematical operators that are denoted with words ===
 \newcommand{\setoperator}[1]{%
@@ -88,8 +89,9 @@
 \setoperator{Aut} % graph automorphism
 \setoperator{Orb} % Group Orbits
 \setoperator{Perm} % Permutation group
+\newcommand{\PermM}[1]{\La_{#1}} % Permutation matrix
 % \setoperator{Out} % Outcome space
-\newcommand{\Sect}[1]{\s{S}\br{#1}} % Outcome space
+\newcommand{\Events}[1]{\s{E}\br{#1}} % Set of events
 \newcommand{\Dom}[1]{\s{D}\br{#1}} % Domian
 % \setoperator{Dom} % Domian
 % \setoperator{Dom} % Domian
@@ -194,71 +196,59 @@
 
     Heretofore, our discussions of compatibility, contextuality and the marginal problem have be completely general, making no reference to the nature of the outcomes of the random variables $\jointvar$; whether they be discrete or continuous, finite or unbounded, or otherwise. \todo[TC]{It is entirely possible to obtain complete solutions to the marginal problem for continuous and unbounded measure spaces using entropic inequalities. [Elaborate and reference]} In this paper we restrict our attention to finite outcomes. In particular, we will focus on marginal scenarios that are finite but have a large number of outcomes. To assist with the subsequent analysis, we recall some familiar notions of probability theory together with new terminology and notation. \\
 
-    \subsubsection{Sections}
-    To every discrete random variable $v$ there corresponds a prescribed set of \term{outcomes} $O_v$. We also define the set of all \term{sections over $v$} $\Sect{v}$\footnote{Technically $\Sect{v}$ can be called a \textit{sheaf} but we neglect to introduce that terminology here.} to be the set of all functions $s : \bc{v} \to O_v$ each representing the event that a measurement on $v$ was made where $s\br{v} \in O_v$ was observed.
-    \[ \Sect{v} \defined \bc{s : \bc{v} \to O_v} \label{eq:outcome_space} \]
-    Making the unfamiliar distinction between sections $s$ and outcomes in $O_v$ might seem pedantic. Evidently, $\Sect{v}$ and $O_v$ have a one-to-one correspondence. There is rarely any harm in referring synonymously to either as outcomes. Nonetheless, a sheaf-theoretic treatment of contextuality~\cite{Abramsky_2011} demands the distinction.
-    Specifically for this work, the distinction becomes essential for our discussion and exploit of marginal symmetries in \cref{sec:symmetry}. As a natural generalization we define the tuple sections for collection of random variables $V = \bc{v_1, \ldots, v_n}$ in a parallel manner,
-    \[ \Sect{V} \defined \bc{s: V \to O_{V} \mid \forall i : s\br{v_i} \in O_{v_i} } \eq \label{eq:outcome_space}\]
-    Each section $s$ can be compactly represented as a set of mappings over each element of $V$.
+    \subsubsection{Events}
+    To every discrete random variable $v$ there corresponds a prescribed set of \term{outcomes} $O_v$. We also define the set of all \term{events over $v$} $\Events{v}$\footnote{In the language of sheaf-theory, $\Events{v}$ is the \textit{sheaf of events}~\cite{Abramsky_2011}.} to be the set of all functions $s : \bc{v} \to O_v$ each representing the event that a measurement on $v$ was made where $s\br{v} \in O_v$ was observed.
+    \[ \Events{v} \defined \bc{s : \bc{v} \to O_v} \label{eq:outcome_space} \]
+    Evidently, $\Events{v}$ and $O_v$ have a one-to-one correspondence and this distinction can be confounding. There is rarely any harm in referring synonymously to either as outcomes. Nonetheless, a sheaf-theoretic treatment of contextuality~\cite{Abramsky_2011} demands the distinction.
+    Specifically for this work, the distinction becomes essential for our discussion and exploit of marginal symmetries in \cref{sec:symmetry}. As a natural generalization we define the event over a collection of random variables $V = \bc{v_1, \ldots, v_n}$ in a parallel manner,
+    \[ \Events{V} \defined \bc{s: V \to O_{V} \mid \forall i : s\br{v_i} \in O_{v_i} } \eq \label{eq:outcome_space}\]
+    Each event $s$ can be compactly represented as a set of mappings over each element of $V$.
     \[ s = \bc{v_1 \mapsto s\br{v_1}, \ldots, v_k \mapsto s\br{v_k}} = \bc{v_i\mapsto s\br{v_i}}_{i = 1}^{k} \]
-    The domain $\Dom{s}$ of an section $s$ is the set of random variables it valuates, i.e. if $s \in \Sect{V}$, then $\Dom{s} = V$.
+    The domain $\Dom{s}$ of an event $s$ is the set of random variables it valuates, i.e. if $s \in \Events{V}$, then $\Dom{s} = V$.
     \begin{example}
-        Let $s \in \Sect{V}$ be a section over $V$, a probability distribution $\prob[V]$ over $V$ will assign a non-negative probability $\prob[V][s]$ to $s$. Let $V = \bc{v_1, v_2}$ with each $v \in V$ having $3$ distinct outcomes $O_v = \bc{0,1,2}$. Furthermore let $f \in \Sect{V}$ be the section $\br{v_1 \mapsto 2, v_2 \mapsto 1}$. Then the following notations are interchangeable,
+        Let $s \in \Events{V}$ be an event over $V$, a probability distribution $\prob[V]$ over $V$ will assign a non-negative probability $\prob[V][s]$ to $s$. Let $V = \bc{v_1, v_2}$ with each $v \in V$ having $3$ distinct outcomes $O_v = \bc{0,1,2}$. Furthermore let $f \in \Events{V}$ be the section $\br{v_1 \mapsto 2, v_2 \mapsto 1}$. Then the following notations are interchangeable,
         \[ \prob[][s] = \prob[\Dom{s}][s] = \prob[V][s] = \prob[v_1, v_2][s] = \prob[][v_1 \mapsto s_1\br{v_1}, v_2 \mapsto s_2\br{v_2}] = \prob[][v_1 \mapsto 2, v_2 \mapsto 1] = \prob[v_1v_2][21] \]
         Each of which should be read as ``the probability that $v_1$ got outcome $2$ and $v_2$ got outcome $1$''
     \end{example}
     \begin{definition}
     \label{def:section_restriction}
-    For every $W \subseteq V$ and $s \in \Sect{V}$, the \term{restriction of $s$ onto $W$} (denoted $s|_{W} \in \Sect{W}$) is the section in $\Sect{W}$ that \textit{agrees} with each of $s$'s assignments for variables in $W$.
+    For every $W \subseteq V$ and $s \in \Events{V}$, the \term{restriction of $s$ onto $W$} (denoted $s|_{W} \in \Events{W}$) is the event in $\Events{W}$ that \textit{agrees} with each of $s$'s assignments for variables in $W$.
     \[ \forall v \in W : s|_{W}\br{v} = s\br{v} \]
     \end{definition}
     \begin{definition}
     \label{def:section_compatible}
-    The sections $s_{V} \in \Sect{V}$ and $s_{W} \in \Sect{W}$ are said to be \term{compatible} sections if they agree on their valuations of $V \cap W$. Compatibility will be denoted with the infix `$\com$'.
+    The events $s_{V} \in \Events{V}$ and $s_{W} \in \Events{W}$ are said to be \term{compatible} events if they agree on their valuations of $V \cap W$. Compatibility will be denoted with the infix `$\com$'.
     \[ s_{V} \com s_{W} \iff {s_{V}}|_{V\cap W} = {s_{W}}|_{V\cap W} \]
     \end{definition}
     \begin{definition}
     \label{def:section_extendable}
-    It $s_V \in \Sect{V}$ and $s_W \in \Sect{W}$ compatible sections and $W \subseteq V$ then $s_W$ is said to be \term{extendable} to $s_V$. Extendability will be denoted with the infix `$\ext$'.
+    It $s_V \in \Events{V}$ and $s_W \in \Events{W}$ compatible events and $W \subseteq V$ then $s_W$ is said to be \term{extendable} to $s_V$. Extendability will be denoted with the infix `$\ext$'.
     \[ s_W \ext s_V \iff s_W \com s_V, W \subseteq V \]
     Extendability is dual to the notion of a \term{restriction} of $s_V$; $s_V$ can be restricted to $s_W$ ($s_V \res s_W$) if and only if $s_W$ is extendable to $s_V$.
     \end{definition}
 
     \begin{remark}
-        The notation `$s \com t$' is used to indicate compatibility between $s \in \Sect{V}$ and $t \in \Sect{W}$ because of the following observation: $s$ and $t$ are compatible if and only if they are extensions of some outcome $r \in \Sect{V \cap W}$.
-        \[ s \com t \iff \exists r \in \Sect{V \cap W} \mid s \res r \ext t \]
+        The notation `$s \com t$' is used to indicate compatibility between $s \in \Events{V}$ and $t \in \Events{W}$ because of the following observation: $s$ and $t$ are compatible if and only if they are extensions of some event $r \in \Events{V \cap W}$.
+        \[ s \com t \iff \exists r \in \Events{V \cap W} \mid s \res r \ext t \]
         In fact $r$ is uniquely defined.
         \[ \forall v \in V \cap W : r\br{v} = s\br{v} = t\br{v} \]
     \end{remark}
 
-    \begin{definition}
-        \label{def:extendable_set}
-        The set of all extendable sections of $s \in \Sect{W}$ into $V$ is called the \term{extendable set of $s$ into $V$}.
-        \[ \Ext[V]{s} \defined \bc{g \in \Sect{V} \mid s \ext g} \subseteq \Sect{V} \]
-        The extendable set of $s$ into $V$ is the subset of sections in $\Sect{V}$ that \textit{agrees} with $s$ about valuations for variables in $W$.
-    \end{definition}
-
-    \begin{example}
-        Let $W = \bc{a, b}$ and $V = \bc{a, b, c}$ be two sets of random variables. Clearly $W \subseteq V$; a prerequisite for extendability. Further impose that the outcome labels for each variable are the same: $O_a = O_b = O_c = \bc{0,1,2}$. As an example, let $s = \bc{a \mapsto s\br{a} = 1, b \mapsto s\br{b} = 2} \in \Sect{W}$. The extendable set of $s$ into $V$ is,
-        \[ \Ext[V]{s} = \Ext[a,b,c]{a \mapsto 1, b \mapsto 2} = \bc{\bc{a \mapsto 1, b \mapsto 2, c \mapsto 0}, \bc{a \mapsto 1, b \mapsto 2, c \mapsto 1}, \bc{a \mapsto 1, b \mapsto 2, c \mapsto 2}} \]
-    \end{example}
-
-    For every marginal scenario $\mscenario = \bc{V_1, \ldots, V_k}$, it is useful to put special emphasis on the \term{joint sections} $\Sect{\jointvar}$. Similarly we define the \term{context sections} $\bc{\Sect{V} \mid V \in \mscenario}$. Finally, we elect to define the disjoint union of all context sections are called the \term{marginal sections} and by an abuse of notation we will denote this disjoint union as $\Sect{\mscenario}$.
-    \[ \Sect{\mscenario} = \coprod_{V \in \mscenario} \Sect{V} \]
-    Each marginal section $m \in \Sect{\mscenario}$ has a domain $\Dom{m} = V$ for some $V \in \mscenario$.
+    For every marginal scenario $\mscenario = \bc{V_1, \ldots, V_k}$, it is useful to put special emphasis on the \term{joint events} $\Events{\jointvar}$. Similarly we define the \term{context events} $\bc{\Events{V} \mid V \in \mscenario}$. Finally, we elect to define the disjoint union of all context events are called the \term{marginal events} and by an abuse of notation we will denote this disjoint union as $\Events{\mscenario}$.
+    \[ \Events{\mscenario} = \coprod_{V \in \mscenario} \Events{V} \]
+    Each marginal section $m \in \Events{\mscenario}$ has a domain $\Dom{m} = V$ for some $V \in \mscenario$.
     \subsubsection{Linear Programs}
     \label{sec:linear_programs}
 
     We are now fully equipped to write the marginal problem as a matrix multiplication.
     \begin{definition}
         \label{def:incidence_matrix}
-        The \term{incidence matrix} $M$ for a marginal scenario $\mscenario = \bc{V_1, \dots, V_k}$ is a bit-wise matrix where the columns are indexed by \textit{joint} sections $j \in \Sect{\jointvar}$ and the rows are indexed by \textit{marginal} sections $m \in \Sect{\mscenario}$. The entries of $M$ are populated whenever a row index is extendable to a column index.
+        The \term{incidence matrix} $M$ for a marginal scenario $\mscenario = \bc{V_1, \dots, V_k}$ is a bit-wise matrix where the columns are indexed by \textit{joint} events $j \in \Events{\jointvar}$ and the rows are events by \textit{marginal} sections $m \in \Events{\mscenario}$. The entries of $M$ are populated whenever a row index is extendable to a column index.
         \[ M_{m,j} = \de_{m \ext j} \defined \begin{cases}
             1 & m \ext j \\
             0 & \text{otherwise}
         \end{cases} \]
-        Where $\de_{m \ext j}$ is termed the \term{extendability indicator}. The incidence matrix has $\abs{\Sect{\jointvar}}$ columns, $\abs{\Sect{\mscenario}} = \sum_{i} \abs{\Sect{V_i}}$ rows and $k\abs{\Sect{\jointvar}}$ non-zero entries.
+        Where $\de_{m \ext j}$ is termed the \term{extendability indicator}. The incidence matrix has $\abs{\Events{\jointvar}}$ columns, $\abs{\Events{\mscenario}} = \sum_{i} \abs{\Events{V_i}}$ rows and $k\abs{\Events{\jointvar}}$ non-zero entries.
     \end{definition}
     To illustrate this concretely, consider the following example:
     \begin{example}
@@ -282,16 +272,16 @@
     \end{example}
 
     \begin{definition}
-        The \term{joint distribution vector} $\probvec^{\jointvar}$ for a probability distribution $\prob[\jointvar]$ is the vector whose entries are the positive, real-valued probabilities that $\prob[\jointvar]$ assigns to each joint section $j \in \Sect{\jointvar}$. $\probvec^{\jointvar}$ shares the same indices as the \textit{column} indices of $M$.
-        \[ \forall j \in \Sect{\jointvar} : \probvec^{\jointvar}_j = \prob[\jointvar][j] \]
+        The \term{joint distribution vector} $\probvec^{\jointvar}$ for a probability distribution $\prob[\jointvar]$ is the vector whose entries are the positive, real-valued probabilities that $\prob[\jointvar]$ assigns to each joint event $j \in \Events{\jointvar}$. $\probvec^{\jointvar}$ shares the same indices as the \textit{column} indices of $M$.
+        \[ \forall j \in \Events{\jointvar} : \probvec^{\jointvar}_j = \prob[\jointvar][j] \]
     \end{definition}
     \begin{definition}
-        The \term{marginal distribution vector} $\probvec^{\mscenario}$ for a marginal model $\prob^{\mscenario} = \bc{P_{V_1}, \ldots, P_{V_k}}$ is the vector whose entries are probabilities over the set of marginal outcomes $\Sect{\mscenario}$. $\probvec^{\mscenario}$ shares the same indices as the \textit{row} indices of $M$.
-        \[ \forall m \in \Sect{\mscenario} : \probvec^{\mscenario}_m = \prob[\Dom{m}][m] \]
+        Analogously, \term{marginal distribution vector} $\probvec^{\mscenario}$ for a marginal model $\prob^{\mscenario} = \bc{P_{V_1}, \ldots, P_{V_k}}$ is the vector whose entries are probabilities over the set of marginal outcomes $\Events{\mscenario}$. $\probvec^{\mscenario}$ shares the same indices as the \textit{row} indices of $M$.
+        \[ \forall m \in \Events{\mscenario} : \probvec^{\mscenario}_m = \prob[\Dom{m}][m] \]
     \end{definition}
     The marginal and joint distribution vectors are related via the incidence matrix $M$. Given a joint distribution vector $\probvec^{\jointvar}$ one can obtain the marginal distribution vector $\probvec^{\mscenario}$ by multiplying $M$ by $\probvec^{\jointvar}$.
-    \[ \probvec^{\mscenario} = M \cdot \probvec^{\jointvar} \eq \label{eq:incidence_matrix_use} \]
-    Henceforth we will use $\probvec^{\jointvar}$ ($\probvec^{\mscenario}$) and $\prob[\jointvar]$ ($\prob^{\jointvar}$) interchangeably.
+    \[ \probvec^{\mscenario} = M \tcdot \probvec^{\jointvar} \eq \label{eq:incidence_matrix_use} \]
+    Henceforth we will use $\probvec^{\jointvar}$ ($\probvec^{\mscenario}$) and $\prob[\jointvar]$ ($\prob_{\mscenario}$) interchangeably.
 
     \begin{remark}
         The particular ordering of the rows and columns of $M$ carries no importance, but it \textit{must} be consistent between $M$, $\probvec^{\jointvar}$ and $\probvec^{\mscenario}$.
@@ -299,21 +289,13 @@
 
     The marginal problem can now be rephrased in the language of the incidence matrix. Suppose one obtains a marginal distribution vector $\probvec^{\mscenario}$. The marginal problem becomes equivalent to the question: \textit{Does there exist a joint distribution vector $\probvec^{\jointvar}$ such that \cref{eq:incidence_matrix_use} holds?}
 
-    % \begin{example}
-    %     The marginal problem for the inflated causal structure $\ts'$ depicted in \cref{fig:inflated_triangle_scenario} concerns itself with the pre-injectable marginal scenario $\mscenario = \PreInj[\ts]{\ts'} = \bc{V_1, \ldots, V_{12}}$. Equipping the observed nodes of $\ts'$ with $4$-element outcome labels, the incidence matrix $M$ has $16,896$ rows and $16,777,216$ columns.
-    %     \begin{align*}
-    %         &\text{\# Rows} = \abs{\Sect{\mscenario}} = \sum_{i=1}^{12} \abs{\Sect{V_i}} = \sum_{i=1}^{12} 4^{\abs{V_i}} = 4 \cdot 4^6 + 8 \cdot 4^3 = 16,896 \\
-    %         &\text{\# Columns} = \abs{\Sect{\jointvar}} = 4^{\abs{\jointvar}} = 4^{12} = 16,777,216
-    %     \end{align*}
-    %     With $12 \cdot 4^{12} = 201,326,592$ non-zero entries. For obvious reasons, no attempt is made to reproduce it here.
-    % \end{example}
     \begin{definition}
         \label{def:marginal_linear_program}
         \term{The Marginal Linear Program} is the following linear program:
         \begin{alignat*}{2}
-            & \text{minimize:} \quad&& \emptyset \cdot x\\
+            & \text{minimize:} \quad&& \emptyset \tcdot x\\
             & \text{subject to:} && x \succeq 0 \\
-            & && M \cdot x = \probvec^{\mscenario}
+            & && M \tcdot x = \probvec^{\mscenario}
         \end{alignat*}
         If this ``optimization''\footnote{``Optimization'' is presented in quotes here because the minimization objective is trivially always zero ($\emptyset$ denotes the null vector of all zero entries). The primal value of the linear program is of no interest, all that matters is its \textit{feasibility}.} is \textit{feasible}, then there exists a vector $x$ than can satisfy \cref{eq:incidence_matrix_use} and is a valid joint distribution vector. Therefore feasibility implies that $\probvec^{\jointvar} = x$. Moreover if the marginal linear program is \textit{infeasible}, then there \textit{does not} exist a joint distribution $\probvec^{\jointvar}$ over all random variables.
     \end{definition}
@@ -322,20 +304,20 @@
         \label{def:dual_marginal_linear_program}
         \term{The Dual Marginal Linear Program} is the dual of \cref{def:marginal_linear_program} formulated via a procedure similar to~\cite{Lahaie_2008}:
         \begin{alignat*}{2}
-            & \text{minimize:} \quad&& y \cdot \probvec^{\mscenario}\\
-            & \text{subject to:} && y \cdot M \succeq 0
+            & \text{minimize:} \quad&& y \tcdot \probvec^{\mscenario}\\
+            & \text{subject to:} && y \tcdot M \succeq 0
         \end{alignat*}
         Where $y$ is a real valued vector with the same length as $\probvec^{\mscenario}$.
     \end{definition}
 
-    The dual marginal linear program not only answers the marginal problem for a specific marginal model $\probvec^{\mscenario}$ but as a by-product provides an inequality that witnesses its contextuality. First notice that the dual problem is \textit{never infeasible}; by choosing $y$ to be trivially the null vector $\emptyset$ of appropriate size, all constraints become satisfied. Secondly if the dual constraint $y \cdot M \succeq 0$ holds and the primal is feasible, then the following must hold:
-    \[ y \cdot \probvec^{\mscenario} =  y \cdot M \cdot x \geq 0 \eq \label{eq:dual_marginal_ineq} \]
-    Therefore the \textit{sign} of the dual value $d \defined \min \br{y \cdot \probvec^{\mscenario}}$ classifies a marginal model's contextuality. If $d < 0$ then \cref{eq:dual_marginal_ineq} is violated and therefore $\probvec^{\mscenario}$ is contextual. Likewise if $d \geq 0$ (satisfying \cref{eq:dual_marginal_ineq}), then $\probvec^{\mscenario}$ is non-contextual. \footnote{Actually, if $d \geq 0$ then it is exactly $d = 0$ due to the existence of the trivial $y = \emptyset$. This observation is an instance of the \textit{Complementary Slackness Property} of~\cite{Bradley_1977}. \comment[TC]{Is this really the CSP?} Moreover, if $d < 0$, then it is unbounded $d = -\inf$. This latter point becomes clear upon recognizing that for any $y$ with $d < 0$, another $y' = \al y$ can be constructed (with $\al > 1$) such that $d' = \al d < d$. Since a more negative $d'$ can always be found, it must be that $d$ is unbounded. This is a demonstration of the fundamental \textit{Unboundedness Property} of~\cite{Bradley_1977}; if the dual is unbounded, then the primal is infeasible. \comment[TC]{\href{http://web.stanford.edu/~ashishg/msande111/notes/chapter4.pdf}{Farkas's lemma} here?}}
+    The dual marginal linear program not only answers the marginal problem for a specific marginal model $\probvec^{\mscenario}$ but as a by-product provides an inequality that witnesses its contextuality. If this is not obvious, first notice that the dual problem is \textit{never infeasible}; by choosing $y$ to be trivially the null vector $\emptyset$ of appropriate size, all constraints become satisfied. Secondly if the dual constraint $y \tcdot M \succeq 0$ holds \textit{and} the primal is feasible, then the following must hold:
+    \[ y \tcdot \probvec^{\mscenario} =  y \tcdot M \tcdot x \geq 0 \eq \label{eq:dual_marginal_ineq} \]
+    Therefore the \textit{sign} of the dual value $d \defined \min \br{y \tcdot \probvec^{\mscenario}}$ classifies a marginal model's contextuality. If $d < 0$ then \cref{eq:dual_marginal_ineq} is violated and therefore $\probvec^{\mscenario}$ is contextual. Likewise if $d \geq 0$ (satisfying \cref{eq:dual_marginal_ineq}), then $\probvec^{\mscenario}$ is non-contextual. \footnote{Actually, if $d \geq 0$ then it is exactly $d = 0$ due to the existence of the trivial $y = \emptyset$. This observation is an instance of the \textit{Complementary Slackness Property} of~\cite{Bradley_1977}. \comment[TC]{Is this really the CSP?} Moreover, if $d < 0$, then it is unbounded $d = -\inf$. This latter point becomes clear upon recognizing that for any $y$ with $d < 0$, another $y' = \al y$ can be constructed (with $\al > 1$) such that $d' = \al d < d$. Since a more negative $d'$ can always be found, it must be that $d$ is unbounded. This is a demonstration of the fundamental \textit{Unboundedness Property} of~\cite{Bradley_1977}; if the dual is unbounded, then the primal is infeasible. \comment[TC]{\href{http://web.stanford.edu/~ashishg/msande111/notes/chapter4.pdf}{Farkas's lemma} here?}}
 
     \begin{definition} An \term{infeasibility certificate}~\cite{Andersen_2001} is any vector $y$ that satisfies the constraint of \cref{def:dual_marginal_linear_program} and also permits violation of \cref{eq:dual_marginal_ineq} for some marginal distribution vector $\probvec^{\mscenario}$.
-    \[ y \in \R^{\abs{\Sect{\mscenario}}} : y \cdot M \succeq 0, \quad y \cdot \probvec^{\mscenario} < 0 \]
-    Furthermore, any $y$ satisfying $y \cdot M \succeq 0$ can be promoted to a \term{certificate inequality} that constraints the set of non-contextual marginal models $\s{NC}$,
-    \[ \forall \probvec^{\mscenario} \in \s{NC} : y \cdot \probvec^{\mscenario} \geq 0 \]
+    \[ y \in \R^{\abs{\Events{\mscenario}}} : y \tcdot M \succeq 0, \quad y \tcdot \probvec^{\mscenario} < 0 \]
+    Furthermore, for every $y$ satisfying $y \tcdot M \succeq 0$ there corresponds a \term{certificate inequality} that constraints the set of non-contextual marginal models $\s{NC}$,
+    \[ \forall \probvec^{\mscenario} \in \s{NC} : y \tcdot \probvec^{\mscenario} \geq 0 \]
     \end{definition}
 
     \todo[TC]{Discuss Infeasibility Certificates basis} \\
@@ -344,13 +326,50 @@
 
     \todo[TC]{Discuss Compatibility, connection to cooperative games/resources, bell incompatibility?} \\
 
-    \subsubsection{Fourier Motzkin Elimination}
-    The complete space of marginal models over $\mscenario$ can be partitioned into two spaces; non-contextual marginal models in $\s{NC}$ and contextual ones in $\s{C}$.
+    \subsubsection{Fourier Motzkin Elimination \& Polytope Projection}
+
+    The complete space of marginal models over $\mscenario$ can be partitioned into two spaces: contextual ($\s{C}$) and non-contextual marginal models ($\s{NC}$). The separation between these spaces is completely characterized by the system of inequalities associated with \cref{eq:incidence_matrix_use}. Explicitly,
+    \begin{equation} \label{eq:halfspace_rep_incidence}
+    \begin{alignedat}{2}
+        \forall m \in \Events{\mscenario} :&&\quad \probvec^{\mscenario}_m - {\sum}_{j} M_{m, j} \probvec^{\jointvar}_j &\geq 0 \\
+        \forall m \in \Events{\mscenario} :&&\quad -\probvec^{\mscenario}_m + {\sum}_{j} M_{m, j} \probvec^{\jointvar}_j &\geq 0 \\
+        \forall j \in \Events{\jointvar} :&&\quad \probvec^{\jointvar}_j &\geq 0
+    \end{alignedat}
+    \end{equation}
+    Geometrically \cref{eq:halfspace_rep_incidence} is a family of $2\abs{\Events{\mscenario}} + \abs{\Events{\jointvar}}$ half-planes bounding $\R^{\abs{\Events{\mscenario}}} \times \R^{\abs{\Events{\jointvar}}}$. However testing the contextuality of a marginal model $\probvec^{\mscenario}$ requires a collection of inequalities bounding just $\R^{\abs{\Events{\mscenario}}}$. Transforming \cref{eq:halfspace_rep_incidence} into the desired system of inequalities is the task of linear-quantifier elimination. A popular tool for linear quantifier elimination is Fourier-Motzkin elimination \cite{Dantzig_1973,Inflation,Abramsky_2012,jones_2004}. We will avoid expounding the Fourier-Motzkin procedure in this paper and instead reproduce a few of its notable features and consequences.
+
+    \begin{definition} \cite[Section 12.2]{Schrijver_1998}
+        The \term{Fourier-Motzkin elimination} procedure begins with a matrix $A$ and a vector $b$ defining a system of inequalities $S_1 = \bc{A\tcdot x \leq b}$ constraining a set of variables $x$ and symbolically eliminates a sub-set of theses variables $x \setminus y$. Upon completion, one obtains a new set of constraints $S_2 = \bc{A' y \leq b'}$ such that,
+        \[ \exists y : A' y \leq b' \iff \exists x : A x \leq b \]
+        Any solution $y$ of $S_2$ will permit at least one solution $x$ in $S_1$ (and vice versa).
+    \end{definition}
+
+    When applied to the marginal problem of \cref{eq:halfspace_rep_incidence}, the Fourier-Motzkin procedure eliminates all reference to the joint probabilities $\probvec^{\jointvar}_j$ and returns a system of inequalities over the marginal probabilities $\probvec^{\mscenario}_m$ representing a \textit{complete} solution to the marginal problem. Applying the Fourier-Motzkin procedure to completely solve the marginal problem is discussed in more detail in~\cite{Inflation} and~\cite{Fritz_2011}. \todo[TC]{Improve this discussion of FMP}. \\
+
+    \todo[TC]{Discuss why FM is slow?}\\
+
+    \begin{remark}
+        In theory, Fourier-Motzkin offers a complete solution to the marginal problem for all marginal scenarios; its limitations are purely computational. In addition, the entire procedure only utilizes field operations \cite{Abramsky_2012} meaning that since \cref{eq:halfspace_rep_incidence} is a rational system of inequalities, then a complete solution to the marginal problem only requires a finite set of linear, rational coefficient inequalities.
+    \end{remark}
+
+    \begin{theorem}
+        There exists a set of necessary and sufficient conditions
+
+    \end{theorem}
+
+
 
     \todo[TC]{Logical Bell inequalities paper: only need to consider rational inequalities, actually integer inequalities, actually homogeneous inequalities} \\
     \todo[TC]{Discuss computational complexity} \\
     \todo[TC]{Mention what a complete solution looks like after using Fourier Motzkin}
     \subsubsection{Marginal Polytope}
+    \begin{definition}
+        Let $I_{1}$ and $I_{2}$ represent two
+    \end{definition}
+    \begin{definition}
+        Let $\s{I}$
+    \end{definition}
+
     \todo[TC]{Very briefly discuss polytope perspective and facet inequalities vs. non-facet inequalities}
     \todo[TC]{Define facets as irreducible inequalities}
 
@@ -360,45 +379,43 @@
 
     Section \ref{sec:linear_programs} discusses how one can obtain a $\s{NC}$-inequality that witnesses the contextuality of a particular marginal model $\probvec^{\mscenario}$ by writing the marginal problem as a linear program. Every $\probvec^{\mscenario} \in \s{NC}$ is witness-able by some certificate inequality. Albeit when a candidate marginal model $\probvec^{\mscenario}$ is not present, linear optimization offers no utility. \\
 
-    This Section aims to develop a procedure for finding \textit{all} certificate inequalities in a computationally efficient manner. Specifically by finding all certificate inequalities that are also facets of the marginal polytope. Before doing so, we will first summarize a method that can be used to obtain a complete solution to the \textit{possibilistic} marginal problem and indirectly offer a \textit{partial} solution to the \textit{probabilistic} marginal problem.
+    This section aims to develop a procedure for finding \textit{all} certificate inequalities in a computationally efficient manner. Specifically by finding all certificate inequalities that are also facets of the marginal polytope. Before doing so, we will first summarize a method \todo[TC]{Method where this idea came from, original insight from Hardy?} that can be used to obtain a complete solution to the \textit{possibilistic} marginal problem~\cite{Mansfield_2012} and indirectly offer a \textit{partial} solution to the \textit{probabilistic} marginal problem.
 
     \subsection{Hardy Transversals}
     \label{sec:logical_inequalities}
-    Let $a \in \Sect{\mscenario}$ be any marginal section and $C = \bc{c_1, \ldots, c_{n}} \subseteq \Sect{\mscenario}$ be a subset of the marginal sections. Recall that $a, c_1, \ldots, c_n$ are particular \textit{events} over marginal contexts $V \in \mscenario$. We say that the subset $C$ forms a \term{logical extension} of $a$ if the following logical implication holds for \textit{all} marginal models $\probvec^{\mscenario}$.
+    Let $a \in \Events{\mscenario}$ be any marginal event and $C = \bc{c_1, \ldots, c_{n}} \subseteq \Events{\mscenario}$ be a subset of the marginal events. We say that the subset $C$ forms a \term{logical extension} of $a$ if the following logical implication holds for \textit{all} marginal models $\probvec^{\mscenario}$.
     \[ a \implies c_1 \vee \ldots \vee c_n = \bigvee_{c \in C} c \eq \label{eq:1a_implication} \]
     Which can be dictated: \textit{Whenever the event $a$ occurs, at least one the events in $C$ occurs.} In this paper, the marginal event $a$ will be referred to as the \textit{antecedent} and $C$ as the \textit{consequent set}. To clarify, a marginal model $\probvec^{\mscenario}$ satisfies \cref{eq:1a_implication} if there always exists at least one $c \in C$ that is possible ($\probvec^{\mscenario}_c > 0$) whenever $a$ is possible. A marginal model $\probvec^{\mscenario}$ violates \cref{eq:1a_implication} whenever \textit{none} of the sections in $C$ are possible while $a$ is nonetheless still possible. Marginal models that violate logical statements such as \cref{eq:1a_implication} are known as \term{Hardy Paradoxes}~\cite{Inflation,Mansfield_2012,Mancinska_2014}. The concept of witnessing quantum incompatibility on a logical level has been analyzed thoroughly for decades~\cite{Greenberger_1990,Abramsky_2012}; being motivated by a greater sense of robustness compared to probabilistic constraints. \\
 
-    All logical implications of the form \cref{eq:1a_implication} can be constructed by first selecting $a$ and then configuring $C$ persuant to \cref{eq:1a_implication}.
+    All logical implications of the form \cref{eq:1a_implication} can be constructed by first selecting $a$ and then manufacturing a consequent set $C$ persuant to \cref{eq:1a_implication}.
+
     \begin{definition}
         \label{def:extendable_set}
-        For each marginal section $m \in \Sect{\mscenario}$ the \term{extendable set of $m$ into $\jointvar$} is the set of all joint sections $j \in \Sect{\jointvar}$ that are extensions of $m$.
-        \[ \Ext[\jointvar]{m} = \bc{j \in \Sect{\jointvar} \mid m \ext j} \]
+        For each marginal event $m \in \Events{\mscenario}$ the \term{extendable set of $m$ into $\jointvar$} is the set of all joint events $j \in \Events{\jointvar}$ that are extensions of $m$.
+        \[ \Ext[\jointvar]{m} = \bc{j \in \Events{\jointvar} \mid m \ext j} \]
     \end{definition}
-    Practically speaking, the extendable set of $m$ into $\jointvar$ is represented by the $m$-th row of the incidence matrix $M$.
+
+    The extendable set of $m$ into $\jointvar$ is the subset of events in $\Events{\jointvar}$ that \textit{agree} with $m$ about valuations for variables in $\Dom{m}$. Practically speaking, the extendable set of $m$ into $\jointvar$ is represented by the $m$-th row of the incidence matrix $M$.
+
     \begin{lemma}
         \label{lemma:logical_extenable_set}
-        Let $a \in \Sect{\mscenario}$ and $\probvec^{\mscenario} \in \s{NC}$ be non-contextual. Then,
+        Let $a \in \Events{\mscenario}$ and $\probvec^{\mscenario} \in \s{NC}$ be non-contextual. Then,
         \[ a \iff \bigvee_{j \in \Ext[\jointvar]{a}} j \eq \label{eq:lemma_logical_extendable_set}\]
     \end{lemma}
-    The idea being if a joint distribution does exists, then the event $a$ represents partial knowledge of the entire system $\jointvar$; whenever $a$ occurs, exactly one joint section $j$ has occurred and $j$ must be compatible with $a$. Likewise \cref{lemma:logical_extenable_set} applies to the consequent set $C \in \Sect{\mscenario}$,
+    The idea being if a joint distribution does exists, then the event $a$ represents partial knowledge of the entire system $\jointvar$; whenever $a$ is measured, exactly one joint event $j$ has occurred in reality and $j$ must be compatible with $a$. Likewise \cref{lemma:logical_extenable_set} applies to the consequent set $C \in \Events{\mscenario}$,
     \[ \bigvee_{c \in C} c \iff \bigvee_{c \in C} \bigvee_{j \in \Ext[\jointvar]{c}} j \eq \label{eq:logical_extension_C}\]
     If a subset $C$ can be found such that its extendable set \textit{covers} the extendable set of $a$,
     \[ \Ext[\jointvar]{a} \subseteq \bigcup_{c \in C} \Ext[\jointvar]{c} \eq \label{eq:logical_containment} \]
-    Then the combination of \cref{eq:lemma_logical_extendable_set,eq:logical_extension_C,eq:logical_containment} yields \cref{eq:1a_implication}.\\
+    Then the combination of \cref{eq:lemma_logical_extendable_set,eq:logical_extension_C,eq:logical_containment} yields \cref{eq:1a_implication}.  Computationally enumerating all logical extensions $C \subseteq \Events{\jointvar}$ for a particular antecedent $a \in \Events{\mscenario}$ corresponds iteratively selecting marginal sections $c \neq a$ for membership in $C$ until \cref{eq:logical_containment} is satisfies. This process is more generally known as a set-covering problem, or a hypergraph transversal problem~\cite{Inflation}, an idea we return to in the more general picture to follow in \cref{sec:dep}. \todo[TC]{Maybe use an example here to define a Hardy transversal.}\\
 
-    It is possible to show that for each logical constraint there exists a probabilistic constraint that is tighter. The principle statement of \cref{lemma:logical_extenable_set} can be taken in a probabilistic form. If the marginal model $\probvec^{\mscenario}$ is to admit a joint distribution $\probvec^{\jointvar}$, then it must be that the antecedent probability $a\in \Sect{\mscenario}$ ($\probvec^{\mscenario}_a = \prob[\Dom{a}][a]$) is equal to a marginalization over its extendable set into $\jointvar$.
+    It is possible to show that for each logical constraint there exists a probabilistic constraint that is tighter. The principle statement of \cref{lemma:logical_extenable_set} can be taken in a probabilistic form. If the marginal model $\probvec^{\mscenario}$ is to admit a joint distribution $\probvec^{\jointvar}$, then it must be that the antecedent probability $\probvec^{\mscenario}_a$ is equal to a marginalization over its extendable set into $\jointvar$.
     \[ \probvec^{\mscenario}_a = \sum_{j \in \Ext[\jointvar]{a}}\probvec^{\jointvar}_j \eq \label{eq:marginal_extendable_sum_a} \]
     This is nothing more than the the $a$-th row of \cref{eq:incidence_matrix_use}. Likewise for the consequent set,
     \[ \sum_{c \in C}\probvec^{\mscenario}_c = \sum_{c \in C}\sum_{j \in \Ext[\jointvar]{c}}\probvec^{\jointvar}_j \eq \label{eq:marginal_extendable_sum_cs} \]
-    Since $C$ is a logical extension of $a$, the right-hand side of \cref{eq:marginal_extendable_sum_a} \textit{algebraically} covers \cref{eq:marginal_extendable_sum_cs}\footnote{If there were a joint outcome $j^*$ present on the right-hand side of \cref{eq:marginal_extendable_sum_a} but not the right-hand side of \cref{eq:marginal_extendable_sum_cs}, then \cref{eq:1a_probabilistic} would be violated by the deterministic joint distribution where $\probvec^{\jointvar}_{j^*} = 1$}. Therefore one recovers the probabilistic version of \cref{eq:1a_implication},
+    Since $C$ is a logical extension of $a$, the right-hand side of \cref{eq:marginal_extendable_sum_a} \textit{algebraically} covers \cref{eq:marginal_extendable_sum_cs}\footnote{If there were a joint event $j^*$ present on the right-hand side of \cref{eq:marginal_extendable_sum_a} but not the right-hand side of \cref{eq:marginal_extendable_sum_cs}, then \cref{eq:1a_probabilistic} would be violated by the deterministic joint distribution where $\probvec^{\jointvar}_{j^*} = 1$}. Therefore one recovers the probabilistic version of \cref{eq:1a_implication},
     \[ \probvec^{\mscenario}_a \leq \sum_{c \in C}\probvec^{\jointvar}_c \eq \label{eq:1a_probabilistic} \]
-    Because \cref{eq:1a_probabilistic}'s logical precedent, inequalities of the form of \cref{eq:1a_probabilistic} are called \term{Hardy inequalities}.
+    Due to the logical precedent, inequalities of the form of \cref{eq:1a_probabilistic} are called \term{Hardy inequalities}. Marginal models that are contextual on a logical level are \term{possibilistically contextual}. In~\cite{Abramsky_2011} it was demonstrated that all possibilistically contextual models have their contextuality witnessed by logical extensions. In this sense, logical implications of the form \cref{eq:1a_implication} completely solve the possibilistic marginal problem.
     \todo[TC]{Discuss logical bell inequalities}
-    \begin{remark}
-        It is also possible to recover \cref{eq:1a_probabilistic} from \cref{eq:1a_implication} by more direct means by putting \cref{eq:1a_implication} into disjunction normal form and assigning it a certain probability,
-        \[ \prob[][\neg a \vee \bigvee_{c \in C} c] = 1 \]
-        Then applying Boole's indentity and the negative rule $\prob[][\neg a] = 1 - \prob[][a]$ one recovers \cref{eq:1a_probabilistic}.
-    \end{remark}
     \begin{remark}
         The probabilistic logical extension \cref{eq:1a_probabilistic} is an \textit{upgraded} version of \cref{eq:1a_implication} in the following sense.
         \begin{itemize}
@@ -407,22 +424,20 @@
         \end{itemize}
     \end{remark}
 
-    Computationally enumerating all logical extensions $C \subseteq \Sect{\jointvar}$ for a particular antecedent $a \in \Sect{\mscenario}$ corresponds iteratively selecting marginal sections $c \neq a$ for membership in $C$ until \cref{eq:logical_containment} is satisfies. This process is more generally known as a set-covering problem, or a hypergraph transversal problem~\cite{Inflation}, an idea we return to in the more general picture to follow.
-
     \subsection{Definite Extensions}
-    We will now generalize the notion of a Hardy transversal by considering multi-sets of antecedents corresponding to multiple marginal outcomes each accompanied by an assigned multiplicity. Afterwards we provide an algorithm to completely solve the marginal problem by transversing generalized hypergraphs. To our benefit, this technique for solving the marginal problem offers considerable advantages over existing methods when dealing with large marginal scenarios. \\
+    We will now generalize the notion of a Hardy transversal by considering multi-sets of antecedents corresponding to multiple marginal events each accompanied by an assigned multiplicity. Afterwards we provide an algorithm to completely solve the marginal problem by transversing generalized hypergraphs. To our benefit, this technique for solving the marginal problem offers considerable advantages over existing methods when dealing with large marginal scenarios. \\
 
     To facilitate the discussion, some definitions and notation are necessary.
     \begin{definition}
-        A \term{multi-set} or \term{bag} $\mset{}$ for a marginal scenario $\mscenario$ is a vector indexed by marginal outcomes $m \in \Sect{\mscenario}$ whose entries are integers $\mset{}_{m} \in \Z$. The \term{support} $\supp{\mset{}}$ of an bag is the subset of marginal outcomes that are assigned non-zero multiplicity.
-        \[ \supp{\mset{}} \defined \bc{m \in \Sect{\mscenario} \mid \mset{}_m \neq 0} \]
-        The \term{order} $\abs{\mset{}}$ of a multi-set $\mset{}$ is entry-wise sum of $\mset{}$.
-        \[ \abs{\mset{}} = \sum_{m \in \Sect{\mscenario}} \mset{}_m = \sum_{m \in \supp{\mset{}}} \mset{}_m \]
+        A \term{multi-set} or \term{bag} $\ga$ for a marginal scenario $\mscenario$ is a vector indexed by marginal events $m \in \Events{\mscenario}$ whose entries are integers $\ga_{m} \in \Z$. The \term{support} $\supp{\ga}$ of an bag is the subset of marginal events that are assigned non-zero multiplicity.
+        \[ \supp{\ga} \defined \bc{m \in \Events{\mscenario} \mid \ga_m \neq 0} \]
+        The \term{order} $\abs{\ga}$ of a multi-set $\ga$ is entry-wise sum of $\ga$.
+        \[ \abs{\ga} = \sum_{m \in \Events{\mscenario}} \ga_m = \sum_{m \in \supp{\ga}} \ga_m \]
     \end{definition}
 
     \begin{definition}
-        The \term{marginal indicator} vector $\de^{m}$ for a marginal outcome $m$ is the unit vector indexed by marginal outcomes $\Sect{\mscenario}$ whose only non-zero entry is the marginal outcome $m$.
-        \[ \forall m' \in \Sect{\mscenario} : \de^{m}_{m'} = \begin{cases}
+        The \term{marginal indicator} vector $\de^{m}$ for a marginal event $m$ is the unit vector indexed by marginal outcomes $\Events{\mscenario}$ whose only non-zero entry is the marginal event $m$.
+        \[ \forall m' \in \Events{\mscenario} : \de^{m}_{m'} = \begin{cases}
             1 & m' = m \\
             0 & m' \neq m
         \end{cases} \]
@@ -430,39 +445,41 @@
     \end{definition}
 
     \begin{definition}
-        The \term{extension $\extmset{}$ of an multi-set $\mset{}$} for a marginal scenario $\mscenario$ is a vector indexed by \textit{joint} outcomes $j \in \Sect{\jointvar}$ and is constructed by merging the extendable sets of each marginal outcome $m \in \supp{\mset{}}$.
-        \[ \forall j \in \Sect{\jointvar} : \extmset{}_{j} \defined \sum_{m \in \supp{\mset{}}} \mset{}_{m} \de_{m \ext j}\]
-        Which is equivalent to a left-multiplication of $\ga$ into the incidence matrix $M$.
-        \[ \extmset{} \defined \mset{} \cdot M \]
+        The \term{extension $\Ga$ of an multi-set $\ga$} for a marginal scenario $\mscenario$ is a vector indexed by \textit{joint} events $j \in \Events{\jointvar}$ and can be constructed by left-multiplication of $\ga$ into the incidence matrix $M$.
+        \[ \Ga \defined \ga \tcdot M \]
     \end{definition}
 
-    For every multi-set $\mset{}$ there corresponds a candidate inequality $I_{\mscenario} = \bc{\mset{} \cdot \probvec^{\mscenario} \geq 0}$ whose validity is completely characterized by the extension of $\mset{}$.
+    For every multi-set $\ga$ there corresponds a candidate inequality $I_{\mscenario} = \bc{\ga \tcdot \probvec^{\mscenario} \geq 0}$ whose validity is completely characterized by $\Ga$.
     \begin{theorem}
-        \label{thm:deinite_extension_main_thm}
-        Let $\mset{}$ be a multi-set for the marginal scenario $\mscenario$. Then the inequality $I_{\mscenario} = \bc{\mset{} \cdot \probvec^{\mscenario} \geq 0}$ is a valid non-contextuality inequality if and only if $\extmset{}$ is positive semi-definite.
-        \[ \forall \probvec^{\mscenario} \in \s{NC} : \mset{} \cdot \probvec^{\mscenario} \geq 0 \iff \extmset{} \succeq 0 \qquad \forall j : \extmset{}_j \geq 0 \eq \label{eq:thm:semi_definite_extension}\]
+        \label{thm:definite_extension_main_thm}
+        Let $\ga$ be a multi-set for the marginal scenario $\mscenario$. Then the inequality $I_{\mscenario} = \bc{\ga \tcdot \probvec^{\mscenario} \geq 0}$ is a valid non-contextuality inequality if and only if $\Ga$ is positive semi-definite.
+        \[ \forall \probvec^{\mscenario} \in \s{NC} : \ga \tcdot \probvec^{\mscenario} \geq 0 \iff \Ga \succeq 0  \eq \label{eq:thm:semi_definite_extension}\]
     \end{theorem}
     \begin{proof}
-        The proof follows directly from \cref{eq:incidence_matrix_use}. Since $\probvec^{\mscenario} = M \cdot \probvec^{\jointvar}$,
-        \[ \mset{} \cdot \probvec^{\mscenario} = \mset{} \cdot M \cdot \probvec^{\jointvar} = \extmset{} \cdot \probvec^{\jointvar} \]
-        Thus $\extmset{} \succeq 0$ implies that $\extmset{} \cdot \probvec^{\jointvar} \geq 0$ which gives $\mset{} \cdot \probvec^{\mscenario} \geq 0$. The forward case of \cref{eq:thm:semi_definite_extension} can be proven by contradiction. Suppose that $\mset{} \cdot \probvec^{\mscenario} \geq 0$ for all marginal models but $\Ga \not \succeq 0$. There then must exist at least one joint outcome $\exists j^{*} : \Ga_{j^{*}} < 0$ such that the deterministic joint distribution $\probvec^{\jointvar} = \de^{j^{*}}$ induces contradiction,
-        \[ 0 > \extmset{}_{j^{*}} = \extmset{}\cdot \de^{j^{*}} = \mset{} \cdot M \cdot \de^{j^{*}}  \]
-        Because $M \cdot \de^{j^{*}}$ is a non-contextual marginal model but $\ga \cdot M \cdot \de^{j^{*}} \not \geq 0$.
+        The proof follows directly from \cref{eq:incidence_matrix_use}. Since $\probvec^{\mscenario} = M \tcdot \probvec^{\jointvar}$,
+        \[ \ga \tcdot \probvec^{\mscenario} = \ga \tcdot M \tcdot \probvec^{\jointvar} = \Ga \tcdot \probvec^{\jointvar} \]
+        If $\Ga \succeq 0$, then $\Ga \tcdot \probvec^{\jointvar} \geq 0$ which gives $\ga \tcdot \probvec^{\mscenario} \geq 0$. The forward case of \cref{eq:thm:semi_definite_extension} can be proven by contradiction. Suppose that $\ga \tcdot \probvec^{\mscenario} \geq 0$ for all marginal models but $\Ga \not \succeq 0$. Consequently there exists at least one joint outcome $j^{*}$ such that $\Ga_{j^{*}} < 0$. This negative entry can be exploited by a deterministic joint distribution $\probvec^{\jointvar} = \de^{j^{*}}$,
+        \[ 0 > \Ga_{j^{*}} = \Ga\tcdot \de^{j^{*}} = \ga \tcdot M \tcdot \de^{j^{*}}  \]
+        Which is a contradiction: $M \tcdot \de^{j^{*}}$ is a non-contextual marginal model but $\ga \tcdot M \tcdot \de^{j^{*}} \not \geq 0$.
     \end{proof}
+
+    Clearly if the multi-set itself is positive semi-definite $\ga \succeq 0$ then $\Ga \succeq 0$ is also. Corresponding inequalities are then \textit{trivial}: being satisfied by all $\probvec^{\mscenario} \in \s{NC}$. As such, it is desired to obtain definite extensions $\Ga$ from \textit{indefinite} multi-sets $\ga$.
+
     \begin{corollary}
-        Let $\mset{}$ be a multi-set for the marginal scenario $\mscenario$. Then the equality $I_{\mscenario} = \bc{\mset{} \cdot \probvec^{\mscenario} = 0}$ is satisfied by all non-contextual marginal models if and only if $\extmset{}$ is a null vector (i.e. $\forall j : \extmset{}_{j} = 0$).
+        Let $\ga$ be a multi-set for the marginal scenario $\mscenario$. Then the equality $I_{\mscenario} = \bc{\ga \tcdot \probvec^{\mscenario} = 0}$ is satisfied by all non-contextual marginal models if and only if $\Ga$ is a null vector (i.e. $\forall j : \Ga_{j} = 0$).
     \end{corollary}
 
-    \Cref{thm:deinite_extension_main_thm} demonstrates it is possible to generate non-contextuality inequalities by finding multi-sets $\mset{}$ such that $\Ga \succeq 0$. In light of this, we will formally define the subset of joint outcomes $j$ that are preventing a candidate multi-set $\mset$ from having positive semi-definite extensions.
+    \Cref{thm:definite_extension_main_thm} demonstrates it is possible to generate non-contextuality inequalities by finding multi-sets $\ga$ such that $\Ga \succeq 0$. In light of this, we will formally define the subset of joint outcomes $j$ that are preventing a candidate multi-set $\ga$ from having positive semi-definite extensions.
 
     \begin{definition}
-        The \term{inhibiting set} $\inhibit\br{\mset}$ for a multi-set $\mset$ is the subset of joint outcomes preventing $\extmset \succeq 0$ from holding true.
-        \[ \inhibit\br{\mset} = \bc{j \in \Sect{\jointvar} \mid \br{\mset \cdot M}_j = \extmset_j < 0} \]
+        The \term{inhibiting set} $\inhibit\br{\ga}$ for a multi-set $\ga$ is the subset of joint outcomes preventing $\Ga \succeq 0$ from holding true.
+        \[ \inhibit\br{\ga} = \bc{j \in \Events{\jointvar} \mid \br{\ga \tcdot M}_j = \Ga_j < 0} \]
     \end{definition}
 
-    Clearly if the multi-set itself is positive semi-definite $\mset{} \succeq 0$ then $\extmset{} \succeq 0$ is maintained always. As such, it is desired to obtain multi-sets $\mset{}$ that have some positive and negative entires. Procedurally, definite extensions can be built by beginning with a seed multi-set $\mset{}^{} = \mset{}^{A}$ (to be called the antecedent set) composed entirely of non-positive entries and iteratively modifying $\mset{}^{(n)}$ by adding $1$ to specific marginal outcomes $m$ ($\mset{}^{(n+1)} = \mset{}^{(n)} + \de^{m}$) in such a way that progresses $\extmset{}^{(n)}$ toward becoming positive semi-definite (i.e. by decreasing the inhibiting set). Taking inspiration from logical, Hardy-type, transversal inequalities discussed in \cref{sec:logical_inequalities}, we can view this process as a weighted hypergraph transversal problem.
+    Procedurally, definite extensions can be built by beginning with a seed multi-set $\ga^{(0)} = \ga^{A}$ composed entirely of non-positive entries and iteratively appending marginal events $m$ ($\ga^{(n+1)} = \ga^{(n)} + \de^{m}$) in such a way that progresses $\Ga^{(n)}$ toward becoming positive semi-definite (i.e. by decreasing the inhibiting set). Taking inspiration from logical, Hardy-type, transversal inequalities discussed in \cref{sec:logical_inequalities}, we can view this process as a weighted hypergraph transversal problem.
 
     \subsection{Definite Extension Procedure}
+    \label{sec:dep}
     Before discussing the definite extension procedure (DEP) directly, we will motivate its main algorithmic component (weighted hypergraphs transversals) with a short example.
     \subsubsection{Example}
     \begin{example}
@@ -493,26 +510,27 @@
             \begin{minipage}[b]{.48\textwidth}
                 \centering
                 \scalebox{1.0}{\input{../figures/hypergraphs/minimal_example}}
-                \caption{An edge-weighted hypergraph $\hgraph_{\weights}$ corresponding to the antecedent set $\mset^{A}$ with $\mset^{A}_{m_3} = -1$ and $\mset^{A}_{m_8} = -2$.}
+                \caption{An edge-weighted hypergraph $\hgraph_{\weights}$ corresponding to the antecedent set $\ga^{A}$ with $\ga^{A}_{m_3} = -1$ and $\ga^{A}_{m_8} = -2$.}
                 \label{fig:hypergraph_example}
             \end{minipage}
         \end{center}
         \end{figure}
-        Now suppose our antecedent set is $\mset^{A}$ and has two specified entries:
-        \[ \mset^{A}_{m_{3}} = -1 \quad \mset^{A}_{m_{8}} = -2 \]
-        Then the antecedent extension is given by $\extmset^{A}= \mset^{A} \cdot M$:
-        \[ \extmset^{A}_{j_{4}} = \extmset^{A}_{j_{8}} = -2 \quad \extmset^{A}_{j_{5}} = \extmset^{A}_{j_{6}} = -1 \]
-        The objective then becomes to \textit{hit} the joint outcomes of the inhibiting set $\bc{j_{4}, j_{5}, j_{6}, j_{8}}$ with marginal outcomes organized as a consequent multi-set $\mset^{C} \succeq 0$ such that,
-        \[ \extmset^{C} + \extmset^{A} \succeq 0 \]
-        Taking motivation from \cref{sec:logical_inequalities}, this procedure can be casted as a multi-node hitting problem, or an edge-weighted hypergraph problem. Construct a weighted hypergraph $\hgraph_{\weights}$ (see \cref{fig:hypergraph_example}) where the edges are labeled by joint outcomes $\edges = \bc{e_{j_{4}}, e_{j_{5}}, e_{j_{6}}, e_{j_{8}}}$. These edges are assigned weights $w_j$ precisely equal to the magnitude of $\extmset^{A}$.
-        \[ \forall j \in \bc{{j_{4}}, {j_{5}}, {j_{6}}, {j_{8}}} : w_{j} = - \extmset^{A}_j \]This weighting represents the joint outcomes that are preventing $\extmset$ from becoming positive semi-definite. The nodes represent all possible marginal outcomes that have the potential to contribute to $\mset^{C}$.
+        Now suppose our antecedent set is $\ga^{A}$ and has two specified entries:
+        \[ \ga^{A}_{m_{3}} = -1 \quad \ga^{A}_{m_{8}} = -2 \]
+        Then the antecedent extension is given by $\Ga^{A}= \ga^{A} \tcdot M$:
+        \[ \Ga^{A}_{j_{4}} = \Ga^{A}_{j_{8}} = -2 \quad \Ga^{A}_{j_{5}} = \Ga^{A}_{j_{6}} = -1 \]
+        The objective then becomes to \textit{cover} the joint events of the inhibiting set $\bc{j_{4}, j_{5}, j_{6}, j_{8}}$ with marginal events organized as a consequent multi-set $\ga^{C} \succeq 0$ such that,
+        \[ \Ga^{C} + \Ga^{A} \succeq 0 \]
+        Taking motivation from \cref{sec:logical_inequalities}, this procedure can be casted as a multi-node hitting problem, or an edge-weighted hypergraph problem. Construct a weighted hypergraph $\hgraph_{\weights}$ (see \cref{fig:hypergraph_example}) where the edges are labeled by joint outcomes $\edges = \bc{e_{j_{4}}, e_{j_{5}}, e_{j_{6}}, e_{j_{8}}}$. These edges are assigned weights $w_j$ precisely equal to the magnitude of $\Ga^{A}$.
+        \[ \forall j \in \bc{{j_{4}}, {j_{5}}, {j_{6}}, {j_{8}}} : w_{j} = - \Ga^{A}_j \]
+        These weights characterize the joint events that are preventing $\Ga$ from becoming positive semi-definite. The nodes represent all possible marginal events that have the potential to contribute to $\ga^{C}$.
         \[ \nodes = \bc{m_2, m_4, m_5, m_6, m_{10}, m_{11}, m_{12}} \]
         A node $m$ is a member of edge $e_{j}$ if $m \ext j$. By inspection of \cref{fig:hypergraph_example} one can identify numerous multi-sets of $\ga^{C}$ of $\nodes$ that hit each edge $w_j$ times. As a singular example,
         \[ \trans = \bc{m_{2}, m_{10}, m_{11}, m_{12}, m_{12}} = \kbordermatrix{
             & m_2 & m_4 & m_5 & m_6 & m_{10} & m_{11} & m_{12} \\
             &   1 &   0 &   0 &   0 &      1 &      1 &      2
         } \]
-        satisfies this condition. We call such $\trans$ \textit{transversals} of $\hgraph_{\weights}$. This multi-sets enable one to construct the positive semi-definite extension $\extmset^{C} + \extmset^{A}$ where $\extmset^{C} = \trans \cdot M$. This corresponds to the inequality $- \ga^{A} \cdot \probvec^{\mscenario} \leq \ga^{C} \cdot \probvec^{\mscenario}$,
+        satisfies this condition. We call such $\trans$ \textit{transversals} of $\hgraph_{\weights}$. This multi-set enables one to construct the positive semi-definite extension $\Ga^{C} + \Ga^{A}$ where $\Ga^{C} = \trans \tcdot M$. This corresponds to the inequality $- \ga^{A} \tcdot \probvec^{\mscenario} \leq \ga^{C} \tcdot \probvec^{\mscenario}$,
         \begin{align*}
         \probvec^{\mscenario}_{m_3} + 2 \probvec^{\mscenario}_{m_8} &\leq \probvec^{\mscenario}_{m_{2}} + \probvec^{\mscenario}_{m_{10}} + \probvec^{\mscenario}_{m_{11}} + 2 \probvec^{\mscenario}_{m_{12}} \\
         \prob[][m_3] + 2 \prob[][m_8] &\leq \prob[][m_{2}] + \prob[][m_{10}] + \prob[][m_{11}] + 2 \prob[][m_{12}] \\
@@ -523,63 +541,63 @@
     %     For convenience, denote the $m$-th row of the incidence matrix $M$ as $\de^{m \ext \jointvar}$ and the $j$-th column of $M$ by $\de^{j \res \mscenario}$.
     %     \[ \de^{m \ext \jointvar}_j = \de^{j \res \mscenario}_m  = \de^{\mscenario \ext \jointvar}_{m,j} \]
     %     The following relationships hold for the indicator vectors.
-    %     \[ \de^{\mscenario \ext \jointvar} \cdot \de^{j} = \de^{j \res \mscenario} \qquad \de^{m} \cdot \de^{\mscenario \ext \jointvar} = \de^{m \ext \jointvar} \]
+    %     \[ \de^{\mscenario \ext \jointvar} \tcdot \de^{j} = \de^{j \res \mscenario} \qquad \de^{m} \tcdot \de^{\mscenario \ext \jointvar} = \de^{m \ext \jointvar} \]
     % \end{definition}
     % We first recall that every non-contextual marginal model $\prob^{\mscenario}$ can be written as the convex combination of columns of the incidence matrix $M$.
-    % \[ \probvec^{\mscenario} = M \cdot \probvec^{\jointvar} = \sum_{j \in \Sect{\jointvar}} \de_{m \ext j} \prob[\jointvar][j] \]
+    % \[ \probvec^{\mscenario} = M \tcdot \probvec^{\jointvar} = \sum_{j \in \Events{\jointvar}} \de_{m \ext j} \prob[\jointvar][j] \]
     % Thus we define the set of all non-contextual marginal models as $\mathcal{NC}$,
     % \[ \mathcal{NC} \defined \bc{\probvec^{\mscenario} \mid \probvec^{\mscenario} = \sum_{j} \mu_{j} \de_{j \res \mscenario}, \mu_j \geq 0, \sum_{j} \mu_{j} = 1} \]
 
     % \begin{definition}
-    %     Let $\mscenario$ be a marginal scenario and let $j \in \Sect{\jointvar}$ be a joint outcome. The \term{restriction of $j$ onto $\mscenario$} is deterministic marginal model $\de_{j \res \mscenario} : \Sect{\mscenario} \to \bc{0, 1}$.
+    %     Let $\mscenario$ be a marginal scenario and let $j \in \Events{\jointvar}$ be a joint outcome. The \term{restriction of $j$ onto $\mscenario$} is deterministic marginal model $\de_{j \res \mscenario} : \Events{\mscenario} \to \bc{0, 1}$.
     %     \[ \de_{j \res \mscenario}\br{m} \defined \begin{cases}
     %         1 & j \ext m  \\
     %         0 & \textrm{otherwise}
     %     \end{cases} \]
-    %     As a vector indexed by marginal outcomes $m \in \Sect{\mscenario}$, $\de_{j \ext \mscenario}$ is precisely the $j$-th column of the incidence matrix.
+    %     As a vector indexed by marginal outcomes $m \in \Events{\mscenario}$, $\de_{j \ext \mscenario}$ is precisely the $j$-th column of the incidence matrix.
     % \end{definition}
 
 
 
 
     % \begin{definition}
-    %     The \term{extension of an m-set} $\mset{S}$ into $\jointvar$ denoted $\extmset{S}$ is a vector indexed by \textit{joint} outcomes $j \in \Sect{\jointvar}$ and is defined as follows,
-    %     \[ \extmset{S}_{j} \defined \sum_{s \in \supp{\mset{S}}} \mset{S}_{s} \de_{s \ext j} \eq \label{eq:joint_multiplicity} \]
-    %     As an immediate consequence, the support of $\extmset{S}$ is immediately known,
-    %     \[ \supp{\extmset{S}} = \bigcup_{s \in \supp{\mset{S}}} \Ext[\jointvar]{s} \]
+    %     The \term{extension of an m-set} $\ga{S}$ into $\jointvar$ denoted $\Ga{S}$ is a vector indexed by \textit{joint} outcomes $j \in \Events{\jointvar}$ and is defined as follows,
+    %     \[ \Ga{S}_{j} \defined \sum_{s \in \supp{\ga{S}}} \ga{S}_{s} \de_{s \ext j} \eq \label{eq:joint_multiplicity} \]
+    %     As an immediate consequence, the support of $\Ga{S}$ is immediately known,
+    %     \[ \supp{\Ga{S}} = \bigcup_{s \in \supp{\ga{S}}} \Ext[\jointvar]{s} \]
     % \end{definition}
     % \begin{definition}
-    %     An m-set $\mset{C}$ is an \term{extension cover} of an m-set $\mset{A}$ for a marginal scenario $\mscenario$ if and only if the following two conditions hold\footnote{In fact \cref{eq:multi_extenable_cover_def} implies \cref{eq:flat_extenable_cover_def} since $\forall j \not \in \supp{\extmset{A}} : \extmset{A}_j = 0$.}:
+    %     An m-set $\ga{C}$ is an \term{extension cover} of an m-set $\ga{A}$ for a marginal scenario $\mscenario$ if and only if the following two conditions hold\footnote{In fact \cref{eq:multi_extenable_cover_def} implies \cref{eq:flat_extenable_cover_def} since $\forall j \not \in \supp{\Ga{A}} : \Ga{A}_j = 0$.}:
     %     \begin{gather*}
-    %         \supp{\extmset{A}} \subseteq \supp{\extmset{C}} \eq \label{eq:flat_extenable_cover_def}\\
-    %         \forall j \in \supp{\extmset{A}} : \extmset{A}_{j} \leq \extmset{C}_j \eq \label{eq:multi_extenable_cover_def}
+    %         \supp{\Ga{A}} \subseteq \supp{\Ga{C}} \eq \label{eq:flat_extenable_cover_def}\\
+    %         \forall j \in \supp{\Ga{A}} : \Ga{A}_{j} \leq \Ga{C}_j \eq \label{eq:multi_extenable_cover_def}
     %     \end{gather*}
     % \end{definition}
     % Identifying extension covers is of great importance because of the following theorem.
     % \begin{theorem}
     %     \label{thm:extendable_cover_ineq}
-    %     If the m-set $\mset{C}$ is an extension cover of the m-set $\mset{A}$ for a marginal scenario $\mscenario$, then the following is a valid compatibility $I_{\mscenario}$ for the marginal scenario $\mscenario$.
-    %     \[ \sum_{a \in \supp{\mset{A}}}\mset{A}_a\prob[][a] \leq \sum_{c \in \supp{\mset{C}}}\mset{C}_c\prob[][c] \eq \label{eq:extendable_cover} \]
+    %     If the m-set $\ga{C}$ is an extension cover of the m-set $\ga{A}$ for a marginal scenario $\mscenario$, then the following is a valid compatibility $I_{\mscenario}$ for the marginal scenario $\mscenario$.
+    %     \[ \sum_{a \in \supp{\ga{A}}}\ga{A}_a\prob[][a] \leq \sum_{c \in \supp{\ga{C}}}\ga{C}_c\prob[][c] \eq \label{eq:extendable_cover} \]
     % \end{theorem}
     % \begin{proof}
     %     To prove that \cref{eq:extendable_cover} is a valid compatibility inequality $I_{\mscenario}$ for all marginal models $\prob^\mscenario$, we will demonstrate that \cref{eq:extendable_cover} follows from the assumption that a joint distribution $\prob[\jointvar]$ exists.
 
-    %     For each m-set $\mset{S}$ write the weighted sum over the probabilities $\bc{\prob[][s]}_{s \in \supp{\mset{S}}}$ in terms of the joint distribution $\prob[\jointvar]$ using \cref{eq:joint_multiplicity}.
+    %     For each m-set $\ga{S}$ write the weighted sum over the probabilities $\bc{\prob[][s]}_{s \in \supp{\ga{S}}}$ in terms of the joint distribution $\prob[\jointvar]$ using \cref{eq:joint_multiplicity}.
     %     \begin{align*}
     %     \eq \label{eq:derivation_cover}
     %     \begin{split}
-    %     \sum_{s \in \supp{\mset{S}}} \mset{S}_s\prob[][s] &= \sum_{s \in \supp{\mset{S}}} \mset{S}_s  \sum_{j \in \Ext[\jointvar]{s}} \prob[\jointvar][j] \\
-    %     &= \sum_{s \in \supp{\mset{S}}} \mset{S}_s \sum_{j \in \Sect{\jointvar}} \isext{s}{j} \prob[\jointvar][j] \\
-    %     &= \sum_{j \in \Sect{\jointvar}} \bs{\sum_{s \in \supp{\mset{S}}} \mset{S}_s  \isext{s}{j}} \prob[\jointvar][j] \\
-    %     &= \sum_{j \in \supp{\extmset{S}}} \extmset{S}_j \prob[\jointvar][j]
+    %     \sum_{s \in \supp{\ga{S}}} \ga{S}_s\prob[][s] &= \sum_{s \in \supp{\ga{S}}} \ga{S}_s  \sum_{j \in \Ext[\jointvar]{s}} \prob[\jointvar][j] \\
+    %     &= \sum_{s \in \supp{\ga{S}}} \ga{S}_s \sum_{j \in \Events{\jointvar}} \isext{s}{j} \prob[\jointvar][j] \\
+    %     &= \sum_{j \in \Events{\jointvar}} \bs{\sum_{s \in \supp{\ga{S}}} \ga{S}_s  \isext{s}{j}} \prob[\jointvar][j] \\
+    %     &= \sum_{j \in \supp{\Ga{S}}} \Ga{S}_j \prob[\jointvar][j]
     %     \end{split}
     %     \end{align*}
     %     First examine the substitution $S \to C$,
-    %     \[ \sum_{c \in \supp{\mset{C}}} \mset{C}_c\prob[][c] = \sum_{j \in \supp{\extmset{C}}} \extmset{C}_j \prob[\jointvar][j] \]
-    %     By \cref{eq:flat_extenable_cover_def} $\supp{\extmset{A}} \subseteq \supp{\extmset{C}}$,
-    %     \[ \sum_{c \in \supp{\mset{C}}} \mset{C}_c\prob[][c] = \sum_{j \in \supp{\extmset{C}}} \extmset{C}_j \prob[\jointvar][j] + \sum_{j \in \supp{\extmset{C}} \setminus \supp{\extmset{A}}} \extmset{C}_j \prob[\jointvar][j] \]
-    %     Notice that the sum over $j \in \supp{\extmset{C}} \setminus \supp{\extmset{A}}$ is entirely positive since $\extmset{C}_j \in \N$ and $\prob[\jointvar][j] \geq 0$. Moreover \cref{eq:multi_extenable_cover_def} gives $\extmset{C}_j \geq \extmset{A}_j$. Combining these observations along with \cref{eq:derivation_cover} for $S \to A$, one arrives at the inequality,
-    %     \[ \sum_{c \in \supp{\mset{C}}} \mset{C}_c\prob[][c] \geq \sum_{j \in \supp{\extmset{A}}} \extmset{A}_j \prob[\jointvar][j] = \sum_{a \in \supp{\mset{A}}} \mset{A}_a\prob[][a] \]
+    %     \[ \sum_{c \in \supp{\ga{C}}} \ga{C}_c\prob[][c] = \sum_{j \in \supp{\Ga{C}}} \Ga{C}_j \prob[\jointvar][j] \]
+    %     By \cref{eq:flat_extenable_cover_def} $\supp{\Ga{A}} \subseteq \supp{\Ga{C}}$,
+    %     \[ \sum_{c \in \supp{\ga{C}}} \ga{C}_c\prob[][c] = \sum_{j \in \supp{\Ga{C}}} \Ga{C}_j \prob[\jointvar][j] + \sum_{j \in \supp{\Ga{C}} \setminus \supp{\Ga{A}}} \Ga{C}_j \prob[\jointvar][j] \]
+    %     Notice that the sum over $j \in \supp{\Ga{C}} \setminus \supp{\Ga{A}}$ is entirely positive since $\Ga{C}_j \in \N$ and $\prob[\jointvar][j] \geq 0$. Moreover \cref{eq:multi_extenable_cover_def} gives $\Ga{C}_j \geq \Ga{A}_j$. Combining these observations along with \cref{eq:derivation_cover} for $S \to A$, one arrives at the inequality,
+    %     \[ \sum_{c \in \supp{\ga{C}}} \ga{C}_c\prob[][c] \geq \sum_{j \in \supp{\Ga{A}}} \Ga{A}_j \prob[\jointvar][j] = \sum_{a \in \supp{\ga{A}}} \ga{A}_a\prob[][a] \]
     %     Which is equivalent to \cref{eq:extendable_cover}; every non-contextual marginal model $\prob^{\mscenario}$ must satisfy \cref{eq:extendable_cover}.
     % \end{proof}
     % \begin{corollary}
@@ -587,7 +605,7 @@
     %     Every linear, integer coefficient compatibility inequality that is homogeneous is an extension covering inequality.
     % \end{corollary}
     % \begin{proof}
-    %     A proof is easy to see by contradiction. Let $I_{\mscenario} = \bc{\gamma \cdot \probvec^{\mscenario} \geq 0}$ where $\gamma_m \in \Z | \forall m \in \Sect{\mscenario}$ be a homogeneous, linear, integer coefficient, compatibility inequality such that it is \textit{not} an extension covering inequality. Next seperate $\gamma$ into its positive and negative components,
+    %     A proof is easy to see by contradiction. Let $I_{\mscenario} = \bc{\gamma \tcdot \probvec^{\mscenario} \geq 0}$ where $\gamma_m \in \Z | \forall m \in \Events{\mscenario}$ be a homogeneous, linear, integer coefficient, compatibility inequality such that it is \textit{not} an extension covering inequality. Next seperate $\gamma$ into its positive and negative components,
     %     \[ \gamma_m^{+} = \begin{cases}
     %         \gamma_m & \gamma_m > 0 \\
     %         0 & \gamma_m \leq 0
@@ -597,25 +615,25 @@
     %         -\gamma_m & \gamma_m < 0 \\
     %         0 & \gamma_m \geq 0
     %     \end{cases} \]
-    %     Such that both $\gamma^{+}$ and $\gamma^{-}$ are valid m-sets. Therefore $I_{\mscenario} = \bc{\br{\gamma^{+} - \gamma^{-}} \cdot \probvec^{\mscenario} \geq 0}$. Since this inequality is \textit{not} an extension cover, it must be that there exists at least one joint outcome $j' \in \Sect{\jointvar}$ such that $\Gamma^{-}_{j'} > \Gamma^{+}_{j'}$. Consequently by \cref{eq:derivation_cover}, the deterministic distribution $\probvec^{\mscenario} = \de_{j' \res \mscenario}$ \textit{violates} $I_{\mscenario}$. However since $\de_{j' \res \mscenario} \in \mathcal{NC}$ and violates $I_{\mscenario}$, $I_{\mscenario}$ can not be a compatibility inequality; disagreeing with the assumption that it was.
+    %     Such that both $\gamma^{+}$ and $\gamma^{-}$ are valid m-sets. Therefore $I_{\mscenario} = \bc{\br{\gamma^{+} - \gamma^{-}} \tcdot \probvec^{\mscenario} \geq 0}$. Since this inequality is \textit{not} an extension cover, it must be that there exists at least one joint outcome $j' \in \Events{\jointvar}$ such that $\Gamma^{-}_{j'} > \Gamma^{+}_{j'}$. Consequently by \cref{eq:derivation_cover}, the deterministic distribution $\probvec^{\mscenario} = \de_{j' \res \mscenario}$ \textit{violates} $I_{\mscenario}$. However since $\de_{j' \res \mscenario} \in \mathcal{NC}$ and violates $I_{\mscenario}$, $I_{\mscenario}$ can not be a compatibility inequality; disagreeing with the assumption that it was.
     % \end{proof}
     % \begin{corollary}
-    %     If the m-set $\mset{C}$ is an extension cover of the m-set $\br{A, \mulA}$ for a marginal scenario $\mscenario$, then the following is a valid compatibility $I_{\mscenario}$ for the marginal scenario $\mscenario$.
-    %     \[ \sum_{a \in \supp{\mset{A}}}\prob[][a] \leq \sum_{c \in \supp{\mset{C}}}\prob[][c] \eq \label{eq:extendable_cover_flat} \]
+    %     If the m-set $\ga{C}$ is an extension cover of the m-set $\br{A, \mulA}$ for a marginal scenario $\mscenario$, then the following is a valid compatibility $I_{\mscenario}$ for the marginal scenario $\mscenario$.
+    %     \[ \sum_{a \in \supp{\ga{A}}}\prob[][a] \leq \sum_{c \in \supp{\ga{C}}}\prob[][c] \eq \label{eq:extendable_cover_flat} \]
     % \end{corollary}
     % \begin{proof}
-    %     This follows from the fact that if $\mset{C}$ is an extension cover of $\br{A, \mulA}$, then $\br{C, \mathbf{1}_{C}}$ is an extension cover of $\br{A, \mathbf{1}_{A}}$. Since $E_A \subseteq E_C$ is already trivially satisfied, all that remains is to demonstrate that \cref{eq:multi_extenable_cover_def} holds for unitary multiplicities $\mathbf{1}_A$ and $\mathbf{1}_C$.
+    %     This follows from the fact that if $\ga{C}$ is an extension cover of $\br{A, \mulA}$, then $\br{C, \mathbf{1}_{C}}$ is an extension cover of $\br{A, \mathbf{1}_{A}}$. Since $E_A \subseteq E_C$ is already trivially satisfied, all that remains is to demonstrate that \cref{eq:multi_extenable_cover_def} holds for unitary multiplicities $\mathbf{1}_A$ and $\mathbf{1}_C$.
 
-    %     First examine extension $\br{E_C, \mul{\mext{C}}}$ for the m-set $\mset{C}$ as defined by \cref{eq:joint_multiplicity},
-    %     \[ \forall j \in E_C : \extmset{C}_j = \sum_{c \in \supp{\mset{C}}} \mulC\br{c} \isext{c}{j} \]
+    %     First examine extension $\br{E_C, \mul{\mext{C}}}$ for the m-set $\ga{C}$ as defined by \cref{eq:joint_multiplicity},
+    %     \[ \forall j \in E_C : \Ga{C}_j = \sum_{c \in \supp{\ga{C}}} \mulC\br{c} \isext{c}{j} \]
 
 
     %     First apply \cref{lemma:logical_extenable_set} to an arbitrary set $S \in \bc{A, C}$,
-    %     \[ \bigvee_{s \in \supp{\mset{S}}} s \iff \bigvee_{s \in \supp{\mset{S}}} \bigvee_{j \in \Ext[\jointvar]{s}} j \iff \bigvee_{j \in E_S} j \eq \label{eq:logical_iff_ext}\]
+    %     \[ \bigvee_{s \in \supp{\ga{S}}} s \iff \bigvee_{s \in \supp{\ga{S}}} \bigvee_{j \in \Ext[\jointvar]{s}} j \iff \bigvee_{j \in E_S} j \eq \label{eq:logical_iff_ext}\]
     %     Now since $E_A \subseteq E_C$ by \cref{eq:flat_extenable_cover_def} we have that,
     %     \[ \bigvee_{j \in E_A} j \implies \bigvee_{j \in E_C} j \eq \label{eq:logical_cover}\]
     %     Combining \cref{eq:logical_iff_ext,eq:logical_cover} one arrives at,
-    %     \[ \bigvee_{a \in \supp{\mset{A}}} a \implies \bigvee_{c \in \supp{\mset{C}}}c \]
+    %     \[ \bigvee_{a \in \supp{\ga{A}}} a \implies \bigvee_{c \in \supp{\ga{C}}}c \]
     % \end{proof}
     % For a working example, let $\jointvar = \bc{a, b, c}$ be a set of binary random variables ($O = \bc{0,1}$) and $\mscenario = \bc{\bc{a,b},\bc{b,c},\bc{a,c}}$ be the marginal context.
     \subsubsection{Weighted Hypergraphs}
@@ -636,31 +654,30 @@
     \begin{definition}
         A weighted transversal $\trans$ of a weighted hypergraph $\hgraph_{\weights}$ is a said to be \term{minimal} or have \term{minimal-multiplicities} if all its entries $\trans_n : n \in \nodes$ are minimal in the sense that there does not exist a node $n' \in \supp{\trans}$ such that $\trans - \de^{n'}$ is still a transversal.
         \[ \forall n' \in \nodes : \exists e \in \edges, n' \in e : \sum_{n \in e} \trans_{n} - 1 < w_e  \eq \label{eq:weighted_trans_minimal}\]
-        Equivalently, $\trans$ is minimal if there does not exists another transversal $\trans'$ that precedes $\trans$.
-        \[ \not \exists \trans' \neq \trans : \forall j : \trans'_j \leq \trans_j \]
+        Equivalently, $\trans$ is minimal if there does not exists another transversal $\trans' \neq \trans$ such that $\forall j : \trans'_j \leq \trans_j$.
     \end{definition}
-    Remark than in the situation where all assigned weights are singular $w_e = 1$, the weighted minimality condition \cref{eq:weighted_trans_minimal} reduces to the unweighted minimality condition \cref{eq:flat_trans_minimal}. The principle component of the definite extension procedure can be summarized as follows:
+    Remark that if all assigned weights are singular $w_e = 1$, the weighted minimality condition \cref{eq:weighted_trans_minimal} reduces to the unweighted minimality condition \cref{eq:flat_trans_minimal}. The principle component of the definite extension procedure can be summarized as follows:
 
     \subsubsection{Transversals of Antecedent Hypergraphs}
-    Given an antecedent multi-set $\mset^{A}$ where $\mset^{A} \preceq 0$, identify the \textit{inhibiting set} $\inhibit\br{\mset^{A}}$ responsible for preventing $\extmset^{A}$ from being classified as positive semi-definite. For an antecedent set $\mset^{A}$ where all entries are negative, there are a few equivalent ways of representing the inhibiting set,
-    \[ \inhibit\br{\mset^{A}} = \supp{\extmset^{A}} = \bc{j \mid \extmset^A_j < 0} = \bc{j \mid \exists m \in \supp{\mset^A} : m \ext j } \]
-    The last interpretation corresponding to the extendable set of $\supp{\mset^{A}}$. Using the inhibiting set $\inhibit\br{\mset^{A}}$, construct a weighted hypergraph $\hgraph_\weights\br{\mset^A}$ such that,
+    Given an antecedent multi-set $\ga^{A}$ where $\ga^{A} \preceq 0$, identify the \textit{inhibiting set} $\inhibit\br{\ga^{A}}$ responsible for preventing $\Ga^{A}$ from being classified as positive semi-definite. For an antecedent set $\ga^{A}$ where all entries are negative, there are a few equivalent ways of representing the inhibiting set,
+    \[ \inhibit\br{\ga^{A}} = \supp{\Ga^{A}} = \bc{j \mid \Ga^A_j < 0} = \bc{j \mid \exists m \in \supp{\ga^A} : m \ext j } \]
+    The last interpretation corresponding to the extendable set of $\supp{\ga^{A}}$. Using the inhibiting set $\inhibit\br{\ga^{A}}$, construct a weighted hypergraph $\hgraph_\weights\br{\ga^A}$ such that,
     \begin{align*}
-    \edges\br{\mset^{A}} &= \bc{e_j \mid j \in \inhibit\br{\mset^{A}}} \\
-    e_j &= \bc{m \in \Sect{\mscenario} \mid m \ext j, m \not \in \supp{\ga^A}} \\
-    \weights\br{\mset^{A}} &= \bc{w_j = - \extmset^{A}_j \mid j \in \inhibit\br{\mset^{A}}} \\
-    \nodes\br{\mset^A} &= \bigcup_{j \in \inhibit\br{\mset^A}} e_j \\
-    &= \bc{m \in \Sect{\mscenario} \mid m \not \in \supp{\mset^A}, \exists m' \in \supp{\mset^A} : m \com m'}
+    \edges\br{\ga^{A}} &= \bc{e_j \mid j \in \inhibit\br{\ga^{A}}} \\
+    e_j &= \bc{m \in \Events{\mscenario} \mid m \ext j, m \not \in \supp{\ga^A}} \\
+    \weights\br{\ga^{A}} &= \bc{w_j = - \Ga^{A}_j \mid j \in \inhibit\br{\ga^{A}}} \\
+    \nodes\br{\ga^A} &= \bigcup_{j \in \inhibit\br{\ga^A}} e_j \\
+    &= \bc{m \in \Events{\mscenario} \mid m \not \in \supp{\ga^A}, \exists m' \in \supp{\ga^A} : m \com m'}
     \end{align*}
-    The hyperedges $e_j \in \edges\br{\mset^{A}}$ are indexed by the inhibiting set. Each hyperedge $e_j$ is the subset of marginal outcomes $e_j \subseteq \Sect{\mscenario}$ that are extendable to $j$ (yet not already included in $\ga^A$\footnote{At this point, it might be unclear why we disregard marginal outcomes in $\supp{\ga^A}$. Sufficient reasoning will become apparent when presented with a complete discussion of the definite extension procedure.}). The weights $\weights\br{\mset^A}$ equal the amount that $\extmset^{A}$ needs to recover by, and the nodes $\nodes\br{\mset^A}$ are simply the union of all edges. This weighted hypergraph is termed the \term{antecedent hypergraph}.
+    The hyperedges $e_j \in \edges\br{\ga^{A}}$ are indexed by the inhibiting set. Each hyperedge $e_j$ is the subset of marginal events $e_j \subseteq \Events{\mscenario}$ that are extendable to $j$ (yet not already included in $\ga^A$\footnote{At this point, it might be unclear why we disregard marginal outcomes in $\supp{\ga^A}$. Sufficient reasoning will become apparent when presented with a complete discussion of the definite extension procedure.}). The weights $\weights\br{\ga^A}$ equal the amount that $\Ga^{A}$ needs to recover by, and the nodes $\nodes\br{\ga^A}$ are simply the union of all edges. This weighted hypergraph is termed the \term{antecedent hypergraph}.
     \begin{remark}
         The structure of a hypergraph $\hgraph$ (disregarding weights) is best computationally implemented as a bitwise matrix $H$ where the rows of $H$ are in correspondence with the nodes $n \in \nodes$ of $\hgraph$. Likewise, the columns of $H$ are in correspondence with the edges $e \in \edges$ of $\hgraph$. The entires of $H$ can be populated according to edge inclusion.
         \[ H_{n,e} = \begin{cases}
             1 & n \in e \\
             0 & n \not \in e
         \end{cases} \]
-        Regarding the antecedent hypergraph $\hgraph\br{\mset^A}$, the matrix form $H\br{\mset^A}$ of $\hgraph\br{\mset^A}$ can be constructed by taking the incidence matrix $M$ and deleting rows not in $\nodes\br{\mset^A}$ and columns not in $\edges\br{\mset^A}$. As an example, consider \cref{ex:hypergraph_example} and the hypergraph of \cref{fig:hypergraph_example}. The corresponding matrix representation of the hypergraph of \cref{ex:hypergraph_example} is a sub-matrix of the the incidence matrix depicted in \cref{fig:compact_incidence}.
-        \[ H\br{\mset^A} = \kbordermatrix{
+        Regarding the antecedent hypergraph $\hgraph\br{\ga^A}$, the matrix form $H\br{\ga^A}$ of $\hgraph\br{\ga^A}$ can be constructed by taking the incidence matrix $M$ and deleting rows not in $\nodes\br{\ga^A}$ and columns not in $\edges\br{\ga^A}$. As an example, consider \cref{ex:hypergraph_example} and the hypergraph of \cref{fig:hypergraph_example}. The corresponding matrix representation of the hypergraph of \cref{ex:hypergraph_example} is a sub-matrix of the the incidence matrix depicted in \cref{fig:compact_incidence}.
+        \[ H\br{\ga^A} = \kbordermatrix{
             & j_4 & j_5 & j_6 & j_8 \\
             m_2 & \kone & \kzer & \kzer & \kzer \\
             m_4 & \kzer & \kzer & \kzer & \kone \\
@@ -673,15 +690,24 @@
         Although it is possible to generate antecedent hypergraphs in this manner, we recommend against it. One of the advantages of the definite extension procedure (to be discussed in \cref{sec:advantages_dep}) is that typically the size of an antecedent hypergraph $H$ is \textit{far smaller} than the original incidence matrix $M$. For large enough marginal scenarios, $M$ becomes too resource intensive to hold in memory, while $H$ remains far more manageable.
     \end{remark}
 
-    After generating an antecedent hypergraph $\hgraph\br{\mset^A}$, it is possible to find all valid, homogeneous, non-contextuality inequalities $I_\mscenario = \bc{ \mset \cdot \probvec^{\mscenario} \geq 0}$ by finding all transversals of $\hgraph\br{\mset^A}$. As mentioned previously for each transversal $\trans$, the marginal multi-set $\mset^C$ agreeing with $\trans$ can be constructed,
-    \[ \forall m \in \supp{\trans} : \mset^C_{m} = \trans_m \]
-    Such that $\ga^A + \ga^C$ has definite extension, which by \cref{thm:deinite_extension_main_thm} induces the valid inequality,
-    \[ I_\mscenario = \bc{\br{\mset^C + \mset^A} \cdot \probvec^{\mscenario} \geq 0} \eq \label{eq:transversal_inequality}\]
-    More importantly, one only needs to consider \textit{minimal transversals} of $\hgraph\br{\mset^A}$. If a transversal $\trans$ is non-minimal, then there exists another transversal $\trans'$ such that $\trans' \preceq \trans$. A minimal transversal $\trans'$ would be have correspondence with a tighter inequality $I_\mscenario' = \bc{\br{{\mset'}^C + \mset^A} \cdot \probvec^{\mscenario} \geq 0}$ that is capable of witnessing contextually in a strictly large subset of marginal models $\probvec^{\mscenario}$. \\
+    After generating an antecedent hypergraph $\hgraph\br{\ga^A}$, it is possible to find all valid, homogeneous, non-contextuality inequalities $I_\mscenario = \bc{ \ga \tcdot \probvec^{\mscenario} \geq 0}$ by finding all transversals of $\hgraph\br{\ga^A}$. As mentioned previously for each transversal $\trans$, the marginal multi-set $\ga^C$ agreeing with $\trans$ can be constructed,
+    \[ \forall m \in \supp{\trans} : \ga^C_{m} = \trans_m \]
+    Such that $\ga^A + \ga^C$ has definite extension, which by \cref{thm:definite_extension_main_thm} induces the valid inequality,
+    \[ I_\mscenario = \bc{\br{\ga^C + \ga^A} \tcdot \probvec^{\mscenario} \geq 0} \eq \label{eq:transversal_inequality}\]
+    More importantly, one only needs to consider \textit{minimal transversals} of $\hgraph\br{\ga^A}$. If a transversal $\trans$ is non-minimal, then there exists another transversal $\trans'$ such that $\trans' \preceq \trans$. A minimal transversal $\trans'$ would have correspondence with a tighter inequality $I_\mscenario' = \bc{\br{{\ga'}^C + \ga^A} \tcdot \probvec^{\mscenario} \geq 0}$ that is capable of witnessing contextually in a strictly large subset of marginal models $\probvec^{\mscenario}$. \\
 
     \begin{definition}
-
+        Let $I_1$ and $I_2$ denote two different $\s{NC}$-inequalities.
     \end{definition}
+
+    \begin{definition}
+        Let $\s{Y}$ denote the set of all multi-sets $\ga$ with positive semi-definite extensions,
+        \[ \s{Y} = \bc{\ga \mid \ga \tcdot M = \Ga \succeq 0} \]
+        A multi-set $\ga$ is said to be \term{reducible/redundant} if,
+        \[ \exists \ga^1, \ga^2 \in \s{Y} : \ga = \ga^1 + \ga^2, \ga \neq \ga^1 \neq \ga^2 \neq 0 \]
+    \end{definition}
+
+    \todo[TC]{Figure out language and how to delineate the idea of reducible and irreducible extensions}
 
     Therefore, it is possible to generate a family of \textit{tight} inequalities for each antecedent choice
 
@@ -690,6 +716,10 @@
     \todo[TC]{FM section would demonstrate that linear, homogeneous, integer inequalities are sufficient} \\
     \todo[TC]{Talk about how all facets with antecedent order $n$ would be found by DEP at level $n$} \\
     \todo[TC]{Upper limit of DEP is set by lowest antecedent order of FM result} \\
+    \begin{theorem}
+        \label{thm:completeness}
+        \todo[TC]{main completeness theorem}
+    \end{theorem}
     \subsubsection{Advantages}
     \label{sec:advantages_dep}
     \todo[TC]{Horizontally scalable} \\
@@ -707,6 +737,7 @@
     \label{sec:disadvantages_dep}
     \todo[TC]{We don't yet know exactly how high the hierarchy goes} \\
     \todo[TC]{If complete solution is ultimately desired, FM is in principle far more efficient because it does need to prune anything} \\
+    \todo[TC]{Trivial equalities show that lower-order transversals are equivalent to higher order transversals (maybe not)} \\
     \subsubsection{Unanswered questions}
     % \todo[TC]{How to avoid regenerating inequalities that are reducible to lower order}
     % Corollary \ref{cor:linear_integer} alludes to completeness of extension covers. It vaguely suggests that every non-contextuality inequality needs to be an extension cover, otherwise there would exist a compatible and deterministic distribution that violates it. We will now demonstrate this completeness explicitly by first discussing what is required of a complete solution to the marginal problem.
@@ -724,16 +755,16 @@
     % \begin{proof}
     % \end{proof}
     % \begin{definition}
-    %     An extension cover $\mset{C}$ of $\mset{A}$ is said to be \term{minimal} if there does not exist an extension cover $\mset{C'}$ different from $\mset{C}$ such that,
-    %     \[ \forall j \in \Sect{\jointvar} : \mset{C'}_j \leq \mset{C}_j \]
+    %     An extension cover $\ga{C}$ of $\ga{A}$ is said to be \term{minimal} if there does not exist an extension cover $\ga{C'}$ different from $\ga{C}$ such that,
+    %     \[ \forall j \in \Events{\jointvar} : \ga{C'}_j \leq \ga{C}_j \]
     % \end{definition}
 
-    % If a more minimal extension cover $\mset{C'}$ does exists, then the inequality it defines (as per \cref{thm:extendable_cover_ineq} directly implies the inequality defined by $\mset{C}$.
+    % If a more minimal extension cover $\ga{C'}$ does exists, then the inequality it defines (as per \cref{thm:extendable_cover_ineq} directly implies the inequality defined by $\ga{C}$.
 
     % \begin{definition}
-    %     An extension cover $\mset{C}$ of $\mset{A}$ is said to be \term{reducible} if there exists a \textit{partition} of $\mset{C}$ and $\mset{A}$,
-    %     \[ \mset{C} = \mset{C_1} + \mset{C_2} \qquad \mset{A} = \mset{A_1} + \mset{A_2} \]
-    %     Such that $\mset{C_1}$ is an extension cover for $\mset{A_1}$ and $\mset{C_2}$ is an extension cover for $\mset{A_2}$. If $\br{\mset{C}, \mset{A}}$ does \textit{not} admit a partition, then it is said to be \term{irreducible}.
+    %     An extension cover $\ga{C}$ of $\ga{A}$ is said to be \term{reducible} if there exists a \textit{partition} of $\ga{C}$ and $\ga{A}$,
+    %     \[ \ga{C} = \ga{C_1} + \ga{C_2} \qquad \ga{A} = \ga{A_1} + \ga{A_2} \]
+    %     Such that $\ga{C_1}$ is an extension cover for $\ga{A_1}$ and $\ga{C_2}$ is an extension cover for $\ga{A_2}$. If $\br{\ga{C}, \ga{A}}$ does \textit{not} admit a partition, then it is said to be \term{irreducible}.
     % \end{definition}
 
     % \todo[TC]{Basis certificates}
@@ -742,7 +773,7 @@
     % % \caption{The Extension Cover Procedure (DEP)}
     % % \label{alg:ecp}
     % % \begin{algorithmic}
-    % %   \State $\mset{S}^{0} = \mul{\emptyset}$
+    % %   \State $\ga{S}^{0} = \mul{\emptyset}$
     % % \end{algorithmic}
     % % \end{algorithm}
 
@@ -750,9 +781,9 @@
     % %   \caption{The Extension Cover Procedure (DEP)
     % %     \label{alg:ecp}}
     % %   \begin{algorithmic}[1]
-    % %     \Require{An antecedent m-set $\mset{A}$ and a partial consequent m-set $\mset{S}$.}
+    % %     \Require{An antecedent m-set $\ga{A}$ and a partial consequent m-set $\ga{S}$.}
     % %     \Statex
-    % %     \Function{DEP}{$\mset{A}, \mset{S}$}
+    % %     \Function{DEP}{$\ga{A}, \ga{S}$}
     % %       % \Let{$z$}{$x \oplus y$} \Comment{$\oplus$: bitwise exclusive-or}
     % %       % \Let{$\delta$}{$0$}
     % %       % \For{$i \gets 1 \textrm{ to } n$}
@@ -830,25 +861,80 @@
         In general (as in this example), permutations over all variables can modify the marginal scenario $\gep\bs{\mscenario} \neq \mscenario$; in general we write $\gep\bs{I_{\mscenario}} = \gep\bs{I}_{\gep\bs{\mscenario}}$. Although $\gep\bs{I_{\mscenario}}$ is in fact a valid $\s{NC}$-inequality, in constrains marginal models of a different marginal scenario $\gep\bs{\mscenario}$ and are in general of no interest.
     \end{example}
 
+    \subsection{Marginal Symmetries}
+    As demonstrated by \cref{ex:symmetries}, permutations can be applied to inequalities themselves to generate new inequalities. To formalize this notion, let $\Perm{S}$ denote the \term{permutation group} acting on the set $S$ consisting of all bijective maps $\pi : S \to S$.
+    \[ \Perm{S} = \bc{\pi : S \to S} \eq \label{eq:permutation_group_def}\]
+    Together with the $\abs{S}\times\abs{S}$ permutation matrix $\PermM{\pi}$ for each permutation $\pi$,
+    \[ \forall i,j \in S : \quad {\PermM{\pi}}_{;i,j} \defined \begin{cases}
+        1 & \pi\br{i} = j\\
+        0 & \pi\br{i} \neq j\\
+    \end{cases} \]
+
+    \begin{definition}
+        A \term{marginal symmetry} of $\mscenario$ is a symmetry of the incidence matrix $M$ corresponding to a pair of permutations $\br{\pi_\mscenario \in \Perm{\Events{\mscenario}}, \pi_\jointvar\in \Perm{\Events{\jointvar}}}$ such that $M$ is invariant under permutation.
+        \[ \PermM{\pi_\mscenario} \tcdot M \tcdot \PermM{\pi_\jointvar} = M \]
+    \end{definition}
+
+    Identifying the set of all marginal symmetries for a given marginal model is very important; it allows one to generate new inequalities from known ones.
+
+    \begin{theorem}
+        \label{thm:inequalities_generated_symmetries}
+        For each $\s{NC}$-inequality $I_{\mscenario} = \bc{\ga \tcdot \probvec^{\mscenario} \geq 0}$ and marginal symmetry $\br{\pi_{\mscenario}, \pi_{\jointvar}}$, the inequality $\pi_{\mscenario}\bs{I_{\mscenario}}$ defined by,
+        \[ \pi_{\mscenario}\bs{I_{\mscenario}} \defined \bc{\pi^{-1}_{\mscenario}\bs{\ga} \tcdot \probvec^{\mscenario} \geq 0} \eq \label{eq:thm:inequalities_generated_symmetries}\]
+        is also a valid $\s{NC}$-inequality.
+    \end{theorem}
+    \begin{proof}
+        Since $I_{\mscenario} = \bc{\ga \tcdot \probvec^{\mscenario} \geq 0}$ is a $\s{NC}$-inequality, then by \cref{thm:definite_extension_main_thm}, $\ga \tcdot M = \Ga \succeq 0$. Also note that $\PermM{\pi_{\jointvar}}$ is invertible with $\PermM{\pi_{\jointvar}}^{-1} = \PermM{\pi^{-1}_{\jointvar}}$. Therefore,
+        \[ \Ga\tcdot\PermM{\pi_{\jointvar}}^{-1} = \ga \tcdot M \tcdot \PermM{\pi_{\jointvar}}^{-1} = \ga\tcdot \PermM{\pi_{\mscenario}}\tcdot M \]
+        But $\Ga \succeq 0 \implies \Ga\tcdot\PermM{\pi_{\jointvar}}^{-1} \succeq 0$. Thus,
+        \[ \ga\tcdot\PermM{\pi_{\mscenario}}\tcdot M \succeq 0 \eq \label{eq:thm:inequalities_generated_symmetries_step}\]
+        Interpreting $\ga\tcdot\PermM{\pi_{\mscenario}}$ as a multi-set for $\mscenario$,
+        \[ \forall m \in \Events{\mscenario} : \br{\ga\tcdot\PermM{\pi_{\mscenario}}}_m = \ga_{\pi^{-1}_{\mscenario}\bs{m}} \defined \pi^{-1}_{\mscenario}\bs{\ga}_m \]
+        Therefore \cref{eq:thm:inequalities_generated_symmetries_step} shows that $\pi^{-1}_{\mscenario}\bs{\ga}$ has a positive semi-definite extension and thus \cref{thm:definite_extension_main_thm} proves that \cref{eq:thm:inequalities_generated_symmetries} is also a valid $\s{NC}$-inequality.
+    \end{proof}
+    \begin{remark}
+        There are two equivalent interpretations for the permuted inequality $\pi_{\mscenario}\bs{I_{\mscenario}}$ of \cref{thm:inequalities_generated_symmetries}. Notice,
+        \[ \pi^{-1}_{\mscenario}\bs{\ga} \tcdot \probvec^{\mscenario} = \ga \tcdot \La_{\pi_{\mscenario}} \tcdot \probvec^{\mscenario} = \ga \tcdot \pi_{\mscenario}\bs{\probvec}^{\mscenario} \]
+        Which means one can either think of $\pi_{\mscenario}\bs{I_{\mscenario}}$ as being $I_{\mscenario}$ with the coefficients rearranged, or with the probabilistic assignments rearranged.
+    \end{remark}
+
+    \todo[TC]{Discuss the importance of symmetries to restrict branching in DEP}
+
+    Diagrammatically, for each marginal event $m \in \Events{\mscenario}$ and joint event $j \in \Events{\jointvar}$, the notion of extendability is preserved by $\br{\pi_\mscenario, \pi_\jointvar}$.
+    \begin{center}
+        \begin{tikzpicture}
+            \newcommand{\symmetryspace}{1.5};
+            \draw (0, \symmetryspace) node[](m){$m$};
+            \draw (\symmetryspace, \symmetryspace) node[](j){$j$};
+            \draw (0, 0) node[](pm){$\pi_{\mscenario}\bs{m}$};
+            \draw (\symmetryspace, 0) node[](pj){$\pi_{\jointvar}\bs{j}$};
+
+            \draw[->] (m) -- node[left]{$\pi_\mscenario$}(pm);
+            \draw[->] (j) -- node[right]{$\pi_\jointvar$}(pj);
+            \draw[-<] (m) -- (j);
+            \draw[-<] (pm) -- (pj);
+        \end{tikzpicture}
+    \end{center}
+    Fortunately, every incidence matrix $M$ has a useful \term{uniqueness property}: there are no duplicated columns or rows in $M$. This means that in every marginal symmetry $\br{\pi_\mscenario, \pi_\jointvar}$, $\pi_\jointvar$ is uniquely determined by $\pi_\mscenario$ and vice versa. Therefore we restrict our attention and discussions to row permutations $\pi_\mscenario$, with column permutations being in one-to-one correspondence. Henceforth we will denote to the most general marginal symmetry using $\pi$ and take it to mean a permutation over marginal events. \\
+
+
     \subsection{Outcome Symmetry}
     \label{sec:outome_label_symmetry}
-    As demonstrated by \cref{ex:symmetries}, permutations of outcomes can be applied to inequalities themselves to generate new inequalities. To formalize this notion, let $\Perm{S}$ denote the \term{permutation group} acting on the set $S$ consisting of all bijective maps $s : S \to S$.
-    \[ \Perm{S} = \bc{s : S \to S} \eq \label{eq:permutation_group_def}\]
     \begin{definition}
-        The \term{outcome symmetry group} $\go$ for the set of joint variables $\jointvar = \bc{v_1, \ldots, v_n}$ is the direct product of permutations over the outcome labels for each variable $v \in \jointvar$,
+        The \term{outcome symmetry group} $\go$ for the set of joint variables $\jointvar = \bc{v_1, \ldots, v_n}$ is the direct product of permutations over the outcomes for each variable $v \in \jointvar$,
         \[ \go \defined \Perm{O_{v_1}} \times \cdots \times \Perm{O_{v_n}} = \prod_{v \in \jointvar} \Perm{O_{v}} \]
-        The action of $\geo \in \go$ on any section $s \in \Sect{V}$ (denoted $\geo\bs{s}$) where $V \subseteq \jointvar$ is defined as,
+        The action of $\geo \in \go$ on any event $s \in \Events{V}$ (denoted $\geo\bs{s}$) where $V \subseteq \jointvar$ is defined as,
         \[ \forall v \in \Dom{s} : \br{\geo\bs{s}}\br{v} \defined \geo\bs{s\br{v}} \eq \label{eq:act_on_outcome_label}\]
     \end{definition}
-    \begin{lemma}
-        \label{lem:extendable_invariance_acto}
-        If a marginal section $m \in \Sect{\mscenario}$ is extendable to the joint section $j \in \Sect{J}$, then for any outcome permutation $\geo \in \go$, $\geo\bs{m}$ is extendable to $\geo\bs{j}$.
+    \begin{theorem}
+        \label{thm:extendable_invariance_acto}
+        If a marginal event $m \in \Events{\mscenario}$ is extendable to the joint event $j \in \Events{J}$, then for any outcome permutation $\geo \in \go$, $\geo\bs{m}$ is extendable to $\geo\bs{j}$.
         \[ m \ext j \iff \geo\bs{m} \ext \geo\bs{j} \eq \label{eq:extendable_invariance_acto}\]
-    \end{lemma}
+    \end{theorem}
     \begin{proof}
         The proof should be clear by the definition of extendability (\cref{def:section_extendable}).
         \[ m \ext j \iff \forall v \in \Dom{m} : j\br{v} = m\br{v} \]
-        Every label permutation $\geo \in \go$ leaves the outcome domain invariant $\Dom{m} = \Dom{\geo\bs{m}}$. Thus by \cref{eq:act_on_outcome_label},
+        Every outcome permutation $\geo \in \go$ leaves the domain of the event invariant $\Dom{m} = \Dom{\geo\bs{m}}$. Thus by \cref{eq:act_on_outcome_label},
         \begin{align*}
         \forall v \in \Dom{\geo\bs{m}}: \br{\geo\bs{j}}\br{v} = \geo\bs{j\br{v}} = \geo\bs{m\br{v}} = \br{\geo\bs{m}}\br{v}
         \end{align*}
@@ -856,25 +942,9 @@
     \end{proof}
     \begin{corollary}
         \label{coll:incidence_invariance}
-        Let $M$ be the incidence matrix for a marginal scenario $\mscenario$ and $\geo \in \go$ be a label permutation of the joint random variables $\jointvar$. By \cref{lem:extendable_invariance_acto}, the action of $\geo$ on $M$ leaves $M$ invariant ($\geo\bs{M} = M$),
+        Let $M$ be the incidence matrix for a marginal scenario $\mscenario$ and $\geo \in \go$ be an outcome permutation of the joint random variables $\jointvar$. By \cref{thm:extendable_invariance_acto}, the action of $\geo$ on $M$ leaves $M$ invariant ($\geo\bs{M} = M$),
         \[ \geo\bs{M}_{m,j} \defined M_{\geo\bs{m},\geo\bs{j}} = \de_{\geo\bs{m} \ext \geo\bs{j}} = \de_{m \ext j} = M_{m,j} \eq \label{eq:incidence_invariance}\]
     \end{corollary}
-    \begin{theorem}
-        \label{thm:inequalities_outcome_label_generation}
-        For each $\s{NC}$-inequality $I_{\mscenario}$ and outcome permutation $\geo \in \go$, the inequality defined by $\geo\bs{I_{\mscenario}} = \geo\bs{I}_{\mscenario}$ is also a valid $\s{NC}$-inequality.
-    \end{theorem}
-    \begin{proof}
-        First let $I_{\mscenario} = \bc{\ga \cdot \probvec^{\mscenario} \geq 0}$ be a $\s{NC}$-inequality for the marginal scenario $\mscenario$ where $\ga$ is the multi-set associated with $I_{\mscenario}$. Furthermore let $\geo\bs{I_{\mscenario}} = \geo\bs{I}_{\mscenario} = \bc{\ga \cdot \geo\bs{\probvec}^{\mscenario} \geq 0}$ be the inequality obtained after permuting $\probvec^{\mscenario}$ defined as,
-        \[ \forall m \in \Sect{\mscenario} : \geo\bs{\probvec}^{\mscenario}_m \defined \probvec^{\mscenario}_{\geo\bs{m}} \]
-        It should be clear to see that $\ga \cdot \geo\bs{\probvec}^{\mscenario}$ can be rewritten as,
-        \[ \ga \cdot \geo\bs{\probvec}^{\mscenario} = \sum_{m \in \Sect{\mscenario}} \ga_{m} \probvec^{\mscenario}_{\geo\bs{m}} = \sum_{m' \in \Sect{\mscenario}} \ga_{\geo^{-1}\bs{m'}} \probvec^{\mscenario}_{m'} = \geo^{-1}\bs{\ga} \cdot \probvec^{\mscenario}\]
-        Therefore the permuted inequality is equivalent to,
-        \[ \geo\bs{I}_{\mscenario} = \bc{\geo^{-1}\bs{\ga} \cdot \probvec^{\mscenario} \geq 0} \]
-        All that remains to be proven is that $\geo^{-1}\bs{\ga}$ forms a valid certificate for the incidence matrix $M$. Since $\geo \in \go$, \cref{coll:incidence_invariance} gives,
-        \[ \br{\geo^{-1}\bs{\ga} \cdot M}_j = \sum_{m \in \Sect{\mscenario}} \geo^{-1}\bs{\ga}_m \de_{m\ext j} = \sum_{m \in \Sect{\mscenario}} \bs{\ga}_m \de_{\geo\bs{m}\ext j} = \sum_{m \in \Sect{\mscenario}} \bs{\ga}_m \de_{m\ext \geo^{-1}\bs{j}} = \br{\ga \cdot M}_{\geo^{-1}\bs{j}} \]
-        But since $I_{\mscenario}$ is a $\s{NC}$-inequality, $\ga \cdot M \succeq 0$ and thus $\geo^{-1}\bs{\ga} \cdot M \succeq 0$ making $\geo\bs{I}_{\mscenario}$ a $\s{NC}$-inequality as well.
-    \end{proof}
-
     \subsection{Variable Symmetry}
 
     In \cref{sec:outome_label_symmetry}, permutations of outcomes were introduced as symmetries of the incidence matrix $M$. However the proof of \cref{thm:inequalities_outcome_label_generation} indicates that any permutation leaving the incidence matrix intact can be used to generate new inequalities. \\
@@ -886,29 +956,10 @@
     \begin{definition}
         The \term{variable permutation group} $\gp$ for a marginal scenario $\mscenario$ is the joint permutation subgroup that stabilizes the marginal scenario.
         \[ \Phi \defined \bc{\gep \in \Perm{\jointvar} \mid \forall V \in \mscenario : \gep\bs{V} \in \mscenario} \]
-        The action of $\gep \in \gp$ on any outcome $f \in \Sect{V}$ (denoted $\geo\bs{f}$) is defined as,
+        The action of $\gep \in \gp$ on any outcome $f \in \Events{V}$ (denoted $\geo\bs{f}$) is defined as,
         \[ \forall v \in \Dom{\gep\bs{f}} : \br{\gep\bs{f}}\br{v} \defined f\br{\gep^{-1}\bs{v}} \eq \label{eq:act_on_variable}\]
     \end{definition}
 
-    \subsection{Marginal Symmetries}
-
-    \begin{definition}
-        A \term{marginal symmetry} of $\mscenario$ is a symmetry of the incidence matrix $M$ corresponding to a tuple $\br{\pi_\mscenario, \pi_\jointvar}$ such that $\pi_X \in \Perm{\Sect{X}}$ for $X= \mscenario, \jointvar$ such that the following diagram holds for all $m \in \Sect{\mscenario}$ and $j \in \Sect{\jointvar}$.
-        \begin{center}
-            \begin{tikzpicture}
-                \newcommand{\symmetryspace}{1.5};
-                \draw (0, \symmetryspace) node[](m){$m$};
-                \draw (\symmetryspace, \symmetryspace) node[](j){$j$};
-                \draw (0, 0) node[](pm){$\pi_{\mscenario}\bs{m}$};
-                \draw (\symmetryspace, 0) node[](pj){$\pi_{\jointvar}\bs{j}$};
-
-                \draw[->] (m) -- node[left]{$\pi_\mscenario$}(pm);
-                \draw[->] (j) -- node[right]{$\pi_\jointvar$}(pj);
-                \draw[-<] (m) -- (j);
-                \draw[-<] (pm) -- (pj);
-            \end{tikzpicture}
-        \end{center}
-    \end{definition}
 
     \subsection{Causal Symmetry}
 
@@ -990,12 +1041,12 @@
         Label invariance is a prerequisite for any kind of symmetry amoung random variables.
     \end{definition}
     \begin{definition}
-        Let $\jointvar = \br{v_1, \ldots v_k}$ be a collection of random variables along with a specific outcome $m \in \Sect{V}$ where $V \subseteq \jointvar$. The action of $\gep \in \Perm{\jointvar}$ on $m$ is a new outcome $\gep\bs{m} \in \Sect{\gep\bs{V}}$ over $\gep\bs{V} \subseteq \jointvar$ defined as follows,
+        Let $\jointvar = \br{v_1, \ldots v_k}$ be a collection of random variables along with a specific outcome $m \in \Events{V}$ where $V \subseteq \jointvar$. The action of $\gep \in \Perm{\jointvar}$ on $m$ is a new outcome $\gep\bs{m} \in \Events{\gep\bs{V}}$ over $\gep\bs{V} \subseteq \jointvar$ defined as follows,
         \[ \forall v \in V : \br{\gep\bs{m}}\br{\gep\bs{v}} \defined m \br{v} \]
         The idea being that $\gep$ modifies $m$ in such a way that permutes its domain while leaving its range invariant.
     \end{definition}
     \begin{example}
-        Consider the outcome $m = \bc{A \mapsto 0, B \mapsto 1, C \mapsto 2} \in \Sect{\bc{A,B,C}}$ where all variables have $4$ possible outcomes $O_A = O_B = O_C = \bc{0,1,2,3}$ and the permutation $\gep = \bc{A \to D, B \to C, C \to B, D \to A}$.
+        Consider the outcome $m = \bc{A \mapsto 0, B \mapsto 1, C \mapsto 2} \in \Events{\bc{A,B,C}}$ where all variables have $4$ possible outcomes $O_A = O_B = O_C = \bc{0,1,2,3}$ and the permutation $\gep = \bc{A \to D, B \to C, C \to B, D \to A}$.
         The \textit{action} of $\gep$ on $m$ is as follows,
         \begin{align*}
             \gep\bs{m} &= \gep\bs{\bc{A \mapsto m\br{A}, B \mapsto m\br{B}, C \mapsto m\br{C}}} \\
@@ -1004,10 +1055,10 @@
             &= \bc{D \mapsto 0, C \mapsto 1, B \mapsto 2} \\
             &= \bc{B \mapsto 2, C \mapsto 1, D \mapsto 0}
         \end{align*}
-        Evidently, $\gep\bs{m} \in \Sect{\bc{B, C, D}}$.
+        Evidently, $\gep\bs{m} \in \Events{\bc{B, C, D}}$.
     \end{example}
 
-    Through repeated action of $\gep \in \gp$ on marginal outcomes $m \in \Sect{\mscenario}$ and joint outcomes $j \in \Sect{\jointvar}$, one can define group orbits of $\gp$ in $\Sect{\mscenario}$ and $\Sect{\jointvar}$.
+    Through repeated action of $\gep \in \gp$ on marginal outcomes $m \in \Events{\mscenario}$ and joint outcomes $j \in \Events{\jointvar}$, one can define group orbits of $\gp$ in $\Events{\mscenario}$ and $\Events{\jointvar}$.
     \begin{align*}
         \Orb[\gp]{m} &\defined \bc{\gep\bs{m} \mid \gep \in \gp} \\
         \Orb[\gp]{j} &\defined \bc{\gep\bs{j} \mid \gep \in \gp}
@@ -1277,21 +1328,21 @@
 
     \begin{definition}
         The \term{product distribution} of two disjoint probability distributions $\prob[V]$ and $\prob[W]$ (where $V \cap W = \emptyset$) is denoted as $\prob[V] \times \prob[W]$.
-        \[ \forall f \in \Sect{V \cup W} : \br{\prob[V] \times \prob[W]}\br{f} \defined \prob[V][f|_{V}]\cdot\prob[W][f|_{W}] \]
+        \[ \forall f \in \Events{V \cup W} : \br{\prob[V] \times \prob[W]}\br{f} \defined \prob[V][f|_{V}]\tcdot\prob[W][f|_{W}] \]
         A product distribution of $k$ mutually disjoint distributions is defined as,
         \[ \prod_{i\in\bs{k}} \prob[V_i] \defined \br{\prob[V_1] \times \cdots \times \prob[V_k]} \]
     \end{definition}
 
     \begin{definition}
         The \term{marginalization} of a distribution $\prob[V]$ to a distribution over $W \subseteq V$ is denoted $\sum_{V \setminus W} \prob[V]$ and is defined such that,
-        \[ \forall f \in \Sect{W} : \br{\sum_{V \setminus W} \prob[V]}\br{f} \defined \sum_{g \in \Ext[V]{f}} \prob[V][g] \]
+        \[ \forall f \in \Events{W} : \br{\sum_{V \setminus W} \prob[V]}\br{f} \defined \sum_{g \in \Ext[V]{f}} \prob[V][g] \]
     \end{definition}
 
     \section{Exemplary Inequalities}
     \section{Connections to Sheaf-Theoretic Treatment}
     \section{Computationally Efficient Parametrization of the Unitary Group}
     Spengler, Huber and Hiesmayr~\cite{Spengler_2010_Unitary} suggest the parameterization of the unitary group $\mathcal{U}\br{d}$ using a $d\times d$-matrix of real-valued parameters $\lambda_{n, m}$,
-    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} \exp\br{i P_n \lambda_{n,m}}\exp\br{i \si_{m,n} \lambda_{m,n}}}} \cdot \bs{\prod_{l=1}^{d} \exp\br{iP_l \lambda_{l,l}}}  \eq \label{eq:spengler_unitary} \]
+    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} \exp\br{i P_n \lambda_{n,m}}\exp\br{i \si_{m,n} \lambda_{m,n}}}} \tcdot \bs{\prod_{l=1}^{d} \exp\br{iP_l \lambda_{l,l}}}  \eq \label{eq:spengler_unitary} \]
     Where $P_l$ are one-dimensional projective operators,
     \[ P_l = \ket{l}\bra{l} \eq \label{eq:projective_operator} \]
     and the $\si_{m,n}$ are generalized anti-symmetric $\si$-matrices,
@@ -1324,7 +1375,7 @@
     \[ R_{m,n} = \mathbb{I} + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \sum_{j=1}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j}}{\br{2j}!} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sum_{j=0}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j+1}}{\br{2j+1}!} \]
     \[ R_{m,n} = \mathbb{I} + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sin\lambda_{n,m} \eq \label{eq:unitary_R} \]
     By combining the optimizations of \cref{eq:unitary_RP,eq:unitary_R,eq:unitary_GP} together we arrive at an equivalent form for \cref{eq:spengler_unitary} that is computational more efficient.
-    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} RP_{n,m}R_{m,n}}} \cdot \bs{\prod_{l=1}^{d} GP_l} \eq \label{eq:fast_spengler_unitary} \]
+    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} RP_{n,m}R_{m,n}}} \tcdot \bs{\prod_{l=1}^{d} GP_l} \eq \label{eq:fast_spengler_unitary} \]
     In quantum mechanics, the global phase of a state $\ket{\psi} \in \Hilb^n$ is a \textit{redundant} parameter. Parameterizing unitaries using \cref{eq:fast_spengler_unitary} is especially attractive since the global phase terms $GP_l$ can be dropped, allowing one to parameterize all unitaries in $\mathcal{U}\br{d}$ up to this degeneracy~\cite{Spengler_2010_Unitary}\footnote{In our implementation, we accomplish this by explicitly setting $\lambda_{l,l} = 0$ in \cref{eq:unitary_GP}}.
     \[ U_{/ GP_l} = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} RP_{n,m}R_{m,n}}} \eq \label{eq:fast_spengler_unitary_gp} \]
     \todo[TC]{Explanation of Computational Complexity $\mathcal{O}\br{d^3}$ vs. $\mathcal{O}\br{1}$ using~\cite{Moler_2003}}
