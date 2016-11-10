@@ -1,0 +1,479 @@
+\documentclass[
+    hyperref={colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=MidnightBlue},
+    xcolor={dvipsnames},
+]{beamer}
+
+\setbeameroption{show notes}
+\usefonttheme[onlymath]{serif}
+
+\usepackage{../../packages/shared}
+\usepackage{../../packages/misc_commands}
+
+% === Causal structure formatting for tikz ===
+\input{../../figures/causal_structures/formatting}
+
+\renewcommand{\term}[1]{\textcolor{Mahogany}{#1}}
+
+\title[Triangle Inequalities]{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Scenario}
+\author[Fraser]{T.~C.~Fraser\inst{1}}
+\institute[PI]
+{
+    \inst{1}%
+    Perimeter Institute for Theoretical Physics\\
+    Ontario, Canada
+}
+\date[QN 2016]{Quantum Networks, 2016}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\begin{frame}[allowframebreaks]
+    \frametitle{References}
+    \todo[TC]{Figure out how to get references at the end}
+    \setbeamertemplate{bibliography item}{\insertbiblabel}
+    \bibliographystyle{abbrv}
+    \bibliography{../references}{}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Table of Contents}
+\tableofcontents
+
+\end{frame}
+
+\section{Tools}
+
+\begin{frame}
+    \frametitle{Introduction}
+    \note[item]{\todo[TC]{}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Notation}
+    \begin{itemize}
+        \item Complete set of random variables are the \term{joint random variables}
+        \[ \jointvar = \bc{v_1, \cdots, v_n} \]
+        \item A subset of $V \subset \jointvar$ is a \term{marginal context}
+        \item \term{Marginal scenario} $\mscenario$
+        \[ \mscenario = \bc{V_1, \ldots, V_k \mid V_i \subset \jointvar} \quad \jointvar = {\bigcup}_{i} V_i  \]
+        \item Marginal scenario forms a \textit{simplicial complex}
+        \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
+        \item Restrict focus to \textit{maximal} marginal scenario where only the largest contexts are present
+        \[ \forall V_i, V_j \in \mscenario : V_i \not \subset V_j \]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Notation Cont'd}
+    \begin{itemize}
+        \item \term{Marginal model} $\prob^{\mscenario}$ is collection of probability distributions
+        \[ \prob^{\mscenario} = \bc{\prob[V_1], \ldots, \prob[V_k]} \]
+        \item \term{Causal Structure} $\graph = \br{\nodes, \edges}$ is a directed acyclic graph (DAG)
+        \item Nodes classified into \term{latent nodes} $\nodes_{L}$ and \term{observed nodes} $\nodes_{O}$
+    \end{itemize}
+    \todo[TC]{Insert generic causal structure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Graph Theory [Optional Slide]}
+    Let $n, m \in \nodes$ be nodes of the graph $\graph$.
+    \begin{itemize}
+        \item \term{parents of $n$}: $\Pa[\graph]{n} \defined \bc{m \mid m \to n}$
+        \item \term{children of $n$}: $\Ch[\graph]{n} \defined \bc{m \mid n \to m}$
+        \item \term{ancestry of $n$}: $\An[\graph]{n} \defined \bigcup_{i\in\mathbb{W}} \Pa[\graph][i]{n}$
+        \[ \Pa[\graph][0]{n} = n \qquad \Pa[\graph][i]{n} \defined \Pa[\graph]{\Pa[\graph][i-1]{n}} \]
+    \end{itemize}
+    Notation extends to sets of nodes $N \subseteq \nodes$,
+    \begin{itemize}
+        \item \term{parents of $N$}: $\Pa[\graph]{N} \defined \bigcup_{n\in N}\Pa[\graph]{n}$
+        \item \term{children of $N$}: $\Ch[\graph]{N} \defined \bigcup_{n\in N}\Ch[\graph]{n}$
+        \item \term{ancestry of $N$}: $\An[\graph]{N} \defined \bigcup_{n\in N}\An[\graph]{n}$
+    \end{itemize}
+    An \term{induced subgraph} of $\graph = \br{\nodes, \edges}$ due to $N \subseteq \nodes$
+    \[ \Sub[\graph]{N} = \br{N, \bc{e \in \edges \mid e \subseteq N}} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Causal Compatibility}
+    \textbf{Question:} Is a marginal model $\prob^{\mscenario}$ \term{compatible} with a causal structure $\graph$?\\
+    \[ \mscenario = \bc{V_1, \ldots, V_k \mid V_i \subset \nodes_O} \]
+    \textbf{Answer:} $\prob^{\mscenario}$ is compatible with $\graph$ if there exists a set of \term{casual parameters}
+    \[ \bc{\prob[n \mid \Pa[\graph]{n}] \mid n \in \nodes} \]
+    Such that for each $V \in \mscenario$, $\prob[V]$ can be recovered:
+    \begin{enumerate}
+        \item $\prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}]$
+        \item $\prob[V] = \sum_{\nodes \setminus V} \prob[\nodes]$
+    \end{enumerate}
+
+    A \term{casual compatibility inequality} is an inequality over $\prob^{\mscenario}$ that is satisfied by all compatible $\prob^{\mscenario}$
+    \note<1>[item]{}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Triangle Scenario}
+    \begin{columns}
+        \column{0.4\linewidth}
+            \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario}}
+        \column{0.6\linewidth}
+            \begin{itemize}
+                \item Three parties $\nodes_O = \bc{A, B, C}$
+                \item Pair-wise sharing three latent variables $\nodes_L = \bc{X, Y, Z}$
+                \item \todo[TC]{Inject info about existing work}
+                \item There exists \textit{quantum-accessible} distributions $\prob[ABC]$ that are \textit{incompatible} with the triangle scenario
+            \end{itemize}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Fritz Distribution}
+    The \term{Fritz Distribution $\prob[F]$}:
+    \begin{itemize}
+        \item three-party $\prob[F] = \prob[ABC]$
+        \item each party has four outcomes
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflation Technique}
+    \begin{itemize}
+        \item Developed by Wolfe, Spekkens, and Fritz \cite{Inflation}
+    \end{itemize}
+    \begin{definition}
+        An \term{inflation} of a causal structure $\graph$ is another causal structure $\graph'$ such that:
+        \[ \forall n' \in \nodes', n' \sim n \in \nodes: \AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \]
+        Where $\AnSub[\graph]{n}$ denotes the ancestral sub-graph of $n$ in $\graph$
+        \[ \AnSub[\graph]{n} = \Sub[\graph]{\An[\graph]{n}} \]
+        And '$\sim$' is a \term{copy-index} equivalence relation
+        \[ A_1 \sim A_2 \sim A \not \sim B_1 \sim B_2 \sim B \]
+    \end{definition}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflations of the Triangle Scenario}
+    \begin{center}
+    \begin{tabular}{cc}
+        %\hline
+        \scalebox{0.5}{\input{../../figures/causal_structures/triangle_scenario}}
+        &
+        \scalebox{0.5}{\input{../../figures/causal_structures/inflated_triangle_scenario_spiral}}
+        \\
+        %\hline
+        The Triangle Scenario
+        &
+        Spiral Inflation \\
+        %\hline
+        \scalebox{0.5}{\input{../../figures/causal_structures/inflated_triangle_scenario_cut}}
+        &
+        \scalebox{0.5}{\input{../../figures/causal_structures/inflated_triangle_scenario}}
+        \\
+        %\hline
+        Cut Inflation
+        &
+        Large Inflation \\
+        %\hline
+    \end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflation Lemma}
+    If one has obtained $\graph$, inflation $\graph'$ and \textit{compatible} marginal distribution $\prob[N]$ where $N \subseteq \nodes$, then:
+    \begin{enumerate}
+        \item There exists causal parameters $\bc{\prob[n\mid\Pa[\graph]{n}] \mid n \in \nodes}$ such that
+        \[ \prob[N] = \prod_{n \in N}\prob[n\mid\Pa[\graph]{n}] \]
+        \item $\AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \implies \Pa[\graph']{n'} \sim \Pa[\graph]{n}$
+        \item Construct \term{inflated causal parameters}
+        \[ \forall n' \in \nodes' : \prob[n'\mid\Pa[\graph']{n'}] \defined \prob[n\mid\Pa[\graph]{n}]\]
+        \item Obtain \textit{compatible} marginal distributions over any $N' \subseteq \nodes'$
+        \[ \prob[N'] = \prod_{n' \in N'}\prob[n'\mid\Pa[\graph']{n'}] \]
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflation Lemma Cont'd}
+    \begin{itemize}
+        \item Inflation procedure holds for any $N \in \nodes, N' \in \nodes'$ where $N \sim N'$
+        \item Define \term{injectable sets of $\graph'$} and \term{images of the injectable of $\graph$}
+        \begin{align*}
+            \Inj[\graph]{\graph'} &\defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : N \sim N'} \\
+            \ImInj[\graph]{\graph'} &\defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : N \sim N'} \\
+        \end{align*}
+        \item For $N' \in \Inj[\graph]{\graph'}$ there is a \textit{unique} $N \subseteq \nodes$ such that $N \sim N'$
+        \item For $N \in \Inj[\graph]{\graph}$ there can \textit{exist many} $N' \subseteq \nodes'$ such that $N \sim N'$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflation Lemma Cont'd}
+    \begin{lemma}
+        \term{The Inflation Lemma:}~\cite[lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$, if a marginal model $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ is compatible with $\graph$ then all marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
+    \end{lemma}
+    \begin{corollary}
+        Any causal compatibility inequality $I'$ constraining the injectable sets $\Inj[\graph]{\graph'}$ can be \term{deflated} into a causal compatibility inequality $I$ constraining the images of the injectable sets $\ImInj[\graph]{\graph'}$.
+    \end{corollary}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Inflation Lemma Cont'd}
+    \begin{lemma}
+        \term{The Inflation Lemma:}~\cite[lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$, if a marginal model $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ is compatible with $\graph$ then all marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
+    \end{lemma}
+    \begin{corollary}
+        Any causal compatibility inequality $I'$ constraining the injectable sets $\Inj[\graph]{\graph'}$ can be \term{deflated} into a causal compatibility inequality $I$ constraining the images of the injectable sets $\ImInj[\graph]{\graph'}$.
+    \end{corollary}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflation Pipeline}
+    \note[item]{Walk through how the inflation pipeline works}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outcomes and Events}
+    \begin{itemize}
+        \item Set of \term{outcomes} $O_v$ for each variable $v$
+        \item Set of \term{events} for a set of variables $V$
+        \[ \Events{V} \defined \bc{s: V \to O_V \mid \forall v \in V, s\br{v} \in O_v} \]
+    \end{itemize}
+    \begin{definition}
+        The set of events over the joint variables $\Events{\jointvar}$ are termed the \term{joint events}.
+    \end{definition}
+    \begin{definition}
+        The set of events over the marginal contexts are the \term{marginal events}
+        \[ \Events{\mscenario} \defined \coprod_{V \in \mscenario} \Events{V} \]
+    \end{definition}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Incidence Matrix}
+    \begin{itemize}
+        \item Incidence matrix $M$ is a bit-wise matrix
+        \item Row-indexed by marginal events $m \in \Events{\mscenario}$
+        \item Column-indexed by joint events $j \in \Events{\jointvar}$
+        \[ M_{m,j} = \begin{cases}
+            1 & m \text{ compatible with } j \\
+            0 & \text{otherwise}
+        \end{cases} \]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Application to Large Inflation}
+    \begin{columns}
+        \column{0.6\linewidth}
+            \begin{itemize}
+                \item Tackling Large inflation
+                \item 12 pre-injectable sets (to follow)
+            \end{itemize}
+        \column{0.4\linewidth}
+            \scalebox{0.5}{\input{../../figures/causal_structures/inflated_triangle_scenario}}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Large Inflation Pre-injectable Sets}
+    \begin{equation*}
+        \begin{gathered}
+            \textbf{Maximal Pre-injectable Sets} \\
+            \bc{A_1, B_1, C_1, A_4, B_4, C_4} \\
+            \bc{A_1, B_2, C_3, A_4, B_3, C_2} \\
+            \bc{A_2, B_3, C_1, A_3, B_2, C_4} \\
+            \bc{A_2, B_4, C_3, A_3, B_1, C_2} \\
+            \bc{A_1, B_3, C_4} \\
+            \bc{A_1, B_4, C_2} \\
+            \bc{A_2, B_1, C_4} \\
+            \bc{A_2, B_2, C_2} \\
+            \bc{A_3, B_3, C_3} \\
+            \bc{A_3, B_4, C_1} \\
+            \bc{A_4, B_1, C_3} \\
+            \bc{A_4, B_2, C_1}
+        \end{gathered}
+        \qquad
+        \begin{gathered}
+            \textbf{Ancestral Independences} \\
+            \bc{A_1, B_1, C_1} \ancestralindep \bc{A_4, B_4, C_4} \\
+            \bc{A_1, B_2, C_3} \ancestralindep \bc{A_4, B_3, C_2} \\
+            \bc{A_2, B_3, C_1} \ancestralindep \bc{A_3, B_2, C_4} \\
+            \bc{A_2, B_4, C_3} \ancestralindep \bc{A_3, B_1, C_2} \\
+            \bc{A_1} \ancestralindep \bc{B_3} \ancestralindep \bc{C_4} \\
+            \bc{A_1} \ancestralindep \bc{B_4} \ancestralindep \bc{C_2} \\
+            \bc{A_2} \ancestralindep \bc{B_1} \ancestralindep \bc{C_4} \\
+            \bc{A_2} \ancestralindep \bc{B_2} \ancestralindep \bc{C_2} \\
+            \bc{A_3} \ancestralindep \bc{B_3} \ancestralindep \bc{C_3} \\
+            \bc{A_3} \ancestralindep \bc{B_4} \ancestralindep \bc{C_1} \\
+            \bc{A_4} \ancestralindep \bc{B_1} \ancestralindep \bc{C_3} \\
+            \bc{A_4} \ancestralindep \bc{B_2} \ancestralindep \bc{C_1}
+        \end{gathered}
+    \end{equation*}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Large Inflation Incidence}
+    \begin{itemize}
+        \item Joint variables are all of the observable nodes $\nodes_O' = \jointvar$
+        \[ \jointvar = \bc{A_1, A_2, A_3, A_4,B_1, B_2, B_3, B_4,C_1, C_2, C_3, C_4} \]
+        \item Marginal scenario is composed of pre-injectable sets $\mscenario = \PreInj[\graph]{\graph'}$
+        \item Inequalities Violated by Fritz distribution are inherently $4$-outcome
+        \item Incidence matrix $M$ is very large $\sim 2.25 \textsf{Gb}$
+        \[ \# \text{Columns} = \prod_{v \in \jointvar} O_{v} = 4^{12} = 16,777,216 \]
+        \[ \# \text{Rows} = \sum_{V \in \mscenario} \prod_{v \in V} O_{v} = 4\times 4^{6} + 8 \times 4^{3} = 16,896 \]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inequalities Found}
+\end{frame}
+
+\section{Symmetries}
+\begin{frame}
+    \frametitle{Causal Symmetry}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Symmetric Incidence}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Symmetric Inequalities}
+\end{frame}
+
+\section{Searching for New Distributions}
+\begin{frame}
+    \frametitle{Numerical Optimization}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Parameterizing Quantum Distributions}
+    For our purposes, we need to parameterize the space of quantum-accessible distributions that are \textit{realized} on the Triangle Scenario
+    \[ \prob[ABC]\br{abc} = \Tr\bs{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm M_{A,a}\otimes M_{B,b} \otimes M_{C,c}} \]
+    \begin{center}
+        \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario_operational}}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Parameterizing Unitary Group}
+    \begin{itemize}
+        \item Spengler, Huber and Heismayr \cite{Spengler_2010_Unitary} demonstrate a parameterization of $\s{U}\br{d}$ where the parameters are organized in a $d \times d$-matrix of real values $\la_{n,m}$
+        \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n} RP_{n,m}}} \tcdot \bs{\prod_{l=1}^{d} GP_{l}} \]
+        \item Global Phase Terms: $GP_{l} = \exp\br{iP_l \lambda_{l,l}}$
+        \item Relative Phase Terms: $RP_{m,n} = \exp\br{i P_n \lambda_{n,m}}$
+        \item Rotation Terms: $R_{n,m} = \exp\br{i \si_{m,n} \lambda_{m,n}}$
+        \item Projection Operators: $P_l = \ket{l}\bra{l}$
+        \item Anti-symmetric $\si$-matrices: $\si_{m,n} = - i\ket{m}\bra{n} + i \ket{n}\bra{m}$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Parameterizing Unitary Group Cont'd}
+    \begin{itemize}
+        \item Each parameter $\la_{n,m}$ has physical interpretation
+        \item Degeneracies are easily eliminated such as global phase
+        \[ \forall l = 1, \ldots, d : \la_{l,l} = 0 \implies GP_{l} = 1 \]
+        \item Parameterize $U \in \s{U}\br{d}$ up to global phase denoted $\ti{U} \in \s{U}\br{d}$
+        \item Computationally efficient
+        \begin{alignat*}{2}
+            GP_l &= \ident &&+ P_l \br{e^{i\la_{l,l}} - 1} \\
+            RP_{m,n} &= \ident &&+ P_n \br{e^{i\la_{n,m}} - 1} \\
+            R_{n,m} &= \ident &&+ \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} \\
+            & &&+ \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sin\lambda_{n,m} \\
+        \end{alignat*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Parameterizing States}
+    \begin{itemize}
+        \item Each latent resource $\rho \in \br{\rho_{AB}, \rho_{BC}, \rho_{CA}}$ modeled as bipartite qubit state acting on $\Hilb^{d/2} \otimes \Hilb^{d/2}$
+        \item $d \times d$ positive semi-definite (PSD) hermitian matrices with unitary trace
+        \item \term{Cholesky Parametrization} allows one to write any hermitian PSD as $\rho = T^{\dagger} T$
+        \item For $d = 4$:
+        \[ T = \begin{bmatrix}\la_{1}&0&0&0\\\la_{2} + i \la_{3}&\la_{4}&0&0\\\la_{5} + i \la_{6}&\la_{7} + i \la_{8}&\la_{9}&0\\\la_{10} + i \la_{11}&\la_{12} + i \la_{13}&\la_{14} + i \la_{15}&\la_{16}\end{bmatrix} \]
+        \item $d^2$ real-valued parameters
+        \item Normalized $\rho = {T^{\dagger}T}/{\Tr\br{T^{\dagger} T}}$ adds degeneracy
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Parameterizing States Cont'd}
+    \begin{itemize}
+        \item \term{SHH parameterization} \cite{Spengler_2010_Unitary} exploits spectral decomposition; for rank $k \leq d$ density matrix
+        \[ \rho = \sum_{i=1}^{k} p_i \ket{\psi_i} \bra{\psi_i} \qquad p_i \geq 0, \sum_i p_i = 1 \]
+        \item Orthonormal $k$-element sub-basis $\bc{\ket{\psi_i}}$ of $\Hilb^d$ can be transformed into computational basis $\bc{\ket{i}}$ by unitary $U \in \s{U}\br{d}$ such that $\ket{\psi_i} = U \ket{i}$
+        \item Freedom to choice $k$
+        \item Parameterize $\rho$ through $\bc{p_i}$ and $\ti{U}_{k}$
+        \[ \ti{U}_{k} = \prod_{m=1}^{k} \br{\prod_{n={m+1}}^{d} R_{m,n} RP_{n,m}} \]
+        \item $d^2 - \br{d-k}^2 - k + \br{k-1} = 2dk -k^2 -1$ real-valued parameters (no-degeneracy)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Parameterizing POVMs}
+    \begin{itemize}
+        \item Each party $\br{A, B, C}$ is assigned a \term{projective-operator valued measure (POVM)} $\br{M_A, M_B, M_C}$
+        \[ \forall \ket{\psi} \in \Hilb^d : \bra{\psi} M_\chi \ket{\psi} \geq 0 \quad M_\chi = M_\chi^{\dagger} \]
+        \item $n$-outcome measurement
+        \[ M_\chi = \bc{M_{\chi, 1}, \ldots, M_{\chi, n}} \quad \sum_{i=1}^{n} M_{\chi, i} = \ident \]
+        \item For $n = 2$ outcomes, a parameterization exists by constraining the eigenvalues of $M_{\chi, i}$; for $n > 2$ not aware of anything
+        \item Warrants consideration of \term{projective-valued measures (PVMs)} (for $n = d$ this is without loss of generality)
+    \end{itemize}
+    \note<1>[item]{Naimark's Dilation Theorem}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Parameterizing PVMs}
+    \begin{itemize}
+        \item Each party $\br{A, B, C}$ is assigned $n$-outcome $\br{M_A, M_B, M_C}$ such that,
+        \[ M_{\chi,i}M_{\chi,j} = \de_{ij} M_{\chi, i} \quad M_{\chi, i} = \ket{m_{\chi,i}}\bra{m_{\chi,i}} \]
+        \item Inspired by \cite{Pal_2010}, parameterizing PVMs means parameterizing a $n$-element sub-basis $\bc{\ket{m_{\chi,i}}}$
+        \item Use unitary transformation again
+        \[ \bc{\ket{m_{\chi,1}}, \ldots, \ket{m_{\chi,n}}} = \bc{U \ket{1}, \ldots, U \ket{n}} \]
+        \item Global phase and remaining basis irrelevant: $\ti{U}_{n}$ requires $2dn -n^2 -1$ real-valued parameters\
+        \item PVMs are computationally more efficient
+    \end{itemize}
+    \[ \prob[ABC]\br{abc} = \bra{m_{A,a}m_{B,b}m_{C,c}}{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm}\ket{m_{A,a}m_{B,b}m_{C,c}} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Network Permutation Matrix}
+    \begin{columns}
+        \column{0.6\linewidth}
+        \begin{itemize}
+            \item States and measurements in the Triangle Scenario are not aligned
+            \item Without $\netperm$, $\prob[ABC]$ would be separable
+            \item Required to align $B$'s measurement over $\Tr_{A,C}\br{\rho_{AB} \otimes \rho_{BC}}$
+            \item $\netperm$ is a $2^6 \times 2^6$ matrix
+        \end{itemize}
+        \column{0.4\linewidth}
+            \includegraphics[trim={1.0cm 1.2cm 1.0cm 1cm},clip,width=1.0\textwidth]{../../figures/perm_mtrx.pdf}
+    \end{columns}
+    \begin{itemize}
+        \item Shifts one qubit to the left
+        \[ \netperm \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Maximally Violating Distributions}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Non-Trivial Inequalities For Large Inflation}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Conclusions}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Post-doc Opportunities At Perimeter}
+\end{frame}
+
+\end{document}

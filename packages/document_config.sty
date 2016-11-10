@@ -1,0 +1,22 @@
+% ===================================================================
+% === This separate file is created to avoid conflict with beamer ===
+% ===================================================================
+
+% === Numbering For amsthm theorem environments ===
+\usepackage{amsthm} % The AMS theorems package
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% === To avoid conflict with beamer ===
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=MidnightBlue]{hyperref} % automatic hyperlinks that are blue
+\usepackage[dvipsnames]{xcolor} % For divps compatible colors
+

@@ -1,107 +1,13 @@
 % === Revtex Declaration ===
 \documentclass[aps, 10pt, english, twoside, pra, nofootinbib, longbibliography]{revtex4-1}
 
-% \usepackage{silence}
-% \WarningFilter{revtex4-1}{Repair the float}
-% \usepackage{algorithm}
-% \usepackage[noend]{algpseudocode}
 % === All of the Packages I use frequently ===
-\usepackage{../packages/shared}
-
-% === Drafting Declarations ===
-\draftprofile[TC Fraser]{TC}{Red}
-\draftprofile[Elie Wolfe]{E}{Green}
-
-% === Numbering For amsthm theorem environments ===
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-
-% === To allow for labeling of rows and columns of a matrix ===
-%\usepackage{kbordermatrix}
-\usepackage{../packages/kbordermatrix}
-\renewcommand{\kbldelim}{(} % Left delimiter
-\renewcommand{\kbrdelim}{)} % Right delimiter
-
-% === Commonly re-occurring symbols ===
-\newcommand{\hgraph}{\mathcal{H}}
-\newcommand{\graph}{\mathcal{G}}
-\newcommand{\nodes}{\mathcal{N}}
-\newcommand{\weights}{\mathcal{W}}
-\newcommand{\edges}{\mathcal{E}}
-\newcommand{\trans}{\mathcal{T}}
-\newcommand{\ind}{S}
-\newcommand{\inhibit}{\mathcal{I}}
-\newcommand{\netperm}{\Pi}
-\newcommand{\Hilb}{\mathcal{H}}
-\newcommand{\ancestralindep}{\perp}
-\newcommand{\valprod}{\times}
-\newcommand{\bigvalprod}{\prod}
-\newcommand{\com}{\mathrel{\Yright\hspace{-0.2em}\Yleft}}
-\newcommand{\ext}{\mathrel{\Yleft}}
-\newcommand{\res}{\mathrel{\Yright}}
-\newcommand{\gep}{\varphi}
-\newcommand{\gp}{\Phi}
-\newcommand{\geo}{\omega}
-\newcommand{\go}{\Omega}
-\newcommand{\mscenario}{\mathcal{M}}
-\newcommand{\jointvar}{\mathcal{J}}
-% \newcommand{\mset}{\gamma}
-% \newcommand{\extmset}{\Gamma}
-\newcommand{\supp}[1]{\si\br{#1}}
-\newcommand{\kone}{\mathbf{1}}
-\newcommand{\kzer}{\textcolor{gray}{0}}
-
-% \newcommand{\mext}[1]{E_{#1}}
-% \newcommand{\mul}[1]{\Gamma_{#1}}
-\newcommand{\isext}[2]{\delta_{#1 \ext #2}}
-\newcommand{\ts}{{\graph}}
-% When I introduce a new term or definition
-\newcommand{\term}[1]{\textcolor{Mahogany}{\textbf{#1}}}
-\newcommand{\tcdot}{} % Tentative cdot, not sure if I want to keep dots
-
-% === Mathematical operators that are denoted with words ===
-\newcommand{\setoperator}[1]{%
-\expandafter\DeclareDocumentCommand\csname#1\endcsname{O{} O{} m}{{\mathsf{#1}_{##1}^{##2}}\br{##3}}%
-}
-
-\setoperator{Pa} % Parents of a node
-\setoperator{Ch} % Children of a node
-\setoperator{An} % Ancestry of a node
-\setoperator{Sub} % subgraph
-\setoperator{AnSub} % Ancestral subgraph
-\setoperator{Ext} % Extension of outcomes
-\setoperator{Com} % Compatible equivalence relation
-\setoperator{Nec} % Necessary nodes
-\setoperator{UnNec} % Unnecessary nodes
-\setoperator{Inj} % injectable sets
-\setoperator{ImInj} % images of the injectable sets
-\setoperator{PreInj} % Pre-injectable sets
-\setoperator{ImPreInj} % images of the Pre-injectable sets
-\setoperator{Aut} % graph automorphism
-\setoperator{Orb} % Group Orbits
-\setoperator{Perm} % Permutation group
-\newcommand{\PermM}[1]{\La_{#1}} % Permutation matrix
-% \setoperator{Out} % Outcome space
-\newcommand{\Events}[1]{\s{E}\br{#1}} % Set of events
-\newcommand{\Dom}[1]{\s{D}\br{#1}} % Domian
-% \setoperator{Dom} % Domian
-% \setoperator{Dom} % Domian
-
-\newcommand{\outc}[1]{o\bs{#1}} % Fritz's BBTII notation for observed outcomes
-\DeclareDocumentCommand{\prob}{O{} O{}}{\ifthenelse{\equal{#1}{}}{P}{P_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution
-\DeclareDocumentCommand{\probvec}{O{} O{}}{\ifthenelse{\equal{#1}{}}{\mathcal{P}}{\mathcal{P}_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution vector
+\usepackage{../../packages/document_config}
+\usepackage{../../packages/shared}
+\usepackage{../../packages/misc_commands}
 
 % === Causal structure formatting for tikz ===
-\input{../figures/causal_structures/formatting}
+\input{../../figures/causal_structures/formatting}
 
 \begin{document}
     \title{Inequalities Witnessing Quantum Incompatibility in The Triangle Scenario}
@@ -509,7 +415,7 @@
             \end{minipage}\hspace{0.04\textwidth}%
             \begin{minipage}[b]{.48\textwidth}
                 \centering
-                \scalebox{1.0}{\input{../figures/hypergraphs/minimal_example}}
+                \scalebox{1.0}{\input{../../figures/hypergraphs/minimal_example}}
                 \caption{An edge-weighted hypergraph $\hgraph_{\weights}$ corresponding to the antecedent set $\ga^{A}$ with $\ga^{A}_{m_3} = -1$ and $\ga^{A}_{m_8} = -2$.}
                 \label{fig:hypergraph_example}
             \end{minipage}
@@ -1081,13 +987,13 @@
     \begin{center}
         \begin{minipage}[b]{.48\textwidth}
             \centering
-            \scalebox{1.0}{\input{../figures/causal_structures/triangle_scenario}}
+            \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario}}
             \caption{The casual structure of the Triangle Scenario. Three variables $A,B,C$ are observable and illustrated as triangles, while $X, Y, Z$ are latent variables illustrated as circles.}
             \label{fig:triangle_scenario}
         \end{minipage}\hspace{0.04\textwidth}%
         \begin{minipage}[b]{.48\textwidth}
             \centering
-            \scalebox{0.8}{\input{../figures/causal_structures/inflated_triangle_scenario}}
+            \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_scenario}}
             \caption{An inflated causal structure of the Triangle Scenario \cref{fig:triangle_scenario}.}
             \label{fig:inflated_triangle_scenario}
         \end{minipage}
@@ -1239,13 +1145,13 @@
     \begin{center}
         \begin{minipage}[b]{.48\textwidth}
             \centering
-            \includegraphics{../figures/CHSH_convex.pdf}
+            \includegraphics{../../figures/CHSH_convex.pdf}
             \caption{Convex optimizations against $I\tsb{CHSH}$ recover algebraic violation of $4$.}
             \label{fig:CHSH_convex}
         \end{minipage}\hspace{0.04\textwidth}%
         \begin{minipage}[b]{.48\textwidth}
             \centering
-            \includegraphics{../figures/CHSH_quantum.pdf}
+            \includegraphics{../../figures/CHSH_quantum.pdf}
             \caption{Quantum optimizations against $I\tsb{CHSH}$ recover maximum violation of $2\sqrt{2}$.}
             \label{fig:CHSH_quantum}
         \end{minipage}
@@ -1431,7 +1337,7 @@
     \subsection{Network Permutation Matrix}
     \begin{figure}
         \centering
-        \includegraphics[trim={1cm 1.2cm 1.0cm 1cm},clip,width=0.4\textwidth]{../figures/perm_mtrx.pdf}
+        \includegraphics[trim={1cm 1.2cm 1.0cm 1cm},clip,width=0.4\textwidth]{../../figures/perm_mtrx.pdf}
         \caption{The network permutation matrix $\netperm$ for $\br{\Hilb^2}^{\otimes 6}$ realized on the triangle scenario. Black represents a value of $1$ and $0$ otherwise.}
         \label{fig:perm_mtrx}
     \end{figure}
@@ -1463,5 +1369,5 @@
     \[ p_j = \f{\abs{\lambda_j}}{\sum_{i=1}^{n} \abs{\lambda_i}} \quad \forall j \in 1, \ldots, n \eq \label{eq:uniform_param} \]
     For various convex optimization tasks sensitive to initial conditions outlined \cref{sec:optimizations}, the latter parameterization of \cref{eq:uniform_param} generally performed better than the former \cref{eq:convex_param}.
 
-    \bibliography{references}
+    \bibliography{../references}
 \end{document}

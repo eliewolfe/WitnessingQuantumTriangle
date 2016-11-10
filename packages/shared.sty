@@ -1,8 +1,7 @@
 % === Packages ===
-\usepackage[colorlinks=true, linkcolor=blue, citecolor=MidnightBlue]{hyperref} % automatic hyperlinks that are blue
 \usepackage{siunitx} % For units
 \usepackage{amsmath} % American mathematics society
-\usepackage{amsthm} % The AMS theorems package
+\usepackage{bbm}
 \usepackage{esint} % For closed integrals
 \usepackage{listings} % For code snippets
 \usepackage{amssymb} % For set symbols
@@ -11,10 +10,8 @@
 % \usepackage[style=phys]{biblatex} % For physics style formatting
 \usepackage{ifthen} % For checking optional parameters
 \usepackage{color} % For Colors
-\usepackage[dvipsnames]{xcolor} % For divps compatible colors
 \usepackage{array} % For better tables
 \usepackage[makeroom]{cancel} % For canceling out terms
-\hypersetup{colorlinks, urlcolor=blue} % blue links when using \url{...}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{extramarks} % Required for headers and footers
 \usepackage{lastpage} % For total page count
@@ -38,6 +35,10 @@
 \usepackage{csquotes} % For quotes
 
 % === Custom Packages ===
-\usepackage{../packages/mathmacros} % For TC's custom macros for math
-\usepackage{../packages/scope} % For TC's custom set, const, and scope parameters configuarion
-\usepackage{../packages/draft} % For identifying work unfinished
+\usepackage{../../packages/mathmacros} % For TC's custom macros for math
+\usepackage{../../packages/scope} % For TC's custom set, const, and scope parameters configuarion
+\usepackage{../../packages/draft} % For identifying work unfinished
+
+% === Drafting Declarations ===
+\draftprofile[TC Fraser]{TC}{Red}
+\draftprofile[Elie Wolfe]{E}{Green}
