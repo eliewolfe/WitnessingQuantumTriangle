@@ -13,6 +13,7 @@
 \usepackage{../../packages/misc_commands}
 \input{../../figures/causal_structures/formatting} % Causal structure formatting for tikz
 \renewcommand{\term}[1]{\textcolor{Mahogany}{#1}}
+\renewcommand{\tcdot}{\cdot} % Tentative cdot, not sure if I want to keep dots
 
 
 \title[Triangle Inequalities]{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Scenario}
@@ -276,6 +277,11 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{$d$-Separation Polynomial}
+
+\end{frame}
+
+\begin{frame}
     \frametitle{Triangle Scenario}
     \begin{columns}
         \column{0.4\linewidth}
@@ -320,27 +326,69 @@
     \end{definition}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Distribution Vectors}
+    \begin{itemize}
+        \item \term{Joint Distribution Vector $\probvec^{\jointvar}$}
+        \[ \forall j \in \Events{\jointvar} : \probvec^{\jointvar}_j = \prob[\jointvar][j] \]
+        \item \term{Marginal Distribution Vector $\probvec^{\mscenario}$}
+        \[ \forall m \in \Events{\mscenario} : \probvec^{\mscenario}_m = \prob[\Dom{m}][m] \]
+    \end{itemize}
+\end{frame}
 
 \begin{frame}
     \frametitle{Incidence Matrix}
     \begin{itemize}
-        \item Incidence matrix $M$ is a bit-wise matrix
+        \item Marginal Problem as linear program
+        \begin{align*}
+            \probvec^{\mscenario}_m &= {\sum}_{j} M_{m,j} \probvec^{\jointvar}_j \\
+            \probvec^{\mscenario} &= M \tcdot \probvec^{\jointvar}
+        \end{align*}
+        \item \term{Incidence matrix} $M$ is a bit-wise matrix
         \item Row-indexed by marginal events $m \in \Events{\mscenario}$
         \item Column-indexed by joint events $j \in \Events{\jointvar}$
         \[ M_{m,j} = \begin{cases}
-            1 & m \text{ compatible with } j \\
+            1 & m = j|_{\Dom{m}} \\
             0 & \text{otherwise}
         \end{cases} \]
+        \begin{gather*}
+        \# \text{Columns} = \abs{\Events{\jointvar}} = \prod_{v \in \jointvar} \abs{O_{v}} \\
+        \# \text{Rows} = \abs{\Events{\mscenario}} = \sum_{V \in \mscenario} \prod_{v \in V} \abs{O_{v}}
+        \end{gather*}
+
     \end{itemize}
 \end{frame}
+
+\begin{frame}[shrink=10]
+    \frametitle{Example}
+    Let $\jointvar$ be $3$ binary variables $\jointvar = \bc{A,B,C}$ and $\mscenario$ be the marginal scenario $\mscenario = \bc{\bc{A,B}, \bc{B,C}, \bc{A,C}}$. The incidence matrix becomes:
+    \[ M = \kbordermatrix{
+        (A,B,C) \:\: = & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
+        (A=0, B=0) & \kone & \kone & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer \\
+        (A=0, B=1) & \kzer & \kzer & \kone & \kone & \kzer & \kzer & \kzer & \kzer \\
+        (A=1, B=0) & \kzer & \kzer & \kzer & \kzer & \kone & \kone & \kzer & \kzer \\
+        (A=1, B=1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kone \\
+        (B=0, C=0) & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer \\
+        (B=0, C=1) & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer \\
+        (B=1, C=0) & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer \\
+        (B=1, C=1) & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone \\
+        (A=0, C=0) & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer & \kzer \\
+        (A=0, C=1) & \kzer & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer \\
+        (A=1, C=0) & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone & \kzer \\
+        (A=1, C=1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone
+    } \]
+\end{frame}
+
+
 
 \begin{frame}
     \frametitle{Application to Large Inflation}
     \begin{columns}
         \column{0.6\linewidth}
             \begin{itemize}
-                \item Tackling Large inflation
-                \item 12 pre-injectable sets (to follow)
+                \item Find compatibility inequalities for TS by finding non-contextuality inequalities for Large Inflation
+                \item Marginal Scenario is the set of maximal pre-injectable sets
+                \item 12 maximal pre-injectable sets (to follow)
             \end{itemize}
         \column{0.4\linewidth}
             \scalebox{0.5}{\input{../../figures/causal_structures/inflated_triangle_scenario}}
@@ -393,8 +441,8 @@
         \item Marginal scenario is composed of pre-injectable sets $\mscenario = \PreInj[\graph]{\graph'}$
         \item Inequalities Violated by Fritz distribution are inherently $4$-outcome
         \item Incidence matrix $M$ is very large $\sim 2.25 \textsf{Gb}$
-        \[ \# \text{Columns} = \prod_{v \in \jointvar} O_{v} = 4^{12} = 16,777,216 \]
-        \[ \# \text{Rows} = \sum_{V \in \mscenario} \prod_{v \in V} O_{v} = 4\times 4^{6} + 8 \times 4^{3} = 16,896 \]
+        \[ \# \text{Columns} = 4^{12} = 16,777,216 \]
+        \[ \# \text{Rows} =  4\times 4^{6} + 8 \times 4^{3} = 16,896 \]
     \end{itemize}
 \end{frame}
 
@@ -454,8 +502,8 @@
         \item Spengler, Huber and Heismayr \cite{Spengler_2010_Unitary} demonstrate a parameterization of $\s{U}\br{d}$ where the parameters are organized in a $d \times d$-matrix of real values $\la_{n,m}$
         \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n} RP_{n,m}}} \tcdot \bs{\prod_{l=1}^{d} GP_{l}} \]
         \item Global Phase Terms: $GP_{l} = \exp\br{iP_l \lambda_{l,l}}$
-        \item Relative Phase Terms: $RP_{m,n} = \exp\br{i P_n \lambda_{n,m}}$
-        \item Rotation Terms: $R_{n,m} = \exp\br{i \si_{m,n} \lambda_{m,n}}$
+        \item Relative Phase Terms: $RP_{n,m} = \exp\br{i P_n \lambda_{n,m}}$
+        \item Rotation Terms: $R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}}$
         \item Projection Operators: $P_l = \ket{l}\bra{l}$
         \item Anti-symmetric $\si$-matrices: $\si_{m,n} = - i\ket{m}\bra{n} + i \ket{n}\bra{m}$
     \end{itemize}
@@ -471,8 +519,8 @@
         \item Computationally efficient
         \begin{alignat*}{2}
             GP_l &= \ident &&+ P_l \br{e^{i\la_{l,l}} - 1} \\
-            RP_{m,n} &= \ident &&+ P_n \br{e^{i\la_{n,m}} - 1} \\
-            R_{n,m} &= \ident &&+ \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} \\
+            RP_{n,m} &= \ident &&+ P_n \br{e^{i\la_{n,m}} - 1} \\
+            R_{m,n} &= \ident &&+ \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} \\
             & &&+ \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sin\lambda_{n,m} \\
         \end{alignat*}
     \end{itemize}
