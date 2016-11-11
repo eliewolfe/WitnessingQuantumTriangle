@@ -1,21 +1,22 @@
 \documentclass[
-    hyperref={colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=MidnightBlue},
+    % hyperref={bookmarks=false,colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=MidnightBlue},
     xcolor={dvipsnames},
 ]{beamer}
 
-\setbeameroption{show notes}
-\usefonttheme[onlymath]{serif}
-
+% \usepackage{pgfpages} % For viewing slides on the right
+\usepackage[warningthreshold=0.95]{resizegather} % For resizing gather environment to fit massive equations
+\setbeameroption{show notes} % Shows notes on the right of the main slides
+% \setbeameroption{show notes on second screen}
+\usefonttheme[onlymath]{serif} % For serif font in math mode
+\usepackage[round]{natbib} % Needed for Author name citations
 \usepackage{../../packages/shared}
 \usepackage{../../packages/misc_commands}
-
-% === Causal structure formatting for tikz ===
-\input{../../figures/causal_structures/formatting}
-
+\input{../../figures/causal_structures/formatting} % Causal structure formatting for tikz
 \renewcommand{\term}[1]{\textcolor{Mahogany}{#1}}
 
+
 \title[Triangle Inequalities]{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Scenario}
-\author[Fraser]{T.~C.~Fraser\inst{1}}
+\author[Fraser]{T.C.~Fraser\inst{1}}
 \institute[PI]
 {
     \inst{1}%
@@ -33,7 +34,7 @@
     \frametitle{References}
     \todo[TC]{Figure out how to get references at the end}
     \setbeamertemplate{bibliography item}{\insertbiblabel}
-    \bibliographystyle{abbrv}
+    \bibliographystyle{plainnat}
     \bibliography{../references}{}
 \end{frame}
 
@@ -47,33 +48,94 @@
 
 \begin{frame}
     \frametitle{Introduction}
-    \note[item]{\todo[TC]{}}
+    \note[item]{Thank International Institute for Physics (IIP) for support}
+    \note[item]{Thank Perimeter Institute for Theoretical Physics (PI) for support}
 \end{frame}
+\begin{frame}
+    \frametitle{Objective}
+    \begin{itemize}
+        \item Derive causal compatibility/locality inequalities that distinguish quantum distributions from classical ones
+        \item Specifically for the Triangle Scenario (TS)
+    \end{itemize}
+    \begin{center}
+        \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario}}
+    \end{center}
+    \note[item]{Research project's goal was to derive new causal compatibility inequalities that distinguish quantum correlations from classical correlations}
+    \note[item]{More specifically, the ambition of the project is to obtain such inequalities that constraint compatibility with The Triangle Scenario}
+    \note[item]{Triangle Scenario has be studied extensively before}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Objective Cont'd}
+    \begin{itemize}
+        \item In~\citet{Branciard_2012} it was noted that characterizing locality in TS remained an open problem and that identifying compatibility constraints in this configuration \textbf{seemed challenging}
+        \item In~\citet{Fritz_2012}, Fritz demonstrated that TS is the \textbf{smallest} correlation scenario in which their exists quantum incompatible distributions (proof without inequalities)
+        \item In~\citet{Henson_2014}, TS was classified as an \textbf{interesting} causal structure: conditional independence relations are not a sufficient characterization of compatibility
+        \item Several other authors (see~\cite{Steudel_2010},~\cite{Chaves_2014},~\cite{Inflation}, $\ldots$) have investigated TS without achieving research objective
+    \end{itemize}
+    \note[item]{At the time of publishing~\citet{Branciard_2012}, problem seems hard.}
+    \note[item]{Important because its smallest correlation scenario with quantum non-locality.}
+    \note[item]{Compatibility can not be determined from conditional independence relations (there are none)}
+    \note[item]{It would be interesting to find quantum non-locality in the triangle scenario that does not rely on Bell's theorem.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{This Talk}
+    \begin{itemize}
+        \item Report the discovery of such inequalities
+        \item Explain how these inequalities were obtained
+        \item Discuss quantum distributions that violate compatibility inequalities
+        \item Attempts at finding new quantum distributions different than those proposed by~\cite{Fritz_2012}
+        \item Briefly discuss symmetric inequalities
+    \end{itemize}
+    \note[item]{The purpose of this talk is to present these new-found inequalities and explain how they were obtained}
+    \note[item]{Additionally I will talk about my attempts at using these inequalities to find new incompatible quantum distributions}
+    \note[item]{In doing so, will discuss how we obtained symmetric compatibility inequalities that have violations in the Triangle Scenario}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example Inequality}
+    \begin{itemize}
+        \item Quick example/preview:
+    \end{itemize}
+    \input{../../figures/inequalities/nosymwitness_ineq_print_pretty}
+    \begin{itemize}
+        \item $\prob[][abc]$ shorthand for $\prob[ABC][abc]$
+        \item Four outcomes for each $A, B, C$
+        \item Polynomial in $\prob[ABC]$, marginals $\prob[AB]$, $\prob[BC]$, $\prob[AC]$, $\prob[A]$, $\prob[B]$, $\prob[C]$
+    \end{itemize}
+    \note[item]{As a quick example or preview of what is to come, here is a an example inequality admits quantum violations in the triangle scenario}
+    \note[item]{Some features of note: inequality is polynomial in $\prob[ABC]$ and its marginals}
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Notation}
+%     \begin{itemize}
+%         \item A subset of $V \subset \jointvar$ is a \term{marginal context}
+%         \item Restrict focus to \textit{maximal} marginal scenario where only the largest contexts are present
+%         \[ \forall V_i, V_j \in \mscenario : V_i \not \subset V_j \]
+%     \end{itemize}
+% \end{frame}
 
 \begin{frame}
     \frametitle{Notation}
-    \begin{itemize}
-        \item Complete set of random variables are the \term{joint random variables}
-        \[ \jointvar = \bc{v_1, \cdots, v_n} \]
-        \item A subset of $V \subset \jointvar$ is a \term{marginal context}
-        \item \term{Marginal scenario} $\mscenario$
-        \[ \mscenario = \bc{V_1, \ldots, V_k \mid V_i \subset \jointvar} \quad \jointvar = {\bigcup}_{i} V_i  \]
-        \item Marginal scenario forms a \textit{simplicial complex}
-        \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
-        \item Restrict focus to \textit{maximal} marginal scenario where only the largest contexts are present
-        \[ \forall V_i, V_j \in \mscenario : V_i \not \subset V_j \]
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Notation Cont'd}
+    \textbf{Question:} Which marginal models $\prob^{\mscenario}$ are \term{compatible} with a causal structure $\graph$?\\
     \begin{itemize}
         \item \term{Marginal model} $\prob^{\mscenario}$ is collection of probability distributions
         \[ \prob^{\mscenario} = \bc{\prob[V_1], \ldots, \prob[V_k]} \]
+        \item \term{Marginal scenario} $\mscenario = \bc{V_1, \ldots, V_k}$
+        \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
+        % \item Marginal scenario forms a \textit{simplicial complex}
+        % \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
+        \item \term{Joint random variables} $\jointvar = {\bigcup}_{i} V_i = \bc{v_1, \ldots, v_n}$
         \item \term{Causal Structure} $\graph = \br{\nodes, \edges}$ is a directed acyclic graph (DAG)
         \item Nodes classified into \term{latent nodes} $\nodes_{L}$ and \term{observed nodes} $\nodes_{O}$
     \end{itemize}
-    \todo[TC]{Insert generic causal structure}
+    \note[item]{Before continuing, I will define exactly what I mean by causal compatibility}
+    \note[item]{Causal compatibility refers to the compatibility between causal structures and marginal models}
+    \note[item]{Marginal model is collection of probability distributions over sets of random variables}
+    \note[item]{Marginal scenario refers to the those sets of random variables}
+    \note[item]{The complete set of random variables are the joint random variables}
 \end{frame}
 
 \begin{frame}
@@ -97,8 +159,7 @@
 
 \begin{frame}
     \frametitle{Causal Compatibility}
-    \textbf{Question:} Is a marginal model $\prob^{\mscenario}$ \term{compatible} with a causal structure $\graph$?\\
-    \[ \mscenario = \bc{V_1, \ldots, V_k \mid V_i \subset \nodes_O} \]
+    \textbf{Question:} Which marginal models $\prob^{\mscenario}$ are \term{compatible} with a causal structure $\graph$?\\
     \textbf{Answer:} $\prob^{\mscenario}$ is compatible with $\graph$ if there exists a set of \term{casual parameters}
     \[ \bc{\prob[n \mid \Pa[\graph]{n}] \mid n \in \nodes} \]
     Such that for each $V \in \mscenario$, $\prob[V]$ can be recovered:
@@ -106,40 +167,36 @@
         \item $\prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}]$
         \item $\prob[V] = \sum_{\nodes \setminus V} \prob[\nodes]$
     \end{enumerate}
-
-    A \term{casual compatibility inequality} is an inequality over $\prob^{\mscenario}$ that is satisfied by all compatible $\prob^{\mscenario}$
-    \note<1>[item]{}
+    \textbf{Inequality:} A \term{casual compatibility inequality} $I$ is an inequality over $\prob^{\mscenario}$ that is satisfied by all compatible $\prob^{\mscenario}$
 \end{frame}
 
 \begin{frame}
-    \frametitle{Triangle Scenario}
-    \begin{columns}
-        \column{0.4\linewidth}
-            \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario}}
-        \column{0.6\linewidth}
-            \begin{itemize}
-                \item Three parties $\nodes_O = \bc{A, B, C}$
-                \item Pair-wise sharing three latent variables $\nodes_L = \bc{X, Y, Z}$
-                \item \todo[TC]{Inject info about existing work}
-                \item There exists \textit{quantum-accessible} distributions $\prob[ABC]$ that are \textit{incompatible} with the triangle scenario
-            \end{itemize}
-    \end{columns}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Fritz Distribution}
-    The \term{Fritz Distribution $\prob[F]$}:
-    \begin{itemize}
-        \item three-party $\prob[F] = \prob[ABC]$
-        \item each party has four outcomes
-    \end{itemize}
+    \frametitle{Deriving Inequalities}
+    Two necessary components to compatibility:
+    \begin{enumerate}
+        \item[1.] \term{Marginal problem}: $\forall V \in \mscenario : \prob[V] = \sum_{\nodes \setminus V} \prob[\nodes]$
+        \begin{itemize}
+            \item Is the marginal model contextual or non-contextual?
+            \item 3 distinct ways to tackle this problem
+            \begin{enumerate}
+                \item[1.] Convex hull, Polytope projection, Fourier-Motzkin
+                \item[2.] Possibilistic Hardy Inequalities (Hypergraph transversals)
+                \item[3.] Linear Program Feasibility/Infeasibility
+            \end{enumerate}
+        \end{itemize}
+    \end{enumerate}
+    \begin{enumerate}
+        \item[2.] \term{Markov Separation}: $\prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}]$
+        \begin{itemize}
+            \item Much harder to determine since latent nodes $\nodes_O$ have unspecified behaviour
+            \item It is possible to turn Markov Separation problem into a Marginal problem (at least partially)
+        \end{itemize}
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}
     \frametitle{Inflation Technique}
-    \begin{itemize}
-        \item Developed by Wolfe, Spekkens, and Fritz \cite{Inflation}
-    \end{itemize}
+    Developed by Wolfe, Spekkens, and Fritz \cite{Inflation}
     \begin{definition}
         An \term{inflation} of a causal structure $\graph$ is another causal structure $\graph'$ such that:
         \[ \forall n' \in \nodes', n' \sim n \in \nodes: \AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \]
@@ -148,8 +205,9 @@
         And '$\sim$' is a \term{copy-index} equivalence relation
         \[ A_1 \sim A_2 \sim A \not \sim B_1 \sim B_2 \sim B \]
     \end{definition}
-
 \end{frame}
+
+
 
 \begin{frame}
     \frametitle{Inflations of the Triangle Scenario}
@@ -192,6 +250,7 @@
     \end{enumerate}
 \end{frame}
 
+
 \begin{frame}
     \frametitle{Inflation Lemma Cont'd}
     \begin{itemize}
@@ -216,15 +275,28 @@
     \end{corollary}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Triangle Scenario}
+    \begin{columns}
+        \column{0.4\linewidth}
+            \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario}}
+        \column{0.6\linewidth}
+            \begin{itemize}
+                \item Three parties $\nodes_O = \bc{A, B, C}$
+                \item Pair-wise sharing three latent variables $\nodes_L = \bc{X, Y, Z}$
+                \item \todo[TC]{Inject info about existing work}
+                \item There exists \textit{quantum-accessible} distributions $\prob[ABC]$ that are \textit{incompatible} with the triangle scenario
+            \end{itemize}
+    \end{columns}
+\end{frame}
 
 \begin{frame}
-    \frametitle{Inflation Lemma Cont'd}
-    \begin{lemma}
-        \term{The Inflation Lemma:}~\cite[lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$, if a marginal model $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ is compatible with $\graph$ then all marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
-    \end{lemma}
-    \begin{corollary}
-        Any causal compatibility inequality $I'$ constraining the injectable sets $\Inj[\graph]{\graph'}$ can be \term{deflated} into a causal compatibility inequality $I$ constraining the images of the injectable sets $\ImInj[\graph]{\graph'}$.
-    \end{corollary}
+    \frametitle{Fritz Distribution}
+    The \term{Fritz Distribution $\prob[F]$}:
+    \begin{itemize}
+        \item three-party $\prob[F] = \prob[ABC]$
+        \item each party has four outcomes
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -333,6 +405,25 @@
 \section{Symmetries}
 \begin{frame}
     \frametitle{Causal Symmetry}
+    \begin{itemize}
+        \item Desirable to find compatibility inequality $I$ such that
+        \[ \forall \varphi \in \Perm{A,B,C} : \varphi\bs{I} = I \]
+        \item Compatibility is independent of variable labels
+        \[ \forall \varphi \in \Perm{\nodes} : I \stackrel{\text{com}}{\rightarrow} \graph \implies \varphi\bs{I} \stackrel{\text{com}}{\rightarrow} \varphi\bs{\graph}  \]
+        \item If $\varphi\bs{\graph} = \graph$ then $\varphi\bs{I} \stackrel{\text{com}}{\rightarrow} \graph$
+    \end{itemize}
+    \begin{definition}
+        The \term{causal symmetry group} of causal structure $\graph$:
+        \[ \Aut{\graph} = \bc{\varphi \in \Perm{\nodes} \mid \varphi\bs{\graph} = \graph} \]
+        Strictly speaking, one needs to preserve observable nodes:
+        \[ \Aut[\nodes_O]{\graph} = \bc{\varphi \in \Aut{\graph} \mid \varphi\bs{\nodes_O} = \nodes_O} \]
+    \end{definition}
+    \note<1>[item]{Fritz distribution is incompatible with Triangle scenario because party $C$ plays the role of measurement settings for both $A$ and $B$}
+    \note<1>[item]{In order to find quantum distributions different from $P_F$ in the Triangle Scenario, it is therefore desirable to find a proof of its incompatibility (i.e. inequality) that is symmetric under exchange of parties}
+    \note<1>[item]{Surprisingly, it is possible to do so!}
+    \note<1>[item]{Here is how.}
+    \note<1>[item]{First, we will formally define the symmetry group in question}
+    \note<1>[item]{Causal symmetry group is the }
 \end{frame}
 
 \begin{frame}
