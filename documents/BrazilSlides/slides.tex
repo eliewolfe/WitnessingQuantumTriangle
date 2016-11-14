@@ -11,8 +11,12 @@
 \setbeameroption{show notes} % Shows notes on the right of the main slides
 % \setbeameroption{show notes on second screen}
 \usefonttheme[onlymath]{serif} % For serif font in math mode
-% \usepackage[round]{natbib} % Needed for Author name citations
 \usepackage[backend=biber]{biblatex} %
+
+\usepackage{silence}
+\WarningFilter{biblatex}{Patching footnotes failed}
+\renewcommand\mkbibacro[1]{{\footnotesize\MakeUppercase{#1}}} % http://tex.stackexchange.com/questions/203111/small-caps-font-warning-in-beamer-using-biblatex
+
 \usepackage{../../packages/shared}
 \usepackage{../../packages/misc_commands}
 \input{../../figures/causal_structures/formatting} % Causal structure formatting for tikz
@@ -37,7 +41,6 @@
 \begin{document}
 
 \frame{\titlepage}
-
 
 % \begin{frame}
 %     \frametitle{Table of Contents}
@@ -865,7 +868,6 @@
 
 \begin{frame}[allowframebreaks]
     \frametitle{References}
-    \todo[TC]{Figure out how to get references at the end}
     \printbibliography
 \end{frame}
 
