@@ -1,23 +1,25 @@
 \documentclass[
-    hyperref={bookmarks=false,colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=MidnightBlue},
+    hyperref={bookmarks=false},% ,colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=MidnightBlue
     xcolor={dvipsnames},
 ]{beamer}
 
-\usetheme[height=8mm]{Rochester}
-\usecolortheme{default}
+\usetheme[height=8mm]{Rochester} % Main Theme
+\usecolortheme{default} % Color Theme
 
 % \usepackage{pgfpages} % For viewing slides on the right
 \usepackage[warningthreshold=0.95]{resizegather} % For resizing gather environment to fit massive equations
 \setbeameroption{show notes} % Shows notes on the right of the main slides
 % \setbeameroption{show notes on second screen}
 \usefonttheme[onlymath]{serif} % For serif font in math mode
-\usepackage[round]{natbib} % Needed for Author name citations
+% \usepackage[round]{natbib} % Needed for Author name citations
+\usepackage[backend=biber]{biblatex} %
 \usepackage{../../packages/shared}
 \usepackage{../../packages/misc_commands}
 \input{../../figures/causal_structures/formatting} % Causal structure formatting for tikz
 \renewcommand{\term}[1]{\textcolor{Mahogany}{#1}}
 \renewcommand{\tcdot}{\cdot} % Tentative cdot, not sure if I want to keep dots
-
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\addbibresource{../references.bib}
 
 \title[Triangle Inequalities]{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Scenario}
 \author[Fraser]{T.C.~Fraser\inst{1,2}}
@@ -36,13 +38,6 @@
 
 \frame{\titlepage}
 
-\begin{frame}[allowframebreaks]
-    \frametitle{References}
-    \todo[TC]{Figure out how to get references at the end}
-    \setbeamertemplate{bibliography item}{\insertbiblabel}
-    \bibliographystyle{plainnat}
-    \bibliography{../references}{}
-\end{frame}
 
 % \begin{frame}
 %     \frametitle{Table of Contents}
@@ -73,12 +68,12 @@
 \begin{frame}
     \frametitle{Objective Cont'd}
     \begin{itemize}
-        \item In~\citet{Branciard_2012} it was noted that characterizing locality in TS remained an open problem and that identifying compatibility constraints in this configuration \textbf{seemed challenging}
-        \item In~\citet{Fritz_2012}, Fritz demonstrated that TS is the \textbf{smallest} correlation scenario in which their exists quantum incompatible distributions (proof without inequalities)
-        \item In~\citet{Henson_2014}, TS was classified as an \textbf{interesting} causal structure: conditional independence relations are not a sufficient characterization of compatibility
+        \item In~\cite{Branciard_2012} it was noted that characterizing locality in TS remained an open problem and that identifying compatibility constraints in this configuration \textbf{seemed challenging}
+        \item In~\cite{Fritz_2012}, Fritz demonstrated that TS is the \textbf{smallest} correlation scenario in which their exists quantum incompatible distributions (proof without inequalities)
+        \item In~\cite{Henson_2014}, TS was classified as an \textbf{interesting} causal structure: conditional independence relations are not a sufficient characterization of compatibility
         \item Several other authors (see~\cite{Steudel_2010},~\cite{Chaves_2014},~\cite{Inflation}, $\ldots$) have investigated TS without achieving research objective
     \end{itemize}
-    \note[item]{At the time of publishing~\citet{Branciard_2012}, problem seems hard.}
+    \note[item]{At the time of publishing~\cite{Branciard_2012}, problem seems hard.}
     \note[item]{Important because its smallest correlation scenario with quantum non-locality.}
     \note[item]{Compatibility can not be determined from conditional independence relations (there are none)}
     \note[item]{It would be interesting to find quantum non-locality in the triangle scenario that does not rely on Bell's theorem.}
@@ -865,6 +860,13 @@
 
 \begin{frame}
     \frametitle{Post-doc Opportunities At Perimeter}
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]
+    \frametitle{References}
+    \todo[TC]{Figure out how to get references at the end}
+    \printbibliography
 \end{frame}
 
 \end{document}
