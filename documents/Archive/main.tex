@@ -1014,8 +1014,8 @@
     \begin{align*}
     \eq \label{eq:fritz_dist}
     \begin{split}
-    \prob[F][111] = \prob[F][221] = \prob[F][412] = \prob[F][322] = \prob[F][233] = \prob[F][143] = \prob[F][344] = \prob[F][434] &= \f{1}{32}\br{2 + \sqrt{2}} \\
-    \prob[F][121] = \prob[F][211] = \prob[F][422] = \prob[F][312] = \prob[F][243] = \prob[F][133] = \prob[F][334] = \prob[F][444] &= \f{1}{32}\br{2 - \sqrt{2}}
+    \prob[F][000] = \prob[F][110] = \prob[F][301] = \prob[F][211] = \prob[F][122] = \prob[F][032] = \prob[F][233] = \prob[F][323] &= \f{1}{32}\br{2 + \sqrt{2}} \\
+    \prob[F][010] = \prob[F][100] = \prob[F][311] = \prob[F][201] = \prob[F][132] = \prob[F][022] = \prob[F][223] = \prob[F][333] &= \f{1}{32}\br{2 - \sqrt{2}}
     \end{split}
     \end{align*}
     Here the notation $\prob[F][abc] = \prob[ABC][abc] = \prob[][A=a,B=b,C=c]$ is used. The Fritz distribution $\prob[F]$ can be realized with the following quantum configuration:
@@ -1035,13 +1035,13 @@
     Fritz first proved it's incompatibility~\cite{Fritz_2012} by showing $C$ acts a moderator to ensure measurement pseudo-settings for $A$ and $B$ are independent, satisfying non-broadcasting requirements for the standard Bell scenario. In fact, by coarse-graining outcomes for $A$ and $B$ and treating $C$ as a measurement-setting moderator, $P_F$ maximally violates the CHSH inequality. To illustrate this, begin with the CHSH inequality~\cite{CHSH_Original},
     \[ \ba{AB|S_A=1, S_B=1} + \ba{AB|S_A=1, S_B=2} + \ba{AB|S_A=2, S_B=1} - \ba{AB|S_A=2, S_B=2} \leq 2 \eq \label{eq:CHSH}\]
     Where $\ba{AB|S_A=i, S_B=j}$ is the correlation between $A$ and $B$ given the measurement settings for $A$ ($B$) is $i$ ($j$) respectively. Next each of $C$'s outcomes become the conditioned settings in \cref{eq:CHSH},
-    \[ \ba{AB|C=2} + \ba{AB|C=3} + \ba{AB|C=4} - \ba{AB|C=1} \leq 2 \eq \label{eq:chsh_c}\]
+    \[ \ba{AB|C=1} + \ba{AB|C=2} + \ba{AB|C=3} - \ba{AB|C=0} \leq 2 \eq \label{eq:chsh_c}\]
     Finally, specifying the two outcome coarse-graining as $\bc{1,2,3,4} \rightarrow \bc{\br{1,4}, \br{2,3}}$ gives a definition of correlation,
-    \[ \ba{AB} \defined 2\bc{\prob[][11] + \prob[][14] + \prob[][41] + \prob[][44] + \prob[][22] + \prob[][23] + \prob[][32] + \prob[][33]} - 1 \]
+    \[ \ba{AB} \defined 2\bc{\prob[][00] + \prob[][03] + \prob[][30] + \prob[][33] + \prob[][11] + \prob[][12] + \prob[][21] + \prob[][22]} - 1 \]
     Which when applied to the Fritz distribution \cref{eq:fritz_dist} gives the following correlations:
     \begin{gather*}
-    \ba{AB|C=2} = 2 \bc{\f{1}{32}\bs{2\br{2+\sqrt{2}}+2\br{2-\sqrt{2}}}} - 1 = \f{\sqrt{2}}{2} \\
-    \ba{AB|C=3} = \ba{AB|C=4} = \f{\sqrt{2}}{2} \quad \ba{AB|C=1} = -\f{\sqrt{2}}{2}
+    \ba{AB|C=1} = 2 \bc{\f{1}{32}\bs{2\br{2+\sqrt{2}}+2\br{2-\sqrt{2}}}} - 1 = \f{\sqrt{2}}{2} \\
+    \ba{AB|C=2} = \ba{AB|C=4} = \f{\sqrt{2}}{2} \quad \ba{AB|C=1} = -\f{\sqrt{2}}{2}
     \end{gather*}
     Which when applied to \cref{eq:chsh_c} gives the familiar Tsirelson violation of $2\sqrt{2} \not\leq 2$~\cite{Cirelson_1980}.
 
@@ -1136,6 +1136,8 @@
     The CHSH inequality~\cite{CHSH_Original} can we viewed as a causal compatibility inequality for the iconic Bell Scenario (Fig. 19 of~\cite{Wood_2012}, Fig. 11 of~\cite{Inflation}, Fig. 1 a) of~\cite{Tavakoli_2015}, etc.) corresponding to Bell's notion of local causality~\cite{Wood_2012}. It constrains the set of 2-outcome bipartite distributions over local binary measurement settings for each party $\prob[AB\mid S_A S_B] \defined \bc{\prob[AB\mid 0 0], \prob[AB\mid 01], \prob[AB\mid 10], \prob[AB\mid 11]}$. Numerical optimization \textit{should} obtain the algebraic violation associated with the PR-Box correlations~\cite{PR_1995}. Maintaining full generality, we simply need to parameterize these $4$ distributions using \cref{eq:uniform_param}, each requiring $4$ real-valued parameters. We define the optimization target for the CHSH inequality to be the left-hand-side of \cref{eq:CHSH},
     \[ I\tsb{CHSH} = \ba{AB|11} + \ba{AB|12} + \ba{AB|21} - \ba{AB|22} \]
     Figure \ref{fig:CHSH_convex} demonstrates this optimization for $5$ random seed parameters $\lambda^0$, each converging to the expected value of $4$. Analogously,~\cite{Cirelson_1980}
+
+    Generic optimization (BFGS, gradient descent) \cite{Nocedal_2000}. Basin-hopping \cite{Wales_1997}
 
     \begin{figure}
     \newlength\figureheight

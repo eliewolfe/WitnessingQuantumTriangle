@@ -1,83 +1,150 @@
 \documentclass[
-    hyperref={colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=MidnightBlue},
+    hyperref={bookmarks=false,colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=MidnightBlue},
     xcolor={dvipsnames},
 ]{beamer}
 
-\setbeameroption{show notes}
-\usefonttheme[onlymath]{serif}
+\usetheme[height=8mm]{Rochester}
+\usecolortheme{default}
 
+% \usepackage{pgfpages} % For viewing slides on the right
+\usepackage[warningthreshold=0.95]{resizegather} % For resizing gather environment to fit massive equations
+\setbeameroption{show notes} % Shows notes on the right of the main slides
+% \setbeameroption{show notes on second screen}
+\usefonttheme[onlymath]{serif} % For serif font in math mode
+\usepackage[round]{natbib} % Needed for Author name citations
 \usepackage{../../packages/shared}
 \usepackage{../../packages/misc_commands}
-
-% === Causal structure formatting for tikz ===
-\input{../../figures/causal_structures/formatting}
-
+\input{../../figures/causal_structures/formatting} % Causal structure formatting for tikz
 \renewcommand{\term}[1]{\textcolor{Mahogany}{#1}}
+\renewcommand{\tcdot}{\cdot} % Tentative cdot, not sure if I want to keep dots
+
 
 \title[Triangle Inequalities]{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Scenario}
-\author[Fraser]{T.~C.~Fraser\inst{1}}
-\institute[PI]
+\author[Fraser]{T.C.~Fraser\inst{1,2}}
+\institute
 {
     \inst{1}%
     Perimeter Institute for Theoretical Physics\\
-    Ontario, Canada
+    Ontario, Canada \\
+    \inst{2}%
+    University of Waterloo\\
+    Ontario, Canada \\
 }
-\date[QN 2016]{Quantum Networks, 2016}
+\date[QN 2016]{Quantum Networks Workshop, IIP, Nov. 2016}
 
 \begin{document}
 
 \frame{\titlepage}
 
-
 \begin{frame}[allowframebreaks]
     \frametitle{References}
     \todo[TC]{Figure out how to get references at the end}
     \setbeamertemplate{bibliography item}{\insertbiblabel}
-    \bibliographystyle{abbrv}
+    \bibliographystyle{plainnat}
     \bibliography{../references}{}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Table of Contents}
-\tableofcontents
+% \begin{frame}
+%     \frametitle{Table of Contents}
+% \tableofcontents
 
-\end{frame}
+% \end{frame}
 
-\section{Tools}
 
 \begin{frame}
     \frametitle{Introduction}
-    \note[item]{\todo[TC]{}}
+    \note[item]{Thank International Institute for Physics (IIP) for support}
+    \note[item]{Thank Perimeter Institute for Theoretical Physics (PI) for support}
 \end{frame}
+\begin{frame}
+    \frametitle{Objective}
+    \begin{itemize}
+        \item Derive causal compatibility/locality inequalities that distinguish quantum distributions from classical ones
+        \item Specifically for the Triangle Scenario (TS)
+    \end{itemize}
+    \begin{center}
+        \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario}}
+    \end{center}
+    \note[item]{Research project's goal was to derive new causal compatibility inequalities that distinguish quantum correlations from classical correlations}
+    \note[item]{More specifically, the ambition of the project is to obtain such inequalities that constraint compatibility with The Triangle Scenario}
+    \note[item]{Triangle Scenario has be studied extensively before}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Objective Cont'd}
+    \begin{itemize}
+        \item In~\citet{Branciard_2012} it was noted that characterizing locality in TS remained an open problem and that identifying compatibility constraints in this configuration \textbf{seemed challenging}
+        \item In~\citet{Fritz_2012}, Fritz demonstrated that TS is the \textbf{smallest} correlation scenario in which their exists quantum incompatible distributions (proof without inequalities)
+        \item In~\citet{Henson_2014}, TS was classified as an \textbf{interesting} causal structure: conditional independence relations are not a sufficient characterization of compatibility
+        \item Several other authors (see~\cite{Steudel_2010},~\cite{Chaves_2014},~\cite{Inflation}, $\ldots$) have investigated TS without achieving research objective
+    \end{itemize}
+    \note[item]{At the time of publishing~\citet{Branciard_2012}, problem seems hard.}
+    \note[item]{Important because its smallest correlation scenario with quantum non-locality.}
+    \note[item]{Compatibility can not be determined from conditional independence relations (there are none)}
+    \note[item]{It would be interesting to find quantum non-locality in the triangle scenario that does not rely on Bell's theorem.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{This Talk}
+    \begin{itemize}
+        \item Report the discovery of such inequalities
+        \item Explain how these inequalities were obtained
+        \item Discuss quantum distributions that violate compatibility inequalities
+        \item Attempts at finding new quantum distributions different than those proposed by~\cite{Fritz_2012}
+        \item Briefly discuss symmetric inequalities
+    \end{itemize}
+    \note[item]{The purpose of this talk is to present these new-found inequalities and explain how they were obtained}
+    \note[item]{Additionally I will talk about my attempts at using these inequalities to find new incompatible quantum distributions}
+    \note[item]{In doing so, will discuss how we obtained symmetric compatibility inequalities that have violations in the Triangle Scenario}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example Inequality}
+    \begin{itemize}
+        \item Quick example/preview:
+    \end{itemize}
+    \input{../../figures/inequalities/nosymwitness_ineq_print_pretty}
+    \begin{itemize}
+        \item $\prob[][abc]$ shorthand for $\prob[ABC][abc]$
+        \item Four outcomes for each $A, B, C$
+        \item Polynomial in $\prob[ABC]$, marginals $\prob[AB]$, $\prob[BC]$, $\prob[AC]$, $\prob[A]$, $\prob[B]$, $\prob[C]$
+    \end{itemize}
+    \note[item]{As a quick example or preview of what is to come, here is a an example inequality admits quantum violations in the triangle scenario}
+    \note[item]{Some features of note: inequality is polynomial in $\prob[ABC]$ and its marginals}
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Notation}
+%     \begin{itemize}
+%         \item A subset of $V \subset \jointvar$ is a \term{marginal context}
+%         \item Restrict focus to \textit{maximal} marginal scenario where only the largest contexts are present
+%         \[ \forall V_i, V_j \in \mscenario : V_i \not \subset V_j \]
+%     \end{itemize}
+% \end{frame}
 
 \begin{frame}
     \frametitle{Notation}
-    \begin{itemize}
-        \item Complete set of random variables are the \term{joint random variables}
-        \[ \jointvar = \bc{v_1, \cdots, v_n} \]
-        \item A subset of $V \subset \jointvar$ is a \term{marginal context}
-        \item \term{Marginal scenario} $\mscenario$
-        \[ \mscenario = \bc{V_1, \ldots, V_k \mid V_i \subset \jointvar} \quad \jointvar = {\bigcup}_{i} V_i  \]
-        \item Marginal scenario forms a \textit{simplicial complex}
-        \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
-        \item Restrict focus to \textit{maximal} marginal scenario where only the largest contexts are present
-        \[ \forall V_i, V_j \in \mscenario : V_i \not \subset V_j \]
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Notation Cont'd}
+    \textbf{Question:} Which marginal models $\prob^{\mscenario}$ are \term{compatible} with a causal structure $\graph$?\\
     \begin{itemize}
         \item \term{Marginal model} $\prob^{\mscenario}$ is collection of probability distributions
         \[ \prob^{\mscenario} = \bc{\prob[V_1], \ldots, \prob[V_k]} \]
+        \item \term{Marginal scenario} $\mscenario = \bc{V_1, \ldots, V_k}$
+        \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
+        % \item Marginal scenario forms a \textit{simplicial complex}
+        % \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
+        \item \term{Joint random variables} $\jointvar = {\bigcup}_{i} V_i = \bc{v_1, \ldots, v_n}$
         \item \term{Causal Structure} $\graph = \br{\nodes, \edges}$ is a directed acyclic graph (DAG)
         \item Nodes classified into \term{latent nodes} $\nodes_{L}$ and \term{observed nodes} $\nodes_{O}$
     \end{itemize}
-    \todo[TC]{Insert generic causal structure}
+    \note[item]{Before continuing, I will define exactly what I mean by causal compatibility}
+    \note[item]{Causal compatibility refers to the compatibility between causal structures and marginal models}
+    \note[item]{Marginal model is collection of probability distributions over sets of random variables}
+    \note[item]{Marginal scenario refers to the those sets of random variables}
+    \note[item]{The complete set of random variables are the joint random variables}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Graph Theory [Optional Slide]}
+    \frametitle{Graph Theory [Optional]}
     Let $n, m \in \nodes$ be nodes of the graph $\graph$.
     \begin{itemize}
         \item \term{parents of $n$}: $\Pa[\graph]{n} \defined \bc{m \mid m \to n}$
@@ -97,8 +164,7 @@
 
 \begin{frame}
     \frametitle{Causal Compatibility}
-    \textbf{Question:} Is a marginal model $\prob^{\mscenario}$ \term{compatible} with a causal structure $\graph$?\\
-    \[ \mscenario = \bc{V_1, \ldots, V_k \mid V_i \subset \nodes_O} \]
+    \textbf{Question:} Which marginal models $\prob^{\mscenario}$ are \term{compatible} with a causal structure $\graph$?\\
     \textbf{Answer:} $\prob^{\mscenario}$ is compatible with $\graph$ if there exists a set of \term{casual parameters}
     \[ \bc{\prob[n \mid \Pa[\graph]{n}] \mid n \in \nodes} \]
     Such that for each $V \in \mscenario$, $\prob[V]$ can be recovered:
@@ -106,40 +172,34 @@
         \item $\prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}]$
         \item $\prob[V] = \sum_{\nodes \setminus V} \prob[\nodes]$
     \end{enumerate}
-
-    A \term{casual compatibility inequality} is an inequality over $\prob^{\mscenario}$ that is satisfied by all compatible $\prob^{\mscenario}$
-    \note<1>[item]{}
+    \textbf{Inequality:} A \term{casual compatibility inequality} $I$ is an inequality over $\prob^{\mscenario}$ that is satisfied by all compatible $\prob^{\mscenario}$
 \end{frame}
 
 \begin{frame}
-    \frametitle{Triangle Scenario}
-    \begin{columns}
-        \column{0.4\linewidth}
-            \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario}}
-        \column{0.6\linewidth}
-            \begin{itemize}
-                \item Three parties $\nodes_O = \bc{A, B, C}$
-                \item Pair-wise sharing three latent variables $\nodes_L = \bc{X, Y, Z}$
-                \item \todo[TC]{Inject info about existing work}
-                \item There exists \textit{quantum-accessible} distributions $\prob[ABC]$ that are \textit{incompatible} with the triangle scenario
-            \end{itemize}
-    \end{columns}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Fritz Distribution}
-    The \term{Fritz Distribution $\prob[F]$}:
-    \begin{itemize}
-        \item three-party $\prob[F] = \prob[ABC]$
-        \item each party has four outcomes
-    \end{itemize}
+    \frametitle{Deriving Inequalities}
+    Two necessary components to compatibility:
+    \begin{enumerate}
+        \item \term{Marginal problem}: $\forall V \in \mscenario : \prob[V] = \sum_{\nodes \setminus V} \prob[\nodes]$
+        \begin{itemize}
+            \item Is the marginal model contextual or non-contextual?
+            \item 3 distinct ways to tackle this problem
+            \begin{enumerate}
+                \item Convex hull, Polytope projection, Fourier-Motzkin
+                \item Possibilistic Hardy Inequalities (Hypergraph transversals)
+                \item Linear Program Feasibility/Infeasibility
+            \end{enumerate}
+        \end{itemize}
+        \item \term{Markov Separation}: $\prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}]$
+        \begin{itemize}
+            \item Much harder to determine since latent nodes $\nodes_O$ have unspecified behaviour
+            \item It is possible to turn Markov Separation problem into a Marginal problem (at least partially)
+        \end{itemize}
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}
     \frametitle{Inflation Technique}
-    \begin{itemize}
-        \item Developed by Wolfe, Spekkens, and Fritz \cite{Inflation}
-    \end{itemize}
+    Developed by Wolfe, Spekkens, and Fritz \cite{Inflation}
     \begin{definition}
         An \term{inflation} of a causal structure $\graph$ is another causal structure $\graph'$ such that:
         \[ \forall n' \in \nodes', n' \sim n \in \nodes: \AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \]
@@ -148,11 +208,12 @@
         And '$\sim$' is a \term{copy-index} equivalence relation
         \[ A_1 \sim A_2 \sim A \not \sim B_1 \sim B_2 \sim B \]
     \end{definition}
-
 \end{frame}
 
+
+
 \begin{frame}
-    \frametitle{Inflations of the Triangle Scenario}
+    \frametitle{Some Inflations of the Triangle Scenario}
     \begin{center}
     \begin{tabular}{cc}
         %\hline
@@ -216,63 +277,63 @@
     \end{corollary}
 \end{frame}
 
-
 \begin{frame}
-    \frametitle{Inflation Lemma Cont'd}
-    \begin{lemma}
-        \term{The Inflation Lemma:}~\cite[lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$, if a marginal model $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ is compatible with $\graph$ then all marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
-    \end{lemma}
-    \begin{corollary}
-        Any causal compatibility inequality $I'$ constraining the injectable sets $\Inj[\graph]{\graph'}$ can be \term{deflated} into a causal compatibility inequality $I$ constraining the images of the injectable sets $\ImInj[\graph]{\graph'}$.
-    \end{corollary}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Inflation Pipeline}
-    \note[item]{Walk through how the inflation pipeline works}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Outcomes and Events}
+    \frametitle{$d$-Separation Polynomial}
     \begin{itemize}
-        \item Set of \term{outcomes} $O_v$ for each variable $v$
-        \item Set of \term{events} for a set of variables $V$
-        \[ \Events{V} \defined \bc{s: V \to O_V \mid \forall v \in V, s\br{v} \in O_v} \]
+        \item Deflation only holds when inequality constrains probabilities $\prob[N'], N' \in \Inj[\graph]{\graph'}$
+        \item \textbf{Linear inequality} for $\graph'$
     \end{itemize}
-    \begin{definition}
-        The set of events over the joint variables $\Events{\jointvar}$ are termed the \term{joint events}.
-    \end{definition}
-    \begin{definition}
-        The set of events over the marginal contexts are the \term{marginal events}
-        \[ \Events{\mscenario} \defined \coprod_{V \in \mscenario} \Events{V} \]
-    \end{definition}
-\end{frame}
-
-
-\begin{frame}
-    \frametitle{Incidence Matrix}
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \pgfmathsetmacro{\hs}{1.8};
+            \pgfmathsetmacro{\vs}{1};
+            \pgfmathsetmacro{\cross}{0.3};
+            \draw (0*\hs, 4*\vs) node[](a){$\prob[N']$};
+            \draw (0*\hs, 2*\vs) node[](ab){$N' \not \in \Inj[\graph]{\graph'}$};
+            \draw (4*\hs, 4*\vs) node[](c){$\prob[N_1']\prob[N_2']$};
+            \draw (2*\hs, 4*\vs) node[](ac){$N_1' \ancestralindep N_2'$};
+            \draw (2*\hs, 4*\vs + 0.5*\vs) node[]{$N_1' \cup N_2' = N$};
+            \draw (4*\hs, 2*\vs) node[](cd){$N_1', N_2' \in \Inj[\graph]{\graph'}$};
+            \draw (4*\hs, 0*\vs) node[](d){$\prob[N_1]\prob[N_2]$};
+            \draw (0, 0) node[](b){??};
+            \draw[thick, ] (a) -- (ab);
+            \draw[thick, ] (c) -- (cd);
+            \draw[thick, ] (a) -- (ac);
+            \draw[thick, ->] (ac) -- (c);
+            \draw[thick, ->] (ab) -- (b);
+            \draw[thick, ->] (cd) -- (d);
+            \draw[very thick, red]
+            (+ \cross, 1*\vs + \cross) -- (- \cross, 1*\vs - \cross)
+            (+ \cross, 1*\vs - \cross) -- (- \cross, 1*\vs + \cross)
+            ;
+        \end{tikzpicture}
+    \end{center}
     \begin{itemize}
-        \item Incidence matrix $M$ is a bit-wise matrix
-        \item Row-indexed by marginal events $m \in \Events{\mscenario}$
-        \item Column-indexed by joint events $j \in \Events{\jointvar}$
-        \[ M_{m,j} = \begin{cases}
-            1 & m \text{ compatible with } j \\
-            0 & \text{otherwise}
-        \end{cases} \]
+        \item \textbf{Polynomial inequality} for $\graph$!
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Application to Large Inflation}
-    \begin{columns}
-        \column{0.6\linewidth}
-            \begin{itemize}
-                \item Tackling Large inflation
-                \item 12 pre-injectable sets (to follow)
-            \end{itemize}
-        \column{0.4\linewidth}
-            \scalebox{0.5}{\input{../../figures/causal_structures/inflated_triangle_scenario}}
-    \end{columns}
+    \frametitle{Pre-injectable Sets}
+    \begin{itemize}
+        \item $d$-separation relations $+$ inflation $=$ polynomial inequalities over $\graph$
+        \item Restrict focus to sets $N'$ that are partitioned into $N_1', N_2'$ $d$-separated by empty set $\emptyset$
+        \item A \term{pre-injectable set} $N'$:
+        \[ N' = {\coprod}_i N_i' \quad \forall i: N_i' \in \Inj[\graph]{\graph'} \]
+        \[ \forall i, j : N_i' \ancestralindep N_j' \iff \An[\graph']{N'_i} \cap \An[\graph']{N'_j} = \emptyset \]
+        \item Only need to consider \term{maximal pre-injectable sets} $\PreInj[\graph]{\graph'}$
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Pre-injectable Sets of Large Inflation}
+    \begin{center}
+        \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_scenario}}
+    \end{center}
+    \begin{itemize}
+        \item Has $12$ maximal pre-injectable sets (to follow)
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -312,6 +373,193 @@
     \end{equation*}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Deriving Inequalities}
+    \begin{itemize}
+        \item Inflation facilitates turning linear, inflated inequalities into polynomial deflated ones
+        \item \textbf{Question:} How to derive compatibility inequalities for $\graph'$?
+        \item \textbf{Answer:} Use your favorite technique for deriving compatibility inequalities:
+        \begin{itemize}
+            \item Entropic inequalities
+            \item Finite outcome inequalities
+        \end{itemize}
+        \item Here we solve the marginal problem for $\mscenario = \PreInj[\graph]{\graph'}$
+        \item First some notation and formalism
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outcomes and Events}
+    \begin{definition}
+        Each variable $v$ has finite set of \term{outcomes} $O_v$. \\
+        Each set of variables $V$ has finite set of \term{events} $\Events{V}$:
+        \[ \Events{V} \defined \bc{s: V \to O_V \mid \forall v \in V, s\br{v} \in O_v} \]
+    \end{definition}
+    \begin{definition}
+        The set of events over the joint variables $\Events{\jointvar}$ are termed the \term{joint events}.
+    \end{definition}
+    \begin{definition}
+        The set of events over the marginal contexts are the \term{marginal events}
+        \[ \Events{\mscenario} \defined \coprod_{V \in \mscenario} \Events{V} \]
+    \end{definition}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Distribution Vectors}
+    \begin{definition}
+        The \term{joint distribution vector} $\probvec^{\jointvar}$
+        \[ \probvec^{\jointvar}_j = \prob[\jointvar][j] \quad \forall j \in \Events{\jointvar}\]
+    \end{definition}
+    \begin{definition}
+        The \term{marginal distribution vector} $\probvec^{\mscenario}$
+        \[ \probvec^{\mscenario}_m = \prob[\Dom{m}][m] \quad \forall m \in \Events{\mscenario}, \Dom{m} \in \mscenario\]
+    \end{definition}
+    Can now write complete marginal problem as matrix multiplication:
+    \[ \forall V \in \mscenario : \prob[V] = \sum_{\jointvar \setminus V} \prob[\jointvar] \iff \probvec^{\mscenario} = M \tcdot \probvec^{\jointvar} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Incidence Matrix}
+    \begin{itemize}
+        \item \term{Incidence matrix} $M$ is a bit-wise matrix
+        \item Row-indexed by marginal events $m \in \Events{\mscenario}$
+        \item Column-indexed by joint events $j \in \Events{\jointvar}$
+        \[ M_{m,j} = \begin{cases}
+            1 & m = j|_{\Dom{m}} \\
+            0 & \text{otherwise}
+        \end{cases} \]
+        \begin{gather*}
+        \# \text{Columns} = \abs{\Events{\jointvar}} = \prod_{v \in \jointvar} \abs{O_{v}} \\
+        \# \text{Rows} = \abs{\Events{\mscenario}} = \sum_{V \in \mscenario} \prod_{v \in V} \abs{O_{v}}
+        \end{gather*}
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[shrink=10]
+    \frametitle{Example}
+    Let $\jointvar$ be $3$ binary variables $\jointvar = \bc{A,B,C}$ and $\mscenario$ be the marginal scenario $\mscenario = \bc{\bc{A,B}, \bc{B,C}, \bc{A,C}}$. The incidence matrix becomes:
+    \[ M = \kbordermatrix{
+        (A,B,C) \:\: = & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
+        (A=0, B=0) & \kone & \kone & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer \\
+        (A=0, B=1) & \kzer & \kzer & \kone & \kone & \kzer & \kzer & \kzer & \kzer \\
+        (A=1, B=0) & \kzer & \kzer & \kzer & \kzer & \kone & \kone & \kzer & \kzer \\
+        (A=1, B=1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kone \\
+        (B=0, C=0) & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer \\
+        (B=0, C=1) & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer \\
+        (B=1, C=0) & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer \\
+        (B=1, C=1) & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone \\
+        (A=0, C=0) & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer & \kzer \\
+        (A=0, C=1) & \kzer & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer \\
+        (A=1, C=0) & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone & \kzer \\
+        (A=1, C=1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone
+    } \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Marginal Linear Program}
+    \begin{itemize}
+        \item Obtain inequalities from incidence matrix $M$ and known incompatible distribution $\probvec^{\mscenario}$
+    \end{itemize}
+    \begin{columns}[T]
+        \column{0.4\linewidth}%
+            \term{Marginal LP}:%
+            \begin{alignat*}{2}
+                & \text{minimize:} \quad&& \emptyset \tcdot x\\
+                & \text{subject to:} && x \succeq 0 \\
+                & && M \tcdot x = \probvec^{\mscenario} \\
+            \end{alignat*}%
+        \column{0.4\linewidth}%
+            \term{Dual Marginal LP}:%
+            \begin{alignat*}{2}
+                & \text{minimize:} \quad&& y \tcdot \probvec^{\mscenario}\\
+                & \text{subject to:} && y \tcdot M \succeq 0 \\
+            \end{alignat*}%
+    \end{columns}
+    \begin{itemize}
+        \item $y$ is an \term{infeasibility certificate}:
+        \[ y \tcdot M \tcdot x = y \tcdot \probvec^{\mscenario} \geq 0  \]
+        \item \term{Infeasibility inequality}: $y \tcdot \probvec^{\mscenario} \geq 0$
+        \item Most linear programing toolkits return certificates (\href[pdfnewwindow]{http://docs.mosek.com/8.0/pythonapi/optimizer-task-gety.html}{\textit{Mosek}}, \href[pdfnewwindow]{https://www.gurobi.com/documentation/6.5/refman/farkasdual.html}{\textit{Gurobi}}, \href[pdfnewwindow]{http://www-01.ibm.com/support/docview.wss?uid=swg21400058}{\textit{CPLEX}}, \href[pdfnewwindow]{http://cvxr.com/cvx/doc/basics.html\#dual-variables}{\textit{cvxr}}/\href[pdfnewwindow]{http://cvxopt.org/userguide/coneprog.html\#linear-cone-programs}{\textit{cvxopt}}.)
+    \end{itemize}
+    \note[item]{It is possible to derive non-contextuality inequalities from $M$ and a known incompatible distribution $\probvec^{\mscenario}$}
+    \note[item]{Note the null objective; the minimization objective is trivially always zero}
+    \note[item]{The primal value of the linear program is of no interest, all that matters is its \textit{feasibility}.}
+    \note[item]{If \textit{feasible}, then there exists a vector $x$ that is a valid joint distribution vector $\probvec^{\jointvar}$.}
+    \note[item]{Feasibility implies that $\probvec^{\jointvar} = x$.}
+    \note[item]{Infeasibility implies contextuality}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Known Incompatible Distribution in The Triangle Scenario}
+    \cite{Fritz_2012} provides quantum-accessible distribution incompatible with TS
+    \[ \prob[ABC]\br{abc} = \Tr\bs{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm M_{A,a}\otimes M_{B,b} \otimes M_{C,c}} \]
+    \begin{center}
+        \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario_operational}}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Fritz Distribution}
+    The \term{Fritz Distribution $\prob[F]$}:
+    \begin{itemize}
+        \item three-party $\prob[F] = \prob[ABC]$
+        \item each party has $4$ outcomes
+    \end{itemize}
+    \begin{gather*}
+    \prob[F][00\textcolor{blue}{0}] = \prob[F][11\textcolor{blue}{0}] = \prob[F][30\textcolor{blue}{1}] = \prob[F][21\textcolor{blue}{1}] = \prob[F][12\textcolor{blue}{2}] = \prob[F][03\textcolor{blue}{2}] = \prob[F][23\textcolor{blue}{3}] = \prob[F][32\textcolor{blue}{3}] = \f{1}{32}\br{2 + \sqrt{2}} \\
+    \prob[F][01\textcolor{blue}{0}] = \prob[F][10\textcolor{blue}{0}] = \prob[F][31\textcolor{blue}{1}] = \prob[F][20\textcolor{blue}{1}] = \prob[F][13\textcolor{blue}{2}] = \prob[F][02\textcolor{blue}{2}] = \prob[F][22\textcolor{blue}{3}] = \prob[F][33\textcolor{blue}{3}] = \f{1}{32}\br{2 - \sqrt{2}}
+    \end{gather*}
+    \begin{itemize}
+        \item $C$'s outcome acts as measurement ``setting'' for A, B; independent of $\rho_{AB}$
+        \item Correlation coarse graining $\bc{0,1,2,3} \to \bc{\br{0,3}, \br{1,2}}$
+    \end{itemize}
+    \[ \ba{AB | C = 0, 1, 2} = \f{1}{\sqrt{2}} \quad \ba{AB | C = 3} = - \f{1}{\sqrt{2}} \]
+    \begin{itemize}
+        \item Gives CHSH violation
+    \end{itemize}
+    \[ \ba{AB|C=0} + \ba{AB|C=1} + \ba{AB|C=2} - \ba{AB|C=3} = 2\sqrt{2} \not \leq 2 \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Quantum Implementation of Fritz Distribution}
+    \begin{itemize}
+        \item States:
+    \end{itemize}
+    \begin{gather*}
+        \rho_{AB} = \ket{\Psi^+}\bra{\Psi^+} \quad \rho_{BC} = \rho_{CA} = \ket{\Phi^+}\bra{\Phi^+}
+    \end{gather*}
+    \begin{itemize}
+        \item Maximally entangled Bell states:
+    \end{itemize}
+    \[ \ket{\Psi^+} = \f{1}{\sqrt{2}}\br{\ket{01} + \ket{10}} \quad \ket{\Phi^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}} \]
+    \begin{itemize}
+        \item Measurements:
+    \end{itemize}
+    \begin{gather*}
+        M_{A} = \bc{\ket{0\psi_0}\bra{0\psi_0}, \ket{0\psi_{\pi}}\bra{0\psi_{\pi}}, \ket{1\psi_{-\pi/2}}\bra{1\psi_{-\pi/2}}, \ket{1\psi_{\pi/2}}\bra{1\psi_{\pi/2}}} \\
+        M_{B} = \bc{\ket{\psi_{\pi/4}0}\bra{\psi_{\pi/4}0}, \ket{\psi_{5\pi/4}0}\bra{\psi_{5\pi/4}0}, \ket{\psi_{3\pi/4}1}\bra{\psi_{3\pi/4}1}, \ket{\psi_{-\pi/4}1}\bra{\psi_{-\pi/4}1}} \\
+        M_{C} = \bc{\ket{00}\bra{00}, \ket{01}\bra{01}, \ket{10}\bra{10}, \ket{11}\bra{11}}
+    \end{gather*}
+    \begin{itemize}
+        \item Shorthand: $\ket{\psi_x} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{ix}\ket{1}}$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Notes of Fritz Distribution}
+    \begin{itemize}
+        \item Proof contingent on perfect correlation between $C$ and pseudo-settings
+        \item Proof not robust to noise
+    \end{itemize}
+    \begin{problem}[2.17 in \cite{Fritz_2012}]
+        Find an example of non-classical quantum correlations in TS together with a proof of its non-classicality which does not hinge on Bell’s Theorem.
+    \end{problem}
+    \begin{itemize}
+        \item ``...would be helpful to have inequalities...''
+        \item Possible to find inequalities violated by $\prob[F]$ using the Large inflation of the TS
+    \end{itemize}
+\end{frame}
 
 \begin{frame}
     \frametitle{Large Inflation Incidence}
@@ -319,34 +567,110 @@
         \item Joint variables are all of the observable nodes $\nodes_O' = \jointvar$
         \[ \jointvar = \bc{A_1, A_2, A_3, A_4,B_1, B_2, B_3, B_4,C_1, C_2, C_3, C_4} \]
         \item Marginal scenario is composed of pre-injectable sets $\mscenario = \PreInj[\graph]{\graph'}$
-        \item Inequalities Violated by Fritz distribution are inherently $4$-outcome
-        \item Incidence matrix $M$ is very large $\sim 2.25 \textsf{Gb}$
-        \[ \# \text{Columns} = \prod_{v \in \jointvar} O_{v} = 4^{12} = 16,777,216 \]
-        \[ \# \text{Rows} = \sum_{V \in \mscenario} \prod_{v \in V} O_{v} = 4\times 4^{6} + 8 \times 4^{3} = 16,896 \]
+        \item Inequalities violated by Fritz distribution are inherently $4$-outcome
+        \item Incidence matrix $M$ is \textbf{very large} $\sim 2.25 \textsf{Gb}$
+        \begin{itemize}
+            \item $\# \text{Columns} = 4^{12} = 16,777,216$
+            \item $\# \text{Rows} =  4\times 4^{6} + 8 \times 4^{3} = 16,896$
+            \item $\# \text{Non-zero Entries} = 201,326,592$
+        \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Inequalities Found}
+    \frametitle{Triangle Scenario Inequality}
+
 \end{frame}
 
-\section{Symmetries}
+
 \begin{frame}
     \frametitle{Causal Symmetry}
+    \begin{itemize}
+        \item Desirable to find compatibility inequality $I$ such that
+        \[ \forall \varphi \in \Perm{A,B,C} : \varphi\bs{I} = I \]
+        \item Compatibility is independent of variable labels $I, \graph \to \varphi\bs{I}, \varphi\bs{\graph}$
+        \item Need $\varphi\bs{\graph} = \graph$ to find new $\varphi\bs{I}$
+    \end{itemize}
+    \begin{definition}
+        The \term{causal symmetry group} of causal structure $\graph$:
+        \[ \Aut{\graph} = \bc{\varphi \in \Perm{\nodes} \mid \varphi\bs{\graph} = \graph} \]
+        Strictly speaking, one needs to preserve observable nodes:
+        \[ \Aut[\nodes_O]{\graph} = \bc{\varphi \in \Aut{\graph} \mid \varphi\bs{\nodes_O} = \nodes_O} \]
+    \end{definition}
+    \note<1>[item]{Fritz distribution is incompatible with Triangle scenario because party $C$ plays the role of measurement settings for both $A$ and $B$}
+    \note<1>[item]{In order to find quantum distributions different from $P_F$ in the Triangle Scenario, it is therefore desirable to find a proof of its incompatibility (i.e. inequality) that is symmetric under exchange of parties}
+    \note<1>[item]{Surprisingly, it is possible to do so!}
+    \note<1>[item]{Here is how.}
+    \note<1>[item]{First, we will formally define the symmetry group in question}
+    \note<1>[item]{Causal symmetry group is the group of automorphisms on causal structure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Causal Symmetry and Inflation}
+    \begin{itemize}
+        \item Causal symmetry group for $\graph'$ is no good!
+        \item Not possible to deflate inequality if it's not in terms of injectable sets
+        \begin{definition}
+            The \term{restricted causal symmetry group} $\Phi$ of $\graph'$:
+            \[ \Phi = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \]
+        \end{definition}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Restricted Causal Symmetry of Large Inflation}
+    \begin{itemize}
+        \item $\Phi$ for the large inflation is an order $48$ group with $4$ generators
+    \end{itemize}
+    \begin{equation*}
+    \begin{aligned}[c]
+    &\hspace{1mm}\gep_1 \\
+    A_1 &\to A_4 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_1 \\B_1 &\to B_4 \\B_2 &\to B_3 \\B_3 &\to B_2 \\B_4 &\to B_1 \\C_1 &\to C_4 \\C_2 &\to C_3 \\C_3 &\to C_2 \\C_4 &\to C_1
+    \end{aligned}
+    \quad
+    \begin{aligned}[c]
+    &\hspace{1mm}\gep_2 \\
+    A_1 &\to A_1 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_4 \\B_1 &\to C_1 \\B_2 &\to C_3 \\B_3 &\to C_2 \\B_4 &\to C_4 \\C_1 &\to B_1 \\C_2 &\to B_3 \\C_3 &\to B_2 \\C_4 &\to B_4
+    \end{aligned}
+    \quad
+    \begin{aligned}[c]
+    &\hspace{1mm}\gep_3 \\
+    A_1 &\to C_1 \\A_2 &\to C_2 \\A_3 &\to C_3 \\A_4 &\to C_4 \\B_1 &\to A_1 \\B_2 &\to A_2 \\B_3 &\to A_3 \\B_4 &\to A_4 \\C_1 &\to B_1 \\C_2 &\to B_2 \\C_3 &\to B_3 \\C_4 &\to B_4
+    \end{aligned}
+    \quad
+    \begin{aligned}[c]
+    &\hspace{1mm}\gep_4 \\
+    A_1 &\to A_1 \\A_2 &\to A_2 \\A_3 &\to A_3 \\A_4 &\to A_4 \\B_1 &\to B_2 \\B_2 &\to B_1 \\B_3 &\to B_4 \\B_4 &\to B_3 \\C_1 &\to C_3 \\C_2 &\to C_4 \\C_3 &\to C_1 \\C_4 &\to C_2
+    \end{aligned}
+    \end{equation*}
 \end{frame}
 
 \begin{frame}
     \frametitle{Symmetric Incidence}
+    \begin{itemize}
+        \item Group orbits through repeated action of $\varphi \in \Phi$ on $m \in \Events{\mscenario}$ and $j \in \Events{\jointvar}$
+    \end{itemize}
+    \begin{align*}
+        \Phi\bs{m} &\defined \bc{\varphi\bs{m} \mid \varphi \in \Phi} \\
+        \Phi\bs{j} &\defined \bc{\varphi\bs{j} \mid \varphi \in \Phi}
+    \end{align*}
+    \begin{itemize}
+        \item Construct \term{symmetric incidence matrix} $\Phi\bs{M}$
+    \end{itemize}
+    \[ \Phi\bs{M}_{\Phi\bs{m}, \Phi\bs{j}} = \sum_{m' \in \Phi\bs{m}}\sum_{j' \in \Phi\bs{j}} M_{m',j'} \]
+    \[ \Phi\bs{M} = \La_{\Phi\bs{\Events{\mscenario}}}\tcdot M \tcdot \La_{\Phi\bs{\Events{\jointvar}}} \]
+    \begin{itemize}
+        \item $\Phi\bs{M}$ not a bit-wise matrix like $M$
+        \item For large inflation $M$ is $16,896 \times 16,777,216$
+        \item For large inflation $\Phi\bs{M}$ is $450 \times 358,120$ % 3566922 entries
+    \end{itemize}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Symmetric Inequalities}
+\begin{frame}[shrink=60]
+    \frametitle{Party Symmetric Inequality}
+    \input{../../figures/inequalities/MosekCertFritzSym_ineq_print}
 \end{frame}
 
-\section{Searching for New Distributions}
-\begin{frame}
-    \frametitle{Numerical Optimization}
-\end{frame}
 
 \begin{frame}
     \frametitle{Parameterizing Quantum Distributions}
@@ -358,15 +682,36 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Numerical Optimization}
+    \begin{itemize}
+        \item Attempt to find new non-classical distributions
+        \item Objective function $f\br{\la} \in \R$
+        \begin{enumerate}
+            \item Real-valued parameters $\la = \br{\la_0, \ldots, \la_n}$
+            \item Quantum states/measurements $\rho_{AB}, \rho_{BC}, \rho_{CA}, M_{A}, M_{B}, M_{C}$
+            \item Distribution $\prob[ABC]$
+            \item Plug into inequality $I$ in homogeneous form $I\br{\prob[ABC]} \geq 0$
+            \item Output is objective value $I\br{\prob[ABC]}$
+        \end{enumerate}
+        \item Numerical minimization of $f\br{\la}$
+        \[ f(\la_{(k+1)}) = \la_{(k)} - \ga_{(k)} \del f(\la_{(k)})  \]
+        \item Non-convex, non-linear, smooth/continuous
+        \item Gradient Descent, BFGS Method, Nelder-Mead simplex method
+        \item Stochastic methods: simulated annealing, basin-hopping
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
     \frametitle{Parameterizing Unitary Group}
     \begin{itemize}
         \item Spengler, Huber and Heismayr \cite{Spengler_2010_Unitary} demonstrate a parameterization of $\s{U}\br{d}$ where the parameters are organized in a $d \times d$-matrix of real values $\la_{n,m}$
         \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n} RP_{n,m}}} \tcdot \bs{\prod_{l=1}^{d} GP_{l}} \]
         \item Global Phase Terms: $GP_{l} = \exp\br{iP_l \lambda_{l,l}}$
-        \item Relative Phase Terms: $RP_{m,n} = \exp\br{i P_n \lambda_{n,m}}$
-        \item Rotation Terms: $R_{n,m} = \exp\br{i \si_{m,n} \lambda_{m,n}}$
+        \item Relative Phase Terms: $RP_{n,m} = \exp\br{i P_n \lambda_{n,m}}$
+        \item Rotation Terms: $R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}}$
         \item Projection Operators: $P_l = \ket{l}\bra{l}$
         \item Anti-symmetric $\si$-matrices: $\si_{m,n} = - i\ket{m}\bra{n} + i \ket{n}\bra{m}$
+        \item Parameters $\la_{n,m} \in \bs{0, 2\pi}$
     \end{itemize}
 \end{frame}
 
@@ -375,13 +720,13 @@
     \begin{itemize}
         \item Each parameter $\la_{n,m}$ has physical interpretation
         \item Degeneracies are easily eliminated such as global phase
-        \[ \forall l = 1, \ldots, d : \la_{l,l} = 0 \implies GP_{l} = 1 \]
+        \[ \forall l = 1, \ldots, d : \la_{l,l} = 0 \implies GP_{l} = \ident \]
         \item Parameterize $U \in \s{U}\br{d}$ up to global phase denoted $\ti{U} \in \s{U}\br{d}$
         \item Computationally efficient
         \begin{alignat*}{2}
             GP_l &= \ident &&+ P_l \br{e^{i\la_{l,l}} - 1} \\
-            RP_{m,n} &= \ident &&+ P_n \br{e^{i\la_{n,m}} - 1} \\
-            R_{n,m} &= \ident &&+ \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} \\
+            RP_{n,m} &= \ident &&+ P_n \br{e^{i\la_{n,m}} - 1} \\
+            R_{m,n} &= \ident &&+ \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} \\
             & &&+ \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sin\lambda_{n,m} \\
         \end{alignat*}
     \end{itemize}
@@ -409,7 +754,7 @@
         \item Freedom to choice $k$
         \item Parameterize $\rho$ through $\bc{p_i}$ and $\ti{U}_{k}$
         \[ \ti{U}_{k} = \prod_{m=1}^{k} \br{\prod_{n={m+1}}^{d} R_{m,n} RP_{n,m}} \]
-        \item $d^2 - \br{d-k}^2 - k + \br{k-1} = 2dk -k^2 -1$ real-valued parameters (no-degeneracy)
+        \item real-value parameters $d^2 - \br{d-k}^2 - k$ for $\ti{U}_{k}$, $k-1$ for $\bc{p_i}$ (no degeneracy)
     \end{itemize}
 \end{frame}
 
@@ -434,7 +779,7 @@
         \item Inspired by \cite{Pal_2010}, parameterizing PVMs means parameterizing a $n$-element sub-basis $\bc{\ket{m_{\chi,i}}}$
         \item Use unitary transformation again
         \[ \bc{\ket{m_{\chi,1}}, \ldots, \ket{m_{\chi,n}}} = \bc{U \ket{1}, \ldots, U \ket{n}} \]
-        \item Global phase and remaining basis irrelevant: $\ti{U}_{n}$ requires $2dn -n^2 -1$ real-valued parameters\
+        \item Global phase and remaining basis irrelevant: $\ti{U}_{n}$ requires $n(2d - n - 1)$ real-valued parameters\
         \item PVMs are computationally more efficient
     \end{itemize}
     \[ \prob[ABC]\br{abc} = \bra{m_{A,a}m_{B,b}m_{C,c}}{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm}\ket{m_{A,a}m_{B,b}m_{C,c}} \]
@@ -449,27 +794,73 @@
             \item Without $\netperm$, $\prob[ABC]$ would be separable
             \item Required to align $B$'s measurement over $\Tr_{A,C}\br{\rho_{AB} \otimes \rho_{BC}}$
             \item $\netperm$ is a $2^6 \times 2^6$ matrix
+            \item Shifts one qubit to the left
         \end{itemize}
         \column{0.4\linewidth}
             \includegraphics[trim={1.0cm 1.2cm 1.0cm 1cm},clip,width=1.0\textwidth]{../../figures/perm_mtrx.pdf}
     \end{columns}
+    \[ \netperm \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Results}
     \begin{itemize}
-        \item Shifts one qubit to the left
-        \[ \netperm \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
+        \item Full rank $\rho, M$ gives $81$ free parameters
+        \[ \abs{\la} = 3 \cdot (12 + 3) + 3 \cdot 12 = 81 \]
+        \item Parameterization of quantum distributions still degenerate
+        \item Noisy seed (Gaussian noise):
+        \[ \la_{(0)} = \la_{(F)} + \de \la \qquad \de \la_{i} \sim \s{N}\br{\mu = 0, \si^2 = (2\pi10^{\chi})^2} \]
+        \item Uniform seed:
+        \[ \la_{(0), i} \sim \s{U}\br{[0, 2\pi]} \]
     \end{itemize}
 
 \end{frame}
 
 \begin{frame}
-    \frametitle{Maximally Violating Distributions}
+    \frametitle{Fritz Local Minima}
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Gaussian_Perturbation_Fritz_Color_Default.pdf}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Non-Trivial Inequalities For Large Inflation}
+    \frametitle{Fritz Local Minima Zoomed}
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Gaussian_Perturbation_Fritz_Color_Zoomed.pdf}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Max Entangled vs. Max Violating (???) [Optional]}
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_random_seed.pdf}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Max Entangled vs. Max Violating (???) [Optional]}
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_random_seed_Zoomed.pdf}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Max Entangled vs. Max Violating} % $\chi = -2$
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_fritz_seed.pdf}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Maximally Violating Distributions}
+    \begin{itemize}
+        \item Able to out-perform violation provided by Fritz distribution
+        \item Maximally-violating states are not maximally-entangled; similar to detection loop-hole example of \cite{Methot_2006}
+        \item Violation very sensitive to the initial parameters $\la_{(0)}$
+        \item Both symmetric and asymmetric inequalities exhibit same qualitative features
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{Conclusions}
+    \begin{itemize}
+        \item New causal compatibility inequalities have been found for the TS
+        \item Inflation technique capable of producing inequalities with quantum/classical witnesses
+        \item Proof of non-classicality is robust to noise
+        \item Fritz witness-able by party symmetric inequalities
+        \item Maximally violating distributions are different than Fritz but also similar
+        \item Further research is necessary
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
