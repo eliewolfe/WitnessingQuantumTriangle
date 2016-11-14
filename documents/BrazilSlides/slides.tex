@@ -20,14 +20,17 @@
 
 
 \title[Triangle Inequalities]{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Scenario}
-\author[Fraser]{T.C.~Fraser\inst{1}}
-\institute[PI]
+\author[Fraser]{T.C.~Fraser\inst{1,2}}
+\institute
 {
     \inst{1}%
     Perimeter Institute for Theoretical Physics\\
-    Ontario, Canada
+    Ontario, Canada \\
+    \inst{2}%
+    University of Waterloo\\
+    Ontario, Canada \\
 }
-\date[QN 2016]{Quantum Networks IIP, Nov. 2016}
+\date[QN 2016]{Quantum Networks Workshop, IIP, Nov. 2016}
 
 \begin{document}
 
@@ -41,13 +44,12 @@
     \bibliography{../references}{}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Table of Contents}
-\tableofcontents
+% \begin{frame}
+%     \frametitle{Table of Contents}
+% \tableofcontents
 
-\end{frame}
+% \end{frame}
 
-\section{Tools}
 
 \begin{frame}
     \frametitle{Introduction}
@@ -142,7 +144,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Graph Theory [Optional Slide]}
+    \frametitle{Graph Theory [Optional]}
     Let $n, m \in \nodes$ be nodes of the graph $\graph$.
     \begin{itemize}
         \item \term{parents of $n$}: $\Pa[\graph]{n} \defined \bc{m \mid m \to n}$
@@ -521,17 +523,27 @@
 
 \begin{frame}
     \frametitle{Quantum Implementation of Fritz Distribution}
+    \begin{itemize}
+        \item States:
+    \end{itemize}
     \begin{gather*}
-        \rho_{AB} = \ket{\Psi^+}\bra{\Psi^+} \quad \rho_{BC} = \rho_{CA} = \ket{\gp^+}\bra{\gp^+} \\
+        \rho_{AB} = \ket{\Psi^+}\bra{\Psi^+} \quad \rho_{BC} = \rho_{CA} = \ket{\Phi^+}\bra{\Phi^+}
+    \end{gather*}
+    \begin{itemize}
+        \item Maximally entangled Bell states:
+    \end{itemize}
+    \[ \ket{\Psi^+} = \f{1}{\sqrt{2}}\br{\ket{01} + \ket{10}} \quad \ket{\Phi^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}} \]
+    \begin{itemize}
+        \item Measurements:
+    \end{itemize}
+    \begin{gather*}
         M_{A} = \bc{\ket{0\psi_0}\bra{0\psi_0}, \ket{0\psi_{\pi}}\bra{0\psi_{\pi}}, \ket{1\psi_{-\pi/2}}\bra{1\psi_{-\pi/2}}, \ket{1\psi_{\pi/2}}\bra{1\psi_{\pi/2}}} \\
         M_{B} = \bc{\ket{\psi_{\pi/4}0}\bra{\psi_{\pi/4}0}, \ket{\psi_{5\pi/4}0}\bra{\psi_{5\pi/4}0}, \ket{\psi_{3\pi/4}1}\bra{\psi_{3\pi/4}1}, \ket{\psi_{-\pi/4}1}\bra{\psi_{-\pi/4}1}} \\
         M_{C} = \bc{\ket{00}\bra{00}, \ket{01}\bra{01}, \ket{10}\bra{10}, \ket{11}\bra{11}}
     \end{gather*}
     \begin{itemize}
         \item Shorthand: $\ket{\psi_x} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{ix}\ket{1}}$
-        \item Maximally entangled Bell states:
     \end{itemize}
-    \[ \ket{\Psi^+} = \f{1}{\sqrt{2}}\br{\ket{01} + \ket{10}} \quad \ket{\gp^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}} \]
 \end{frame}
 
 \begin{frame}
@@ -555,8 +567,8 @@
         \item Joint variables are all of the observable nodes $\nodes_O' = \jointvar$
         \[ \jointvar = \bc{A_1, A_2, A_3, A_4,B_1, B_2, B_3, B_4,C_1, C_2, C_3, C_4} \]
         \item Marginal scenario is composed of pre-injectable sets $\mscenario = \PreInj[\graph]{\graph'}$
-        \item Inequalities Violated by Fritz distribution are inherently $4$-outcome
-        \item Incidence matrix $M$ is very large $\sim 2.25 \textsf{Gb}$
+        \item Inequalities violated by Fritz distribution are inherently $4$-outcome
+        \item Incidence matrix $M$ is \textbf{very large} $\sim 2.25 \textsf{Gb}$
         \begin{itemize}
             \item $\# \text{Columns} = 4^{12} = 16,777,216$
             \item $\# \text{Rows} =  4\times 4^{6} + 8 \times 4^{3} = 16,896$
@@ -571,15 +583,13 @@
 \end{frame}
 
 
-\section{Symmetries}
 \begin{frame}
     \frametitle{Causal Symmetry}
     \begin{itemize}
         \item Desirable to find compatibility inequality $I$ such that
         \[ \forall \varphi \in \Perm{A,B,C} : \varphi\bs{I} = I \]
-        \item Compatibility is independent of variable labels
-        \[ \forall \varphi \in \Perm{\nodes} : I \stackrel{\text{com}}{\rightarrow} \graph \implies \varphi\bs{I} \stackrel{\text{com}}{\rightarrow} \varphi\bs{\graph}  \]
-        \item If $\varphi\bs{\graph} = \graph$ then $\varphi\bs{I} \stackrel{\text{com}}{\rightarrow} \graph$
+        \item Compatibility is independent of variable labels $I, \graph \to \varphi\bs{I}, \varphi\bs{\graph}$
+        \item Need $\varphi\bs{\graph} = \graph$ to find new $\varphi\bs{I}$
     \end{itemize}
     \begin{definition}
         The \term{causal symmetry group} of causal structure $\graph$:
@@ -596,7 +606,64 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Causal Symmetry and Inflation}
+    \begin{itemize}
+        \item Causal symmetry group for $\graph'$ is no good!
+        \item Not possible to deflate inequality if it's not in terms of injectable sets
+        \begin{definition}
+            The \term{restricted causal symmetry group} $\Phi$ of $\graph'$:
+            \[ \Phi = \Aut[\PreInj[\graph]{\graph'}]{\graph'} \]
+        \end{definition}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Restricted Causal Symmetry of Large Inflation}
+    \begin{itemize}
+        \item $\Phi$ for the large inflation is an order $48$ group with $4$ generators
+    \end{itemize}
+    \begin{equation*}
+    \begin{aligned}[c]
+    &\hspace{1mm}\gep_1 \\
+    A_1 &\to A_4 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_1 \\B_1 &\to B_4 \\B_2 &\to B_3 \\B_3 &\to B_2 \\B_4 &\to B_1 \\C_1 &\to C_4 \\C_2 &\to C_3 \\C_3 &\to C_2 \\C_4 &\to C_1
+    \end{aligned}
+    \quad
+    \begin{aligned}[c]
+    &\hspace{1mm}\gep_2 \\
+    A_1 &\to A_1 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_4 \\B_1 &\to C_1 \\B_2 &\to C_3 \\B_3 &\to C_2 \\B_4 &\to C_4 \\C_1 &\to B_1 \\C_2 &\to B_3 \\C_3 &\to B_2 \\C_4 &\to B_4
+    \end{aligned}
+    \quad
+    \begin{aligned}[c]
+    &\hspace{1mm}\gep_3 \\
+    A_1 &\to C_1 \\A_2 &\to C_2 \\A_3 &\to C_3 \\A_4 &\to C_4 \\B_1 &\to A_1 \\B_2 &\to A_2 \\B_3 &\to A_3 \\B_4 &\to A_4 \\C_1 &\to B_1 \\C_2 &\to B_2 \\C_3 &\to B_3 \\C_4 &\to B_4
+    \end{aligned}
+    \quad
+    \begin{aligned}[c]
+    &\hspace{1mm}\gep_4 \\
+    A_1 &\to A_1 \\A_2 &\to A_2 \\A_3 &\to A_3 \\A_4 &\to A_4 \\B_1 &\to B_2 \\B_2 &\to B_1 \\B_3 &\to B_4 \\B_4 &\to B_3 \\C_1 &\to C_3 \\C_2 &\to C_4 \\C_3 &\to C_1 \\C_4 &\to C_2
+    \end{aligned}
+    \end{equation*}
+\end{frame}
+
+\begin{frame}
     \frametitle{Symmetric Incidence}
+    \begin{itemize}
+        \item Group orbits through repeated action of $\varphi \in \Phi$ on $m \in \Events{\mscenario}$ and $j \in \Events{\jointvar}$
+    \end{itemize}
+    \begin{align*}
+        \Phi\bs{m} &\defined \bc{\varphi\bs{m} \mid \varphi \in \Phi} \\
+        \Phi\bs{j} &\defined \bc{\varphi\bs{j} \mid \varphi \in \Phi}
+    \end{align*}
+    \begin{itemize}
+        \item Construct \term{symmetric incidence matrix} $\Phi\bs{M}$
+    \end{itemize}
+    \[ \Phi\bs{M}_{\Phi\bs{m}, \Phi\bs{j}} = \sum_{m' \in \Phi\bs{m}}\sum_{j' \in \Phi\bs{j}} M_{m',j'} \]
+    \[ \Phi\bs{M} = \La_{\Phi\bs{\Events{\mscenario}}}\tcdot M \tcdot \La_{\Phi\bs{\Events{\jointvar}}} \]
+    \begin{itemize}
+        \item $\Phi\bs{M}$ not a bit-wise matrix like $M$
+        \item For large inflation $M$ is $16,896 \times 16,777,216$
+        \item For large inflation $\Phi\bs{M}$ is $450 \times 358,120$ % 3566922 entries
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[shrink=60]
@@ -604,10 +671,6 @@
     \input{../../figures/inequalities/MosekCertFritzSym_ineq_print}
 \end{frame}
 
-\section{Searching for New Distributions}
-\begin{frame}
-    \frametitle{Numerical Optimization}
-\end{frame}
 
 \begin{frame}
     \frametitle{Parameterizing Quantum Distributions}
@@ -616,6 +679,26 @@
     \begin{center}
         \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario_operational}}
     \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Numerical Optimization}
+    \begin{itemize}
+        \item Attempt to find new non-classical distributions
+        \item Objective function $f\br{\la} \in \R$
+        \begin{enumerate}
+            \item Real-valued parameters $\la = \br{\la_0, \ldots, \la_n}$
+            \item Quantum states/measurements $\rho_{AB}, \rho_{BC}, \rho_{CA}, M_{A}, M_{B}, M_{C}$
+            \item Distribution $\prob[ABC]$
+            \item Plug into inequality $I$ in homogeneous form $I\br{\prob[ABC]} \geq 0$
+            \item Output is objective value $I\br{\prob[ABC]}$
+        \end{enumerate}
+        \item Numerical minimization of $f\br{\la}$
+        \[ f(\la_{(k+1)}) = \la_{(k)} - \ga_{(k)} \del f(\la_{(k)})  \]
+        \item Non-convex, non-linear, smooth/continuous
+        \item Gradient Descent, BFGS Method, Nelder-Mead simplex method
+        \item Stochastic methods: simulated annealing, basin-hopping
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -637,7 +720,7 @@
     \begin{itemize}
         \item Each parameter $\la_{n,m}$ has physical interpretation
         \item Degeneracies are easily eliminated such as global phase
-        \[ \forall l = 1, \ldots, d : \la_{l,l} = 0 \implies GP_{l} = 1 \]
+        \[ \forall l = 1, \ldots, d : \la_{l,l} = 0 \implies GP_{l} = \ident \]
         \item Parameterize $U \in \s{U}\br{d}$ up to global phase denoted $\ti{U} \in \s{U}\br{d}$
         \item Computationally efficient
         \begin{alignat*}{2}
@@ -671,7 +754,7 @@
         \item Freedom to choice $k$
         \item Parameterize $\rho$ through $\bc{p_i}$ and $\ti{U}_{k}$
         \[ \ti{U}_{k} = \prod_{m=1}^{k} \br{\prod_{n={m+1}}^{d} R_{m,n} RP_{n,m}} \]
-        \item $d^2 - \br{d-k}^2 - k + \br{k-1} = 2dk -k^2 -1$ real-valued parameters (no-degeneracy)
+        \item real-value parameters $d^2 - \br{d-k}^2 - k$ for $\ti{U}_{k}$, $k-1$ for $\bc{p_i}$ (no degeneracy)
     \end{itemize}
 \end{frame}
 
@@ -696,7 +779,7 @@
         \item Inspired by \cite{Pal_2010}, parameterizing PVMs means parameterizing a $n$-element sub-basis $\bc{\ket{m_{\chi,i}}}$
         \item Use unitary transformation again
         \[ \bc{\ket{m_{\chi,1}}, \ldots, \ket{m_{\chi,n}}} = \bc{U \ket{1}, \ldots, U \ket{n}} \]
-        \item Global phase and remaining basis irrelevant: $\ti{U}_{n}$ requires $2dn -n^2 -1$ real-valued parameters\
+        \item Global phase and remaining basis irrelevant: $\ti{U}_{n}$ requires $n(2d - n - 1)$ real-valued parameters\
         \item PVMs are computationally more efficient
     \end{itemize}
     \[ \prob[ABC]\br{abc} = \bra{m_{A,a}m_{B,b}m_{C,c}}{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm}\ket{m_{A,a}m_{B,b}m_{C,c}} \]
@@ -717,11 +800,55 @@
             \includegraphics[trim={1.0cm 1.2cm 1.0cm 1cm},clip,width=1.0\textwidth]{../../figures/perm_mtrx.pdf}
     \end{columns}
     \[ \netperm \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Results}
+    \begin{itemize}
+        \item Full rank $\rho, M$ gives $81$ free parameters
+        \[ \abs{\la} = 3 \cdot (12 + 3) + 3 \cdot 12 = 81 \]
+        \item Parameterization of quantum distributions still degenerate
+        \item Noisy seed (Gaussian noise):
+        \[ \la_{(0)} = \la_{(F)} + \de \la \qquad \de \la_{i} \sim \s{N}\br{\mu = 0, \si^2 = (2\pi10^{\chi})^2} \]
+        \item Uniform seed:
+        \[ \la_{(0), i} \sim \s{U}\br{[0, 2\pi]} \]
+    \end{itemize}
 
 \end{frame}
 
 \begin{frame}
+    \frametitle{Fritz Local Minima}
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Gaussian_Perturbation_Fritz_Color_Default.pdf}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Fritz Local Minima Zoomed}
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Gaussian_Perturbation_Fritz_Color_Zoomed.pdf}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Max Entangled vs. Max Violating (???) [Optional]}
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_random_seed.pdf}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Max Entangled vs. Max Violating (???) [Optional]}
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_random_seed_Zoomed.pdf}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Max Entangled vs. Max Violating} % $\chi = -2$
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_fritz_seed.pdf}
+\end{frame}
+
+\begin{frame}
     \frametitle{Maximally Violating Distributions}
+    \begin{itemize}
+        \item Able to out-perform violation provided by Fritz distribution
+        \item Maximally-violating states are not maximally-entangled; similar to detection loop-hole example of \cite{Methot_2006}
+        \item Violation very sensitive to the initial parameters $\la_{(0)}$
+        \item Both symmetric and asymmetric inequalities exhibit same qualitative features
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -730,7 +857,7 @@
         \item New causal compatibility inequalities have been found for the TS
         \item Inflation technique capable of producing inequalities with quantum/classical witnesses
         \item Proof of non-classicality is robust to noise
-        \item Fritz witnessable by party symmetric inequalities
+        \item Fritz witness-able by party symmetric inequalities
         \item Maximally violating distributions are different than Fritz but also similar
         \item Further research is necessary
     \end{itemize}
