@@ -1,5 +1,5 @@
 \documentclass[
-    hyperref={bookmarks=false},% ,colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=MidnightBlue
+    hyperref={bookmarks=false},% ,, linkcolor=blue, urlcolor=blue,, colorlinks=true, citecolor=MidnightBlue
     xcolor={dvipsnames},
 ]{beamer}
 
@@ -8,10 +8,12 @@
 
 % \usepackage{pgfpages} % For viewing slides on the right
 \usepackage[warningthreshold=0.95]{resizegather} % For resizing gather environment to fit massive equations
-\setbeameroption{show notes} % Shows notes on the right of the main slides
+\AtBeginNote{\scriptsize} % Make notes small
+\setbeameroption{show notes} % Shows notes
+% \setbeameroption{show only notes} % Shows only notes
 % \setbeameroption{show notes on second screen}
 \usefonttheme[onlymath]{serif} % For serif font in math mode
-\usepackage[backend=biber, citestyle=authoryear]{biblatex} %
+\usepackage[backend=biber, style=authoryear, doi=false,isbn=false,url=false, citestyle=authoryear-comp]{biblatex} %
 
 \setbeamertemplate{navigation symbols}{
 \insertslidenavigationsymbol%
@@ -35,6 +37,7 @@
 \renewcommand{\tcdot}{\cdot} % Tentative cdot, not sure if I want to keep dots
 \setbeamertemplate{bibliography item}{\insertbiblabel}
 \addbibresource{../references.bib}
+\AtBeginBibliography{\small}
 
 \title[Triangle Inequalities]{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Scenario}
 \author[Fraser]{T.C.~Fraser\inst{1,2}}
@@ -51,58 +54,38 @@
 
 \begin{document}
 
-\frame{\titlepage}
-
-% \begin{frame}
-%     \frametitle{Table of Contents}
-% \tableofcontents
-
-% \end{frame}
-
-
 \begin{frame}
-    \frametitle{Introduction}
+    \titlepage
     \note[item]{Thank International Institute for Physics (IIP) for support}
     \note[item]{Thank Perimeter Institute for Theoretical Physics (PI) for support}
 \end{frame}
+
 \begin{frame}
-    \frametitle{Objective}
-    \begin{itemize}
-        \item Derive causal compatibility/locality inequalities that distinguish quantum distributions from classical ones
-        \item Specifically for the Triangle Scenario (TS)
-    \end{itemize}
+    \frametitle{The Triangle Scenario (TS)}
     \begin{center}
-        \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario}}
+        \scalebox{1.5}{\input{../../figures/causal_structures/triangle_scenario}}
     \end{center}
     \note[item]{Research project's goal was to derive new causal compatibility inequalities that distinguish quantum correlations from classical correlations}
-    \note[item]{More specifically, the ambition of the project is to obtain such inequalities that constraint compatibility with The Triangle Scenario}
     \note[item]{Triangle Scenario has be studied extensively before}
     \note[item]{In~\cite{Branciard_2012} it was noted that characterizing locality in TS remained an open problem and that identifying compatibility constraints in this configuration \textbf{seemed challenging}}
     \note[item]{In~\cite{Fritz_2012}, Fritz demonstrated that TS is the \textbf{smallest} correlation scenario in which their exists quantum incompatible distributions (proof without inequalities)}
-    \note[item]{In~\cite{Henson_2014}, TS was classified as an \textbf{interesting} causal structure: conditional independence relations are not a sufficient characterization of compatibility}
+    \note[item]{In~\cite{Henson_2014}, TS was classified as an \textbf{interesting} causal structure: conditional independence relations are not a sufficient characterization of compatibility (there are none)}
     \note[item]{Several other authors (see~\cite{Steudel_2010},~\cite{Chaves_2014},~\cite{Inflation}, $\ldots$) have investigated TS without achieving research objective}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Objective Cont'd}
-    \note[item]{At the time of publishing~\cite{Branciard_2012}, problem seems hard.}
-    \note[item]{Important because its smallest correlation scenario with quantum non-locality.}
-    \note[item]{Compatibility can not be determined from conditional independence relations (there are none)}
-    \note[item]{It would be interesting to find quantum non-locality in the triangle scenario that does not rely on Bell's theorem.}
-\end{frame}
-
-\begin{frame}
     \frametitle{This Talk}
-    \begin{itemize}
+    \begin{enumerate}
         \item Report the discovery of such inequalities
         \item Explain how these inequalities were obtained
-        \item Discuss quantum distributions that violate compatibility inequalities
-        \item Attempts at finding new quantum distributions different than those proposed by~\cite{Fritz_2012}
-        \item Briefly discuss symmetric inequalities
-    \end{itemize}
+        \item Symmetric inequalities
+        \item Greater violations
+        \item Different kinds of non-locality?
+    \end{enumerate}
     \note[item]{The purpose of this talk is to present these new-found inequalities and explain how they were obtained}
-    \note[item]{Additionally I will talk about my attempts at using these inequalities to find new incompatible quantum distributions}
-    \note[item]{In doing so, will discuss how we obtained symmetric compatibility inequalities that have violations in the Triangle Scenario}
+    \note[item]{Talk about how symmetries play two roles in the search for quantum non-locality}
+    \note[item]{Demonstrate how these inequalities are robust to noise}
+    \note[item]{Finding maximally violating distributions}
 \end{frame}
 
 \begin{frame}
@@ -506,13 +489,25 @@
     \end{center}
 \end{frame}
 
+\newcommand{\probplotvalue}[1]{%
+    \definecolor{probvalcolor}{RGB}{#1}%
+    \definecolor{outlinecolor}{RGB}{127, 127, 127}%
+    \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]%
+        \pgfmathsetmacro{\size}{0.2};%
+        \draw[outlinecolor, fill=probvalcolor] (-\size,-\size) -- (-\size, +\size) -- (+\size, +\size) -- (+\size, -\size) -- cycle;%
+    \end{tikzpicture}%
+}%
+
 \begin{frame}
     \frametitle{Fritz Distribution}
-    The \term{Fritz Distribution $\prob[F]$}:
-    \begin{itemize}
-        \item three-party $\prob[F] = \prob[ABC]$
-        \item each party has $4$ outcomes
-    \end{itemize}
+    \begin{center}
+        \includegraphics[width=\linewidth]{../../figures/distributions/fritz_dist_plot.pdf}
+    \end{center}
+    \[ \probplotvalue{253, 253, 84} = \f{1}{32}\br{2 - \sqrt{2}} \qquad \probplotvalue{11, 1, 0} = \f{1}{32}\br{2 + \sqrt{2}}\]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Fritz Distribution Course Graining CHSH [Optional]}
     \begin{gather*}
     \prob[F][00\textcolor{blue}{0}] = \prob[F][11\textcolor{blue}{0}] = \prob[F][30\textcolor{blue}{1}] = \prob[F][21\textcolor{blue}{1}] = \prob[F][12\textcolor{blue}{2}] = \prob[F][03\textcolor{blue}{2}] = \prob[F][23\textcolor{blue}{3}] = \prob[F][32\textcolor{blue}{3}] = \f{1}{32}\br{2 + \sqrt{2}} \\
     \prob[F][01\textcolor{blue}{0}] = \prob[F][10\textcolor{blue}{0}] = \prob[F][31\textcolor{blue}{1}] = \prob[F][20\textcolor{blue}{1}] = \prob[F][13\textcolor{blue}{2}] = \prob[F][02\textcolor{blue}{2}] = \prob[F][22\textcolor{blue}{3}] = \prob[F][33\textcolor{blue}{3}] = \f{1}{32}\br{2 - \sqrt{2}}
@@ -529,7 +524,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Quantum Implementation of Fritz Distribution}
+    \frametitle{Quantum Implementation of Fritz Distribution [Optional]}
     \begin{itemize}
         \item States:
     \end{itemize}
@@ -552,6 +547,7 @@
         \item Shorthand: $\ket{\psi_x} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{ix}\ket{1}}$
     \end{itemize}
 \end{frame}
+
 
 \begin{frame}
     \frametitle{Notes of Fritz Distribution}
@@ -820,8 +816,27 @@
         \item Uniform seed:
         \[ \la_{(0), i} \sim \s{U}\br{[0, 2\pi]} \]
     \end{itemize}
-
 \end{frame}
+
+\begin{frame}
+    \frametitle{Uniform Noise}
+    \[ \s{U}_{\varepsilon}\br{P} = \br{1 + \varepsilon} P + \varepsilon \s{U} \]
+    \begin{center}
+        \includegraphics[width=\linewidth]{../../figures/distributions/uniform_dist_plot.pdf}
+    \end{center}
+    \[ \probplotvalue{255, 255, 109} = \f{1}{64} \]
+    % \begin{center}
+    %     \begin{tikzpicture}
+    %         \pgfmathsetmacro{\ts}{0.5}; % term spacing
+    %         \draw[] (0*\ts,0) node[]{$P_\varepsilon$};
+    %         \draw[] (1*\ts,0) node[]{$=$};
+    %         \draw[] (2*\ts,0) node[]{$(1-\varepsilon)P_{F}$};
+    %         \draw[] (3*\ts,0) node[]{$+$};
+    %         \draw[] (4*\ts,0) node[]{$\delta$};
+    %     \end{tikzpicture}
+    % \end{center}
+\end{frame}
+
 
 \begin{frame}
     \frametitle{Fritz Local Minima}
@@ -873,7 +888,6 @@
 \begin{frame}
     \frametitle{Post-doc Opportunities At Perimeter}
 \end{frame}
-
 
 \begin{frame}[allowframebreaks]
     \frametitle{References}
