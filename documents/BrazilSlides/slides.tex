@@ -13,6 +13,17 @@
 \usefonttheme[onlymath]{serif} % For serif font in math mode
 \usepackage[backend=biber, citestyle=authoryear]{biblatex} %
 
+\setbeamertemplate{navigation symbols}{
+\insertslidenavigationsymbol%
+\insertframenavigationsymbol%
+\insertsubsectionnavigationsymbol%
+\insertsectionnavigationsymbol%
+\insertdocnavigationsymbol%
+\insertbackfindforwardnavigationsymbol%
+\hspace{1em}%
+\usebeamerfont{footline} \insertframenumber/\inserttotalframenumber%
+}
+
 \usepackage{silence}
 \WarningFilter{biblatex}{Patching footnotes failed}
 \renewcommand\mkbibacro[1]{{\footnotesize\MakeUppercase{#1}}} % http://tex.stackexchange.com/questions/203111/small-caps-font-warning-in-beamer-using-biblatex
