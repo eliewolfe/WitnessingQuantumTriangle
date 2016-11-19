@@ -76,131 +76,49 @@
 \begin{frame}
     \frametitle{This Talk}
     \begin{enumerate}
-        \item Report the discovery of such inequalities
-        \item Explain how these inequalities were obtained
-        \item Symmetric inequalities
-        \item Greater violations
-        \item Different kinds of non-locality?
+        \item Inflation technique provides polynomial inequalities
+        \item Inequalities witnessing non-local quantum correlations in the Triangle Scenario
+        \item Discuss search for new non-local quantum correlations
     \end{enumerate}
-    \note[item]{The purpose of this talk is to present these new-found inequalities and explain how they were obtained}
-    \note[item]{Talk about how symmetries play two roles in the search for quantum non-locality}
-    \note[item]{Demonstrate how these inequalities are robust to noise}
-    \note[item]{Finding maximally violating distributions}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Example Inequality}
-    \begin{itemize}
-        \item Quick example/preview:
-    \end{itemize}
-    \input{../../figures/inequalities/nosymwitness_ineq_print_pretty}
-    \begin{itemize}
-        \item $\prob[][abc]$ shorthand for $\prob[ABC][abc]$
-        \item Four outcomes for each $A, B, C$
-        \item Polynomial in $\prob[ABC]$, marginals $\prob[AB]$, $\prob[BC]$, $\prob[AC]$, $\prob[A]$, $\prob[B]$, $\prob[C]$
-    \end{itemize}
-    \note[item]{As a quick example or preview of what is to come, here is a an example inequality admits quantum violations in the triangle scenario}
-    \note[item]{Some features of note: inequality is polynomial in $\prob[ABC]$ and its marginals}
-\end{frame}
-
-% \begin{frame}
-%     \frametitle{Notation}
-%     \begin{itemize}
-%         \item A subset of $V \subset \jointvar$ is a \term{marginal context}
-%         \item Restrict focus to \textit{maximal} marginal scenario where only the largest contexts are present
-%         \[ \forall V_i, V_j \in \mscenario : V_i \not \subset V_j \]
-%     \end{itemize}
-% \end{frame}
-
-\begin{frame}
-    \frametitle{Notation}
-    \textbf{Question:} Which marginal models $\prob^{\mscenario}$ are \term{compatible} with a causal structure $\graph$?\\
-    \begin{itemize}
-        \item \term{Marginal model} $\prob^{\mscenario}$ is collection of probability distributions
-        \[ \prob^{\mscenario} = \bc{\prob[V_1], \ldots, \prob[V_k]} \]
-        \item \term{Marginal scenario} $\mscenario = \bc{V_1, \ldots, V_k}$
-        \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
-        % \item Marginal scenario forms a \textit{simplicial complex}
-        % \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
-        \item \term{Joint random variables} $\jointvar = {\bigcup}_{i} V_i = \bc{v_1, \ldots, v_n}$
-        \item \term{Causal Structure} $\graph = \br{\nodes, \edges}$ is a directed acyclic graph (DAG)
-        \item Nodes classified into \term{latent nodes} $\nodes_{L}$ and \term{observed nodes} $\nodes_{O}$
-    \end{itemize}
-    \note[item]{Before continuing, I will define exactly what I mean by causal compatibility}
-    \note[item]{Causal compatibility refers to the compatibility between causal structures and marginal models}
-    \note[item]{Marginal model is collection of probability distributions over sets of random variables}
-    \note[item]{Marginal scenario refers to the those sets of random variables}
-    \note[item]{The complete set of random variables are the joint random variables}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Graph Theory [Optional]}
-    Let $n, m \in \nodes$ be nodes of the graph $\graph$.
-    \begin{itemize}
-        \item \term{parents of $n$}: $\Pa[\graph]{n} \defined \bc{m \mid m \to n}$
-        \item \term{children of $n$}: $\Ch[\graph]{n} \defined \bc{m \mid n \to m}$
-        \item \term{ancestry of $n$}: $\An[\graph]{n} \defined \bigcup_{i\in\mathbb{W}} \Pa[\graph][i]{n}$
-        \[ \Pa[\graph][0]{n} = n \qquad \Pa[\graph][i]{n} \defined \Pa[\graph]{\Pa[\graph][i-1]{n}} \]
-    \end{itemize}
-    Notation extends to sets of nodes $N \subseteq \nodes$,
-    \begin{itemize}
-        \item \term{parents of $N$}: $\Pa[\graph]{N} \defined \bigcup_{n\in N}\Pa[\graph]{n}$
-        \item \term{children of $N$}: $\Ch[\graph]{N} \defined \bigcup_{n\in N}\Ch[\graph]{n}$
-        \item \term{ancestry of $N$}: $\An[\graph]{N} \defined \bigcup_{n\in N}\An[\graph]{n}$
-    \end{itemize}
-    An \term{induced subgraph} of $\graph = \br{\nodes, \edges}$ due to $N \subseteq \nodes$
-    \[ \Sub[\graph]{N} = \br{N, \bc{e \in \edges \mid e \subseteq N}} \]
+    \note[item]{This talk is going to have three components}
+    \note[item]{Demonstrating how something called the inflation technique allows one derive polynomial compatibility constraints for and causal structure}
+    \note[item]{Using the inflation technique to find inequalities that demonstrate non-local quantum distributions on the Triangle scenario}
 \end{frame}
 
 \begin{frame}
     \frametitle{Causal Compatibility}
-    \textbf{Question:} Which marginal models $\prob^{\mscenario}$ are \term{compatible} with a causal structure $\graph$?\\
-    \textbf{Answer:} $\prob^{\mscenario}$ is compatible with $\graph$ if there exists a set of \term{casual parameters}
-    \[ \bc{\prob[n \mid \Pa[\graph]{n}] \mid n \in \nodes} \]
-    Such that for each $V \in \mscenario$, $\prob[V]$ can be recovered:
-    \begin{enumerate}
-        \item $\prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}]$
-        \item $\prob[V] = \sum_{\nodes \setminus V} \prob[\nodes]$
-    \end{enumerate}
-    \textbf{Inequality:} A \term{casual compatibility inequality} $I$ is an inequality over $\prob^{\mscenario}$ that is satisfied by all compatible $\prob^{\mscenario}$
+    \vfill
+    \begin{center}
+        Triangle Scenario
+    \end{center}
+    \[ \prob[ABC] = \int_{XYZ}\prob[A|X,Y]\prob[B|Y,Z]\prob[C|Z,X]\prob[X]\prob[Y]\prob[Z] \]
+    \vfill
+    \begin{center}
+        \noindent\rule{8cm}{0.4pt}
+    \end{center}
+    \vfill
+    \begin{center}
+        General Setting
+    \end{center}
+    \[ \prob[V] = \sum_{\nodes \setminus V} \prob[\nodes] \qquad \prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}] \]
+    \vfill
 \end{frame}
 
 \begin{frame}
-    \frametitle{Deriving Inequalities}
-    Two necessary components to compatibility:
-    \begin{enumerate}
-        \item \term{Marginal problem}: $\forall V \in \mscenario : \prob[V] = \sum_{\nodes \setminus V} \prob[\nodes]$
-        \begin{itemize}
-            \item Is the marginal model contextual or non-contextual?
-            \item 3 distinct ways to tackle this problem
-            \begin{enumerate}
-                \item Convex hull, Polytope projection, Fourier-Motzkin
-                \item Possibilistic Hardy Inequalities (Hypergraph transversals)
-                \item Linear Program Feasibility/Infeasibility
-            \end{enumerate}
-        \end{itemize}
-        \item \term{Markov Separation}: $\prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}]$
-        \begin{itemize}
-            \item Much harder to determine since latent nodes $\nodes_O$ have unspecified behaviour
-            \item It is possible to turn Markov Separation problem into a Marginal problem (at least partially)
-        \end{itemize}
-    \end{enumerate}
+    \frametitle{Demonstrating Inflation Technique}
+    \vfill
+    \begin{center}
+    \begin{columns}
+        \column{0.5\linewidth}%
+        \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario_anim_1}}
+        \column{0.5\linewidth}%
+        \scalebox{1.0}{\input{../../figures/causal_structures/inflated_triangle_scenario_spiral_anim_1}}
+    \end{columns}
+    \end{center}
+    \only<1>{\[\forall n' \in \nodes', n' \sim n \in \nodes: \AnSub[\graph']{n'} \sim \AnSub[\graph]{n}\]}%
+    \only<2>{\[\AnSub[\graph]{A} \sim \AnSub[\graph']{A_1}\]}%
+    \only<3>{\[\AnSub[\graph]{C} \sim \AnSub[\graph']{C_2}\]}%
 \end{frame}
-
-\begin{frame}
-    \frametitle{Inflation Technique}
-    Developed by Wolfe, Spekkens, and Fritz \cite{Inflation}
-    \begin{definition}
-        An \term{inflation} of a causal structure $\graph$ is another causal structure $\graph'$ such that:
-        \[ \forall n' \in \nodes', n' \sim n \in \nodes: \AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \]
-        Where $\AnSub[\graph]{n}$ denotes the ancestral sub-graph of $n$ in $\graph$
-        \[ \AnSub[\graph]{n} = \Sub[\graph]{\An[\graph]{n}} \]
-        And '$\sim$' is a \term{copy-index} equivalence relation
-        \[ A_1 \sim A_2 \sim A \not \sim B_1 \sim B_2 \sim B \]
-    \end{definition}
-\end{frame}
-
-
 
 \begin{frame}
     \frametitle{Some Inflations of the Triangle Scenario}
@@ -230,89 +148,50 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Inflation Lemma}
-    If one has obtained $\graph$, inflation $\graph'$ and \textit{compatible} marginal distribution $\prob[N]$ where $N \subseteq \nodes$, then:
-    \begin{enumerate}
-        \item There exists causal parameters $\bc{\prob[n\mid\Pa[\graph]{n}] \mid n \in \nodes}$ such that
-        \[ \prob[N] = \prod_{n \in N}\prob[n\mid\Pa[\graph]{n}] \]
-        \item $\AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \implies \Pa[\graph']{n'} \sim \Pa[\graph]{n}$
-        \item Construct \term{inflated causal parameters}
-        \[ \forall n' \in \nodes' : \prob[n'\mid\Pa[\graph']{n'}] \defined \prob[n\mid\Pa[\graph]{n}]\]
-        \item Obtain \textit{compatible} marginal distributions over any $N' \subseteq \nodes'$
-        \[ \prob[N'] = \prod_{n' \in N'}\prob[n'\mid\Pa[\graph']{n'}] \]
-    \end{enumerate}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Inflation Lemma Cont'd}
-    \begin{itemize}
-        \item Inflation procedure holds for any $N \in \nodes, N' \in \nodes'$ where $N \sim N'$
-        \item Define \term{injectable sets of $\graph'$} and \term{images of the injectable of $\graph$}
-        \begin{align*}
-            \Inj[\graph]{\graph'} &\defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : N \sim N'} \\
-            \ImInj[\graph]{\graph'} &\defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : N \sim N'} \\
-        \end{align*}
-        \item For $N' \in \Inj[\graph]{\graph'}$ there is a \textit{unique} $N \subseteq \nodes$ such that $N \sim N'$
-        \item For $N \in \Inj[\graph]{\graph}$ there can \textit{exist many} $N' \subseteq \nodes'$ such that $N \sim N'$
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Inflation Lemma Cont'd}
-    \begin{lemma}
-        \term{The Inflation Lemma:}~\cite[lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$, if a marginal model $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ is compatible with $\graph$ then all marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
-    \end{lemma}
-    \begin{corollary}
-        Any causal compatibility inequality $I'$ constraining the injectable sets $\Inj[\graph]{\graph'}$ can be \term{deflated} into a causal compatibility inequality $I$ constraining the images of the injectable sets $\ImInj[\graph]{\graph'}$.
-    \end{corollary}
-\end{frame}
-
-\begin{frame}
-    \frametitle{$d$-Separation Polynomial}
-    \begin{itemize}
-        \item Deflation only holds when inequality constrains probabilities $\prob[N'], N' \in \Inj[\graph]{\graph'}$
-        \item \textbf{Linear inequality} for $\graph'$
-    \end{itemize}
+    \frametitle{Injectable Sets}
     \begin{center}
-        \begin{tikzpicture}[scale=0.8]
-            \pgfmathsetmacro{\hs}{1.8};
-            \pgfmathsetmacro{\vs}{1};
-            \pgfmathsetmacro{\cross}{0.3};
-            \draw (0*\hs, 4*\vs) node[](a){$\prob[N']$};
-            \draw (0*\hs, 2*\vs) node[](ab){$N' \not \in \Inj[\graph]{\graph'}$};
-            \draw (4*\hs, 4*\vs) node[](c){$\prob[N_1']\prob[N_2']$};
-            \draw (2*\hs, 4*\vs) node[](ac){$N_1' \ancestralindep N_2'$};
-            \draw (2*\hs, 4*\vs + 0.5*\vs) node[]{$N_1' \cup N_2' = N$};
-            \draw (4*\hs, 2*\vs) node[](cd){$N_1', N_2' \in \Inj[\graph]{\graph'}$};
-            \draw (4*\hs, 0*\vs) node[](d){$\prob[N_1]\prob[N_2]$};
-            \draw (0, 0) node[](b){??};
-            \draw[thick, ] (a) -- (ab);
-            \draw[thick, ] (c) -- (cd);
-            \draw[thick, ] (a) -- (ac);
-            \draw[thick, ->] (ac) -- (c);
-            \draw[thick, ->] (ab) -- (b);
-            \draw[thick, ->] (cd) -- (d);
-            \draw[very thick, red]
-            (+ \cross, 1*\vs + \cross) -- (- \cross, 1*\vs - \cross)
-            (+ \cross, 1*\vs - \cross) -- (- \cross, 1*\vs + \cross)
-            ;
-        \end{tikzpicture}
+    \begin{columns}
+        \column{0.5\linewidth}%
+        \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario_anim_2}}
+        \column{0.5\linewidth}%
+        \scalebox{1.0}{\input{../../figures/causal_structures/inflated_triangle_scenario_spiral_anim_2}}
+    \end{columns}
     \end{center}
-    \begin{itemize}
-        \item \textbf{Polynomial inequality} for $\graph$!
-    \end{itemize}
+    \only<1>{\[\AnSub[\graph]{A,C} \sim \AnSub[\graph']{A_2,C_1}\]}%
+    \only<2>{\[?? \not \sim \AnSub[\graph']{B_1,B_2}\]}%
+    \only<3>{\[?? \not \sim \AnSub[\graph']{B_2,C_2}\]}%
 \end{frame}
 
 \begin{frame}
-    \frametitle{Pre-injectable Sets}
+    \frametitle{Injectable Sets Defined}
+    The \term{injectable sets in $\graph'$}:
+    \begin{align*}
+        \Inj[\graph]{\graph'} &\defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : \AnSub[\graph]{N} \sim \AnSub[\graph']{N'}}
+    \end{align*}
+    The \term{images of the injectable sets in $\graph$}:
+    \begin{align*}
+        \ImInj[\graph]{\graph'} &\defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : \AnSub[\graph]{N} \sim \AnSub[\graph']{N'}}
+    \end{align*}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Perfect Correlation Is Incompatible}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example Inequality}
     \begin{itemize}
-        \item $d$-separation relations $+$ inflation $=$ polynomial inequalities over $\graph$
-        \item Restrict focus to sets $N'$ that are partitioned into $N_1', N_2'$ $d$-separated by empty set $\emptyset$
-        \item A \term{pre-injectable set} $N'$:
-        \[ N' = {\coprod}_i N_i' \quad \forall i: N_i' \in \Inj[\graph]{\graph'} \]
-        \[ \forall i, j : N_i' \ancestralindep N_j' \iff \An[\graph']{N'_i} \cap \An[\graph']{N'_j} = \emptyset \]
-        \item Only need to consider \term{maximal pre-injectable sets} $\PreInj[\graph]{\graph'}$
+        \item Quick example/preview:
     \end{itemize}
+    \input{../../figures/inequalities/nosymwitness_ineq_print_pretty}
+    \begin{itemize}
+        \item $\prob[][abc]$ shorthand for $\prob[ABC][abc]$
+        \item Four outcomes for each $A, B, C$
+        \item Polynomial in $\prob[ABC]$, marginals $\prob[AB]$, $\prob[BC]$, $\prob[AC]$, $\prob[A]$, $\prob[B]$, $\prob[C]$
+    \end{itemize}
+    \note[item]{As a quick example or preview of what is to come, here is a an example inequality admits quantum violations in the triangle scenario}
+    \note[item]{Some features of note: inequality is polynomial in $\prob[ABC]$ and its marginals}
 \end{frame}
 
 
@@ -501,52 +380,33 @@
 \begin{frame}
     \frametitle{Fritz Distribution}
     \begin{center}
-        \includegraphics[width=\linewidth]{../../figures/distributions/fritz_dist_plot.pdf}
+        \includegraphics[width=\linewidth]{../../figures/distributions/fritz_dist_plot_bits_brazil.pdf}
     \end{center}
     \[ \probplotvalue{253, 253, 84} = \f{1}{32}\br{2 - \sqrt{2}} \qquad \probplotvalue{11, 1, 0} = \f{1}{32}\br{2 + \sqrt{2}}\]
 \end{frame}
 
 \begin{frame}
-    \frametitle{Fritz Distribution Course Graining CHSH [Optional]}
-    \begin{gather*}
-    \prob[F][00\textcolor{blue}{0}] = \prob[F][11\textcolor{blue}{0}] = \prob[F][30\textcolor{blue}{1}] = \prob[F][21\textcolor{blue}{1}] = \prob[F][12\textcolor{blue}{2}] = \prob[F][03\textcolor{blue}{2}] = \prob[F][23\textcolor{blue}{3}] = \prob[F][32\textcolor{blue}{3}] = \f{1}{32}\br{2 + \sqrt{2}} \\
-    \prob[F][01\textcolor{blue}{0}] = \prob[F][10\textcolor{blue}{0}] = \prob[F][31\textcolor{blue}{1}] = \prob[F][20\textcolor{blue}{1}] = \prob[F][13\textcolor{blue}{2}] = \prob[F][02\textcolor{blue}{2}] = \prob[F][22\textcolor{blue}{3}] = \prob[F][33\textcolor{blue}{3}] = \f{1}{32}\br{2 - \sqrt{2}}
-    \end{gather*}
+    \frametitle{Fritz Distribution Violating CHSH}
+    % \begin{gather*}
+    % \prob[F][00\textcolor{blue}{0}] = \prob[F][11\textcolor{blue}{0}] = \prob[F][30\textcolor{blue}{1}] = \prob[F][21\textcolor{blue}{1}] = \prob[F][12\textcolor{blue}{2}] = \prob[F][03\textcolor{blue}{2}] = \prob[F][23\textcolor{blue}{3}] = \prob[F][32\textcolor{blue}{3}] = \f{1}{32}\br{2 + \sqrt{2}} \\
+    % \prob[F][01\textcolor{blue}{0}] = \prob[F][10\textcolor{blue}{0}] = \prob[F][31\textcolor{blue}{1}] = \prob[F][20\textcolor{blue}{1}] = \prob[F][13\textcolor{blue}{2}] = \prob[F][02\textcolor{blue}{2}] = \prob[F][22\textcolor{blue}{3}] = \prob[F][33\textcolor{blue}{3}] = \f{1}{32}\br{2 - \sqrt{2}}
+    % \end{gather*}
     \begin{itemize}
         \item $C$'s outcome acts as measurement ``setting'' for A, B; independent of $\rho_{AB}$
-        \item Correlation coarse graining $\bc{0,1,2,3} \to \bc{\br{0,3}, \br{1,2}}$
+        \item Correlation between right bits
     \end{itemize}
-    \[ \ba{AB | C = 0, 1, 2} = \f{1}{\sqrt{2}} \quad \ba{AB | C = 3} = - \f{1}{\sqrt{2}} \]
+    \[ \ba{A_rB_r} = \prob[A_rB_r][00] + \prob[A_rB_r][11] - \prob[A_rB_r][01] - \prob[A_rB_r][10] \]
+    \[ \ba{A_rB_r | C = 0, 1, 2} = \f{1}{\sqrt{2}} \quad \ba{A_rB_r | C = 3} = - \f{1}{\sqrt{2}} \]
     \begin{itemize}
         \item Gives CHSH violation
     \end{itemize}
-    \[ \ba{AB|C=0} + \ba{AB|C=1} + \ba{AB|C=2} - \ba{AB|C=3} = 2\sqrt{2} \not \leq 2 \]
+    \begin{align*}
+    &\ba{A_rB_r|C=0} + \ba{A_rB_r|C=1} + \ba{A_rB_r|C=2} - \ba{A_rB_r|C=3} \\
+    &\quad = 3 \br{\f{1}{\sqrt{2}}} - \br{-\f{1}{\sqrt{2}}} \\
+    &\quad = 2\sqrt{2} \not \leq 2
+    \end{align*}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Quantum Implementation of Fritz Distribution [Optional]}
-    \begin{itemize}
-        \item States:
-    \end{itemize}
-    \begin{gather*}
-        \rho_{AB} = \ket{\Psi^+}\bra{\Psi^+} \quad \rho_{BC} = \rho_{CA} = \ket{\Phi^+}\bra{\Phi^+}
-    \end{gather*}
-    \begin{itemize}
-        \item Maximally entangled Bell states:
-    \end{itemize}
-    \[ \ket{\Psi^+} = \f{1}{\sqrt{2}}\br{\ket{01} + \ket{10}} \quad \ket{\Phi^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}} \]
-    \begin{itemize}
-        \item Measurements:
-    \end{itemize}
-    \begin{gather*}
-        M_{A} = \bc{\ket{0\psi_0}\bra{0\psi_0}, \ket{0\psi_{\pi}}\bra{0\psi_{\pi}}, \ket{1\psi_{-\pi/2}}\bra{1\psi_{-\pi/2}}, \ket{1\psi_{\pi/2}}\bra{1\psi_{\pi/2}}} \\
-        M_{B} = \bc{\ket{\psi_{\pi/4}0}\bra{\psi_{\pi/4}0}, \ket{\psi_{5\pi/4}0}\bra{\psi_{5\pi/4}0}, \ket{\psi_{3\pi/4}1}\bra{\psi_{3\pi/4}1}, \ket{\psi_{-\pi/4}1}\bra{\psi_{-\pi/4}1}} \\
-        M_{C} = \bc{\ket{00}\bra{00}, \ket{01}\bra{01}, \ket{10}\bra{10}, \ket{11}\bra{11}}
-    \end{gather*}
-    \begin{itemize}
-        \item Shorthand: $\ket{\psi_x} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{ix}\ket{1}}$
-    \end{itemize}
-\end{frame}
 
 
 \begin{frame}
@@ -893,5 +753,208 @@
     \frametitle{References}
     \printbibliography
 \end{frame}
+
+
+\begin{frame}
+    \frametitle{Notation [Optional]}
+    \textbf{Question:} Which marginal models $\prob^{\mscenario}$ are \term{compatible} with a causal structure $\graph$?\\
+    \begin{itemize}
+        \item \term{Marginal model} $\prob^{\mscenario}$ is collection of probability distributions
+        \[ \prob^{\mscenario} = \bc{\prob[V_1], \ldots, \prob[V_k]} \]
+        \item \term{Marginal scenario} $\mscenario = \bc{V_1, \ldots, V_k}$
+        \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
+        % \item Marginal scenario forms a \textit{simplicial complex}
+        % \[ V \in \mscenario, V' \subseteq V  \implies V' \in \mscenario \]
+        \item \term{Joint random variables} $\jointvar = {\bigcup}_{i} V_i = \bc{v_1, \ldots, v_n}$
+        \item \term{Causal Structure} $\graph = \br{\nodes, \edges}$ is a directed acyclic graph (DAG)
+        \item Nodes classified into \term{latent nodes} $\nodes_{L}$ and \term{observed nodes} $\nodes_{O}$
+    \end{itemize}
+    \note[item]{Before continuing, I will define exactly what I mean by causal compatibility}
+    \note[item]{Causal compatibility refers to the compatibility between causal structures and marginal models}
+    \note[item]{Marginal model is collection of probability distributions over sets of random variables}
+    \note[item]{Marginal scenario refers to the those sets of random variables}
+    \note[item]{The complete set of random variables are the joint random variables}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Graph Theory [Optional]}
+    Let $n, m \in \nodes$ be nodes of the graph $\graph$.
+    \begin{itemize}
+        \item \term{parents of $n$}: $\Pa[\graph]{n} \defined \bc{m \mid m \to n}$
+        \item \term{children of $n$}: $\Ch[\graph]{n} \defined \bc{m \mid n \to m}$
+        \item \term{ancestry of $n$}: $\An[\graph]{n} \defined \bigcup_{i\in\mathbb{W}} \Pa[\graph][i]{n}$
+        \[ \Pa[\graph][0]{n} = n \qquad \Pa[\graph][i]{n} \defined \Pa[\graph]{\Pa[\graph][i-1]{n}} \]
+    \end{itemize}
+    Notation extends to sets of nodes $N \subseteq \nodes$,
+    \begin{itemize}
+        \item \term{parents of $N$}: $\Pa[\graph]{N} \defined \bigcup_{n\in N}\Pa[\graph]{n}$
+        \item \term{children of $N$}: $\Ch[\graph]{N} \defined \bigcup_{n\in N}\Ch[\graph]{n}$
+        \item \term{ancestry of $N$}: $\An[\graph]{N} \defined \bigcup_{n\in N}\An[\graph]{n}$
+    \end{itemize}
+    An \term{induced subgraph} of $\graph = \br{\nodes, \edges}$ due to $N \subseteq \nodes$
+    \[ \Sub[\graph]{N} = \br{N, \bc{e \in \edges \mid e \subseteq N}} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Causal Compatibility [Optional]}
+    \textbf{Question:} Which marginal models $\prob^{\mscenario}$ are \term{compatible} with a causal structure $\graph$?\\
+    \textbf{Answer:} $\prob^{\mscenario}$ is compatible with $\graph$ if there exists a set of \term{casual parameters}
+    \[ \bc{\prob[n \mid \Pa[\graph]{n}] \mid n \in \nodes} \]
+    Such that for each $V \in \mscenario$, $\prob[V]$ can be recovered:
+    \begin{enumerate}
+        \item $\prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}]$
+        \item $\prob[V] = \sum_{\nodes \setminus V} \prob[\nodes]$
+    \end{enumerate}
+    \textbf{Inequality:} A \term{casual compatibility inequality} $I$ is an inequality over $\prob^{\mscenario}$ that is satisfied by all compatible $\prob^{\mscenario}$
+\end{frame}
+
+\begin{frame}
+    \frametitle{Deriving Inequalities [Optional]}
+    Two necessary components to compatibility:
+    \begin{enumerate}
+        \item \term{Marginal problem}: $\forall V \in \mscenario : \prob[V] = \sum_{\nodes \setminus V} \prob[\nodes]$
+        \begin{itemize}
+            \item Is the marginal model contextual or non-contextual?
+            \item 3 distinct ways to tackle this problem
+            \begin{enumerate}
+                \item Convex hull, Polytope projection, Fourier-Motzkin
+                \item Possibilistic Hardy Inequalities (Hypergraph transversals)
+                \item Linear Program Feasibility/Infeasibility
+            \end{enumerate}
+        \end{itemize}
+        \item \term{Markov Separation}: $\prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}]$
+        \begin{itemize}
+            \item Much harder to determine since latent nodes $\nodes_O$ have unspecified behaviour
+            \item It is possible to turn Markov Separation problem into a Marginal problem (at least partially)
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflation Technique [Optional]}
+    Developed by Wolfe, Spekkens, and Fritz \cite{Inflation}
+    \begin{definition}
+        An \term{inflation} of a causal structure $\graph$ is another causal structure $\graph'$ such that:
+        \[ \forall n' \in \nodes', n' \sim n \in \nodes: \AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \]
+        Where $\AnSub[\graph]{n}$ denotes the ancestral sub-graph of $n$ in $\graph$
+        \[ \AnSub[\graph]{n} = \Sub[\graph]{\An[\graph]{n}} \]
+        And '$\sim$' is a \term{copy-index} equivalence relation
+        \[ A_1 \sim A_2 \sim A \not \sim B_1 \sim B_2 \sim B \]
+    \end{definition}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflation Lemma [Optional]}
+    If one has obtained $\graph$, inflation $\graph'$ and \textit{compatible} marginal distribution $\prob[N]$ where $N \subseteq \nodes$, then:
+    \begin{enumerate}
+        \item There exists causal parameters $\bc{\prob[n\mid\Pa[\graph]{n}] \mid n \in \nodes}$ such that
+        \[ \prob[N] = \prod_{n \in N}\prob[n\mid\Pa[\graph]{n}] \]
+        \item $\AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \implies \Pa[\graph']{n'} \sim \Pa[\graph]{n}$
+        \item Construct \term{inflated causal parameters}
+        \[ \forall n' \in \nodes' : \prob[n'\mid\Pa[\graph']{n'}] \defined \prob[n\mid\Pa[\graph]{n}]\]
+        \item Obtain \textit{compatible} marginal distributions over any $N' \subseteq \nodes'$
+        \[ \prob[N'] = \prod_{n' \in N'}\prob[n'\mid\Pa[\graph']{n'}] \]
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflation Lemma Cont'd [Optional]}
+    \begin{itemize}
+        \item Inflation procedure holds for any $N \in \nodes, N' \in \nodes'$ where $\AnSub[\graph]{N} \sim \AnSub[\graph']{N'}$
+        \item Define \term{injectable sets of $\graph'$} and \term{images of the injectable of $\graph$}
+    \end{itemize}
+    \begin{align*}
+        \Inj[\graph]{\graph'} &\defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : \AnSub[\graph]{N} \sim \AnSub[\graph']{N'}} \\
+        \ImInj[\graph]{\graph'} &\defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : \AnSub[\graph]{N} \sim \AnSub[\graph']{N'}}
+    \end{align*}
+    \begin{itemize}
+        \item For $N' \in \Inj[\graph]{\graph'}$ there is a \textit{unique} $N \subseteq \nodes$ such that $\AnSub[\graph]{N} \sim \AnSub[\graph']{N'}$
+        \item For $N \in \Inj[\graph]{\graph}$ there can \textit{exist many} $N' \subseteq \nodes'$ such that $\AnSub[\graph]{N} \sim \AnSub[\graph']{N'}$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inflation Lemma Cont'd [Optional]}
+    \begin{lemma}
+        \term{The Inflation Lemma:}~\cite[lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$, if a marginal model $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ is compatible with $\graph$ then all marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
+    \end{lemma}
+    \begin{corollary}
+        Any causal compatibility inequality $I'$ constraining the injectable sets $\Inj[\graph]{\graph'}$ can be \term{deflated} into a causal compatibility inequality $I$ constraining the images of the injectable sets $\ImInj[\graph]{\graph'}$.
+    \end{corollary}
+\end{frame}
+
+\begin{frame}
+    \frametitle{$d$-Separation Polynomial [Optional]}
+    \begin{itemize}
+        \item Deflation only holds when inequality constrains probabilities $\prob[N'], N' \in \Inj[\graph]{\graph'}$
+        \item \textbf{Linear inequality} for $\graph'$
+    \end{itemize}
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \pgfmathsetmacro{\hs}{1.8};
+            \pgfmathsetmacro{\vs}{1};
+            \pgfmathsetmacro{\cross}{0.3};
+            \draw (0*\hs, 4*\vs) node[](a){$\prob[N']$};
+            \draw (0*\hs, 2*\vs) node[](ab){$N' \not \in \Inj[\graph]{\graph'}$};
+            \draw (4*\hs, 4*\vs) node[](c){$\prob[N_1']\prob[N_2']$};
+            \draw (2*\hs, 4*\vs) node[](ac){$N_1' \ancestralindep N_2'$};
+            \draw (2*\hs, 4*\vs + 0.5*\vs) node[]{$N_1' \cup N_2' = N$};
+            \draw (4*\hs, 2*\vs) node[](cd){$N_1', N_2' \in \Inj[\graph]{\graph'}$};
+            \draw (4*\hs, 0*\vs) node[](d){$\prob[N_1]\prob[N_2]$};
+            \draw (0, 0) node[](b){??};
+            \draw[thick, ] (a) -- (ab);
+            \draw[thick, ] (c) -- (cd);
+            \draw[thick, ] (a) -- (ac);
+            \draw[thick, ->] (ac) -- (c);
+            \draw[thick, ->] (ab) -- (b);
+            \draw[thick, ->] (cd) -- (d);
+            \draw[very thick, red]
+            (+ \cross, 1*\vs + \cross) -- (- \cross, 1*\vs - \cross)
+            (+ \cross, 1*\vs - \cross) -- (- \cross, 1*\vs + \cross)
+            ;
+        \end{tikzpicture}
+    \end{center}
+    \begin{itemize}
+        \item \textbf{Polynomial inequality} for $\graph$!
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Pre-injectable Sets [Optional]}
+    \begin{itemize}
+        \item $d$-separation relations $+$ inflation $=$ polynomial inequalities over $\graph$
+        \item Restrict focus to sets $N'$ that are partitioned into $N_1', N_2'$ $d$-separated by empty set $\emptyset$
+        \item A \term{pre-injectable set} $N'$:
+        \[ N' = {\coprod}_i N_i' \quad \forall i: N_i' \in \Inj[\graph]{\graph'} \]
+        \[ \forall i, j : N_i' \ancestralindep N_j' \iff \An[\graph']{N'_i} \cap \An[\graph']{N'_j} = \emptyset \]
+        \item Only need to consider \term{maximal pre-injectable sets} $\PreInj[\graph]{\graph'}$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Quantum Implementation of Fritz Distribution [Optional]}
+    \begin{itemize}
+        \item States:
+    \end{itemize}
+    \begin{gather*}
+        \rho_{AB} = \ket{\Psi^+}\bra{\Psi^+} \quad \rho_{BC} = \rho_{CA} = \ket{\Phi^+}\bra{\Phi^+}
+    \end{gather*}
+    \begin{itemize}
+        \item Maximally entangled Bell states:
+    \end{itemize}
+    \[ \ket{\Psi^+} = \f{1}{\sqrt{2}}\br{\ket{01} + \ket{10}} \quad \ket{\Phi^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}} \]
+    \begin{itemize}
+        \item Measurements:
+    \end{itemize}
+    \begin{gather*}
+        M_{A} = \bc{\ket{1\psi_{\pi/2}}\bra{1\psi_{\pi/2}}, \ket{1\psi_{-\pi/2}}\bra{1\psi_{-\pi/2}}, \ket{0\psi_0}\bra{0\psi_0}, \ket{0\psi_{\pi}}\bra{0\psi_{\pi}}} \\
+        M_{B} = \bc{\ket{\psi_{\pi/4}0}\bra{\psi_{\pi/4}0}, \ket{\psi_{5\pi/4}0}\bra{\psi_{5\pi/4}0}, \ket{\psi_{3\pi/4}1}\bra{\psi_{3\pi/4}1}, \ket{\psi_{-\pi/4}1}\bra{\psi_{-\pi/4}1}} \\
+        M_{C} = \bc{\ket{01}\bra{01}, \ket{11}\bra{11}, \ket{00}\bra{00}, \ket{10}\bra{10}}
+    \end{gather*}
+    \begin{itemize}
+        \item Shorthand: $\ket{\psi_x} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{ix}\ket{1}}$
+    \end{itemize}
+\end{frame}
+
 
 \end{document}

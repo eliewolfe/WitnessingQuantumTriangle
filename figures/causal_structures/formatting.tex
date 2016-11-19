@@ -12,6 +12,13 @@
 \tikzset{triangle/.style={regular polygon,regular polygon sides=3}}
 \tikzset{observed/.style={obs_text, align=center, triangle, thick, draw=obs_outline, fill=obs_fill, inner sep=-0.2em, text width=1.5em}}
 \tikzset{latent/.style={lat_text, align=center, circle, thick, draw=lat_outline, fill=lat_fill, text width=1.5em, inner sep=0.2em}}
+\tikzset{fade/.style={opacity=0.2}}
+\tikzset{unfade/.style={opacity=1.0}}
+% TikZ stile to apply keys only on specific beamer overlays
+% onslide=<overlay spec>{key=value, key=value, ...}
+\tikzset{onslide/.code args={<#1>#2}{%
+  \only<#1>{\pgfkeysalso{#2}}%
+}}
 % \tikzset{cause/.style={mid arrow/.style={postaction={decorate,decoration={markings, mark=at position .5 with {\arrow[#1]{stealth}}}}},}}
 \tikzset{
     % style to apply some styles to each segment of a path

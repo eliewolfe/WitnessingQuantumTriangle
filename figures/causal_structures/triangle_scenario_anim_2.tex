@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=1]
+    \draw[red,scale=2, transform shape, onslide=<1>{opacity=0}, onslide=<2>{unfade}] (0,{0.7}) node{\textbf{\Huge ?}};
+    \begin{scope}[every node/.style=observed, onslide=<1->{fade}]
+        \node[onslide=<1>{unfade}] (C) at (-2, 0) {$C$};
+        \node (B) at (2, 0) {$B$};
+        \node[onslide=<1>{unfade}] (A) at (0, {2*sqrt(3)}) {$A$};
+    \end{scope}
+    \begin{scope}[every node/.style=latent, onslide=<1->{fade}]
+        \node[onslide=<1>{unfade}] (X) at (-1, {sqrt(3)}) {$X$};
+        \node[onslide=<1>{unfade}] (Y) at (1, {sqrt(3)}) {$Y$};
+        \node[onslide=<1>{unfade}] (Z) at (0, 0) {$Z$};
+    \end{scope}
+    \begin{scope}[every path/.style={draw=cause, thick}, onslide=<1->{fade}]
+        \path[postaction={on each segment={mid arrow}}]
+        (Y) -- (B)
+        (Z) -- (B)
+        ;
+        \path[postaction={on each segment={mid arrow}}, onslide=<1>{unfade}]
+        (X) -- (C)
+        (Z) -- (C)
+        ;
+        \path[postaction={on each segment={mid arrow}}, onslide=<1>{unfade}]
+        (X) -- (A)
+        (Y) -- (A)
+        ;
+    \end{scope}
+\end{tikzpicture}
