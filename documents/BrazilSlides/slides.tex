@@ -157,7 +157,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Injectable Sets}
+    \frametitle{What are Injectable Sets?}
     \begin{center}
     \begin{columns}
         \column{0.5\linewidth}%
@@ -218,42 +218,44 @@
     \[ \prob[A_1B_1] = {\sum}_{C_1} \prob[\jointvar] \qquad \prob[B_1C_1] = {\sum}_{A_1} \prob[\jointvar] \qquad \prob[A_1C_1] = {\sum}_{B_1} \prob[\jointvar]\]
 \end{frame}
 
-\begin{frame}
-    \frametitle{Deriving Compatibility Inequalities}
-    \begin{columns}
-        \column{0.6\linewidth}
-            \[ \probvec^{\mscenario} = \begin{pmatrix}
-                \prob[A_1B_1][00] \\
-                \prob[A_1B_1][01] \\
-                \prob[A_1B_1][10] \\
-                \prob[A_1B_1][11] \\
-                \hline
-                \prob[B_1C_1][00] \\
-                \prob[B_1C_1][01] \\
-                \prob[B_1C_1][10] \\
-                \prob[B_1C_1][11] \\
-                \hline
-                \prob[A_1C_1][00] \\
-                \prob[A_1C_1][01] \\
-                \prob[A_1C_1][10] \\
-                \prob[A_1C_1][11] \\
-            \end{pmatrix}\]
-        \column{0.4\linewidth}
-            \scalebox{0.5}{\input{../../figures/causal_structures/inflated_triangle_scenario_cut}}
-            \[\probvec^{\jointvar} = \begin{pmatrix}
-                \prob[A_1B_1C_1][000] \\
-                \prob[A_1B_1C_1][001] \\
-                \prob[A_1B_1C_1][010] \\
-                \prob[A_1B_1C_1][011] \\
-                \prob[A_1B_1C_1][100] \\
-                \prob[A_1B_1C_1][101] \\
-                \prob[A_1B_1C_1][110] \\
-                \prob[A_1B_1C_1][111] \\
-            \end{pmatrix} \]
-    \end{columns}
+\begin{frame}[shrink=13]
+    \frametitle{Deriving Compatibility Inequalities Cont'd}
+    \[ \underbrace{\prob[A_1B_1] = {\sum}_{C_1} \prob[\jointvar] \qquad \prob[B_1C_1] = {\sum}_{A_1} \prob[\jointvar] \qquad \prob[A_1C_1] = {\sum}_{B_1} \prob[\jointvar]} \]
+    \[ \underbrace{\forall V \in \mscenario: \prob[V] = \sum_{\jointvar \setminus V} \prob[\jointvar] }\]
+    \[ \probvec^{\mscenario} = M \tcdot \probvec^{\jointvar}  \]
+    \[ \probvec^{\mscenario} =
+        \begin{pmatrix}
+            \prob[A_1B_1][00] \\
+            \prob[A_1B_1][01] \\
+            \prob[A_1B_1][10] \\
+            \prob[A_1B_1][11] \\
+            \hline
+            \prob[B_1C_1][00] \\
+            \prob[B_1C_1][01] \\
+            \prob[B_1C_1][10] \\
+            \prob[B_1C_1][11] \\
+            \hline
+            \prob[A_1C_1][00] \\
+            \prob[A_1C_1][01] \\
+            \prob[A_1C_1][10] \\
+            \prob[A_1C_1][11] \\
+        \end{pmatrix}
+        \qquad
+        \probvec^{\jointvar} =
+        \begin{pmatrix}
+            \prob[A_1B_1C_1][000] \\
+            \prob[A_1B_1C_1][001] \\
+            \prob[A_1B_1C_1][010] \\
+            \prob[A_1B_1C_1][011] \\
+            \prob[A_1B_1C_1][100] \\
+            \prob[A_1B_1C_1][101] \\
+            \prob[A_1B_1C_1][110] \\
+            \prob[A_1B_1C_1][111] \\
+        \end{pmatrix}
+    \]
 \end{frame}
 
-\begin{frame}[shrink=20]
+\begin{frame}[shrink=15]
     \frametitle{Incidence Example}
     \[ M = \kbordermatrix{
         (A_1,B_1,C_1) \:\: = & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
@@ -270,6 +272,7 @@
         (A_1=1, C_1=0) & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone & \kzer \\
         (A_1=1, C_1=1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone
     } \]
+    \[ \probvec^{\mscenario} = M \tcdot \probvec^{\jointvar}  \]
 \end{frame}
 
 \begin{frame}
