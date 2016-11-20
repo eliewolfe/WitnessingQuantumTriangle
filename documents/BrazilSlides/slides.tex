@@ -39,6 +39,15 @@
 \addbibresource{../references.bib}
 \AtBeginBibliography{\small}
 
+\newcommand{\probplotvalue}[1]{%
+    \definecolor{probvalcolor}{RGB}{#1}%
+    \definecolor{outlinecolor}{RGB}{127, 127, 127}%
+    \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]%
+        \pgfmathsetmacro{\size}{0.2};%
+        \draw[outlinecolor, fill=probvalcolor] (-\size,-\size) -- (-\size, +\size) -- (+\size, +\size) -- (+\size, -\size) -- cycle;%
+    \end{tikzpicture}%
+}%
+
 \title[Triangle Inequalities]{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Scenario}
 \author[Fraser]{T.C.~Fraser\inst{1,2}}
 \institute
@@ -176,7 +185,99 @@
 
 \begin{frame}
     \frametitle{Perfect Correlation Is Incompatible}
+    \begin{columns}
+        \column{0.5\linewidth}
+        \begin{center}
+            \includegraphics[width=\linewidth]{../../figures/distributions/perfect_correlation_2_outcomes.pdf}
+        \end{center}
+        \column{0.5\linewidth}
+        \begin{align*}
+        \probplotvalue{0, 0, 0} &= \f12 \\
+        \prob[ABC][abc] &= \f{\bs{000} + \bs{111}}{2} \\
+        \prob[ABC][abc] &= \begin{cases}
+            \f12 & a = b = c \\
+            0 & \text{ otherwise }
+        \end{cases}
+        \end{align*}
+    \end{columns}
+\end{frame}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\begin{frame}
+    \frametitle{Deriving Compatibility Inequalities}
+    \begin{center}
+        \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_scenario_cut}}
+    \end{center}
+    \[ \mscenario = \bc{\bc{A_1, B_1}, \bc{B_1, C_1}, \bc{A_1, C_1}} \]
+    \[ \prob^{\mscenario} = \bc{\prob[A_1B_1], \prob[B_1C_1], \prob[A_1C_1]} \]
+    \[ \text{Compatibility requires:} \qquad \exists \prob[\jointvar] = \prob[A_1B_1C_1] \]
+    \[ \prob[A_1B_1] = {\sum}_{C_1} \prob[\jointvar] \qquad \prob[B_1C_1] = {\sum}_{A_1} \prob[\jointvar] \qquad \prob[A_1C_1] = {\sum}_{B_1} \prob[\jointvar]\]
+\end{frame}
 
+\begin{frame}
+    \frametitle{Deriving Compatibility Inequalities}
+    \begin{columns}
+        \column{0.6\linewidth}
+            \[ \probvec^{\mscenario} = \begin{pmatrix}
+                \prob[A_1B_1][00] \\
+                \prob[A_1B_1][01] \\
+                \prob[A_1B_1][10] \\
+                \prob[A_1B_1][11] \\
+                \hline
+                \prob[B_1C_1][00] \\
+                \prob[B_1C_1][01] \\
+                \prob[B_1C_1][10] \\
+                \prob[B_1C_1][11] \\
+                \hline
+                \prob[A_1C_1][00] \\
+                \prob[A_1C_1][01] \\
+                \prob[A_1C_1][10] \\
+                \prob[A_1C_1][11] \\
+            \end{pmatrix}\]
+        \column{0.4\linewidth}
+            \scalebox{0.5}{\input{../../figures/causal_structures/inflated_triangle_scenario_cut}}
+            \[\probvec^{\jointvar} = \begin{pmatrix}
+                \prob[A_1B_1C_1][000] \\
+                \prob[A_1B_1C_1][001] \\
+                \prob[A_1B_1C_1][010] \\
+                \prob[A_1B_1C_1][011] \\
+                \prob[A_1B_1C_1][100] \\
+                \prob[A_1B_1C_1][101] \\
+                \prob[A_1B_1C_1][110] \\
+                \prob[A_1B_1C_1][111] \\
+            \end{pmatrix} \]
+    \end{columns}
+\end{frame}
+
+\begin{frame}[shrink=20]
+    \frametitle{Incidence Example}
+    \[ M = \kbordermatrix{
+        (A_1,B_1,C_1) \:\: = & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
+        (A_1=0, B_1=0) & \kone & \kone & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer \\
+        (A_1=0, B_1=1) & \kzer & \kzer & \kone & \kone & \kzer & \kzer & \kzer & \kzer \\
+        (A_1=1, B_1=0) & \kzer & \kzer & \kzer & \kzer & \kone & \kone & \kzer & \kzer \\
+        (A_1=1, B_1=1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kone \\
+        (B_1=0, C_1=0) & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer \\
+        (B_1=0, C_1=1) & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer \\
+        (B_1=1, C_1=0) & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer \\
+        (B_1=1, C_1=1) & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone \\
+        (A_1=0, C_1=0) & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer & \kzer \\
+        (A_1=0, C_1=1) & \kzer & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer \\
+        (A_1=1, C_1=0) & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone & \kzer \\
+        (A_1=1, C_1=1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone
+    } \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Cut Inflation Inequalities}
+    \[ \prob[A_1B_1][00] \leq \prob[B_1C_1][00] + \prob[A_1C_1][01] \]
+    \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_scenario_cut}}
+    \[ \Inj[\graph]{\graph'} = \bc{\bc{A_1,C_1}, \bc{B_1,C_1}, \bc{A_1}, \bc{B_1}, \bc{C_1}} \]
+    \[ \bc{A_1, B_1} \neq \Inj[\graph]{\graph'} \]
 \end{frame}
 
 \begin{frame}
@@ -308,21 +409,6 @@
 \begin{frame}[shrink=10]
     \frametitle{Example}
     Let $\jointvar$ be $3$ binary variables $\jointvar = \bc{A,B,C}$ and $\mscenario$ be the marginal scenario $\mscenario = \bc{\bc{A,B}, \bc{B,C}, \bc{A,C}}$. The incidence matrix becomes:
-    \[ M = \kbordermatrix{
-        (A,B,C) \:\: = & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
-        (A=0, B=0) & \kone & \kone & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer \\
-        (A=0, B=1) & \kzer & \kzer & \kone & \kone & \kzer & \kzer & \kzer & \kzer \\
-        (A=1, B=0) & \kzer & \kzer & \kzer & \kzer & \kone & \kone & \kzer & \kzer \\
-        (A=1, B=1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kone \\
-        (B=0, C=0) & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer \\
-        (B=0, C=1) & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer \\
-        (B=1, C=0) & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer \\
-        (B=1, C=1) & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone \\
-        (A=0, C=0) & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer & \kzer \\
-        (A=0, C=1) & \kzer & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer \\
-        (A=1, C=0) & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone & \kzer \\
-        (A=1, C=1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone
-    } \]
 \end{frame}
 
 \begin{frame}
@@ -367,16 +453,6 @@
         \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario_operational}}
     \end{center}
 \end{frame}
-
-\newcommand{\probplotvalue}[1]{%
-    \definecolor{probvalcolor}{RGB}{#1}%
-    \definecolor{outlinecolor}{RGB}{127, 127, 127}%
-    \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]%
-        \pgfmathsetmacro{\size}{0.2};%
-        \draw[outlinecolor, fill=probvalcolor] (-\size,-\size) -- (-\size, +\size) -- (+\size, +\size) -- (+\size, -\size) -- cycle;%
-    \end{tikzpicture}%
-}%
-
 \begin{frame}
     \frametitle{Fritz Distribution}
     \begin{center}
@@ -646,23 +722,6 @@
         \item PVMs are computationally more efficient
     \end{itemize}
     \[ \prob[ABC]\br{abc} = \bra{m_{A,a}m_{B,b}m_{C,c}}{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm}\ket{m_{A,a}m_{B,b}m_{C,c}} \]
-\end{frame}
-
-\begin{frame}
-    \frametitle{Network Permutation Matrix}
-    \begin{columns}
-        \column{0.6\linewidth}
-        \begin{itemize}
-            \item States and measurements in the Triangle Scenario are not aligned
-            \item Without $\netperm$, $\prob[ABC]$ would be separable
-            \item Required to align $B$'s measurement over $\Tr_{A,C}\br{\rho_{AB} \otimes \rho_{BC}}$
-            \item $\netperm$ is a $2^6 \times 2^6$ matrix
-            \item Shifts one qubit to the left
-        \end{itemize}
-        \column{0.4\linewidth}
-            \includegraphics[trim={1.0cm 1.2cm 1.0cm 1cm},clip,width=1.0\textwidth]{../../figures/perm_mtrx.pdf}
-    \end{columns}
-    \[ \netperm \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
 \end{frame}
 
 \begin{frame}
@@ -954,6 +1013,23 @@
     \begin{itemize}
         \item Shorthand: $\ket{\psi_x} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{ix}\ket{1}}$
     \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Network Permutation Matrix [Optional]}
+    \begin{columns}
+        \column{0.6\linewidth}
+        \begin{itemize}
+            \item States and measurements in the Triangle Scenario are not aligned
+            \item Without $\netperm$, $\prob[ABC]$ would be separable
+            \item Required to align $B$'s measurement over $\Tr_{A,C}\br{\rho_{AB} \otimes \rho_{BC}}$
+            \item $\netperm$ is a $2^6 \times 2^6$ matrix
+            \item Shifts one qubit to the left
+        \end{itemize}
+        \column{0.4\linewidth}
+            \includegraphics[trim={1.0cm 1.2cm 1.0cm 1cm},clip,width=1.0\textwidth]{../../figures/perm_mtrx.pdf}
+    \end{columns}
+    \[ \netperm \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
 \end{frame}
 
 
