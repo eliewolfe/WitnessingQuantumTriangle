@@ -1,0 +1,26 @@
+\newcommand{\ift}{2.3}
+\begin{tikzpicture}[scale=2]
+    \begin{scope}[every node/.style=observed, onslide=<2->{fade}]
+        \node (C1) at ({-2 + 3*1/\ift}, {3*1/(\ift*sqrt(3))}) {$C_1$};
+        \node[onslide=<2->{unfade}] (B1) at ({2 - 3*1/\ift}, {3*1/(\ift*sqrt(3))}) {$B_1$};
+        \node[onslide=<2->{unfade}] (A1) at (0, {2*sqrt(3) - 2*2/sqrt(3)*(1/\ift)}) {$A_1$};
+    \end{scope}
+    \begin{scope}[every node/.style=latent, onslide=<2->{fade}]
+        \node[onslide=<2->{unfade}] (X1) at ({-1 + 1/\ift}, {sqrt(3) - 1/(\ift*sqrt(3))}) {$X_1$};
+        \node[onslide=<2->{unfade}] (Y2) at (1, {sqrt(3)}) {$Y_2$};
+        \node[onslide=<2->{unfade}] (Y1) at ({1 - 1/\ift}, {sqrt(3) - 1/(\ift*sqrt(3))}) {$Y_1$};
+        \node[onslide=<2->{unfade}] (Z1) at (0, 0.5) {$Z_1$};
+    \end{scope}
+    \begin{scope}[every path/.style={draw=cause, thick}, onslide=<2->{fade}]
+        \path[postaction={on each segment={mid arrow}}]
+        (X1) -- (C1)
+        (Z1) -- (C1)
+        ;
+        \path[postaction={on each segment={mid arrow}}, onslide=<2->{unfade}]
+        (X1) -- (A1)
+        (Y2) -- (A1)
+        (Y1) -- (B1)
+        (Z1) -- (B1)
+        ;
+    \end{scope}
+\end{tikzpicture}
