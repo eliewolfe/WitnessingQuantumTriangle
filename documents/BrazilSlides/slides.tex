@@ -586,8 +586,23 @@
     \textbf{Note:} $\prob[][abc]$ shorthand for $\prob[ABC][abc]$
 \end{frame}
 
-\begin{frame}[shrink=60]
+\begin{frame}[shrink=64]
+    \frametitle{Certificate for Fritz Distribution (Full)}
+    \begin{center}
+        \input{../../figures/inequalities/nosymwitness_ineq_print}
+    \end{center}
+\end{frame}
+
+\begin{frame}
     \frametitle{Party Symmetric Inequality}
+    \input{../../figures/inequalities/MosekCertFritzSym_ineq_print_pretty}
+    \vfill
+    \textbf{Note:} $\bs{\prob[][113]\prob[][330]}_3$ shorthand sum over permutations:
+    \[ \prob[][113]\prob[][330] + \prob[][131]\prob[][303] + \prob[][311]\prob[][033] \]
+\end{frame}
+
+\begin{frame}[shrink=60]
+    \frametitle{Party Symmetric Inequality (Full)}
     \input{../../figures/inequalities/MosekCertFritzSym_ineq_print}
 \end{frame}
 
@@ -703,6 +718,12 @@
 \begin{frame}
     \frametitle{Max Entangled vs. Max Violating} % $\chi = -2$
     \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_fritz_seed.pdf}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Maximal Violation}
+    \includegraphics[width=\linewidth]{../../figures/distributions/plotted_dist_I_2_max_violation.pdf}
+    \[ \text{Relative Violation:} \qquad V_F = \f{\min_P\bc{I\br{P}}}{I\br{P_F}} \]
 \end{frame}
 
 \begin{frame}
@@ -1081,6 +1102,17 @@
         \item $\Phi\bs{M}$ not a bit-wise matrix like $M$
         \item For large inflation $M$ is $16,896 \times 16,777,216$
         \item For large inflation $\Phi\bs{M}$ is $450 \times 358,120$ % 3566922 entries
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Symmetrized Fritz [Optional]}
+    \begin{center}
+        \includegraphics[width=\linewidth]{../../figures/distributions/symmetrized_fritz.pdf}
+    \end{center}
+    \begin{itemize}
+        \item More non-local yet not quantum-accessible
+        \item Quantum-accessible distributions form non-context set
     \end{itemize}
 \end{frame}
 
