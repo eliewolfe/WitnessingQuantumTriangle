@@ -700,10 +700,23 @@
     \end{itemize}
     \[ \prob[ABC]\br{abc} = \bra{m_{A,a}m_{B,b}m_{C,c}}{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm}\ket{m_{A,a}m_{B,b}m_{C,c}} \]
 \end{frame}
+\begin{frame}
+    \frametitle{Max Entangled vs. Max Violating} % $\chi = -2$
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_fritz_seed.pdf}
+\end{frame}
 
 \begin{frame}
+    \frametitle{Maximally Violating Distributions}
+    \begin{itemize}
+        \item Able to out-perform violation provided by Fritz distribution
+        \item Maximally-violating states are not maximally-entangled; similar to detection loop-hole example of \cite{Methot_2006}
+        \item Both symmetric and asymmetric inequalities exhibit same qualitative features
+        % \item Violation very sensitive to the initial parameters $\la_{(0)}$
+    \end{itemize}
+\end{frame}
+\begin{frame}
     \frametitle{Uniform Noise}
-    \[ \s{U}_{\varepsilon}\br{P} = \br{1 + \varepsilon} P + \varepsilon \s{U} \]
+    \[ \s{U}_{\varepsilon}\br{P} = \br{1 - \varepsilon} P + \varepsilon \s{U} \]
     \begin{center}
         \includegraphics[width=\linewidth]{../../figures/distributions/uniform_dist_plot.pdf}
     \end{center}
@@ -719,31 +732,36 @@
     %     \end{tikzpicture}
     % \end{center}
 \end{frame}
+
 \begin{frame}
-    \frametitle{Max Entangled vs. Max Violating} % $\chi = -2$
-    \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_fritz_seed.pdf}
+    \frametitle{Robust to Noise}
+    \begin{center}
+        \includegraphics[width=\linewidth]{../../figures/noise/four_rep_inequalities_uniform_noise.pdf}
+    \end{center}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Maximally Violating Distributions}
-    \begin{itemize}
-        \item Able to out-perform violation provided by Fritz distribution
-        \item Maximally-violating states are not maximally-entangled; similar to detection loop-hole example of \cite{Methot_2006}
-        \item Violation very sensitive to the initial parameters $\la_{(0)}$
-        \item Both symmetric and asymmetric inequalities exhibit same qualitative features
-    \end{itemize}
+    \frametitle{Robust to Noise Zoomed}
+    \begin{center}
+        \includegraphics[width=\linewidth]{../../figures/noise/four_rep_inequalities_uniform_noise_zoomed.pdf}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Noisy Non-locality}
+    \begin{center}
+        \includegraphics[width=\linewidth]{../../figures/noise/noisy_yet_non_local_fritz.pdf}
+    \end{center}
+    \[ \probplotvalue{255, 255, 255} = 0.00133 \]
 \end{frame}
 
 \begin{frame}
     \frametitle{Conclusions}
-    \begin{itemize}
-        \item New causal compatibility inequalities have been found for the TS
-        \item Inflation technique capable of producing inequalities with quantum/classical witnesses
-        \item Proof of non-classicality is robust to noise
-        \item Fritz witness-able by party symmetric inequalities
-        \item Maximally violating distributions are different than Fritz but also similar
-        \item Further research is necessary
-    \end{itemize}
+    \begin{enumerate}
+        \item Inflation technique capable of producing polynomial inequalities with quantum/classical witnesses
+        \item Fritz witness-able by party-symmetric inequalities
+        \item Maximally violating distributions require non-maximally entangled states
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}
@@ -914,31 +932,6 @@
         \[ N' = {\coprod}_i N_i' \quad \forall i: N_i' \in \Inj[\graph]{\graph'} \]
         \[ \forall i, j : N_i' \ancestralindep N_j' \iff \An[\graph']{N'_i} \cap \An[\graph']{N'_j} = \emptyset \]
         \item Only need to consider \term{maximal pre-injectable sets} $\PreInj[\graph]{\graph'}$
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Quantum Implementation of Fritz Distribution [Optional]}
-    \begin{itemize}
-        \item States:
-    \end{itemize}
-    \begin{gather*}
-        \rho_{AB} = \ket{\Psi^+}\bra{\Psi^+} \quad \rho_{BC} = \rho_{CA} = \ket{\Phi^+}\bra{\Phi^+}
-    \end{gather*}
-    \begin{itemize}
-        \item Maximally entangled Bell states:
-    \end{itemize}
-    \[ \ket{\Psi^+} = \f{1}{\sqrt{2}}\br{\ket{01} + \ket{10}} \quad \ket{\Phi^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}} \]
-    \begin{itemize}
-        \item Measurements:
-    \end{itemize}
-    \begin{gather*}
-        M_{A} = \bc{\ket{1\psi_{\pi/2}}\bra{1\psi_{\pi/2}}, \ket{1\psi_{-\pi/2}}\bra{1\psi_{-\pi/2}}, \ket{0\psi_0}\bra{0\psi_0}, \ket{0\psi_{\pi}}\bra{0\psi_{\pi}}} \\
-        M_{B} = \bc{\ket{\psi_{\pi/4}0}\bra{\psi_{\pi/4}0}, \ket{\psi_{5\pi/4}0}\bra{\psi_{5\pi/4}0}, \ket{\psi_{3\pi/4}1}\bra{\psi_{3\pi/4}1}, \ket{\psi_{-\pi/4}1}\bra{\psi_{-\pi/4}1}} \\
-        M_{C} = \bc{\ket{01}\bra{01}, \ket{11}\bra{11}, \ket{00}\bra{00}, \ket{10}\bra{10}}
-    \end{gather*}
-    \begin{itemize}
-        \item Shorthand: $\ket{\psi_x} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{ix}\ket{1}}$
     \end{itemize}
 \end{frame}
 
