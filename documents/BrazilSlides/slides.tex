@@ -438,7 +438,22 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Triangle Scenario As Bell Scenario}
+    \begin{center}
+        \scalebox{1.0}{\input{../../figures/causal_structures/triangle_scenario_operational_fritz_bell}}
+    \end{center}
+\end{frame}
+
+\begin{frame}
     \frametitle{Fritz Distribution}
+    \begin{center}
+        \includegraphics[width=\linewidth]{../../figures/distributions/fritz_dist_plot_brazil.pdf}
+    \end{center}
+    \[ \probplotvalue{253, 253, 84} = \f{1}{32}\br{2 - \sqrt{2}} \qquad \probplotvalue{11, 1, 0} = \f{1}{32}\br{2 + \sqrt{2}}\]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Fritz Distribution Bit-Measurements}
     \begin{center}
         \includegraphics[width=\linewidth]{../../figures/distributions/fritz_dist_plot_bits_brazil.pdf}
     \end{center}
@@ -459,7 +474,7 @@
     \end{itemize}
     \begin{gather*}
         M_{A} = \bc{\ket{0\psi_{1}}\bra{0\psi_{1}}, \ket{0\psi_{5}}\bra{0\psi_{5}}, \ket{1\psi_{3}}\bra{1\psi_{3}}, \ket{1\psi_{7}}\bra{1\psi_{7}}} \\
-        M_{B} = \bc{\ket{0\psi_{6}}\bra{0\psi_{6}}, \ket{0\psi_{2}}\bra{0\psi_{2}}, \ket{1\psi_{0}}\bra{1\psi_{0}}, \ket{1\psi_{4}}\bra{1\psi_{4}}} \\
+        M_{B} = \bc{\ket{\psi_{6}0}\bra{\psi_{6}0}, \ket{\psi_{2}0}\bra{\psi_{2}0}, \ket{\psi_{0}1}\bra{\psi_{0}1}, \ket{\psi_{4}1}\bra{\psi_{4}1}} \\
         M_{C} = \bc{\ket{00}\bra{00}, \ket{10}\bra{10}, \ket{01}\bra{01}, \ket{11}\bra{11}}
     \end{gather*}
     \begin{itemize}
@@ -507,7 +522,7 @@
 \begin{frame}
     \frametitle{Large Inflation}
     \begin{center}
-        \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_scenario}}
+        \scalebox{1.0}{\input{../../figures/causal_structures/inflated_triangle_scenario}}
     \end{center}
 \end{frame}
 
@@ -594,6 +609,17 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Symmetric Inequalities}
+    \begin{itemize}
+        \item Certificate inequalities are curated/constructed to witness violation of particular distribution
+        \item Above inequality not the best candidate to search for non-locality different than Fritz distribution
+        \item Perhaps one could obtain inequality that does not assign special preference to $C$
+        \item Desirable to find compatibility inequality $I$ such that
+        \[ \forall \varphi \in \Perm{A,B,C} : \varphi\bs{I} = I \]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
     \frametitle{Party Symmetric Inequality}
     \input{../../figures/inequalities/MosekCertFritzSym_ineq_print_pretty}
     \vfill
@@ -633,13 +659,31 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Quantum Model On Triangle Scenario}
+    \[ \prob[ABC]\br{abc} = \Tr\bs{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm M_{A,a}\otimes M_{B,b} \otimes M_{C,c}} \]
+    \begin{center}
+        \scalebox{0.6}{\input{../../figures/causal_structures/triangle_scenario_operational}}
+    \end{center}
+    \begin{itemize}
+        \item Each latent resource $\rho \in \br{\rho_{AB}, \rho_{BC}, \rho_{CA}}$ modeled as bipartite \textbf{qubit} state acting on $\Hilb^{2} \otimes \Hilb^{2}$
+        \item Each party $\br{A, B, C}$ is assigned $4$-outcome PVM set $\br{M_A, M_B, M_C}$
+        \item Parameterized using unitary transformations $U \in \s{U}\br{4}$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
     \frametitle{Parameterizing Unitary Group}
     \begin{itemize}
-        \item Spengler, Huber and Heismayr \cite{Spengler_2010_Unitary} demonstrate a parameterization of $\s{U}\br{d}$ where the parameters are organized in a $d \times d$-matrix of real values $\la_{n,m}$
-        \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n} RP_{n,m}}} \tcdot \bs{\prod_{l=1}^{d} GP_{l}} \]
-        \item Global Phase Terms: $GP_{l} = \exp\br{iP_l \lambda_{l,l}}$
-        \item Relative Phase Terms: $RP_{n,m} = \exp\br{i P_n \lambda_{n,m}}$
-        \item Rotation Terms: $R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}}$
+        \item Spengler, Huber and Heismayr \cite{Spengler_2010_Unitary} parameterization of $\s{U}\br{d}$
+        \[ \la = \begin{pmatrix}
+            \textcolor{Blue}{\la_{1,1}} & \textcolor{OliveGreen}{\cdots} & \textcolor{OliveGreen}{\la_{1, d}} \\
+            \textcolor{Maroon}{\vdots} & \textcolor{Blue}{\ddots} & \textcolor{OliveGreen}{\vdots} \\
+            \textcolor{Maroon}{\la_{d,1}} & \textcolor{Maroon}{\cdots} & \textcolor{Blue}{\la_{d, d}} \\
+        \end{pmatrix} \]
+        \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} \textcolor{OliveGreen}{R_{m,n}} \textcolor{Maroon}{RP_{n,m}}}} \tcdot \bs{\prod_{l=1}^{d} \textcolor{Blue}{GP_{l}}} \]
+        \item Global Phase Terms: \textcolor{Blue}{$GP_{l} = \exp\br{iP_l \lambda_{l,l}}$}
+        \item Relative Phase Terms: \textcolor{Maroon}{$RP_{n,m} = \exp\br{i P_n \lambda_{n,m}}$}
+        \item Rotation Terms: \textcolor{OliveGreen}{$R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}}$}
         \item Projection Operators: $P_l = \ket{l}\bra{l}$
         \item Anti-symmetric $\si$-matrices: $\si_{m,n} = - i\ket{m}\bra{n} + i \ket{n}\bra{m}$
         \item Parameters $\la_{n,m} \in \bs{0, 2\pi}$
@@ -653,7 +697,9 @@
         \item Degeneracies are easily eliminated such as global phase
         \[ \forall l = 1, \ldots, d : \la_{l,l} = 0 \implies GP_{l} = \ident \]
         \item Parameterize $U \in \s{U}\br{d}$ up to global phase denoted $\ti{U} \in \s{U}\br{d}$
-        \item Computationally efficient
+        % \[ \ti{U}_{k} = \prod_{m=1}^{k} \br{\prod_{n={m+1}}^{d} R_{m,n} RP_{n,m}} \]
+        \[ \ti{U} = \prod_{m=1}^{d} \br{\prod_{n={m+1}}^{d} R_{m,n} RP_{n,m}} \]
+        \item Computationally efficient (no matrix exponentials)
         \begin{alignat*}{2}
             GP_l &= \ident &&+ P_l \br{e^{i\la_{l,l}} - 1} \\
             RP_{n,m} &= \ident &&+ P_n \br{e^{i\la_{n,m}} - 1} \\
@@ -664,66 +710,42 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Parameterizing States}
-    \begin{itemize}
-        \item Each latent resource $\rho \in \br{\rho_{AB}, \rho_{BC}, \rho_{CA}}$ modeled as bipartite qubit state acting on $\Hilb^{d/2} \otimes \Hilb^{d/2}$
-        \item $d \times d$ positive semi-definite (PSD) hermitian matrices with unitary trace
-        \item \term{Cholesky Parametrization} allows one to write any hermitian PSD as $\rho = T^{\dagger} T$
-        \item For $d = 4$:
-        \[ T = \begin{bmatrix}\la_{1}&0&0&0\\\la_{2} + i \la_{3}&\la_{4}&0&0\\\la_{5} + i \la_{6}&\la_{7} + i \la_{8}&\la_{9}&0\\\la_{10} + i \la_{11}&\la_{12} + i \la_{13}&\la_{14} + i \la_{15}&\la_{16}\end{bmatrix} \]
-        \item $d^2$ real-valued parameters
-        \item Normalized $\rho = {T^{\dagger}T}/{\Tr\br{T^{\dagger} T}}$ adds degeneracy
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Parameterizing States Cont'd}
-    \begin{itemize}
-        \item \term{SHH parameterization} \cite{Spengler_2010_Unitary} exploits spectral decomposition; for rank $k \leq d$ density matrix
-        \[ \rho = \sum_{i=1}^{k} p_i \ket{\psi_i} \bra{\psi_i} \qquad p_i \geq 0, \sum_i p_i = 1 \]
-        \item Orthonormal $k$-element sub-basis $\bc{\ket{\psi_i}}$ of $\Hilb^d$ can be transformed into computational basis $\bc{\ket{i}}$ by unitary $U \in \s{U}\br{d}$ such that $\ket{\psi_i} = U \ket{i}$
-        \item Freedom to choice $k$
-        \item Parameterize $\rho$ through $\bc{p_i}$ and $\ti{U}_{k}$
-        \[ \ti{U}_{k} = \prod_{m=1}^{k} \br{\prod_{n={m+1}}^{d} R_{m,n} RP_{n,m}} \]
-        \item real-value parameters $d^2 - \br{d-k}^2 - k$ for $\ti{U}_{k}$, $k-1$ for $\bc{p_i}$ (no degeneracy)
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Parameterizing POVMs}
-    \begin{itemize}
-        \item Each party $\br{A, B, C}$ is assigned a \term{projective-operator valued measure (POVM)} $\br{M_A, M_B, M_C}$
-        \[ \forall \ket{\psi} \in \Hilb^d : \bra{\psi} M_\chi \ket{\psi} \geq 0 \quad M_\chi = M_\chi^{\dagger} \]
-        \item $n$-outcome measurement
-        \[ M_\chi = \bc{M_{\chi, 1}, \ldots, M_{\chi, n}} \quad \sum_{i=1}^{n} M_{\chi, i} = \ident \]
-        \item For $n = 2$ outcomes, a parameterization exists by constraining the eigenvalues of $M_{\chi, i}$; for $n > 2$ not aware of anything
-        \item Warrants consideration of \term{projective-valued measures (PVMs)}
-    \end{itemize}
-    \note<1>[item]{Naimark's Dilation Theorem}
-\end{frame}
-
-\begin{frame}
     \frametitle{Parameterizing PVMs}
     \begin{itemize}
-        \item Each party $\br{A, B, C}$ is assigned $n$-outcome $\br{M_A, M_B, M_C}$ such that,
-        \[ M_{\chi,i}M_{\chi,j} = \de_{ij} M_{\chi, i} \quad M_{\chi, i} = \ket{m_{\chi,i}}\bra{m_{\chi,i}} \]
-        \item Inspired by \cite{Pal_2010}, parameterizing PVMs means parameterizing a $n$-element sub-basis $\bc{\ket{m_{\chi,i}}}$
-        \item Use unitary transformation again
-        \[ \bc{\ket{m_{\chi,1}}, \ldots, \ket{m_{\chi,n}}} = \bc{U \ket{1}, \ldots, U \ket{n}} \]
-        \item Global phase and remaining basis irrelevant: $\ti{U}_{n}$ requires $n(2d - n - 1)$ real-valued parameters\
-        \item PVMs are computationally more efficient
+        \item Each part is assigned $d$ element \term{projective-valued measures (PVMs)} acting on $\s{H}^d$,
+        \[ M = \bc{M_1, \ldots, M_d} \qquad \sum_{i=1}^{d} M_{i} = \ident \]
+        \[ \forall i: \forall \ket{\psi} \in \Hilb^d : \bra{\psi} M_i \ket{\psi} \geq 0 \quad M_i = M_i^{\dagger} \]
+        \[ M_{i}M_{j} = \de_{ij} M_{i} \quad M_{i} = \ket{m_{i}}\bra{m_{i}} \]
+        % \item Inspired by \cite{Pal_2010}, parameterizing PVMs means parameterizing a $n$-element sub-basis $\bc{\ket{m_{\chi,i}}}$
+        \item Unitary transform maps $M$ to computational basis
+        \[ \bc{\ket{m_{1}}, \ldots, \ket{m_{d}}} = \bc{U \ket{1}, \ldots, U \ket{d}} \]
+        \item Global phase irrelevant: $\ti{U}$ requires $d(d - 1)$ real-valued parameters
+        \item PVMs are computationally more efficient than POVMs
     \end{itemize}
     \[ \prob[ABC]\br{abc} = \bra{m_{A,a}m_{B,b}m_{C,c}}{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm}\ket{m_{A,a}m_{B,b}m_{C,c}} \]
 \end{frame}
+
 \begin{frame}
-    \frametitle{Max Entangled vs. Max Violating} % $\chi = -2$
-    \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_fritz_seed.pdf}
+    \frametitle{Parameterizing States}
+    \begin{itemize}
+        \item Exploit spectral decomposition
+        \[ \rho = \sum_{i=1}^{d} p_i \ket{\psi_i} \bra{\psi_i} \qquad p_i \geq 0, \sum_i p_i = 1 \]
+        \item Unitary transform maps $\bc{\ket{\psi_i}}$ to computational basis
+        \[ \bc{\ket{\psi_{1}}, \ldots, \ket{\psi_{d}}} = \bc{U \ket{1}, \ldots, U \ket{d}} \]
+        \item Global phase irrelevant again $\ti{U}$ requires $d\br{d - 1}$ real-valued parameters
+        \item Eigenvalues $\bc{p_i}$ parameterized using hyper-spherical coordinates: $d - 1$ real-valued parameters
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{Maximal Violation}
     \includegraphics[width=\linewidth]{../../figures/distributions/plotted_dist_I_2_max_violation.pdf}
     \[ \text{Relative Violation:} \qquad V_F = \f{\min_P\bc{I\br{P}}}{I\br{P_F}} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Max Entangled vs. Max Violating} % $\chi = -2$
+    \includegraphics[width=\linewidth]{../../figures/optimizations/Max_Entanglement_vs_Max_Violation_fritz_seed.pdf}
 \end{frame}
 
 \begin{frame}
@@ -773,15 +795,24 @@
     \begin{center}
         \includegraphics[width=\linewidth]{../../figures/noise/noisy_yet_non_local_fritz.pdf}
     \end{center}
-    \[ \probplotvalue{255, 255, 255} = 0.00133 \]
+    \[ \probplotvalue{255, 255, 243} = 0.00133 \]
 \end{frame}
 
 \begin{frame}
     \frametitle{Conclusions}
     \begin{enumerate}
-        \item Inflation technique capable of producing polynomial inequalities with quantum/classical witnesses
-        \item Fritz witness-able by party-symmetric inequalities
-        \item Maximally violating distributions require non-maximally entangled states
+        \item \textbf{Inflation technique} capable of producing polynomial inequalities with quantum/classical witnesses
+        \item Fritz witness-able by \textbf{party-symmetric inequalities}
+        \item Maximally violating distributions require \textbf{non-maximally entangled states}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Unanswered Questions}
+    \begin{enumerate}
+        \item Do these new non-local distributions suggest \textbf{new quantum resources} in the triangle scenario?
+        \item Can any non-local quantum correlations in the triangle scenario \textbf{satisfy CHSH inequalities} (under Fritz type coarse graining)?
+        \item Which inequalities are \textbf{most robust} to noise? Facets?
     \end{enumerate}
 \end{frame}
 
@@ -1113,6 +1144,32 @@
     \begin{itemize}
         \item More non-local yet not quantum-accessible
         \item Quantum-accessible distributions form non-context set
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Parameterizing POVMs [Optional]}
+    \begin{itemize}
+        \item Each party $\br{A, B, C}$ is assigned a \term{projective-operator valued measure (POVM)} $\br{M_A, M_B, M_C}$
+        \[ \forall \ket{\psi} \in \Hilb^d : \bra{\psi} M_\chi \ket{\psi} \geq 0 \quad M_\chi = M_\chi^{\dagger} \]
+        \item $n$-outcome measurement
+        \[ M_\chi = \bc{M_{\chi, 1}, \ldots, M_{\chi, n}} \quad \sum_{i=1}^{n} M_{\chi, i} = \ident \]
+        \item For $n = 2$ outcomes, a parameterization exists by constraining the eigenvalues of $M_{\chi, i}$; for $n > 2$ not aware of anything
+        \item Warrants consideration of \term{projective-valued measures (PVMs)}
+    \end{itemize}
+    \note<1>[item]{Naimark's Dilation Theorem}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Cholesky Parameterization of States [Optional]}
+    \begin{itemize}
+        \item Each latent resource $\rho \in \br{\rho_{AB}, \rho_{BC}, \rho_{CA}}$ modeled as bipartite qubit state acting on $\Hilb^{d/2} \otimes \Hilb^{d/2}$
+        \item $d \times d$ positive semi-definite (PSD) hermitian matrices with unitary trace
+        \item \term{Cholesky Parametrization} allows one to write any hermitian PSD as $\rho = T^{\dagger} T$
+        \item For $d = 4$:
+        \[ T = \begin{bmatrix}\la_{1}&0&0&0\\\la_{2} + i \la_{3}&\la_{4}&0&0\\\la_{5} + i \la_{6}&\la_{7} + i \la_{8}&\la_{9}&0\\\la_{10} + i \la_{11}&\la_{12} + i \la_{13}&\la_{14} + i \la_{15}&\la_{16}\end{bmatrix} \]
+        \item $d^2$ real-valued parameters
+        \item Normalized $\rho = {T^{\dagger}T}/{\Tr\br{T^{\dagger} T}}$ adds degeneracy
     \end{itemize}
 \end{frame}
 

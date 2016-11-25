@@ -1,13 +1,13 @@
 \begin{tikzpicture}[scale=1]
     \begin{scope}[every node/.style=observed]
-        \node (C) at (-2, 0) {$M_C$};
-        \node (B) at (2, 0) {$M_B$};
-        \node (A) at (0, {2*sqrt(3)}) {$M_A$};
+        \node (C) at (0, -2.5) {$C$};
+        \node (B) at (2, 2) {$B$};
+        \node (A) at (-2, 2) {$A$};
     \end{scope}
     \begin{scope}[every node/.style=latent]
-        \node (X) at (-1, {sqrt(3)}) {$\rho_{CA}$};
-        \node (Y) at (1, {sqrt(3)}) {$\rho_{AB}$};
-        \node (Z) at (0, 0) {$\rho_{BC}$};
+        \node (X) at (-2, 0) {$S_A$};
+        \node (Y) at (0, 0.5) {$\la$};
+        \node (Z) at (2, 0) {$S_B$};
     \end{scope}
     \begin{scope}[every path/.style={draw=cause, thick}]
         \path[postaction={on each segment={mid arrow}}]
