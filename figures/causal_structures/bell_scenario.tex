@@ -1,21 +1,18 @@
 \begin{tikzpicture}[scale=1]
     \begin{scope}[every node/.style=observed]
-        \node (C) at (-2, 0) {$\p{C}$};
-        \node (B) at (2, 0) {$\p{B}$};
-        \node (A) at (0, {2*sqrt(3)}) {$\p{A}$};
+        \node (B) at (2, 2) {$\p{B}$};
+        \node (A) at (-2, 2) {$\p{A}$};
+        \node (Z) at (2, 0) {$S_{\p{B}}$};
+        \node (X) at (-2, 0) {$S_{\p{A}}$};
     \end{scope}
     \begin{scope}[every node/.style=latent]
-        \node (X) at (-1, {sqrt(3)}) {$\p{X}$};
-        \node (Y) at (1, {sqrt(3)}) {$\p{Y}$};
-        \node (Z) at (0, 0) {$\p{Z}$};
+        \node (Y) at (0, 0.5) {$\la$};
     \end{scope}
     \begin{scope}[every path/.style={draw=cause, thick}]
         \path[postaction={on each segment={mid arrow}}]
         (X) -- (A)
-        (X) -- (C)
         (Y) -- (A)
         (Y) -- (B)
-        (Z) -- (B)
-        (Z) -- (C);
+        (Z) -- (B);
     \end{scope}
 \end{tikzpicture}

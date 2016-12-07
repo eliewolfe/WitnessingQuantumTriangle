@@ -1,20 +1,20 @@
 \newcommand{\ift}{2.3}
 \begin{tikzpicture}[scale=2]
     \begin{scope}[every node/.style=observed, onslide=<1->{fade}]
-        \node[onslide=<3>{unfade}] (C2) at ({-2 + 2*1/\ift}, {2*1/(\ift*sqrt(3))}) {$C_2$};
-        \node[onslide=<1>{unfade}] (C1) at ({-2 + 3*1/\ift}, {3*1/(\ift*sqrt(3))}) {$C_1$};
-        \node[onslide=<2>{unfade},onslide=<3>{unfade}] (B2) at ({2 - 2*1/\ift}, {2*1/(\ift*sqrt(3))}) {$B_2$};
-        \node[onslide=<2>{unfade}] (B1) at ({2 - 3*1/\ift}, {3*1/(\ift*sqrt(3))}) {$B_1$};
-        \node[onslide=<1>{unfade}] (A2) at (0, {2*sqrt(3) - 2*2/sqrt(3)*(1/\ift)}) {$A_2$};
-        \node[] (A1) at (0, {2*sqrt(3) - 3*2/sqrt(3)*(1/\ift)}) {$A_1$};
+        \node[onslide=<3>{unfade}] (C2) at ({-2 + 2*1/\ift}, {2*1/(\ift*sqrt(3))}) {$\p{C}_2$};
+        \node[onslide=<1>{unfade}] (C1) at ({-2 + 3*1/\ift}, {3*1/(\ift*sqrt(3))}) {$\p{C}_1$};
+        \node[onslide=<2>{unfade},onslide=<3>{unfade}] (B2) at ({2 - 2*1/\ift}, {2*1/(\ift*sqrt(3))}) {$\p{B}_2$};
+        \node[onslide=<2>{unfade}] (B1) at ({2 - 3*1/\ift}, {3*1/(\ift*sqrt(3))}) {$\p{B}_1$};
+        \node[onslide=<1>{unfade}] (A2) at (0, {2*sqrt(3) - 2*2/sqrt(3)*(1/\ift)}) {$\p{A}_2$};
+        \node[] (A1) at (0, {2*sqrt(3) - 3*2/sqrt(3)*(1/\ift)}) {$\p{A}_1$};
     \end{scope}
     \begin{scope}[every node/.style=latent, onslide=<1->{fade}]
-        \node[onslide=<3>{unfade}] (X2) at (-1, {sqrt(3)}) {$X_2$};
-        \node[onslide=<1>{unfade}] (X1) at ({-1 + 1/\ift}, {sqrt(3) - 1/(\ift*sqrt(3))}) {$X_1$};
-        \node[onslide=<1>{unfade}] (Y2) at (1, {sqrt(3)}) {$Y_2$};
-        \node[onslide=<2>{unfade}, onslide=<3>{unfade}] (Y1) at ({1 - 1/\ift}, {sqrt(3) - 1/(\ift*sqrt(3))}) {$Y_1$};
-        \node[onslide=<1>{unfade}, onslide=<2>{unfade}, onslide=<3>{unfade}] (Z1) at (0, 0.5) {$Z_1$};
-        \node[onslide=<2>{unfade}, onslide=<3>{unfade}] (Z2) at (0, 0) {$Z_2$};
+        \node[onslide=<3>{unfade}] (X2) at (-1, {sqrt(3)}) {$\p{X}_2$};
+        \node[onslide=<1>{unfade}] (X1) at ({-1 + 1/\ift}, {sqrt(3) - 1/(\ift*sqrt(3))}) {$\p{X}_1$};
+        \node[onslide=<1>{unfade}] (Y2) at (1, {sqrt(3)}) {$\p{Y}_2$};
+        \node[onslide=<2>{unfade}, onslide=<3>{unfade}] (Y1) at ({1 - 1/\ift}, {sqrt(3) - 1/(\ift*sqrt(3))}) {$\p{Y}_1$};
+        \node[onslide=<1>{unfade}, onslide=<2>{unfade}, onslide=<3>{unfade}] (Z1) at (0, 0.5) {$\p{Z}_1$};
+        \node[onslide=<2>{unfade}, onslide=<3>{unfade}] (Z2) at (0, 0) {$\p{Z}_2$};
     \end{scope}
     \begin{scope}[every path/.style={draw=cause, thick}, onslide=<1->{fade}]
         \path[postaction={on each segment={mid arrow}}, onslide=<2>{unfade}, onslide=<3>{unfade}]
