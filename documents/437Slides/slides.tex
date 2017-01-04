@@ -79,15 +79,15 @@
     \titlepage
 \end{frame}
 
-\begin{frame}
-    \frametitle{This Talk}
-    \begin{enumerate}
-        \item Motive why quantum-classical difference is worth studying
-        \item Explain why the triangle scenario is interesting
-        \item Briefly discuss how we obtained new measures of non-classicality
-        \item Discuss search for new non-classical quantum correlations
-    \end{enumerate}
-\end{frame}
+% \begin{frame}
+%     \frametitle{This Talk}
+%     \begin{enumerate}
+%         \item Motive why quantum-classical difference is worth studying
+%         \item Explain why the triangle scenario is interesting
+%         \item Briefly discuss how we obtained new measures of non-classicality
+%         \item Discuss search for new non-classical quantum correlations
+%     \end{enumerate}
+% \end{frame}
 
 \begin{frame}
     \frametitle{Quantum/Classical Discrepancies}
@@ -119,7 +119,7 @@
 \begin{frame}
     \frametitle{Notation \& Jargon}
     \begin{center}
-        Which observations are \textit{compatible} with a given classical model?
+        Given a set of observations, are they \textit{compatible} with a given classical model?
     \end{center}
     \begin{columns}
         \column{0.45\textwidth}
@@ -139,7 +139,7 @@
         \column{0.45\textwidth}
         \begin{center}
             \textbf{Marginal Model $\prob^{\mscenario}$} \\
-            {\footnotesize (observations)}
+            {\footnotesize (set of observations)}
             \[ \mscenario : \text{\term{marginal scenario}} \]
             \[ \mscenario = \bc{V \mid V \subseteq \nodes_{O}} \]
             \[ \prob^{\mscenario} = \bc{\prob[V] \mid V \in \mscenario} \]
@@ -148,23 +148,39 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{The Triangle Scenario}
-    \begin{center}
-        \scalebox{1.5}{\input{../../figures/causal_structures/triangle_scenario}}
-    \end{center}
-\end{frame}
-
-\begin{frame}
     \frametitle{Causal Compatibility}
+    \textbf{Question:} Can your model $\graph$ explain the observation $\prob^{\mscenario}$?\\
     \textbf{Question:} Is $\prob^{\mscenario}$ \term{compatible} with $\graph$?\\
+    \vspace{0.3in}
     \textbf{Answer:} If $\prob^{\mscenario}$ is to be compatible with $\graph$ then:
     \begin{enumerate}
         \item $\prob^{\mscenario}$ must admit a \term{joint distribution} $\prob[\nodes]$:
         \[ \prob[V] = \sum_{\nodes \setminus V} \prob[\nodes] \]
-        \item $\prob[\nodes]$ must obey \term{Markov conditions}:
+        \item $\prob[\nodes]$ must obey \term{Markov conditions} (independence given parents):
         \[ \prob[\nodes] = \prod_{n\in\nodes}\prob[n \mid \Pa[\graph]{n}] \]
     \end{enumerate}
-    \textbf{Inequality:} A \term{casual compatibility inequality} $I$ is an inequality over $\prob^{\mscenario}$ that is satisfied by all compatible $\prob^{\mscenario}$
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inequalities}
+    \textbf{Task:} Determine if $\prob^{\mscenario}$ is \term{compatible} or \term{incompatible} with $\graph$\\
+    \vspace{0.3in}
+    \textbf{Tool:} A \term{casual compatibility inequality} $I$ is an inequality satisfied by all compatible $\prob^{\mscenario}$
+    \vspace{0.3in}
+    \begin{itemize}
+        \item Inequalities $I$ are \textbf{extremely useful}:
+        \item If $\prob^{\mscenario}$ satisfies \textit{all} such constraints $I$, then it is \textit{compatible} with $\graph$
+        \item If $\prob^{\mscenario}$ violates \textit{any} constraint $I$, then it is \textit{incompatible} with $\graph$
+        \item Inequalities act as \textit{measures} of non-classicality
+        \item $I$ identifies \textit{fundamentally} new resources or quantum advantages!
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Case Study: The Triangle Scenario}
+    \begin{center}
+        \scalebox{1.5}{\input{../../figures/causal_structures/triangle_scenario}}
+    \end{center}
 \end{frame}
 
 \begin{frame}
@@ -186,7 +202,7 @@
 \begin{frame}
     \frametitle{Why Triangle Scenario?}
     \begin{itemize}
-        \item Triangle scenario (TS) has be studied extensively before
+        \item The TS could be home to \textbf{brand new} entanglement resources which could lead to new technologies and fundamental physics, albeit very difficult to find
         \item In~\cite{Branciard_2012} it was noted that characterizing quantum non-classicality in TS remained an \textbf{open problem} and that identifying compatibility inequalities \textbf{seemed challenging}
         \item In~\cite{Fritz_2012}, Fritz demonstrated that TS is the \textbf{smallest} correlation scenario in which quantum non-classicality is manifest (proof without inequalities)
         \item In~\cite{Henson_2014}, TS was classified as an \textbf{interesting} causal structure: conditional independence relations are not a sufficient characterization of compatibility (there are none)
