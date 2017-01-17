@@ -51,15 +51,6 @@
 \addbibresource{../references.bib}
 \AtBeginBibliography{\small}
 
-\newcommand{\probplotvalue}[1]{%
-    \definecolor{probvalcolor}{RGB}{#1}%
-    \definecolor{outlinecolor}{RGB}{127, 127, 127}%
-    \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]%
-        \pgfmathsetmacro{\size}{0.2};%
-        \draw[outlinecolor, fill=probvalcolor] (-\size,-\size) -- (-\size, +\size) -- (+\size, +\size) -- (+\size, -\size) -- cycle;%
-    \end{tikzpicture}%
-}%
-
 \title[Triangle Inequalities]{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Scenario}
 \author[Fraser]{T.C.~Fraser\inst{1,2}}
 \institute
