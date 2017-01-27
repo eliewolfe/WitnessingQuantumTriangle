@@ -5,11 +5,8 @@
 \usepackage{../../packages/document_config}
 \usepackage{../../packages/shared}
 \usepackage{../../packages/misc_commands}
-\usepackage{subcaption}
-\usepackage{enumitem}
 
-\renewcommand{\Events}[1]{\mathcal{S}\br{#1}}
-\renewcommand{\tcdot}{\cdot}
+\renewcommand{\Events}[1]{\mathcal{S}\br{#1}} % This notation is conflicting
 
 % === Causal structure formatting for tikz ===
 \input{../../figures/causal_structures/formatting}
@@ -415,7 +412,7 @@
         \[ \forall m \in \Events{\mscenario} : \probvec^{\mscenario}_m = \prob[\Dom{m}][m] \]
     \end{definition}
     By design, the marginal and joint distribution vectors are related via the incidence matrix $M$. Given a joint distribution vector $\probvec^{\jointvar}$ one can obtain the marginal distribution vector $\probvec^{\mscenario}$ by multiplying $M$ by $\probvec^{\jointvar}$.
-    \[ \probvec^{\mscenario} = M \tcdot \probvec^{\jointvar} \eq \label{eq:incidence_matrix_use} \]
+    \[ \probvec^{\mscenario} = M \cdot \probvec^{\jointvar} \eq \label{eq:incidence_matrix_use} \]
     Because the marginal distribution vector $\probvec^{\mscenario}$ is simply another representation of the marginal model $\prob^{\mscenario}$, we will henceforth use the language interchangeably. This is likewise done so for the joint distribution (vector) $\prob[\jointvar]$ ($\probvec^{\jointvar}$). As a quick remark, the particular ordering of the rows and columns of $M$ carries \textit{no importance}, but it \textit{must} be consistent between $M$, $\probvec^{\jointvar}$ and $\probvec^{\mscenario}$. The marginal problem can now be rephrased in the language of the incidence matrix. Suppose one obtains a marginal distribution vector $\probvec^{\mscenario}$; the marginal problem becomes equivalent to the question:
     \textit{Does there exist a joint distribution vector $\probvec^{\jointvar}$ such that \cref{eq:incidence_matrix_use} holds?} \\
 
@@ -439,9 +436,9 @@
         \label{def:marginal_linear_program}
         \term{The Marginal Linear Program} is the following linear program:
         \begin{alignat*}{2}
-            & \text{minimize:} \quad&& \emptyset \tcdot x\\
+            & \text{minimize:} \quad&& \emptyset \cdot x\\
             & \text{subject to:} && x \succeq 0 \\
-            & && M \tcdot x = \probvec^{\mscenario}
+            & && M \cdot x = \probvec^{\mscenario}
         \end{alignat*}
         If this ``optimization''\footnote{``Optimization'' is presented in quotes here because the minimization objective is trivially always zero ($\emptyset$ denotes the null vector of all zero entries). The primal value of the linear program is of no interest, all that matters is its \textit{feasibility}.} is \textit{feasible}, then there exists a vector $x$ than can satisfy \cref{eq:incidence_matrix_use} and is a valid joint distribution vector. Therefore feasibility implies that $\probvec^{\jointvar}$ exists and is precisely $x$. Moreover if the marginal linear program is \textit{infeasible}, then there \textit{does not} exist a joint distribution $\probvec^{\jointvar}$.
     \end{definition}
@@ -452,20 +449,20 @@
         \label{def:dual_marginal_linear_program}
         \term{The Dual Marginal Linear Program}:
         \begin{alignat*}{2}
-            & \text{minimize:} \quad&& y \tcdot \probvec^{\mscenario}\\
-            & \text{subject to:} && y \tcdot M \succeq 0
+            & \text{minimize:} \quad&& y \cdot \probvec^{\mscenario}\\
+            & \text{subject to:} && y \cdot M \succeq 0
         \end{alignat*}
         Where $y$ is a real valued vector with the same length as $\probvec^{\mscenario}$.
     \end{definition}
 
-    The dual marginal linear program not only answers the marginal problem for a specific marginal model $\probvec^{\mscenario}$ but as a by-product provides an inequality that witnesses its contextuality. If this is not obvious, first notice that the dual problem is \textit{never infeasible}; by choosing $y$ to be trivially the null vector $\emptyset$ of appropriate size, all constraints become satisfied. Secondly if the dual constraint $y \tcdot M \succeq 0$ holds \textit{and} the primal is feasible, then the following must hold:
-    \[ y \tcdot \probvec^{\mscenario} =  y \tcdot M \tcdot x \geq 0 \eq \label{eq:dual_marginal_ineq} \]
-    Therefore the \textit{sign} of the dual objective $d \defined \min \br{y \tcdot \probvec^{\mscenario}}$ classifies a marginal model's contextuality. If $d < 0$ then \cref{eq:dual_marginal_ineq} is violated and therefore $\probvec^{\mscenario}$ is contextual. Likewise if $d \geq 0$ (satisfying \cref{eq:dual_marginal_ineq}), then $\probvec^{\mscenario}$ is non-contextual.\footnote{Actually, if $d \geq 0$ then it is exactly $d = 0$ due to the existence of the trivial $y = \emptyset$. This observation is an instance of the \textit{Complementary Slackness Property} of~\cite{Bradley_1977}. Moreover, if $d < 0$, then it is unbounded $d = -\inf$. This latter point becomes clear upon recognizing that for any $y$ with $d < 0$, another $y' = \al y$ can be constructed (with $\al > 1$) such that $d' = \al d < d$. Since a more negative $d'$ can always be found, it must be that $d$ is unbounded. This is a demonstration of the fundamental \textit{Unboundedness Property} of~\cite{Bradley_1977}; if the dual is unbounded, then the primal is infeasible.} This is manifestation of Farkas's lemma~\cite{Schrijver_1998}. \\
+    The dual marginal linear program not only answers the marginal problem for a specific marginal model $\probvec^{\mscenario}$ but as a by-product provides an inequality that witnesses its contextuality. If this is not obvious, first notice that the dual problem is \textit{never infeasible}; by choosing $y$ to be trivially the null vector $\emptyset$ of appropriate size, all constraints become satisfied. Secondly if the dual constraint $y \cdot M \succeq 0$ holds \textit{and} the primal is feasible, then the following must hold:
+    \[ y \cdot \probvec^{\mscenario} =  y \cdot M \cdot x \geq 0 \eq \label{eq:dual_marginal_ineq} \]
+    Therefore the \textit{sign} of the dual objective $d \defined \min \br{y \cdot \probvec^{\mscenario}}$ classifies a marginal model's contextuality. If $d < 0$ then \cref{eq:dual_marginal_ineq} is violated and therefore $\probvec^{\mscenario}$ is contextual. Likewise if $d \geq 0$ (satisfying \cref{eq:dual_marginal_ineq}), then $\probvec^{\mscenario}$ is non-contextual.\footnote{Actually, if $d \geq 0$ then it is exactly $d = 0$ due to the existence of the trivial $y = \emptyset$. This observation is an instance of the \textit{Complementary Slackness Property} of~\cite{Bradley_1977}. Moreover, if $d < 0$, then it is unbounded $d = -\inf$. This latter point becomes clear upon recognizing that for any $y$ with $d < 0$, another $y' = \al y$ can be constructed (with $\al > 1$) such that $d' = \al d < d$. Since a more negative $d'$ can always be found, it must be that $d$ is unbounded. This is a demonstration of the fundamental \textit{Unboundedness Property} of~\cite{Bradley_1977}; if the dual is unbounded, then the primal is infeasible.} This is manifestation of Farkas's lemma~\cite{Schrijver_1998}. \\
 
     An \term{infeasibility certificate}~\cite{Andersen_2001} is any vector $y$ that satisfies the constraint of \cref{def:dual_marginal_linear_program} and also permits violation of \cref{eq:dual_marginal_ineq} for some marginal distribution vector $\probvec^{\mscenario}$.
-    \[ y \in \R^{\abs{\Events{\mscenario}}} : y \tcdot M \succeq 0, \quad y \tcdot \probvec^{\mscenario} < 0 \]
+    \[ y \in \R^{\abs{\Events{\mscenario}}} : y \cdot M \succeq 0, \quad y \cdot \probvec^{\mscenario} < 0 \]
     Most linear program software packages such as Mosek~\cite{Mosek_2016}, Gurobi~\cite{Gurobi_2016}, CPLEX~\cite{Cplex_2016} and CVX/CVX OPT~\cite{CVX_2016,CVX_Opt_2016} are capable of producing infeasibility certificates.
-    Furthermore, for every $y$ satisfying $y \tcdot M \succeq 0$ there corresponds a \term{certificate inequality} that constraints the set of non-contextual marginal models. If $y$ is an infeasibility certificate, then all non-contextual marginal models $\probvec^{\mscenario}$ must satisfy \cref{eq:dual_marginal_ineq} making $y \cdot \probvec^{\mscenario} \geq 0$ a valid causal compatibility inequality.
+    Furthermore, for every $y$ satisfying $y \cdot M \succeq 0$ there corresponds a \term{certificate inequality} that constraints the set of non-contextual marginal models. If $y$ is an infeasibility certificate, then all non-contextual marginal models $\probvec^{\mscenario}$ must satisfy \cref{eq:dual_marginal_ineq} making $y \cdot \probvec^{\mscenario} \geq 0$ a valid causal compatibility inequality.
 
     \subsection{Triangle Scenario Inequalities}
     \label{sec:found_inequalities}
@@ -749,7 +746,7 @@
     To facilitate the parameterization of quantum states states and PVMs, a parameterization of the unitary group of dimension $d$ (denoted $\s{U}\br{d}$) by Spengler, Huber and Hiesmayr~\cite{Spengler_2010_Unitary} is introduced. Discussions of its application to states and measurements are deferred to \cref{sec:states} and \cref{sec:measurements} respectively.
 
     In Ref.~\cite{Spengler_2010_Unitary}, Spengler \textit{et al.} proved that all unitaries $U \in \s{U}\br{d}$ can be parameterized without degeneracy as follows:
-    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} \exp\br{i P_n \lambda_{n,m}}\exp\br{i \si_{m,n} \lambda_{m,n}}}} \tcdot \bs{\prod_{l=1}^{d} \exp\br{iP_l \lambda_{l,l}}}  \eq \label{eq:spengler_unitary} \]
+    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} \exp\br{i P_n \lambda_{n,m}}\exp\br{i \si_{m,n} \lambda_{m,n}}}} \cdot \bs{\prod_{l=1}^{d} \exp\br{iP_l \lambda_{l,l}}}  \eq \label{eq:spengler_unitary} \]
     Where $\la = \bc{\la_{n,m} \mid n,m \in 1, \ldots, d}$ form a $d \times d$ matrix of real-valued parameters with periodicities $\la_{m,n} \in \bs{0, \f{\pi}{2}}$ for $m < n$ and $\la_{m,n} \in \bs{0, 2 \pi}$ for $m \geq n$.
     \[ \la = \begin{pmatrix}
         \la_{1,1} & \cdots & \la_{1, d} \\
@@ -938,7 +935,7 @@
 
     \begin{definition}
         The \term{product distribution} of two disjoint probability distributions $\prob[V]$ and $\prob[W]$ (where $V \cap W = \emptyset$) is denoted as $\prob[V] \times \prob[W]$.
-        \[ \forall s \in \Events{V \cup W} : \br{\prob[V] \times \prob[W]}\br{s} \defined \prob[V][s|_{V}]\tcdot\prob[W][s|_{W}] \]
+        \[ \forall s \in \Events{V \cup W} : \br{\prob[V] \times \prob[W]}\br{s} \defined \prob[V][s|_{V}]\cdot\prob[W][s|_{W}] \]
         A product distribution of $k$ mutually disjoint distributions is defined as,
         \[ \prod_{i\in\bs{k}} \prob[V_i] \defined \br{\prob[V_1] \times \cdots \times \prob[V_k]} \]
     \end{definition}
@@ -971,7 +968,7 @@
     \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \sum_{j=1}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j}}{\br{2j}!} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sum_{j=0}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j+1}}{\br{2j+1}!} \]
     \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sin\lambda_{n,m} \eq \label{eq:unitary_R} \]
     By combining the optimizations of \cref{eq:unitary_GP,eq:unitary_RP,eq:unitary_R} together we arrive at an equivalent form for \cref{eq:spengler_unitary} that is computational more efficient.
-    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n}RP_{n,m}}} \tcdot \bs{\prod_{l=1}^{d} GP_{l}}  \eq \label{eq:spengler_unitary_fast} \]
+    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n}RP_{n,m}}} \cdot \bs{\prod_{l=1}^{d} GP_{l}}  \eq \label{eq:spengler_unitary_fast} \]
 
     \clearpage
     \section{Large Triangle Scenario Inequalities}
@@ -979,6 +976,7 @@
     \label{sec:web_inequality}
     The following is a causal compatibility inequality for the triangle scenario that is violated by the Fritz distribution outlined in \cref{sec:fritz_distribution} and was derived using the Web inflation of \cref{fig:the_web_inflation}.
     \begin{center}
+        % TODO [TC] replace this inequality with correct one
         \includegraphics[width=\linewidth]{../../figures/inequalities/no_symwitness_ineq_print_standalone}
     \end{center}
     Note: $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$.
@@ -987,6 +985,7 @@
     \label{sec:symmetic_web_inequality}
     The following is a symmetric causal compatibility inequality for the triangle scenario that is violated by the Fritz distribution outlined in \cref{sec:fritz_distribution} and was derived using the Web inflation of \cref{fig:the_web_inflation}.
     \begin{center}
+        % TODO [TC] replace this inequality with correct one
         \includegraphics[width=\linewidth]{../../figures/inequalities/MosekCertFritzSym_ineq_standalone}
     \end{center}
     Note: $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$ and $\bs{P(113)P(330)}_3$ is shorthand for the sum over permutations:
