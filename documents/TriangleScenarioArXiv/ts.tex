@@ -7,7 +7,6 @@
 \usepackage{../../packages/misc_commands}
 
 \renewcommand{\Events}[1]{\mathcal{S}\br{#1}} % This notation is conflicting
-\setlength{\parskip}{1em}
 
 % === Causal structure formatting for tikz ===
 \input{../../figures/causal_structures/formatting}
@@ -26,6 +25,7 @@
     \end{abstract}
     \maketitle
     \tableofcontents
+    \setlength{\parskip}{1em}
     \clearpage
 
     \section{Introduction}
@@ -604,7 +604,7 @@
         \[ \Phi\br{\mscenario} \defined \bc{\varphi \in \Perm{\jointvar} \mid \forall V \in \mscenario : \varphi\bs{V} \in \mscenario} \]
     \end{definition}
 
-    Obtaining the variable permutation group $\gp\br{\mscenario}$ is a simple application of a group stabilizer algorithm. After obtaining $\gp\br{\mscenario}$, one can take known compatibility inequalities $I_{\mscenario}$ can create a whole family of inequalities $\bc{\varphi\bs{I_{\mscenario}} \mid \varphi \in \gp\br{\mscenario}}$ that are valid for the same marginal scenario $\varphi\bs{I_{\mscenario}} = \varphi\bs{I}_{\varphi\bs{\mscenario}} = \varphi\bs{I}_{\mscenario}$. 
+    Obtaining the variable permutation group $\gp\br{\mscenario}$ is a simple application of a group stabilizer algorithm. After obtaining $\gp\br{\mscenario}$, one can take known compatibility inequalities $I_{\mscenario}$ can create a whole family of inequalities $\bc{\varphi\bs{I_{\mscenario}} \mid \varphi \in \gp\br{\mscenario}}$ that are valid for the same marginal scenario $\varphi\bs{I_{\mscenario}} = \varphi\bs{I}_{\varphi\bs{\mscenario}} = \varphi\bs{I}_{\mscenario}$.
 
     Although very useful for reducing computational complexity~\cite{Bancal_2010}, we divert our attention to finding \textit{symmetric} inequalities themselves.
     \[ \forall \varphi \in \gp\br{\mscenario} :  \varphi\bs{I_{\mscenario}} = I_{\mscenario} \]
@@ -628,9 +628,9 @@
     \[ \br{\probvec^{\mscenario}_{\Phi}}_{\Orb[\gp]{m}} = \sum_{m' \in \Orb[\gp]{m}} \probvec^{\mscenario}_{m} \]
     Which altogether define a new, \term{symmetric marginal problem},
     \[ \probvec^{\mscenario}_{\Phi} = M_{\gp} \cdot \probvec^{\jointvar}_{\Phi} \]
-    The symmetric marginal problem can be solved using the same computational methods discussed in \cref{sec:deriving_inequalities} and will produce symmetric inequalities. 
+    The symmetric marginal problem can be solved using the same computational methods discussed in \cref{sec:deriving_inequalities} and will produce symmetric inequalities.
 
-    In the context of the Inflation technique, a variable symmetry $\Phi\br{\mscenario'}$ over an inflated marginal scenario $\mscenario'$ does not always correspond to a variable symmetry under deflation $\Phi\br{\mscenario}$. In order to derive deflated inequalities that are symmetric under an exchange of parties, it is required that $\Phi\br{\mscenario'} \sim \Phi\br{\mscenario}$ are equivalent up to copy-index. 
+    In the context of the Inflation technique, a variable symmetry $\Phi\br{\mscenario'}$ over an inflated marginal scenario $\mscenario'$ does not always correspond to a variable symmetry under deflation $\Phi\br{\mscenario}$. In order to derive deflated inequalities that are symmetric under an exchange of parties, it is required that $\Phi\br{\mscenario'} \sim \Phi\br{\mscenario}$ are equivalent up to copy-index.
 
     For the Triangle scenario, the variable permutation group is simply the set of permutations on $A, B, C$: $\Phi\br{\mscenario} = \Perm{A, B, C}$. For the Web inflation (\cref{fig:the_web_inflation}), we have obtained $\gp\br{\PreInj[\graph]{\graph'}}$ which is an order $48$ group with the following $4$ generators:
     \begin{equation*}
@@ -685,7 +685,7 @@
     \[ \s{U}\br{abc} = \s{U}_{ABC}\br{abc} = \f{1}{64} \quad \forall a,b,c\in \bc{0,1,2,3}  \]
     Since the uniform distribution $\s{U}$ is trivially compatible with the triangle scenario, the objective of this section is to determine how much uniform noise needs to be added to the Fritz distribution $\prob[\fritz]$ before it transitions from incompatible to compatible. We do this by defining an affine noise parameter $\vep$ such that $0 \leq \vep \leq 1$ along with the \term{noisy variant} $\s{N}_{\vep}$ of the Fritz distribution,
     \[ \s{N}_{\vep} = \br{1 - \vep} \prob[\fritz] + \vep \s{U} \]
-    Therefore as $\vep$ varies from $0$ to $1$, more and more noise is added to the Fritz distribution as $\s{N}_{\vep}$ transitions from an incompatible distribution $\s{N}_{0} = \prob[\fritz]$ to a compatible distribution $\s{N}_{1} = \s{U}$. For each inequality $I$ and distribution $\prob$, let $I\br{\prob}$ denote a scalar value representing the amount of violation seen by $\prob$. As a standard, let $I\br{\prob} < 0$ represent violations while $I\br{\prob} \leq 0$ represents satisfaction of $I$ (with $I\br{\prob} = 0$ corresponding to complete saturations of the inequality). 
+    Therefore as $\vep$ varies from $0$ to $1$, more and more noise is added to the Fritz distribution as $\s{N}_{\vep}$ transitions from an incompatible distribution $\s{N}_{0} = \prob[\fritz]$ to a compatible distribution $\s{N}_{1} = \s{U}$. For each inequality $I$ and distribution $\prob$, let $I\br{\prob}$ denote a scalar value representing the amount of violation seen by $\prob$. As a standard, let $I\br{\prob} < 0$ represent violations while $I\br{\prob} \leq 0$ represents satisfaction of $I$ (with $I\br{\prob} = 0$ corresponding to complete saturations of the inequality).
 
     To analyze noise, $4$ inequalities where chosen. First, $I_0$ is the inequality derived using the Wagon-Wheel wheel inflation \cref{eq:ww_ineq}. The other three inequalities $I_1, I_2, I_3$ were all derived using the Web inflation; $I_1$ can be found in \cref{sec:web_inequality} while $I_3$ is the symmetric inequality in \cref{sec:symmetic_web_inequality}. Inequality $I_2$ is not reproduced anywhere in this document but is similar to \cref{sec:web_inequality}.
 
