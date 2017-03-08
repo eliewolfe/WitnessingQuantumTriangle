@@ -694,19 +694,17 @@
 
     To analyze noise, $4$ inequalities where chosen. First, $I_0$ is the inequality derived using the Wagon-Wheel wheel inflation \cref{eq:ww_ineq}. The other three inequalities $I_1, I_2, I_3$ were all derived using the Web inflation; $I_1$ can be found in \cref{sec:web_inequality} while $I_3$ is the symmetric inequality in \cref{sec:symmetic_web_inequality}. Inequality $I_2$ is not reproduced anywhere in this document but is similar to \cref{sec:web_inequality}.
 
-    \begin{center}
     \begin{figure}
     \begin{subfigure}[b]{.48\linewidth}
-    \includegraphics[width=\linewidth]{../../figures/noise/noise_2017.pdf}
+    {\centering\includegraphics[width=\linewidth]{../../figures/noise/noise_2017.pdf}}
     \caption{Complete range of noise parameters $\vep$.}\label{fig:noise}
     \end{subfigure}
     \begin{subfigure}[b]{.48\linewidth}
-    \includegraphics[width=\linewidth]{../../figures/noise/noise_2017_lims.pdf}
+    {\centering\includegraphics[width=\linewidth]{../../figures/noise/noise_2017_lims.pdf}}
     \caption{\Cref{fig:noise} zoomed onto relevant region.}\label{fig:noise_zoomed}
     \end{subfigure}
     \caption{Inequality violations when subjected to uniform noise. Each inequality is normalized so that maximum violation is $-1$.}\label{fig:master_noise}
     \end{figure}
-    \end{center}
 
     The results of our experiments are plotted in \cref{fig:master_noise}. \Cref{fig:noise} illustrates that each curve $I\br{\s{N}_{\vep}\br{\prob[\fritz]}}$ as a function of $\vep$ is monotonically increasing as expected; the more noise added to the probability distribution, the more classical it becomes. \Cref{fig:noise_zoomed} is the same plot as \cref{fig:noise} zoomed onto the interval $\vep \in \bs{0, 0.12}$. These tests suggest that inequality $I_1$ (\cref{sec:web_inequality}), when compared against all others is most robust to noise.
 
@@ -728,7 +726,7 @@
 
     In order to find quantum distributions that are more non-classical than the Fritz, we performed numerical optimizations against a objective scalar function $f: \R^n \in \R$ using the following pipeline: To begin, a set of real-valued parameters $\la = \br{\la_0, \ldots, \la_n} \in \R^{n}$ are used to parameterize a set of quantum states $\rho_{AB}, \rho_{BC}, \rho_{CA}$ and measurements $M_A, M_B, M_C$ in agreement with the quantum version of the Triangle structure in \cref{fig:triangle_structure_quantum_model}. Second, a $4$-outcome distribution $\prob[ABC]$ is obtained via \cref{eq:quantum_model_triangle} and supplanted into an inequality $I$ in homogeneous and canonical form $I\br{\prob[ABC]} \leq 0$. The objective value is simply the degree of violation $f = I\br{\prob[ABC]}$ and used to make adjustments to $\la$ in order to achieve largest and larger violations.
 
-    Finding larger violations to compatibility inequalities is nothing more that a numerical optimization (specifically minimization) of $f\br{\la}$. Since the inequalities themselves are polynomial and the space of quantum-accessible distributions is non-convex, a number of optimization methods were used in an attempt to eliminate any issues associated with local minima or ill-conditioned convergence. Specifically, the BFGS method~\cite[p. 142]{Nocedal_2000} and the Nelder-Mead simplex method~\cite[p. 238]{Nocedal_2000} were used along with a hybrid method called Basin Hopping~\cite{Wales_1997}.
+    Finding larger violations to compatibility inequalities is nothing more that a numerical optimization (specifically minimization) of $f\br{\la}$. Since the inequalities themselves are polynomial and the space of quantum-accessible distributions is non-convex, a number of optimization methods were used in an attempt to eliminate any issues associated with local minima or ill-conditioned convergence. Specifically, the BFGS method~\cite[p. 142]{Nocedal_2000} and the Nelder-Mead simplex method~\cite[p. 238]{Nocedal_2000} were used along with a method called Basin Hopping~\cite{Wales_1997}, which is a hybrid between simulated annealing and gradient descent-based methods.
 
     \subsection{Parameterizing Quantum Distributions}
     \label{sec:param_quantum_dist}
