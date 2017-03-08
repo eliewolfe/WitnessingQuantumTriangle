@@ -1,4 +1,3 @@
-\PassOptionsToPackage{justification=justified}{caption}
 % === Revtex Declaration ===
 \documentclass[aps, 10pt, english, twoside, pra, nofootinbib, tightenlines, longbibliography]{revtex4-1}
 
@@ -39,10 +38,11 @@
 
     This work is the first, therefore, to find causal compatibility inequalities for the Triangle structure that are able to be violated by quantum-accessible distributions. This accomplishment was made possible through the combination of two previous developments. The first, an insight made by \citet{Fritz_2012} regarding the ability to re-interpret the Bell structure as a portion of the Triangle structure. The second, a new framework for solving causal inference problems developed by Wolfe \emph{et al.}~\cite{Inflation} called \term{The Inflation Technique}. Ultimately, this work serves as a validation that the Inflation Technique is sensitive enough to offer new insights into quantum nonclassicality. Moreover, these new inequalities offer an avenue for recognizing previously unknown forms of nonclassicality. The authors attempts to find such novel resources were met with only partial success, suggesting clear refinements for future exploration.
 
-    The manuscript is organized into the following sections: \Cref{sec:causal_compatibility} recalls important notions from causal inference theory and sets up the notation to be used. \Cref{sec:triangle_structure} discusses the Triangle structure and provides an overview of existing research; identifying its stark differences from the Bell structure and motivating why the Triangle structure was chosen as a case study. \Cref{sec:fritz_distribution} defines and discusses a singularly-quantum correlation first concieved of by \citet{Fritz_2012}, which we term the \term{Fritz distribution}. The Fritz distribution was proven to be non-classical without the use of inequalities --- this report fills in the desired missing inequalities. \Cref{sec:inflation_technique} briefly summaries the Inflation Technique in the specific context of this work. Although the summary presented here is designed to be self-standing, a much more pedagogical introduction is offered by the original work~\cite{Inflation}. \Cref{sec:deriving_inequalities} demonstrates how the inflation technique can be used to derive causal compatibility inequalities for the Triangle structure that are violated by quantum-accessible distributions. A sample of these inequalities are presented at the end of \cref{sec:deriving_inequalities} as well as in \cref{sec:web_inequality,sec:symmetic_web_inequality}. Finally, \cref{sec:violations_noise} introduces the method for parameterizing the space of quantum-accessible distributions which we used to numerically optimize against our derived inequalities in search of stronger types of non-classicality. Additionally, the Fritz distribution is subjected to noise in order to measure the robustness of the derived inequalities.
+    The manuscript is organized into the following sections: \Cref{sec:causal_compatibility} recalls important notions from causal inference theory and sets up the notation to be used. \Cref{sec:triangle_structure} discusses the Triangle structure and provides an overview of existing research; identifying its stark differences from the Bell structure and motivating why the Triangle structure was chosen as a case study. \Cref{sec:fritz_distribution} defines and discusses a singularly-quantum correlation first concieved of by \citet{Fritz_2012}, which we term the \term{Fritz distribution}. The Fritz distribution was proven to be non-classical without the use of inequalities --- this report fills in the desired missing inequalities. \Cref{sec:inflation_technique} briefly summaries the Inflation Technique in the specific context of this work. Although the summary presented here is designed to be self-standing, a much more pedagogical introduction is offered by the original work~\cite{Inflation}. \Cref{sec:deriving_inequalities} demonstrates how the inflation technique can be used to derive causal compatibility inequalities for the Triangle structure that are violated by quantum-accessible distributions. A sample of these inequalities are presented at the end of \cref{sec:found_inequalities} (specifically \cref{eq:ww_ineq}) as well as in \cref{sec:web_inequality,sec:symmetic_web_inequality}. Finally, \cref{sec:violations_noise} introduces the method for parameterizing the space of quantum-accessible distributions which we used to numerically optimize against our derived inequalities in search of stronger types of non-classicality. Additionally, the Fritz distribution is subjected to noise in order to measure the robustness of the derived inequalities.
 
 
     \section{Causal Compatibility}
+    \todo[TC]{Talk to Elie about the varying notions of compatibility}
     \label{sec:causal_compatibility}
     The task of causal inference aims to determine the set of potentially observable probability distribution compatible with some hypothesis about causal relationships. whether or not a given family of observed probability distributions can be explained by a proposed causal mechanism~\cite{Pearl_2009}. If a set of observed distributions can be explained by the hypothesized causal mechanism, then the observations are said to be \textit{compatible} with the causal mechanism. In order to define compatibility rigorously, we first need to formally define what is meant by ``set of observations''.
 
@@ -89,6 +89,10 @@
     Unfortunately, a singular inequality can not prove that a given marginal model is \textit{compatible}, only \textit{incompatible}. Instead, a \textit{complete characterization} of compatibility would consist of a complete set of all valid causal compatibility inequalities; satisfaction of a complete set of inequalities does prove compatibility. Currently however, it is unknown how to obtain a complete characterization for any given causal structure, including the Triangle structure.
 
     From the perspective of identifying quantum non-classicality, the causal structure $\graph$ acts as the classical hypothesis for a particular marginal model $\prob^{\mscenario}$. Therefore, non-classicality becomes synonymous with incompatibility: if a marginal model $\prob^{\mscenario}$ is incompatible, then it is non-classical. Henceforth, we will use these two terms interchangeably. From a resource standpoint, if the non-classicality of $\prob^{\mscenario}$ can be witnessed by an inequality $I$, but $\prob^{\mscenario}$ can be implemented using quantum states and measurements, then the causal compatibility inequality $I$ represents a concrete task where quantum resources out-perform classical resources.
+
+    \section{Bell Structure}
+    \label{sec:bell_structure}
+    \todo[TC]{Review of Bell structure, Tsirelson-box, CHSH inequality}
 
     \section{Triangle Structure}
     \label{sec:triangle_structure}
@@ -194,283 +198,13 @@
 
     Additionally, it is important to understand the domain in which Fritz's proof of incompatibility is valid. Specifically, \cref{eq:CHSH} can only be applied to the Triangle structure where there exists perfect correlation between $\p C$'s outcomes and the measurement pseudo-settings (left-bits) of $\p A$ and $\p B$. The details of this restriction are discussed and proven in Fritz's original work~\cite{Fritz_2012}. As such, the incompatibility proof employed by Fritz is not applicable to any distribution that significantly deviates from the Fritz distribution presented above. For example, if one combines \cref{eq:fritz_dist} with more and more uniform noise, at what point does the resultant distribution transition from incompatibility to compatibility? This problem is discussed more in \cref{sec:noise}.
 
-    Upon reflection, the Fritz distribution can rightly be considered slightly manufactured. The phenomenology associated with Bell non-locality or Bell incompatibility are well understood; examining these distributions under a Triangle structure embedding offers no additional perspective onto the types of resources made accessible by quantum mechanics. Therefore, it is desirable to find incompatible quantum distributions that are qualitatively different than those previously considered for the Bell structure. \citet{Fritz_2012} presented the following problem: \textit{Find an example of non-classical quantum correlations in the Triangle structure together with a proof of its non-classicality which does not hinge on Bell’s Theorem.}\footnote{In the way Fritz defines, \textit{non-classical} correlations are the class of \textit{incompatible} correlations.} The problem is understandably stated ambiguously as it is not yet entirely clear how to distinguish between non-classical distributions on differing causal structures. In order to remove some of the ambiguity, consider the following refinements of the problem:
-    \begin{enumerate}[label=\textbf{R.\arabic*}]
-        \item \label{r:1} Find proofs for causal incompatibility of quantum distributions on the Triangle structure that are \textit{not} reliant on perfect correlations.
-        \item \label{r:2} Find incompatible quantum distributions on the Triangle structure that satisfy all Bell structure inequalities under Fritz-type embeddings.
-        \item \label{r:3} Find incompatible quantum distributions that require entanglement in more than one shared state.
-    \end{enumerate}
-    The remainder of this document focuses on a positive solution to \ref{r:1} but leaves \ref{r:2} and \ref{r:3} partially unanswered.
+    Upon reflection, the Fritz distribution can rightly be considered slightly manufactured. The phenomenology associated with Bell non-locality or Bell incompatibility are well understood; examining these distributions embedded in the Triangle structure offers no additional perspective onto the types of entanglement resources made accessible by quantum mechanics. Therefore, it is desirable to find incompatible quantum distributions that are qualitatively different than those previously considered for the Bell structure. Pursuant to this, \citet{Fritz_2012} presented the following problem~\cite[Problem 2.17]{Fritz_2012}:%TODO figure out best way to link to this problem
 
-    \section{Inflation Technique}
-    \label{sec:inflation_technique}
-    The \term{Inflation Technique}, invented by \citet{Inflation} and inspired by the \textit{do calculus} and \textit{twin networks} of \citet{Pearl_2009}, is a family of causal inference techniques that can be used to determine if a marginal model $\prob^{\mscenario}$ is compatible or incompatible with a given causal structure $\graph$. As a preliminary summary, the inflation technique begins by \textit{augmenting} a causal structure with additional copies of its nodes, producing an \textit{inflated} causal structure, and then exposes how causal inference tasks on the inflated causal structure can be used to make inferences on the original causal structure. As a example, inflations of the Triangle structure are depicted in \cref{fig:inflations}. Copies of nodes in the inflated causal structure are distinguished by an additional subscript called the \term{copy-index}. For example node $A$ of \cref{fig:triangle_structure} has copies $A_1, A_2, A_3, A_4$ in the \textit{Web inflation} of \cref{fig:the_web_inflation}. All such copies are deemed equivalent via a \term{copy-index equivalence} relation denoted `$\sim$'. A copy-index is effectively arbitrary, so we will refer to an arbitrary inflated copy of $A$ as $A'$.
-    \[ A \sim A_1 \sim A' \not\sim B \sim B_1 \sim B' \]
-    We preemptively generalize the notion of copy-index equivalence to other mathematical objects like sets, graphs, and groups by saying that $X \sim Y$ if and only if $X = Y$ upon removal of the copy-index. Equipped with the common graph-theoretic terminology and notation of \cref{def:graph_terms}, an inflation can be formally defined as follows:
-    \begin{definition}
-        An \term{inflation} of a causal structure $\graph$ is another causal structure $\graph'$ such that:
-        \[ \forall n' \in \nodes': \AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \eq \label{eq:inflation_defn}\]
-        Verbally, for each inflated node $n'$, the ancestral sub-graph of $n'$ in $\graph'$ is equivalent to its counterpart in $\graph$ up to copy-index.
-    \end{definition}
-    The motivation behind this definition is that if the ancestry of each node $n'$ in $\graph'$ plays the \textit{exact same} role as the ancestry of its source copy $n$ in $\graph$, then every compatible joint distribution $\prob[\nodes]$ on $\graph$ can be used to \textit{create} compatible joint distributions on $\graph'$.
+    \term{Fritz's Problem}: Find an example of non-classical quantum correlations in the Triangle structure together with a proof of its non-classicality which does not hinge on Bell’s theorem.\footnote{In the way Fritz defines, \textit{non-classical} correlations are the class of \textit{incompatible} correlations.}
 
-    To do this, first notice that every compatible joint distribution $\prob[\nodes]$ uniquely defines a set of causal parameters for $\graph$. It is possible to obtain these causal parameters by computing the single-variable marginal distributions of $\prob[\nodes]$,
-    \[ \forall n \in \nodes : \prob[n\mid \Pa[\graph]{n}] = \sum_{\nodes \setminus n} \prob[\nodes] \eq \label{eq:unique_causal_parameters}\]
-    Now it is possible to make use of the inflation criteria (\cref{eq:inflation_defn}) which at least enforces that $\Pa[\graph']{n'} \sim \Pa[\graph]{n}$. From this, one can create a set of \term{inflated causal parameters} using \cref{eq:unique_causal_parameters},
-    \[ \forall n' \in \nodes' : \prob[n'\mid \Pa[\graph']{n'}] \defined \prob[n\mid \Pa[\graph]{n}] \eq \label{eq:inflated_causal_parameters} \]
-    Which in turn uniquely defines a compatible joint distribution $\prob[\nodes']$ on $\graph'$\footnote{Of course, there exists compatible joint distributions on $\nodes'$ that can not be constructed in this manner. The claim is that all joint distributions that are constructed in this way are compatible.}.
-    \[ \prob[\nodes'] = \prod_{n' \in \nodes'} \prob[n'\mid \Pa[\graph']{n'}] \eq \label{eq:unique_causal_parameters_inflated}\]
-    Together, \cref{eq:unique_causal_parameters,eq:inflated_causal_parameters,eq:unique_causal_parameters_inflated} form the \term{weak inflation lemma}: compatible joint distributions over $\nodes$ induce compatible joint distributions over $\nodes'$. Before generalizing to the inflation lemma, a careful observation needs to be made. For any pair of subsets of nodes $N \subseteq \nodes$ and $N' \subseteq \nodes'$ that are equivalent up to copy-index $N \sim N'$, if $\AnSub[\graph]{N} \sim \AnSub[\graph']{N'}$ then any compatible \textit{marginal} distribution $\prob[N]$, where $N \subset \nodes$, induces a compatible marginal distribution $\prob[N']$ over $N'$. In fact, $N'$ must contain no duplicate nodes up to copy index and thus $\prob[N] = \prob[N']$. These subsets of nodes are so essential to the Inflation Technique they are assigned a special name: sets $N' \subseteq \nodes'$ as called the \term{injectable sets} of $\graph'$ and $N \subset \nodes$ the \term{images of the injectable sets} of $\graph$.
-    \begin{align*}
-        \Inj[\graph]{\graph'} &\defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : N \sim N'} \\
-        \ImInj[\graph]{\graph'} &\defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : N \sim N'}
-    \end{align*}
-    Injectable sets are incredibly useful for causal compatibility because they allow one to extend the weak inflation lemma to \textit{the} inflation lemma:
-    \begin{lemma}
-        \label[lemma]{lem:inflation}
-        \term{The Inflation Lemma}~\cite[Lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$ and a marginal model $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ compatible with $\graph$ then all marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
-    \end{lemma}
-    Diagrammatically, \cref{lem:inflation} can be visualized as follows:
+    Understandably, Fritz's Problem is stated ambiguously as it is not yet entirely clear how to distinguish between non-classical distributions on differing causal structures. The remainder of this paper focuses on our advancement toward solving Fritz's Problem. \Cref{sec:conclusions} proposes three refinements of Fritz's Problem which are to be labeled \ref{r:1},\ref{r:2} and \ref{r:3} respectively. Specifically, \ref{r:1} embodies the degree in which the results of \cref{sec:found_inequalities} solve Fritz's problem while \ref{r:2} and \ref{r:3} characterize interpretations of Fritz's Problem that remain partially solved.
 
-    \begin{center}
-        \begin{tikzpicture}
-            \pgfmathsetmacro{\vs}{2.2};
-            \pgfmathsetmacro{\hs}{5.2};
-            \draw (0*\hs,0*\vs) node[](pn){$\underbrace{\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}}_{\text{compatible with $\graph$}}$};
-            \draw (1*\hs,0*\vs) node[](cp){$\bc{\prob[n\mid \Pa[\graph]{n}] \mid n \in \nodes}$};
-            \draw (1*\hs,-1*\vs) node[](cp_){$\bc{\prob[n'\mid \Pa[\graph']{n'}] \mid n' \in \nodes'}$};
-            \draw (0*\hs,-1*\vs) node[](pn_){$\underbrace{\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}}_{\text{compatible with $\graph'$}}$};
-            \draw[very thick, ->] (pn) -- (cp);
-            \draw[very thick, ->] (cp) -- (cp_) node [midway, above, sloped]{{\footnotesize define}};
-            \draw[very thick, ->] (cp_) -- (pn_);
-        \end{tikzpicture}
-    \end{center}
-
-    The inflation lemma is the most important result of the causal inflation technique. The contrapositive version of \cref{lem:inflation} is a powerful tool for deriving causal compatibility constraints. Any causal compatibility constraint, such as a causal compatibility inequality, that constrains injectable marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ can be \textit{deflated} into a valid compatibility constraint on marginal models $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ of the original causal structure by dropping all references to the copy-indices. Additionally, the inflation lemma holds when considering any subset of $\Inj[\graph]{\graph'}$ (analogously $\ImInj[\graph]{\graph'}$). Therefore, one only needs to consider injectable sets that are composed of \textit{observable nodes}.
-
-    Heretofore, the Inflation Technique as stated by \cref{lem:inflation} does not facilitate the derivation of any non-trivial inequalities. The Inflation lemma simply casts causal inference problems on $\graph$ to causal inference problems on $\graph'$. Fortunately, an inflated causal structure $\graph'$ possesses its own conditional independence relations which can be exploited to turn linear inequalities on $\graph'$ into polynomial inequalities on $\graph$.
-
-    Suppose that one were to obtain an inequality on $\graph'$ that contained probabilistic terms such as $\prob[N']$ where $N' \not \in \Inj[\graph]{\graph'}$. At this point, the Inflation lemma is not applicable because it requires probabilistic constraints to consist entirely of distributions $\prob[N']$ where $N'$ is injectable. If for example, $N' \not \in \Inj[\graph]{\graph'}$ could be partitioned into two injectable subsets $N_1' \in \Inj[\graph]{\graph'}$ and $N_2' \in \Inj[\graph]{\graph'}$ that where \term{ancestrally independent} in $\graph'$,
-    \[ N_1' \ancestralindep N_2' \iff \An[\graph']{N_1'} \cap \An[\graph']{N_2'}= \emptyset \]
-    Then the compatible marginal context $\prob[N']$ must be probabilistically separable $\prob[N'] = \prob[N_1']\prob[N_2']$ due to \cref{eq:local_markov_property}. Since $N_1'$ and $N_2'$ are both injectable, the inflation lemma now applies and the original inequality can be deflated.
-
-    \begin{center}
-        \begin{tikzpicture}[scale=0.8]
-            \pgfmathsetmacro{\hs}{1.4};
-            \pgfmathsetmacro{\vs}{0.6};
-            \pgfmathsetmacro{\cross}{0.2};
-            \draw (0*\hs, 4*\vs) node[](a){$\prob[N']$};
-            \draw (0*\hs, 2*\vs) node[](ab){$N' \not \in \Inj[\graph]{\graph'}$};
-            \draw (4*\hs, 4*\vs) node[](c){$\prob[N_1']\prob[N_2']$};
-            \draw (2*\hs, 4*\vs) node[](ac){$N_1' \ancestralindep N_2'$};
-            \draw (2*\hs, 4*\vs + 0.7*\vs) node[]{$N_1' \cup N_2' = N$};
-            \draw (4*\hs, 2*\vs) node[](cd){$N_1', N_2' \in \Inj[\graph]{\graph'}$};
-            \draw (4*\hs, 0*\vs) node[](d){$\prob[N_1]\prob[N_2]$};
-            \draw (0, 0) node[](b){??};
-            \draw[thick, ] (a) -- (ab);
-            \draw[thick, ] (c) -- (cd);
-            \draw[thick, ] (a) -- (ac);
-            \draw[thick, ->] (ac) -- (c);
-            \draw[thick, ->] (ab) -- (b);
-            \draw[thick, ->] (cd) -- (d);
-            \draw[very thick, red]
-            (+ \cross, 1*\vs + \cross) -- (- \cross, 1*\vs - \cross)
-            (+ \cross, 1*\vs - \cross) -- (- \cross, 1*\vs + \cross)
-            ;
-        \end{tikzpicture}
-    \end{center}
-
-    Not all sets $N' \subseteq \nodes'$ can be written as the disjoint union of injectable sets, but those that can are called the \term{pre-injectable sets}. A set $N' \subseteq \nodes'$ is a pre-injectable set if it can be decomposed into the disjoint union of injectable sets $N' = \coprod_{i} N'_i \mid N'_i \in \Inj[\graph]{\graph'}$ and all pairs $N_i', N_j'$ are ancestrally independent: $\forall i, j : N_i' \ancestralindep N_j'$.
-
-    A pre-injectable set $N'$ is of primal importance to the inflation technique because any distribution over $N'$ will factorize according to graphical $d$-separation conditions~\cite{Pearl_2009},
-    \[ \prob[N'] = \prob[\coprod_i N'_i] = \prod_{i}\prob[N'_i] \]
-    Application of the inflation lemma to linear inequalities constraining pre-injectable distributions $\prob[N']$ transforms those inequalities into polynomial inequalities over the injectable distributions, allowing one to replace all terms with probability distributions defined over variables in $\nodes$. Throughout the body of this work, we let $\PreInj[\graph]{\graph'}$ denote the set of all pre-injectable sets. Naturally, the pre-injectable sets will define a marginal scenario $\mscenario$ that in \cref{sec:deriving_inequalities} will be used to derive compatibility inequalities\footnote{Analogously for a marginal scenario $\mscenario$, the pre-injectable sets $\PreInj[\graph]{\graph'}$ form an \textit{abstract simplicial complex}. Therefore, in practice, it is completely sufficient to focus on the maximal pre-injectable sets}.
-
-    \begin{center}
-    \begin{figure}
-    \begin{subfigure}[b]{.45\linewidth}
-    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure_cut}}
-    \caption{The Cut inflation}\label{fig:cut_inflation}
-    \end{subfigure}
-    \begin{subfigure}[b]{.45\linewidth}
-    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral}}
-    \caption{The Spiral inflation}\label{fig:spiral_inflation}
-    \end{subfigure}
-
-    \begin{subfigure}[b]{.45\linewidth}
-    \scalebox{1.0}{\input{../../figures/causal_structures/inflated_triangle_structure_wagon_wheel}}
-    \caption{The Wagon-Wheel inflation}\label{fig:wagon_wheel_inflation}
-    \end{subfigure}
-    \begin{subfigure}[b]{.45\linewidth}
-    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure}}
-    \caption{The Web Inflation}\label{fig:the_web_inflation}
-    \end{subfigure}
-    \caption{Some inflations of the Triangle structure.}
-    \label{fig:inflations}
-    \end{figure}
-    \end{center}
-
-    \section{Deriving Inequalities}
-    \label{sec:deriving_inequalities}
-
-    In \cref{sec:causal_compatibility}, we defined the notion of a causal compatibility inequality without providing a means for deriving/computing them. This section aims to delineate algorithms and methods that can be used to derive causal compatibility inequalities for generic causal inference problems. Recalling the definition of causal compatibility presented in \cref{sec:compatibility}, a marginal model $\prob^{\mscenario}$ is compatible with a causal structure $\graph = \br{\nodes, \edges}$ if it can be recovered from a series of operations. First choose a set of causal parameters $\bc{\prob[n\mid\Pa[\graph]{n}] \mid n \in \nodes}$ and then construct a joint distribution $\prob[\nodes] = \prod_{n \in \nodes} \prob[n \mid \Pa[\graph]{n}]$ over all nodes $\nodes$ (this step is \cref{eq:local_markov_property_operation}). Afterwards, each marginal distribution $\prob[V] \in \mscenario$ should be recoverable from a marginalization over $\prob[\nodes]$ (this step is the combination of \cref{eq:observable_marginalization,eq:context_marginalization}). Intuitively, these two requirements for a compatible marginal model $\prob^{\mscenario}$ provide two necessary components of compatibility:
-    \begin{enumerate}
-        \item The marginal model $\prob^{\mscenario}$ must admit a joint distribution $\prob[\nodes]$ (\cref{eq:observable_marginalization,eq:context_marginalization}).
-        \item The joint distribution $\prob[\nodes]$ must satisfy the Markov separability criteria (\cref{eq:local_markov_property_operation}).
-    \end{enumerate}
-    In practice, this is the natural order in which to classify the compatibility of a marginal model $\prob^{\mscenario}$. First check if the marginal model admits a joint distribution and if and only if it does, determine whether or not the local Markov property can be satisfied for some choice of causal parameters. Intuitively, there are two reasons why a given marginal model $\prob^{\mscenario}$ would be deemed incompatible. One possibility is that the marginal model $\prob^{\mscenario}$ does not admit a joint distribution $\prob[\nodes]$. Alternatively, it could be possible that a joint distribution $\prob[\nodes]$ exists but can not factor into causal parameters as per \cref{eq:local_markov_property_operation}.
-
-    Colloquially, the first necessary condition, namely the existence (or non-existence) of a joint distribution, is referred to as \term{the marginal problem}. The marginal problem asks: given a marginal model $\prob^{\mscenario} = \bc{\prob[V] \mid V \in \mscenario}$ marginal to the joint variables $\jointvar = \bigcup_{V \in \mscenario} V$, does there exist a joint distribution $\prob[\jointvar]$ such that each context $\prob[V]$ can be obtained by marginalizing $\prob[\jointvar]$?
-    \[ \forall V \in \mscenario : \prob[V] = \sum_{\jointvar \setminus V} \prob[\jointvar] \eq \label{eq:def:marginal_problem}\]
-    Note that we have changed notation from the nodes of a causal structure $\nodes$ to a joint set of variables $\jointvar$. This is done simply because the marginal problem is well-defined independent of a given causal structure. In fact, if a marginal model $\prob^{\mscenario}$ does not admit a joint distribution, then it cannot be compatible with \textit{any} causal structure whatsoever. A marginal model is said to be \textit{contextual} if it \textit{does not} admit a joint distribution and \textit{non-contextual} otherwise. The marginal problem has applications to numerous areas of mathematics including game theory~\cite{Vorobev_1962}, database theory, knowledge integration of expert system, and of course, quantum information theory~\cite{Fritz_2011}.
-
-    The marginal problem is distinct from the second necessary condition, which we term the \term{Markov separability problem} in numerous ways. First of all, the marginal problem as applied to causal inference tasks is only concerned with the observable variables $\nodes_{O}$ of $\graph$. This differs from the Markov separability problem which depends directly on the entire graphical structure of $\graph$ and thus must include the latent variables $\nodes_{L}$. The purpose of latent variables is to have unspecified behavior which makes checking the local Markov property exceedingly difficult in comparison to the marginal problem. Secondly, \cref{eq:def:marginal_problem} is inherently a linear system of constraints which be solved rather efficiently using linear programs (to be discussed in \cref{sec:marginal_linear}). The local Markov property concerns itself with probabilistic independence constraints which are polynomial. Fortunately, the Inflation Technique (summarized in \cref{sec:inflation_technique}) is able to cast (at least partially) the Markov separability problem as a marginal problem over an inflated causal structure. As such the Inflation Technique in many ways can be considered a relaxation technique which turns polynomial constraints into linear constraints.
-
-    In consideration of these observations, we will now endeavor to discuss how causal compatibility inequalities can be derived by casting the marginal problem as a linear program. After doing, it becomes possible to discuss existing methods for deriving constraints on the set of contextual marginal models.
-
-    \subsection{The Marginal Problem as a Linear Program}
-    \label{sec:marginal_linear}
-
-    Heretofore, our discussions of compatibility and the marginal problem have been general in the sense of making no reference to the nature the random variables $v \in \jointvar$. In particular, whether the outcomes of $v$ are discrete or continuous, finite or unbounded, or otherwise. In the case of infinite outcomes, the marginal problem can be used to derive entropic inequalities defined over the mutual information between variables $v \in \jointvar$~\cite{Fritz_2011}. Entropic inequalities however have been shown to be less constraining than inequalities defined over variables with finite cardinality~\cite{Inflation}. Throughout this document, we restrict our attention to finite outcomes. To assist with the subsequent analysis, we recall some familiar notions of probability theory.
-
-    \subsubsection{Events \& Outcomes}
-    To every discrete random variable $v$ there corresponds a prescribed set of \term{outcomes} $O_v$. We also define the set of all \term{events over $v$} $\Events{v}$\footnote{In the language of sheaf-theory, $\Events{v}$ is the \textit{sheaf of events}~\cite{Abramsky_2011}.} to be the set of all functions $s : \bc{v} \to O_v$ each representing the event that a measurement on $v$ was made where $s\br{v} \in O_v$ was observed.
-    \[ \Events{v} \defined \bc{s : \bc{v} \to O_v} \]
-    Evidently, $\Events{v}$ and $O_v$ have a one-to-one correspondence and this distinction can be confounding. There is rarely any harm in referring synonymously to either as outcomes. Nonetheless, a sheaf-theoretic treatment of contextuality~\cite{Abramsky_2011} demands the distinction.
-    Specifically for this work, the distinction becomes essential for our discussion and exploit of marginal symmetries in \cref{sec:symmetric_inequalities}. As a natural generalization we define the event over a collection of random variables $V = \bc{v_1, \ldots, v_n}$ in a parallel manner,
-    \[ \Events{V} \defined \bc{s: V \to O_{V} \mid \forall i : s\br{v_i} \in O_{v_i} } \eq \label{eq:outcome_space}\]
-    Each event $s$ can be compactly represented as a set of mappings over each element of $V$.
-    \[ s = \bc{v_1 \mapsto s\br{v_1}, \ldots, v_k \mapsto s\br{v_k}} = \bc{v_i\mapsto s\br{v_i}}_{i = 1}^{k} \]
-    The domain $\Dom{s}$ of an event $s$ is the set of random variables it valuates, i.e. if $s \in \Events{V}$, then $\Dom{s} = V$. Under this framework, a probability distribution $\prob[V]$ can be considered as a map from $\Events{V}$ to the unit interval $\bs{0,1}$.
-    \begin{example}
-        Let $s \in \Events{V}$ be an event over $V$, a probability distribution $\prob[V]$ over $V$ will assign a non-negative probability $\prob[V][s]$ to $s$. Let $V = \bc{v_1, v_2}$ with each $v \in V$ having $3$ distinct outcomes $O_v = \bc{0,1,2}$. Furthermore let $f \in \Events{V}$ be the event $\br{v_1 \mapsto 2, v_2 \mapsto 1}$. The following notations are interchangeable,
-        \[ \prob[][s] = \prob[\Dom{s}][s] = \prob[V][s] = \prob[v_1, v_2][s] = \prob[][v_1 \mapsto s_1\br{v_1}, v_2 \mapsto s_2\br{v_2}] = \prob[][v_1 = 2, v_2 = 1] = \prob[v_1v_2][21] \]
-        Each of which should be read as ``the probability that $v_1$ got outcome $2$ and $v_2$ got outcome $1$''
-    \end{example}
-    The marginal problem inherently depends on the concept of probabilistic marginalization. This concept can be understood at the level of events; one event $s \in \Events{V}$ can be ``marginalized'' or restricted to a smaller event $s' \in \Events{W}$ whenever $W \subseteq V$.
-    \begin{definition}
-    \label{def:section_restriction}
-    For every $W \subseteq V$ and $s \in \Events{V}$, the \term{restriction of $s$ onto $W$} (denoted $s|_{W} \in \Events{W}$) is the event in $\Events{W}$ that \textit{agrees} with each of $s$'s assignments for variables in $W$.
-    \[ \forall v \in W : s|_{W}\br{v} = s\br{v} \]
-    \end{definition}
-    % \begin{definition}
-    % \label{def:section_compatible}
-    % The events $s_{V} \in \Events{V}$ and $s_{W} \in \Events{W}$ are said to be \term{compatible} events if they agree on their valuations of $V \cap W$. Compatibility will be denoted with the infix `$\com$'.
-    % \[ s_{V} \com s_{W} \iff {s_{V}}|_{V\cap W} = {s_{W}}|_{V\cap W} \]
-    % \end{definition}
-    % \begin{definition}
-    % \label{def:section_extendable}
-    % It $s_V \in \Events{V}$ and $s_W \in \Events{W}$ compatible events and $W \subseteq V$ then $s_W$ is said to be \term{extendable} to $s_V$. Extendability will be denoted with the infix `$\ext$'.
-    % \[ s_W \ext s_V \iff s_W \com s_V, W \subseteq V \]
-    % Extendability is dual to the notion of a \term{restriction} of $s_V$; $s_V$ can be restricted to $s_W$ ($s_V \res s_W$) if and only if $s_W$ is extendable to $s_V$.
-    % \end{definition}
-
-    % \begin{remark}
-    %     The notation `$s \com t$' is used to indicate compatibility between $s \in \Events{V}$ and $t \in \Events{W}$ because of the following observation: $s$ and $t$ are compatible if and only if they are extensions of some event $r \in \Events{V \cap W}$.
-    %     \[ s \com t \iff \exists r \in \Events{V \cap W} \mid s \res r \ext t \]
-    %     In fact $r$ is uniquely defined.
-    %     \[ \forall v \in V \cap W : r\br{v} = s\br{v} = t\br{v} \]
-    % \end{remark}
-
-    For every marginal scenario $\mscenario = \bc{V_1, \ldots, V_k}$, it is useful to put special emphasis on the \term{joint events} $\Events{\jointvar}$ which represent all possible global events over the entire set of joint variables. Similarly, we define the \term{context events} for a particular context $V \in \mscenario$ as $\Events{V}$. Finally, we elect to define the \term{marginal events} as the disjoint union of all context events and by an abuse of notation we will denote this disjoint union as $\Events{\mscenario}$.
-    \[ \Events{\mscenario} = \coprod_{V \in \mscenario} \Events{V} \]
-    Each marginal section $m \in \Events{\mscenario}$ has a domain $\Dom{m} = V$ for some $V \in \mscenario$. By construction each marginal event $m \in \Events{\mscenario}$ is a restriction of some joint event $j \in \Events{\jointvar}$.
-    \subsubsection{Linear Programs}
-    \label{sec:linear_programs}
-    The marginalization operation (\cref{eq:def:marginal_problem}) of the marginal problem is a linear operator. This linear operator maps a joint probability distribution $\prob[\jointvar] : \Events{\jointvar} \to \bs{0,1}$ into a marginal model $\prob^{\mscenario} = \bc{\prob[V] : \Events{V} \to \bs{0,1} \mid V \in \mscenario}$. Since $\Events{\mscenario}$ and $\Events{\jointvar}$ are finite, the marginal problem can be casted as a $\abs{\Events{\mscenario}} \times \abs{\Events{\jointvar}}$ matrix.
-
-    \begin{definition}
-        \label{def:incidence_matrix}
-        The \term{incidence matrix} $M$ for a marginal scenario $\mscenario = \bc{V_1, \dots, V_k}$ is a bit-wise matrix where the columns are indexed by \textit{joint} events $j \in \Events{\jointvar}$ and the rows are events by \textit{marginal} events $m \in \Events{\mscenario}$. The entries of $M$ are populated whenever a marginal event $m$ is a restriction of the joint event $j$.
-        \[ M_{m,j} \defined \begin{cases}
-            1 & m = j|_{\s{D}\br{m}} \\
-            0 & \text{otherwise}
-        \end{cases} \]
-        The incidence matrix has $\abs{\Events{\jointvar}}$ columns, $\abs{\Events{\mscenario}} = \sum_{i} \abs{\Events{V_i}}$ rows and $k\abs{\Events{\jointvar}}$ non-zero entries.
-    \end{definition}
-    To illustrate this concretely, consider the following example:
-    \begin{example}
-        \label{ex:incidence_matrix}
-        Let $\jointvar$ be $3$ binary variables $\jointvar = \bc{A,B,C}$ and $\mscenario$ be the marginal scenario $\mscenario = \bc{\bc{A,B}, \bc{B,C}, \bc{A,C}}$. The incidence matrix becomes:
-        \[ M = \kbordermatrix{
-            (A,B,C) \:\: \mapsto & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
-            (A\mapsto0, B\mapsto0) & \kone & \kone & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer \\
-            (A\mapsto0, B\mapsto1) & \kzer & \kzer & \kone & \kone & \kzer & \kzer & \kzer & \kzer \\
-            (A\mapsto1, B\mapsto0) & \kzer & \kzer & \kzer & \kzer & \kone & \kone & \kzer & \kzer \\
-            (A\mapsto1, B\mapsto1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kone \\
-            (B\mapsto0, C\mapsto0) & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer \\
-            (B\mapsto0, C\mapsto1) & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer \\
-            (B\mapsto1, C\mapsto0) & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer \\
-            (B\mapsto1, C\mapsto1) & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone \\
-            (A\mapsto0, C\mapsto0) & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer & \kzer \\
-            (A\mapsto0, C\mapsto1) & \kzer & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer \\
-            (A\mapsto1, C\mapsto0) & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone & \kzer \\
-            (A\mapsto1, C\mapsto1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone
-        } \eq \label{eq:example_incidence}\]
-    \end{example}
-    The incidence matrix needs to act (to the right) on a vector representing the joint probability $\prob[\jointvar]$ distribution and output a vector representing the marginal model $\prob^{\mscenario}$.
-    \begin{definition}
-        The \term{joint distribution vector} $\probvec^{\jointvar}$ for a probability distribution $\prob[\jointvar]$ is the vector whose entries are the positive, real-valued probabilities that $\prob[\jointvar]$ assigns to each joint event $j \in \Events{\jointvar}$. $\probvec^{\jointvar}$ shares the same indices as the \textit{column} indices of $M$.
-        \[ \forall j \in \Events{\jointvar} : \probvec^{\jointvar}_j = \prob[\jointvar][j] \]
-    \end{definition}
-    \begin{definition}
-        Analogously, \term{marginal distribution vector} $\probvec^{\mscenario}$ for a marginal model $\prob^{\mscenario} = \bc{P_{V_1}, \ldots, P_{V_k}}$ is the vector whose entries are probabilities over the set of marginal outcomes $\Events{\mscenario}$. $\probvec^{\mscenario}$ shares the same indices as the \textit{row} indices of $M$.
-        \[ \forall m \in \Events{\mscenario} : \probvec^{\mscenario}_m = \prob[\Dom{m}][m] \]
-    \end{definition}
-    By design, the marginal and joint distribution vectors are related via the incidence matrix $M$. Given a joint distribution vector $\probvec^{\jointvar}$ one can obtain the marginal distribution vector $\probvec^{\mscenario}$ by multiplying $M$ by $\probvec^{\jointvar}$.
-    \[ \probvec^{\mscenario} = M \cdot \probvec^{\jointvar} \eq \label{eq:incidence_matrix_use} \]
-    Because the marginal distribution vector $\probvec^{\mscenario}$ is simply another representation of the marginal model $\prob^{\mscenario}$, we will henceforth use the language interchangeably. This is likewise done so for the joint distribution (vector) $\prob[\jointvar]$ ($\probvec^{\jointvar}$). As a quick remark, the particular ordering of the rows and columns of $M$ carries \textit{no importance}, but it \textit{must} be consistent between $M$, $\probvec^{\jointvar}$ and $\probvec^{\mscenario}$. The marginal problem can now be rephrased in the language of the incidence matrix. Suppose one obtains a marginal distribution vector $\probvec^{\mscenario}$; the marginal problem becomes equivalent to the question:
-    \textit{Does there exist a joint distribution vector $\probvec^{\jointvar}$ such that \cref{eq:incidence_matrix_use} holds?}
-
-    The marginal problem can sometimes take on a more general variant that does not begin with a specific marginal model~\cite{Abramsky_2012,Mansfield_2012,Fritz_2011}: \textit{Given a marginal scenario $\mscenario$, what is the set of all non-contextual marginal models?} \citet{Pitowsky_1991} demonstrates that the set of non-contextual marginal models forms a \textit{convex} polytope called the \term{marginal polytope}. The extremal rays of a marginal polytope directly correspond to the columns of $M$ which correspond to each of the $\abs{\Events{\jointvar}}$ \textit{deterministic} joint distributions $\probvec^{\jointvar}$. Since all joint distributions $\probvec^{\jointvar}$ are probability distributions, their entries must sum to unity.
-    \[ \sum_{j \in \Events{\jointvar}} \probvec^{\jointvar}_j = 1 \]
-    This normalization defines the convexity of the polytope; all non-contextual marginal models are convex mixtures of the deterministic marginal models pursuant to \cref{eq:incidence_matrix_use}. The marginal polytope is a beneficial tool for understanding contextuality. First, the \textit{facets} of a marginal polytope correspond to a finite set of linear inequalities that are complete in the sense that all contextual distributions violate at least one facet inequality~\cite{Brunner_2013}. From the perspective of a marginal polytope, convex hull algorithms can be used to compute a representation of the complete set of linear inequalities and completely solve the marginal problem. Alternatively, one can completely characterize the separation between the space of contextual and non-contextual distributions by the system of inequalities associated with \cref{eq:incidence_matrix_use}. Explicitly,
-    \begin{equation} \label{eq:halfspace_rep_incidence}
-    \begin{alignedat}{2}
-        \forall m \in \Events{\mscenario} :&&\quad \probvec^{\mscenario}_m - {\sum}_{j} M_{m, j} \probvec^{\jointvar}_j &\geq 0 \\
-        \forall m \in \Events{\mscenario} :&&\quad -\probvec^{\mscenario}_m + {\sum}_{j} M_{m, j} \probvec^{\jointvar}_j &\geq 0 \\
-        \forall j \in \Events{\jointvar} :&&\quad \probvec^{\jointvar}_j &\geq 0
-    \end{alignedat}
-    \end{equation}
-    Geometrically \cref{eq:halfspace_rep_incidence} is a family of $2\abs{\Events{\mscenario}} + \abs{\Events{\jointvar}}$ half-planes bounding $\R^{\abs{\Events{\mscenario}}} \times \R^{\abs{\Events{\jointvar}}}$. However testing the contextuality of a marginal model $\probvec^{\mscenario}$ requires a collection of inequalities bounding just $\R^{\abs{\Events{\mscenario}}}$. Transforming \cref{eq:halfspace_rep_incidence} into the desired system of inequalities is the task of linear-quantifier elimination. A popular tool for linear quantifier elimination is \term{Fourier-Motzkin elimination} \cite{Dantzig_1973,Inflation,Abramsky_2012,jones_2004}. Applying the Fourier-Motzkin procedure to completely solve the marginal problem is discussed in more detail in \citet{Fritz_2011}. An excellent survey of existing techniques for solving the marginal problem including Equality Set Projection~\cite{jones_2004} and Hardy-type hypergraph transversals can be found in \citet{Inflation}. In conclusion, there are a number of computational tools available to solve the marginal problem completely whenever no marginal model is provided.
-
-    Each of the above mentioned techniques suffers from computational complexity limitations. For example, the Fourier-Motzkin procedure is in the worst case doubly exponential in the number of initial inequalities~\cite{Dantzig_1973}. For the purposes of this research, solving the marginal problem without reference to a marginal model was intractable. This will become apparent in \cref{sec:found_inequalities} when the inflation technique is applied to the Triangle structure, producing marginal models that are very large. Moreover, algorithms to partially solve the marginal problem such as Hardy-type hypergraph transversals were used to determine hundreds of thousands of causal compatibility inequalities for the Triangle structure; none of which were able to be violated quantumly using numerical optimizations. Therefore, simpler approaches to the marginal problem needed to be considered.
-
-    Luckily, the Fritz distribution (\cref{sec:fritz_distribution}) allows one to avoid the complexity issues of the complete marginal problem and instead focus on the original problem of determining where or not a particular marginal model admitted a joint distribution or not. This question is naturally framed as the following linear problem:
-
-    \begin{definition}
-        \label{def:marginal_linear_program}
-        \term{The Marginal Linear Program} is the following linear program:
-        \begin{alignat*}{2}
-            & \text{minimize:} \quad&& \emptyset \cdot x\\
-            & \text{subject to:} && x \succeq 0 \\
-            & && M \cdot x = \probvec^{\mscenario}
-        \end{alignat*}
-        If this ``optimization''\footnote{``Optimization'' is presented in quotes here because the minimization objective is trivially always zero ($\emptyset$ denotes the null vector of all zero entries). The primal value of the linear program is of no interest, all that matters is its \textit{feasibility}.} is \textit{feasible}, then there exists a vector $x$ than can satisfy \cref{eq:incidence_matrix_use} and is a valid joint distribution vector. Therefore feasibility implies that $\probvec^{\jointvar}$ exists and is precisely $x$. Moreover if the marginal linear program is \textit{infeasible}, then there \textit{does not} exist a joint distribution $\probvec^{\jointvar}$.
-    \end{definition}
-
-    To every linear program, there exists a dual linear program that characterizes the feasibility of the original~\cite{Schrijver_1998}. Constructing the dual linear program is straightforward~\cite{Lahaie_2008}.
-
-    \begin{definition}
-        \label{def:dual_marginal_linear_program}
-        \term{The Dual Marginal Linear Program}:
-        \begin{alignat*}{2}
-            & \text{minimize:} \quad&& y \cdot \probvec^{\mscenario}\\
-            & \text{subject to:} && y \cdot M \succeq 0
-        \end{alignat*}
-        Where $y$ is a real valued vector with the same length as $\probvec^{\mscenario}$.
-    \end{definition}
-
-    The dual marginal linear program not only answers the marginal problem for a specific marginal model $\probvec^{\mscenario}$ but as a by-product provides an inequality that witnesses its contextuality. If this is not obvious, first notice that the dual problem is \textit{never infeasible}; by choosing $y$ to be trivially the null vector $\emptyset$ of appropriate size, all constraints become satisfied. Secondly if the dual constraint $y \cdot M \succeq 0$ holds \textit{and} the primal is feasible, then the following must hold:
-    \[ y \cdot \probvec^{\mscenario} =  y \cdot M \cdot x \geq 0 \eq \label{eq:dual_marginal_ineq} \]
-    Therefore the \textit{sign} of the dual objective $d \defined \min \br{y \cdot \probvec^{\mscenario}}$ classifies a marginal model's contextuality. If $d < 0$ then \cref{eq:dual_marginal_ineq} is violated and therefore $\probvec^{\mscenario}$ is contextual. Likewise if $d \geq 0$ (satisfying \cref{eq:dual_marginal_ineq}), then $\probvec^{\mscenario}$ is non-contextual.\footnote{Actually, if $d \geq 0$ then it is exactly $d = 0$ due to the existence of the trivial $y = \emptyset$. This observation is an instance of the \textit{Complementary Slackness Property} of~\cite{Bradley_1977}. Moreover, if $d < 0$, then it is unbounded $d = -\inf$. This latter point becomes clear upon recognizing that for any $y$ with $d < 0$, another $y' = \al y$ can be constructed (with $\al > 1$) such that $d' = \al d < d$. Since a more negative $d'$ can always be found, it must be that $d$ is unbounded. This is a demonstration of the fundamental \textit{Unboundedness Property} of~\cite{Bradley_1977}; if the dual is unbounded, then the primal is infeasible.} This is manifestation of Farkas's lemma~\cite{Schrijver_1998}.
-
-    An \term{infeasibility certificate}~\cite{Andersen_2001} is any vector $y$ that satisfies the constraint of \cref{def:dual_marginal_linear_program} and also permits violation of \cref{eq:dual_marginal_ineq} for some marginal distribution vector $\probvec^{\mscenario}$.
-    \[ y \in \R^{\abs{\Events{\mscenario}}} : y \cdot M \succeq 0, \quad y \cdot \probvec^{\mscenario} < 0 \]
-    Most linear program software packages such as Mosek~\cite{Mosek_2016}, Gurobi~\cite{Gurobi_2016}, CPLEX~\cite{Cplex_2016} and CVX/CVX OPT~\cite{CVX_2016,CVX_Opt_2016} are capable of producing infeasibility certificates.
-    Furthermore, for every $y$ satisfying $y \cdot M \succeq 0$ there corresponds a \term{certificate inequality} that constraints the set of non-contextual marginal models. If $y$ is an infeasibility certificate, then all non-contextual marginal models $\probvec^{\mscenario}$ must satisfy \cref{eq:dual_marginal_ineq} making $y \cdot \probvec^{\mscenario} \geq 0$ a valid causal compatibility inequality.
-
-    \subsection{Triangle Structure Inequalities}
+    \section{Triangle Structure Inequalities}
     \label{sec:found_inequalities}
 
     Equipped with the Fritz distribution (\cref{sec:fritz_distribution}) and the inflation technique (\cref{sec:inflation_technique}), it is now possible to derive causal compatibility inequalities for the triangle that are violated by the Fritz distribution; the procedure for doing so is as follows. First select an inflation $\graph'$ of the Triangle structure $\graph$ and identify the maximal pre-injectable sets $\PreInj[\graph]{\graph'}$. These sets define the marginal scenario to be used in the Inflation Technique. Next, inflate the Fritz distribution into the pre-injectable sets as described by the Inflation lemma (\cref{lem:inflation}). Finally, obtain infeasibility certificates using some linear programing software and obtain a valid causal compatibility inequality that witnesses the Fritz distribution's incompatibility.
@@ -579,7 +313,7 @@
 
     In summary, these causal compatibility inequalities represent a completion of objective \cref{r:1} from \cref{sec:fritz_distribution}. These inequalities are derived without making use of Bell's theorem and instead use the Inflation Technique which is completely independent of Bell's theorems. Additionally, the derivation of causal compatibility inequalities allows one prove incompatibility even when perfect correlations are absent. Moreover, they allow one to probe the amount of noise the Fritz distribution can sustain before becoming compatible (see \cref{sec:violations_noise}). Unfortunately, infeasibility certificates are found by linear programing software to certify the infeasibility of a \textit{particular distribution}. This means that inequalities like \cref{eq:ww_ineq}, the one presented in \cref{sec:web_inequality}, and others are specifically manufactured in order witness a particular type of quantum non-classicality. In an effort to derive inequalities that could lead to potentially new forms of non-classicality, we searched for inequalities that did not admit biased towards the Fritz distribution.
 
-    \subsection{Symmetric Inequalities}
+    \section{Symmetric Inequalities}
     \label{sec:symmetric_inequalities}
 
     Quite surprisingly, it is possible to derive causal compatibility inequalities for the Triangle structure that are symmetric under the exchange of parties. This is done by grouping marginal events $m \in \Events{\mscenario}$ into orbits under the action of party exchange. Even more interestingly, these inequalities are violated by the Fritz distribution. This comes as a surprise because the Fritz distribution is \text{not} invariant under the exchange of parties; in fact the Fritz distribution is noticeably biased toward $C$.
@@ -637,7 +371,7 @@
 
     In the context of the Inflation technique, a variable symmetry $\Phi\br{\mscenario'}$ over an inflated marginal scenario $\mscenario'$ does not always correspond to a variable symmetry under deflation $\Phi\br{\mscenario}$. In order to derive deflated inequalities that are symmetric under an exchange of parties, it is required that $\Phi\br{\mscenario'} \sim \Phi\br{\mscenario}$ are equivalent up to copy-index.
 
-    For the Triangle structure, the variable permutation group is simply the set of permutations on $A, B, C$: $\Phi\br{\mscenario} = \Perm{A, B, C}$. For the Web inflation (\cref{fig:the_web_inflation}), we have obtained $\gp\br{\PreInj[\graph]{\graph'}}$ which is an order $48$ group with the following $4$ generators:
+    For the Triangle structure in particular, the variable permutation group is simply the set of permutations on $A, B, C$: $\Phi\br{\mscenario} = \Perm{A, B, C}$. For the Web inflation (\cref{fig:the_web_inflation}), we have obtained $\gp\br{\PreInj[\graph]{\graph'}}$ which is an order $48$ group with the following $4$ generators:
     \begin{equation*}
     \begin{aligned}[c]
     &\hspace{1mm}\varphi_1 \\
@@ -671,7 +405,7 @@
 
     \section{Violations \& Noise}
     \label{sec:violations_noise}
-    Causal compatibility inequalities for the Triangle structure (such as those derived in \cref{sec:deriving_inequalities}) offer an avenue into studying quantum non-classicality. In this section, we illuminate two tasks that can be performed in order to further understand the nature of quantum non-classical by using inequalities.
+    Causal compatibility inequalities for the Triangle structure (such as those derived in \cref{sec:deriving_inequalities}) offer an avenue into studying quantum non-classicality. In this section, we make use of two methods, exposure to noise and numerical optimization, to further understand the nature of quantum non-classicality in connection to compatibility inequalities.
 
     \subsection{Noise}
     \label{sec:noise}
@@ -745,7 +479,364 @@
     \[ \prob[\p{ABC}]\br{abc} = \bramidket{m_{\p{A},a}m_{\p{B},b}m_{\p{C},c}}{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm}{m_{\p{A},a}m_{\p{B},b}m_{\p{C},c}} \eq \label{eq:quantum_model_triangle_pvms}\]
 
     In order to parameterize all such distributions, we elect to parameterize the states and measurements separately. Although there are numerous techniques that can used when parameterizing quantum states and measurements~\cite{Petz_2015, Hedemann_2013,Fujii_2005,James_2001,Grasmair_2014,Neilsen_Chaung_2011}, a single technique is presented that was found to be most computationally suitable for our purposes.
-    \subsubsection{Unitary Group}
+    \subsection{Numerical Optimization Results}
+    \label{sec:results}
+
+    \Cref{sec:param_quantum_dist} expounded on how we elected to parameterized the space of quantum distributions that can be realized on the quantum Triangle structure (\cref{fig:triangle_structure_quantum_model}). Specifically, we make use of fully generic $4\times 4$ density matrices (bipartite qubit) for each shared resource and $4$-element projective measurements. For each inequality $I$, we define the relative violation $V_F$ to be maximum violation relative to the violation achieved by the Fritz distribution.
+    \[ V_F = \f{\min_{P}\bc{I\br{P}}}{I\br{P_F}} \]
+
+    The first inequality in consideration is $I_1$; the non-symmetric Web inflation inequality presented in \cref{sec:web_inequality}. At best, numerical optimizations converged to a distribution (\cref{fig:maximum_violation_I_1}) with relative violation $V_F \simeq 1.501$. Almost immediately, it is evident that \cref{fig:maximum_violation_I_1} closely resembles the Fritz distribution. In fact, \cref{fig:maximum_violation_I_1} and \cref{fig:fritz_distribution_visualized} share the exact same \textit{possibilistic structure} or set of possible events. What does this reveal about $I_1$ and non-classicality in the Triangle structure? This result is not entirely unexpected. As was mentioned in \cref{sec:found_inequalities}, these inequalities are derived specifically to show incompatibility of the Triangle structure. Consequently, it seems that $I_1$ only has the capacity to demonstrate incompatibility for a specific forms of non-classicality that resemble the Fritz distribution very closely.
+
+    \begin{figure}
+    \begin{center}
+            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/plotted_dist_I_1_max_violation_2017.pdf}
+            \caption{Probability distribution that maximizes violation of $I_1$ from \cref{sec:web_inequality} ($V_F \simeq 1.501$).}
+            \label{fig:maximum_violation_I_1}
+    \end{center}
+    \end{figure}
+
+    An alternative explanation has to do with the sensitively of the initial condition $\la_{\br{0}} = \br{\la_{\br{0}, 0}, \ldots, \la_{\br{0}, n}}$ in our optimization. In \cref{sec:param_quantum_dist}, it was shown that our parameter space of choice was $2\pi$-periodic in all entries. Somewhat surprisingly, when using a uniform seed for $\la_0$, all optimization methods consistently converged to inequality saturation instead of inequality violation which of course is achievable by the Fritz distribution. Instead, only initial seeds close enough to the \textit{Fritz parameters} $\la_{\br{\fritz}}$ (the parameters that induce the Fritz distribution using the quantum implementation in \cref{sec:fritz_distribution}) where able to achieve violation. To illustrate this graphically, we let the initial seed be a small Gaussian perturbation $\de \la$ away from $\la_{\br{\fritz}}$ in parameter space.
+    \[ \la_{\br{0}} = \la_{\br{\fritz}} + \de \la  \]
+    The Gaussian perturbation was given zero mean $\mu = 0$ and variance $\si^2 = \br{2 \pi 10^{\chi}}^2$ where $\chi$ measures an order of magnitude standard deviation. For $I_1$, deviations of $\chi \gtrsim 1.3$ inhibited convergence to violation. This is depicted in \cref{fig:initial_conditions}. Therefore, it is unclear whether or not our results share the same possibilistic structure as $\prob[\fritz]$ because of the inequality itself or the ill-conditioned nature of the optimization. Most likely, this phenomena is due to a combination of both effects.
+
+    \begin{figure}
+    \begin{subfigure}[t]{.48\linewidth}
+    {\centering\includegraphics[width=\linewidth]{../../figures/optimizations/Gaussian_Perturbation_Fritz_Color_Default.pdf}}
+    \caption{For each iteration step $k$, the inequality target decreases.}\label{fig:initial_conditions_a}
+    \end{subfigure}
+    \begin{subfigure}[t]{.48\linewidth}
+    {\centering\includegraphics[width=\linewidth]{../../figures/optimizations/Gaussian_Perturbation_Fritz_Color_Zoomed.pdf}}
+    \caption{\Cref{fig:noise} zoomed to show convergence is sensitive to initial conditions.}\label{fig:initial_conditions_b}
+    \end{subfigure}
+    \caption{Numerical optimizations aimed at violating causal compatibility inequalities are sensitive to initial conditions.}\label{fig:initial_conditions}
+    \end{figure}
+
+    The second inequality in consideration is $I_3$; the \textit{symmetric} Web inflation inequality presented in \cref{sec:symmetic_web_inequality}. This inequality was able to achieve a greater relative violation than $I_1$ as optimizations converged to a distribution (\cref{fig:maximum_violation_I_3}) with relative violation $V_F \simeq 2.61$. Just as before, the maximum violating distribution shares a possibilistic structure with the Fritz distribution. However, this result is far more surprising. Since the inequality is symmetric with respect to the exchange of parties $\varphi \in \Perm{A, B, C}$, one would naively expect that the maximum violating distribution is be symmetric as well. If it were not, one could construct a distribution that violates $I_3$ more by symmetrizing $\prob[\fritz]$ by summing over all possible permutations and normalizing. The symmetrized Fritz distribution is plotted in \cref{fig:symmetrized_fritz}. This distribution is also non-classical with relative violation $V_F = 3$. As it turns out, the symmetrized Fritz distribution is \textit{not} quantum-accessible in the sense that is cannot be written as \cref{eq:quantum_model_triangle}\footnote{At least numerical optimizations suggest this is the case.} Therefore we conclude that the space of quantum accessible correlations on the Triangle structure is non-convex; a reiteration of a result found in~\citet{Inflation}.
+    \begin{figure}
+    \begin{center}
+            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/plotted_dist_I_3_max_violation_2017.pdf}
+            \caption{Probability distribution that maximizes violation of $I_3$ from \cref{sec:symmetic_web_inequality} ($V_F \simeq 2.61$).}
+            \label{fig:maximum_violation_I_3}
+    \end{center}
+    \end{figure}
+    \begin{figure}
+    \begin{center}
+            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/symmetrized_fritz.pdf}
+            \caption{Symmetrized version of the Fritz distribution ($V_F \simeq 3$).}
+            \label{fig:symmetrized_fritz}
+    \end{center}
+    \end{figure}
+
+    Finally for both $I_0$ and $I_2$, the maximum relative violation happens to be $V_F = 1$ (up to numerical precision). This means that the Fritz distribution either represents a local minimum of the parameter space or is in fact \textit{the} maximally violating distribution. Without further investigations, it is unclear if this behavior is related to the universality of the Fritz distribution or if its an artifact of the methods used to derive $I_0$ and $I_2$.
+
+    \section{Conclusions}
+    \label{sec:conclusions}
+    In \cref{sec:triangle_structure}, we elucidated that compatibility in the Triangle structure has been an unsolved problem for nearly a decade. Initially,~\citet{Branciard_2012} identified the Triangle structure as a challenging causal structure for studying non-classicality. Afterwards,~\citet{Henson_2014} were able to to classify the Triangle structure as \textit{interesting} which partially explains why it remains an enigma. Recently,~\citet{Fritz_2012} discovered the Fritz distribution as the first example of quantum non-classicality in the Triangle structure. Heretofore, researchers have been able to derive causal incompatibility inequalities~\cite{Inflation,Steudel_2010,Henson_2014} but unable to show that any are non-trivial in the context of quantum non-classicality. In \cref{sec:fritz_distribution} the Fritz distribution was described in detail along with Fritz's Problem~\cite[Problem 2.17]{Fritz_2012}.
+
+    In \cref{sec:found_inequalities}, we presented the first examples of causal compatibility inequalities capable of having quantum violations in the sense that they are violated by quantum accessible distributions. This result was made possible through extensive use of the Inflation Technique (\cref{sec:inflation_technique}) when applied to the Fritz distribution. In the context of Fritz's Problem, our result corresponds to a resolution to the following refinement of Fritz's original Problem.
+    \begin{enumerate}[label=\textbf{R.\arabic*}]
+        \setcounter{enumi}{0}
+        \item \label{r:1} Find proofs for causal incompatibility of quantum distributions on the Triangle structure that are \textit{not} reliant on perfect correlations.
+    \end{enumerate}
+
+    Ultimately, this work accomplishes two important tasks. First and foremost, the derivation of inequalities such as \cref{eq:ww_ineq} demonstrates the utility of the Inflation technique specifically for quantum causal inference problems. The Inflation Technique was able to derive causal compatibility inequalities that admit quantum violations in the Triangle structure -- a task that no other existing techniques have succeeded at. In this sense, the results of \cref{sec:found_inequalities} showcase how the Inflation technique is capable of generating new proofs of causal incompatibility specifically of quantum distributions for the Triangle structure. Consequently, this work strongly indicates that the Inflation technique has the potential to solve a assortment of unsolved causal inference problems including those manifest in quantum foundations and quantum information theory. Secondly, \cref{sec:noise} demonstrates that the derived causal compatibility inequalities are robust to varying degrees of noise, directly revealing a critical departure from Fritz's original proof of the incompatibility of the Fritz's distribution (\cref{sec:fritz_distribution}) which relies on perfect (non-noisy) correlations. In conclusion \ref{r:1} has been positively solved through the derivation of inequalities such as \cref{eq:ww_ineq} and those found in \cref{sec:web_inequalities}.
+
+    In consideration of out resolution to \ref{r:1}, we additionally propose two more refinements to Fritz's Problem that are concerned more with the nature of the entanglement resource being exploited in a incompatible quantum distribution:
+    \begin{enumerate}[label=\textbf{R.\arabic*}]
+        \setcounter{enumi}{1}
+        \item \label{r:2} Find incompatible quantum distributions on the Triangle structure that require entanglement in more than one shared state.
+        \item \label{r:3} Find incompatible quantum distributions on the Triangle structure that satisfy all Bell structure inequalities under Fritz-type embeddings.
+    \end{enumerate}
+
+    Fritz's Problem is concerned with identifying incompatible quantum distributions in the Triangle structure that are qualitatively different than the non-classical distributions of the Bell structure discussed in \cref{sec:bell_structure}. When specifically concerned with entanglement resources, Bell structure non-classicality exploits the entanglement of a single bipartite quantum state. In the Triangle structure, the observable nodes $A,B,C$ have access to potentially three different bipartite quantum states. As noted in \cref{sec:fritz_distribution}, the Fritz distribution can be implemented using only a single entangled state\footnote{Of course there exists implementations that make use of three entangled states but at minimum only one is necessary.}. The question, as proposed by \ref{r:2}, remains: does there exist incompatible quantum distributions that genuinely require the entanglement resources of three states? Finding such distributions would affirmatively demonstrate a new form of entanglement resource distinct to the Triangle structure. Moreover \ref{r:3} is justified as a valid interpretation of Fritz's Problem in the following sense: the Fritz distribution was constructed by embedding a quantum distribution incompatible with the Bell structure (\cref{fig:bell_scenario}) into the Triangle structure via the re-imagined version of the Triangle scenario (\cref{fig:triangle_structure_with_fritz_bell_embedded}). Furthermore, the logic of \cref{sec:fritz_distribution} shows that \textit{any} Bell structure compatibility inequality can be upgraded to a compatibility inequality for the Triangle structure, provided one restricts the domain of those inequalities to distributions possessing appropriate perfect correlations. Suppose one relaxed that restriction, then it becomes qualitatively reasonable to associate incompatibility via violations of upgraded inequalities with the same variety of incompatibility that is familiar in the Bell structure. Therefore, satisfying all such upgraded inequalities is a sufficient condition for a new type of incompatibility that is genuinely distinct from Bell structure incompatibility. In summary, it remains unclear whether or not \ref{r:1} or \ref{r:2} is a harder problem or if either is even feasible.
+
+
+
+    \section*{Acknowledgments}
+    T.C. Fraser would like to thank E. Wolfe for his excellent guidance and mentor-ship throughout the duration of this research project. Moreover, T.C. Fraser would like to thank the Perimeter Institute for financing this research and providing access to much needed computational resources.
+    \clearpage
+    \bibliography{references}
+
+    \clearpage
+    \appendix
+
+    \section{Summary of Inflation Technique}
+    \label{sec:inflation_technique}
+
+    \subsection{Satisfaction of d-Separation Relations}
+    \todo[TC]{Absorb the relevant components of the next section into this one}
+
+    \subsection{Marginal Satisfiability and Inequalities}
+    \label{sec:deriving_inequalities}
+
+    In \cref{sec:causal_compatibility}, we defined the notion of a causal compatibility inequality without providing a means for deriving/computing them. This section aims to delineate algorithms and methods that can be used to derive causal compatibility inequalities for generic causal inference problems. Recalling the definition of causal compatibility presented in \cref{sec:compatibility}, a marginal model $\prob^{\mscenario}$ is compatible with a causal structure $\graph = \br{\nodes, \edges}$ if it can be recovered from a series of operations. First choose a set of causal parameters $\bc{\prob[n\mid\Pa[\graph]{n}] \mid n \in \nodes}$ and then construct a joint distribution $\prob[\nodes] = \prod_{n \in \nodes} \prob[n \mid \Pa[\graph]{n}]$ over all nodes $\nodes$ (this step is \cref{eq:local_markov_property_operation}). Afterwards, each marginal distribution $\prob[V] \in \mscenario$ should be recoverable from a marginalization over $\prob[\nodes]$ (this step is the combination of \cref{eq:observable_marginalization,eq:context_marginalization}). Intuitively, these two requirements for a compatible marginal model $\prob^{\mscenario}$ provide two necessary components of compatibility:
+    \begin{enumerate}
+        \item The marginal model $\prob^{\mscenario}$ must admit a joint distribution $\prob[\nodes]$ (\cref{eq:observable_marginalization,eq:context_marginalization}).
+        \item The joint distribution $\prob[\nodes]$ must satisfy the Markov separability criteria (\cref{eq:local_markov_property_operation}).
+    \end{enumerate}
+    In practice, this is the natural order in which to classify the compatibility of a marginal model $\prob^{\mscenario}$. First check if the marginal model admits a joint distribution and if and only if it does, determine whether or not the local Markov property can be satisfied for some choice of causal parameters. Intuitively, there are two reasons why a given marginal model $\prob^{\mscenario}$ would be deemed incompatible. One possibility is that the marginal model $\prob^{\mscenario}$ does not admit a joint distribution $\prob[\nodes]$. Alternatively, it could be possible that a joint distribution $\prob[\nodes]$ exists but can not factor into causal parameters as per \cref{eq:local_markov_property_operation}.
+
+    Colloquially, the first necessary condition, namely the existence (or non-existence) of a joint distribution, is referred to as \term{the marginal problem}. The marginal problem asks: given a marginal model $\prob^{\mscenario} = \bc{\prob[V] \mid V \in \mscenario}$ marginal to the joint variables $\jointvar = \bigcup_{V \in \mscenario} V$, does there exist a joint distribution $\prob[\jointvar]$ such that each context $\prob[V]$ can be obtained by marginalizing $\prob[\jointvar]$?
+    \[ \forall V \in \mscenario : \prob[V] = \sum_{\jointvar \setminus V} \prob[\jointvar] \eq \label{eq:def:marginal_problem}\]
+    Note that we have changed notation from the nodes of a causal structure $\nodes$ to a joint set of variables $\jointvar$. This is done simply because the marginal problem is well-defined independent of a given causal structure. In fact, if a marginal model $\prob^{\mscenario}$ does not admit a joint distribution, then it cannot be compatible with \textit{any} causal structure whatsoever. A marginal model is said to be \textit{contextual} if it \textit{does not} admit a joint distribution and \textit{non-contextual} otherwise. The marginal problem has applications to numerous areas of mathematics including game theory~\cite{Vorobev_1962}, database theory, knowledge integration of expert system, and of course, quantum information theory~\cite{Fritz_2011}.
+
+    The marginal problem is distinct from the second necessary condition, which we term the \term{Markov separability problem} in numerous ways. First of all, the marginal problem as applied to causal inference tasks is only concerned with the observable variables $\nodes_{O}$ of $\graph$. This differs from the Markov separability problem which depends directly on the entire graphical structure of $\graph$ and thus must include the latent variables $\nodes_{L}$. The purpose of latent variables is to have unspecified behavior which makes checking the local Markov property exceedingly difficult in comparison to the marginal problem. Secondly, \cref{eq:def:marginal_problem} is inherently a linear system of constraints which be solved rather efficiently using linear programs (to be discussed in \cref{sec:marginal_linear}). The local Markov property concerns itself with probabilistic independence constraints which are polynomial. Fortunately, the Inflation Technique (summarized in \cref{sec:inflation_technique}) is able to cast (at least partially) the Markov separability problem as a marginal problem over an inflated causal structure. As such the Inflation Technique in many ways can be considered a relaxation technique which turns polynomial constraints into linear constraints.
+
+    In consideration of these observations, we will now endeavor to discuss how causal compatibility inequalities can be derived by casting the marginal problem as a linear program. After doing, it becomes possible to discuss existing methods for deriving constraints on the set of contextual marginal models.
+
+    \subsubsection{The Marginal Problem as a Linear Program}
+    \label{sec:marginal_linear}\label{sec:linear_programs}
+
+    Heretofore, our discussions of compatibility and the marginal problem have been general in the sense of making no reference to the nature the random variables $v \in \jointvar$. In particular, whether the outcomes of $v$ are discrete or continuous, finite or unbounded, or otherwise. In the case of infinite outcomes, the marginal problem can be used to derive entropic inequalities defined over the mutual information between variables $v \in \jointvar$~\cite{Fritz_2011}. Entropic inequalities however have been shown to be less constraining than inequalities defined over variables with finite cardinality~\cite{Inflation}. Throughout this document, we restrict our attention to finite outcomes. To assist with the subsequent analysis, we recall some familiar notions of probability theory.
+
+    % \subsubsection{Events \& Outcomes}
+    To every discrete random variable $v$ there corresponds a prescribed set of \term{outcomes} $O_v$. We also define the set of all \term{events over $v$} $\Events{v}$\footnote{In the language of sheaf-theory, $\Events{v}$ is the \textit{sheaf of events}~\cite{Abramsky_2011}.} to be the set of all functions $s : \bc{v} \to O_v$ each representing the event that a measurement on $v$ was made where $s\br{v} \in O_v$ was observed.
+    \[ \Events{v} \defined \bc{s : \bc{v} \to O_v} \]
+    Evidently, $\Events{v}$ and $O_v$ have a one-to-one correspondence and this distinction can be confounding. There is rarely any harm in referring synonymously to either as outcomes. Nonetheless, a sheaf-theoretic treatment of contextuality~\cite{Abramsky_2011} demands the distinction.
+    Specifically for this work, the distinction becomes essential for our discussion and exploit of marginal symmetries in \cref{sec:symmetric_inequalities}. As a natural generalization we define the event over a collection of random variables $V = \bc{v_1, \ldots, v_n}$ in a parallel manner,
+    \[ \Events{V} \defined \bc{s: V \to O_{V} \mid \forall i : s\br{v_i} \in O_{v_i} } \eq \label{eq:outcome_space}\]
+    Each event $s$ can be compactly represented as a set of mappings over each element of $V$.
+    \[ s = \bc{v_1 \mapsto s\br{v_1}, \ldots, v_k \mapsto s\br{v_k}} = \bc{v_i\mapsto s\br{v_i}}_{i = 1}^{k} \]
+    The domain $\Dom{s}$ of an event $s$ is the set of random variables it valuates, i.e. if $s \in \Events{V}$, then $\Dom{s} = V$. Under this framework, a probability distribution $\prob[V]$ can be considered as a map from $\Events{V}$ to the unit interval $\bs{0,1}$.
+    \begin{example}
+        Let $s \in \Events{V}$ be an event over $V$, a probability distribution $\prob[V]$ over $V$ will assign a non-negative probability $\prob[V][s]$ to $s$. Let $V = \bc{v_1, v_2}$ with each $v \in V$ having $3$ distinct outcomes $O_v = \bc{0,1,2}$. Furthermore let $f \in \Events{V}$ be the event $\br{v_1 \mapsto 2, v_2 \mapsto 1}$. The following notations are interchangeable,
+        \[ \prob[][s] = \prob[\Dom{s}][s] = \prob[V][s] = \prob[v_1, v_2][s] = \prob[][v_1 \mapsto s_1\br{v_1}, v_2 \mapsto s_2\br{v_2}] = \prob[][v_1 = 2, v_2 = 1] = \prob[v_1v_2][21] \]
+        Each of which should be read as ``the probability that $v_1$ got outcome $2$ and $v_2$ got outcome $1$''
+    \end{example}
+    The marginal problem inherently depends on the concept of probabilistic marginalization. This concept can be understood at the level of events; one event $s \in \Events{V}$ can be ``marginalized'' or restricted to a smaller event $s' \in \Events{W}$ whenever $W \subseteq V$.
+    \begin{definition}
+    \label{def:section_restriction}
+    For every $W \subseteq V$ and $s \in \Events{V}$, the \term{restriction of $s$ onto $W$} (denoted $s|_{W} \in \Events{W}$) is the event in $\Events{W}$ that \textit{agrees} with each of $s$'s assignments for variables in $W$.
+    \[ \forall v \in W : s|_{W}\br{v} = s\br{v} \]
+    \end{definition}
+    % \begin{definition}
+    % \label{def:section_compatible}
+    % The events $s_{V} \in \Events{V}$ and $s_{W} \in \Events{W}$ are said to be \term{compatible} events if they agree on their valuations of $V \cap W$. Compatibility will be denoted with the infix `$\com$'.
+    % \[ s_{V} \com s_{W} \iff {s_{V}}|_{V\cap W} = {s_{W}}|_{V\cap W} \]
+    % \end{definition}
+    % \begin{definition}
+    % \label{def:section_extendable}
+    % It $s_V \in \Events{V}$ and $s_W \in \Events{W}$ compatible events and $W \subseteq V$ then $s_W$ is said to be \term{extendable} to $s_V$. Extendability will be denoted with the infix `$\ext$'.
+    % \[ s_W \ext s_V \iff s_W \com s_V, W \subseteq V \]
+    % Extendability is dual to the notion of a \term{restriction} of $s_V$; $s_V$ can be restricted to $s_W$ ($s_V \res s_W$) if and only if $s_W$ is extendable to $s_V$.
+    % \end{definition}
+
+    % \begin{remark}
+    %     The notation `$s \com t$' is used to indicate compatibility between $s \in \Events{V}$ and $t \in \Events{W}$ because of the following observation: $s$ and $t$ are compatible if and only if they are extensions of some event $r \in \Events{V \cap W}$.
+    %     \[ s \com t \iff \exists r \in \Events{V \cap W} \mid s \res r \ext t \]
+    %     In fact $r$ is uniquely defined.
+    %     \[ \forall v \in V \cap W : r\br{v} = s\br{v} = t\br{v} \]
+    % \end{remark}
+
+    For every marginal scenario $\mscenario = \bc{V_1, \ldots, V_k}$, it is useful to put special emphasis on the \term{joint events} $\Events{\jointvar}$ which represent all possible global events over the entire set of joint variables. Similarly, we define the \term{context events} for a particular context $V \in \mscenario$ as $\Events{V}$. Finally, we elect to define the \term{marginal events} as the disjoint union of all context events and by an abuse of notation we will denote this disjoint union as $\Events{\mscenario}$.
+    \[ \Events{\mscenario} = \coprod_{V \in \mscenario} \Events{V} \]
+    Each marginal section $m \in \Events{\mscenario}$ has a domain $\Dom{m} = V$ for some $V \in \mscenario$. By construction each marginal event $m \in \Events{\mscenario}$ is a restriction of some joint event $j \in \Events{\jointvar}$.
+    % \subsubsection{Linear Programs}
+    % \label{sec:linear_programs}
+    The marginalization operation (\cref{eq:def:marginal_problem}) of the marginal problem is a linear operator. This linear operator maps a joint probability distribution $\prob[\jointvar] : \Events{\jointvar} \to \bs{0,1}$ into a marginal model $\prob^{\mscenario} = \bc{\prob[V] : \Events{V} \to \bs{0,1} \mid V \in \mscenario}$. Since $\Events{\mscenario}$ and $\Events{\jointvar}$ are finite, the marginal problem can be casted as a $\abs{\Events{\mscenario}} \times \abs{\Events{\jointvar}}$ matrix.
+
+    \begin{definition}
+        \label{def:incidence_matrix}
+        The \term{incidence matrix} $M$ for a marginal scenario $\mscenario = \bc{V_1, \dots, V_k}$ is a bit-wise matrix where the columns are indexed by \textit{joint} events $j \in \Events{\jointvar}$ and the rows are events by \textit{marginal} events $m \in \Events{\mscenario}$. The entries of $M$ are populated whenever a marginal event $m$ is a restriction of the joint event $j$.
+        \[ M_{m,j} \defined \begin{cases}
+            1 & m = j|_{\s{D}\br{m}} \\
+            0 & \text{otherwise}
+        \end{cases} \]
+        The incidence matrix has $\abs{\Events{\jointvar}}$ columns, $\abs{\Events{\mscenario}} = \sum_{i} \abs{\Events{V_i}}$ rows and $k\abs{\Events{\jointvar}}$ non-zero entries.
+    \end{definition}
+    To illustrate this concretely, consider the following example:
+    \begin{example}
+        \label{ex:incidence_matrix}
+        Let $\jointvar$ be $3$ binary variables $\jointvar = \bc{A,B,C}$ and $\mscenario$ be the marginal scenario $\mscenario = \bc{\bc{A,B}, \bc{B,C}, \bc{A,C}}$. The incidence matrix becomes:
+        \[ M = \kbordermatrix{
+            (A,B,C) \:\: \mapsto & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
+            (A\mapsto0, B\mapsto0) & \kone & \kone & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer \\
+            (A\mapsto0, B\mapsto1) & \kzer & \kzer & \kone & \kone & \kzer & \kzer & \kzer & \kzer \\
+            (A\mapsto1, B\mapsto0) & \kzer & \kzer & \kzer & \kzer & \kone & \kone & \kzer & \kzer \\
+            (A\mapsto1, B\mapsto1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kone \\
+            (B\mapsto0, C\mapsto0) & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer \\
+            (B\mapsto0, C\mapsto1) & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer & \kzer \\
+            (B\mapsto1, C\mapsto0) & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone & \kzer \\
+            (B\mapsto1, C\mapsto1) & \kzer & \kzer & \kzer & \kone & \kzer & \kzer & \kzer & \kone \\
+            (A\mapsto0, C\mapsto0) & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer & \kzer \\
+            (A\mapsto0, C\mapsto1) & \kzer & \kone & \kzer & \kone & \kzer & \kzer & \kzer & \kzer \\
+            (A\mapsto1, C\mapsto0) & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone & \kzer \\
+            (A\mapsto1, C\mapsto1) & \kzer & \kzer & \kzer & \kzer & \kzer & \kone & \kzer & \kone
+        } \eq \label{eq:example_incidence}\]
+    \end{example}
+    The incidence matrix needs to act (to the right) on a vector representing the joint probability $\prob[\jointvar]$ distribution and output a vector representing the marginal model $\prob^{\mscenario}$.
+    \begin{definition}
+        The \term{joint distribution vector} $\probvec^{\jointvar}$ for a probability distribution $\prob[\jointvar]$ is the vector whose entries are the positive, real-valued probabilities that $\prob[\jointvar]$ assigns to each joint event $j \in \Events{\jointvar}$. $\probvec^{\jointvar}$ shares the same indices as the \textit{column} indices of $M$.
+        \[ \forall j \in \Events{\jointvar} : \probvec^{\jointvar}_j = \prob[\jointvar][j] \]
+    \end{definition}
+    \begin{definition}
+        Analogously, \term{marginal distribution vector} $\probvec^{\mscenario}$ for a marginal model $\prob^{\mscenario} = \bc{P_{V_1}, \ldots, P_{V_k}}$ is the vector whose entries are probabilities over the set of marginal outcomes $\Events{\mscenario}$. $\probvec^{\mscenario}$ shares the same indices as the \textit{row} indices of $M$.
+        \[ \forall m \in \Events{\mscenario} : \probvec^{\mscenario}_m = \prob[\Dom{m}][m] \]
+    \end{definition}
+    By design, the marginal and joint distribution vectors are related via the incidence matrix $M$. Given a joint distribution vector $\probvec^{\jointvar}$ one can obtain the marginal distribution vector $\probvec^{\mscenario}$ by multiplying $M$ by $\probvec^{\jointvar}$.
+    \[ \probvec^{\mscenario} = M \cdot \probvec^{\jointvar} \eq \label{eq:incidence_matrix_use} \]
+    Because the marginal distribution vector $\probvec^{\mscenario}$ is simply another representation of the marginal model $\prob^{\mscenario}$, we will henceforth use the language interchangeably. This is likewise done so for the joint distribution (vector) $\prob[\jointvar]$ ($\probvec^{\jointvar}$). As a quick remark, the particular ordering of the rows and columns of $M$ carries \textit{no importance}, but it \textit{must} be consistent between $M$, $\probvec^{\jointvar}$ and $\probvec^{\mscenario}$. The marginal problem can now be rephrased in the language of the incidence matrix. Suppose one obtains a marginal distribution vector $\probvec^{\mscenario}$; the marginal problem becomes equivalent to the question:
+    \textit{Does there exist a joint distribution vector $\probvec^{\jointvar}$ such that \cref{eq:incidence_matrix_use} holds?}
+
+    The marginal problem can sometimes take on a more general variant that does not begin with a specific marginal model~\cite{Abramsky_2012,Mansfield_2012,Fritz_2011}: \textit{Given a marginal scenario $\mscenario$, what is the set of all non-contextual marginal models?} \citet{Pitowsky_1991} demonstrates that the set of non-contextual marginal models forms a \textit{convex} polytope called the \term{marginal polytope}. The extremal rays of a marginal polytope directly correspond to the columns of $M$ which correspond to each of the $\abs{\Events{\jointvar}}$ \textit{deterministic} joint distributions $\probvec^{\jointvar}$. Since all joint distributions $\probvec^{\jointvar}$ are probability distributions, their entries must sum to unity.
+    \[ \sum_{j \in \Events{\jointvar}} \probvec^{\jointvar}_j = 1 \]
+    This normalization defines the convexity of the polytope; all non-contextual marginal models are convex mixtures of the deterministic marginal models pursuant to \cref{eq:incidence_matrix_use}. The marginal polytope is a beneficial tool for understanding contextuality. First, the \textit{facets} of a marginal polytope correspond to a finite set of linear inequalities that are complete in the sense that all contextual distributions violate at least one facet inequality~\cite{Brunner_2013}. From the perspective of a marginal polytope, convex hull algorithms can be used to compute a representation of the complete set of linear inequalities and completely solve the marginal problem. Alternatively, one can completely characterize the separation between the space of contextual and non-contextual distributions by the system of inequalities associated with \cref{eq:incidence_matrix_use}. Explicitly,
+    \begin{equation} \label{eq:halfspace_rep_incidence}
+    \begin{alignedat}{2}
+        \forall m \in \Events{\mscenario} :&&\quad \probvec^{\mscenario}_m - {\sum}_{j} M_{m, j} \probvec^{\jointvar}_j &\geq 0 \\
+        \forall m \in \Events{\mscenario} :&&\quad -\probvec^{\mscenario}_m + {\sum}_{j} M_{m, j} \probvec^{\jointvar}_j &\geq 0 \\
+        \forall j \in \Events{\jointvar} :&&\quad \probvec^{\jointvar}_j &\geq 0
+    \end{alignedat}
+    \end{equation}
+    Geometrically \cref{eq:halfspace_rep_incidence} is a family of $2\abs{\Events{\mscenario}} + \abs{\Events{\jointvar}}$ half-planes bounding $\R^{\abs{\Events{\mscenario}}} \times \R^{\abs{\Events{\jointvar}}}$. However testing the contextuality of a marginal model $\probvec^{\mscenario}$ requires a collection of inequalities bounding just $\R^{\abs{\Events{\mscenario}}}$. Transforming \cref{eq:halfspace_rep_incidence} into the desired system of inequalities is the task of linear-quantifier elimination. A popular tool for linear quantifier elimination is \term{Fourier-Motzkin elimination} \cite{Dantzig_1973,Inflation,Abramsky_2012,jones_2004}. Applying the Fourier-Motzkin procedure to completely solve the marginal problem is discussed in more detail in \citet{Fritz_2011}. An excellent survey of existing techniques for solving the marginal problem including Equality Set Projection~\cite{jones_2004} and Hardy-type hypergraph transversals can be found in \citet{Inflation}. In conclusion, there are a number of computational tools available to solve the marginal problem completely whenever no marginal model is provided.
+
+    Each of the above mentioned techniques suffers from computational complexity limitations. For example, the Fourier-Motzkin procedure is in the worst case doubly exponential in the number of initial inequalities~\cite{Dantzig_1973}. For the purposes of this research, solving the marginal problem without reference to a marginal model was intractable. This will become apparent in \cref{sec:found_inequalities} when the inflation technique is applied to the Triangle structure, producing marginal models that are very large. Moreover, algorithms to partially solve the marginal problem such as Hardy-type hypergraph transversals were used to determine hundreds of thousands of causal compatibility inequalities for the Triangle structure; none of which were able to be violated quantumly using numerical optimizations. Therefore, simpler approaches to the marginal problem needed to be considered.
+
+    Luckily, the Fritz distribution (\cref{sec:fritz_distribution}) allows one to avoid the complexity issues of the complete marginal problem and instead focus on the original problem of determining where or not a particular marginal model admitted a joint distribution or not. This question is naturally framed as the following linear problem:
+
+    \begin{definition}
+        \label{def:marginal_linear_program}
+        \term{The Marginal Linear Program} is the following linear program:
+        \begin{alignat*}{2}
+            & \text{minimize:} \quad&& \emptyset \cdot x\\
+            & \text{subject to:} && x \succeq 0 \\
+            & && M \cdot x = \probvec^{\mscenario}
+        \end{alignat*}
+        If this ``optimization''\footnote{``Optimization'' is presented in quotes here because the minimization objective is trivially always zero ($\emptyset$ denotes the null vector of all zero entries). The primal value of the linear program is of no interest, all that matters is its \textit{feasibility}.} is \textit{feasible}, then there exists a vector $x$ than can satisfy \cref{eq:incidence_matrix_use} and is a valid joint distribution vector. Therefore feasibility implies that $\probvec^{\jointvar}$ exists and is precisely $x$. Moreover if the marginal linear program is \textit{infeasible}, then there \textit{does not} exist a joint distribution $\probvec^{\jointvar}$.
+    \end{definition}
+
+    To every linear program, there exists a dual linear program that characterizes the feasibility of the original~\cite{Schrijver_1998}. Constructing the dual linear program is straightforward~\cite{Lahaie_2008}.
+
+    \begin{definition}
+        \label{def:dual_marginal_linear_program}
+        \term{The Dual Marginal Linear Program}:
+        \begin{alignat*}{2}
+            & \text{minimize:} \quad&& y \cdot \probvec^{\mscenario}\\
+            & \text{subject to:} && y \cdot M \succeq 0
+        \end{alignat*}
+        Where $y$ is a real valued vector with the same length as $\probvec^{\mscenario}$.
+    \end{definition}
+
+    The dual marginal linear program not only answers the marginal problem for a specific marginal model $\probvec^{\mscenario}$ but as a by-product provides an inequality that witnesses its contextuality. If this is not obvious, first notice that the dual problem is \textit{never infeasible}; by choosing $y$ to be trivially the null vector $\emptyset$ of appropriate size, all constraints become satisfied. Secondly if the dual constraint $y \cdot M \succeq 0$ holds \textit{and} the primal is feasible, then the following must hold:
+    \[ y \cdot \probvec^{\mscenario} =  y \cdot M \cdot x \geq 0 \eq \label{eq:dual_marginal_ineq} \]
+    Therefore the \textit{sign} of the dual objective $d \defined \min \br{y \cdot \probvec^{\mscenario}}$ classifies a marginal model's contextuality. If $d < 0$ then \cref{eq:dual_marginal_ineq} is violated and therefore $\probvec^{\mscenario}$ is contextual. Likewise if $d \geq 0$ (satisfying \cref{eq:dual_marginal_ineq}), then $\probvec^{\mscenario}$ is non-contextual.\footnote{Actually, if $d \geq 0$ then it is exactly $d = 0$ due to the existence of the trivial $y = \emptyset$. This observation is an instance of the \textit{Complementary Slackness Property} of~\cite{Bradley_1977}. Moreover, if $d < 0$, then it is unbounded $d = -\inf$. This latter point becomes clear upon recognizing that for any $y$ with $d < 0$, another $y' = \al y$ can be constructed (with $\al > 1$) such that $d' = \al d < d$. Since a more negative $d'$ can always be found, it must be that $d$ is unbounded. This is a demonstration of the fundamental \textit{Unboundedness Property} of~\cite{Bradley_1977}; if the dual is unbounded, then the primal is infeasible.} This is manifestation of Farkas's lemma~\cite{Schrijver_1998}.
+
+    An \term{infeasibility certificate}~\cite{Andersen_2001} is any vector $y$ that satisfies the constraint of \cref{def:dual_marginal_linear_program} and also permits violation of \cref{eq:dual_marginal_ineq} for some marginal distribution vector $\probvec^{\mscenario}$.
+    \[ y \in \R^{\abs{\Events{\mscenario}}} : y \cdot M \succeq 0, \quad y \cdot \probvec^{\mscenario} < 0 \]
+    Most linear program software packages such as Mosek~\cite{Mosek_2016}, Gurobi~\cite{Gurobi_2016}, CPLEX~\cite{Cplex_2016} and CVX/CVX OPT~\cite{CVX_2016,CVX_Opt_2016} are capable of producing infeasibility certificates.
+    Furthermore, for every $y$ satisfying $y \cdot M \succeq 0$ there corresponds a \term{certificate inequality} that constraints the set of non-contextual marginal models. If $y$ is an infeasibility certificate, then all non-contextual marginal models $\probvec^{\mscenario}$ must satisfy \cref{eq:dual_marginal_ineq} making $y \cdot \probvec^{\mscenario} \geq 0$ a valid causal compatibility inequality.
+
+    \subsection{Causal Inflations}
+    The \term{Inflation Technique}, invented by \citet{Inflation} and inspired by the \textit{do calculus} and \textit{twin networks} of \citet{Pearl_2009}, is a family of causal inference techniques that can be used to determine if a marginal model $\prob^{\mscenario}$ is compatible or incompatible with a given causal structure $\graph$. As a preliminary summary, the inflation technique begins by \textit{augmenting} a causal structure with additional copies of its nodes, producing an \textit{inflated} causal structure, and then exposes how causal inference tasks on the inflated causal structure can be used to make inferences on the original causal structure. As a example, inflations of the Triangle structure are depicted in \cref{fig:inflations}. Copies of nodes in the inflated causal structure are distinguished by an additional subscript called the \term{copy-index}. For example node $A$ of \cref{fig:triangle_structure} has copies $A_1, A_2, A_3, A_4$ in the \textit{Web inflation} of \cref{fig:the_web_inflation}. All such copies are deemed equivalent via a \term{copy-index equivalence} relation denoted `$\sim$'. A copy-index is effectively arbitrary, so we will refer to an arbitrary inflated copy of $A$ as $A'$.
+    \[ A \sim A_1 \sim A' \not\sim B \sim B_1 \sim B' \]
+    We preemptively generalize the notion of copy-index equivalence to other mathematical objects like sets, graphs, and groups by saying that $X \sim Y$ if and only if $X = Y$ upon removal of the copy-index. Equipped with the common graph-theoretic terminology and notation of \cref{def:graph_terms}, an inflation can be formally defined as follows:
+    \begin{definition}
+        An \term{inflation} of a causal structure $\graph$ is another causal structure $\graph'$ such that:
+        \[ \forall n' \in \nodes': \AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \eq \label{eq:inflation_defn}\]
+        Verbally, for each inflated node $n'$, the ancestral sub-graph of $n'$ in $\graph'$ is equivalent to its counterpart in $\graph$ up to copy-index.
+    \end{definition}
+    The motivation behind this definition is that if the ancestry of each node $n'$ in $\graph'$ plays the \textit{exact same} role as the ancestry of its source copy $n$ in $\graph$, then every compatible joint distribution $\prob[\nodes]$ on $\graph$ can be used to \textit{create} compatible joint distributions on $\graph'$.
+
+    To do this, first notice that every compatible joint distribution $\prob[\nodes]$ uniquely defines a set of causal parameters for $\graph$. It is possible to obtain these causal parameters by computing the single-variable marginal distributions of $\prob[\nodes]$,
+    \[ \forall n \in \nodes : \prob[n\mid \Pa[\graph]{n}] = \sum_{\nodes \setminus n} \prob[\nodes] \eq \label{eq:unique_causal_parameters}\]
+    Now it is possible to make use of the inflation criteria (\cref{eq:inflation_defn}) which at least enforces that $\Pa[\graph']{n'} \sim \Pa[\graph]{n}$. From this, one can create a set of \term{inflated causal parameters} using \cref{eq:unique_causal_parameters},
+    \[ \forall n' \in \nodes' : \prob[n'\mid \Pa[\graph']{n'}] \defined \prob[n\mid \Pa[\graph]{n}] \eq \label{eq:inflated_causal_parameters} \]
+    Which in turn uniquely defines a compatible joint distribution $\prob[\nodes']$ on $\graph'$\footnote{Of course, there exists compatible joint distributions on $\nodes'$ that can not be constructed in this manner. The claim is that all joint distributions that are constructed in this way are compatible.}.
+    \[ \prob[\nodes'] = \prod_{n' \in \nodes'} \prob[n'\mid \Pa[\graph']{n'}] \eq \label{eq:unique_causal_parameters_inflated}\]
+    Together, \cref{eq:unique_causal_parameters,eq:inflated_causal_parameters,eq:unique_causal_parameters_inflated} form the \term{weak inflation lemma}: compatible joint distributions over $\nodes$ induce compatible joint distributions over $\nodes'$. Before generalizing to the inflation lemma, a careful observation needs to be made. For any pair of subsets of nodes $N \subseteq \nodes$ and $N' \subseteq \nodes'$ that are equivalent up to copy-index $N \sim N'$, if $\AnSub[\graph]{N} \sim \AnSub[\graph']{N'}$ then any compatible \textit{marginal} distribution $\prob[N]$, where $N \subset \nodes$, induces a compatible marginal distribution $\prob[N']$ over $N'$. In fact, $N'$ must contain no duplicate nodes up to copy index and thus $\prob[N] = \prob[N']$. These subsets of nodes are so essential to the Inflation Technique they are assigned a special name: sets $N' \subseteq \nodes'$ as called the \term{injectable sets} of $\graph'$ and $N \subset \nodes$ the \term{images of the injectable sets} of $\graph$.
+    \begin{align*}
+        \Inj[\graph]{\graph'} &\defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : N \sim N'} \\
+        \ImInj[\graph]{\graph'} &\defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : N \sim N'}
+    \end{align*}
+    Injectable sets are incredibly useful for causal compatibility because they allow one to extend the weak inflation lemma to \textit{the} inflation lemma:
+    \begin{lemma}
+        \label[lemma]{lem:inflation}
+        \term{The Inflation Lemma}~\cite[Lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$ and a marginal model $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ compatible with $\graph$ then all marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
+    \end{lemma}
+    Diagrammatically, \cref{lem:inflation} can be visualized as follows:
+
+    \begin{center}
+        \begin{tikzpicture}
+            \pgfmathsetmacro{\vs}{2.2};
+            \pgfmathsetmacro{\hs}{5.2};
+            \draw (0*\hs,0*\vs) node[](pn){$\underbrace{\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}}_{\text{compatible with $\graph$}}$};
+            \draw (1*\hs,0*\vs) node[](cp){$\bc{\prob[n\mid \Pa[\graph]{n}] \mid n \in \nodes}$};
+            \draw (1*\hs,-1*\vs) node[](cp_){$\bc{\prob[n'\mid \Pa[\graph']{n'}] \mid n' \in \nodes'}$};
+            \draw (0*\hs,-1*\vs) node[](pn_){$\underbrace{\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}}_{\text{compatible with $\graph'$}}$};
+            \draw[very thick, ->] (pn) -- (cp);
+            \draw[very thick, ->] (cp) -- (cp_) node [midway, above, sloped]{{\footnotesize define}};
+            \draw[very thick, ->] (cp_) -- (pn_);
+        \end{tikzpicture}
+    \end{center}
+
+    The inflation lemma is the most important result of the causal inflation technique. The contrapositive version of \cref{lem:inflation} is a powerful tool for deriving causal compatibility constraints. Any causal compatibility constraint, such as a causal compatibility inequality, that constrains injectable marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ can be \textit{deflated} into a valid compatibility constraint on marginal models $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ of the original causal structure by dropping all references to the copy-indices. Additionally, the inflation lemma holds when considering any subset of $\Inj[\graph]{\graph'}$ (analogously $\ImInj[\graph]{\graph'}$). Therefore, one only needs to consider injectable sets that are composed of \textit{observable nodes}.
+
+    Heretofore, the Inflation Technique as stated by \cref{lem:inflation} does not facilitate the derivation of any non-trivial inequalities. The Inflation lemma simply casts causal inference problems on $\graph$ to causal inference problems on $\graph'$. Fortunately, an inflated causal structure $\graph'$ possesses its own conditional independence relations which can be exploited to turn linear inequalities on $\graph'$ into polynomial inequalities on $\graph$.
+
+    Suppose that one were to obtain an inequality on $\graph'$ that contained probabilistic terms such as $\prob[N']$ where $N' \not \in \Inj[\graph]{\graph'}$. At this point, the Inflation lemma is not applicable because it requires probabilistic constraints to consist entirely of distributions $\prob[N']$ where $N'$ is injectable. If for example, $N' \not \in \Inj[\graph]{\graph'}$ could be partitioned into two injectable subsets $N_1' \in \Inj[\graph]{\graph'}$ and $N_2' \in \Inj[\graph]{\graph'}$ that where \term{ancestrally independent} in $\graph'$,
+    \[ N_1' \ancestralindep N_2' \iff \An[\graph']{N_1'} \cap \An[\graph']{N_2'}= \emptyset \]
+    Then the compatible marginal context $\prob[N']$ must be probabilistically separable $\prob[N'] = \prob[N_1']\prob[N_2']$ due to \cref{eq:local_markov_property}. Since $N_1'$ and $N_2'$ are both injectable, the inflation lemma now applies and the original inequality can be deflated.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \pgfmathsetmacro{\hs}{1.4};
+            \pgfmathsetmacro{\vs}{0.6};
+            \pgfmathsetmacro{\cross}{0.2};
+            \draw (0*\hs, 4*\vs) node[](a){$\prob[N']$};
+            \draw (0*\hs, 2*\vs) node[](ab){$N' \not \in \Inj[\graph]{\graph'}$};
+            \draw (4*\hs, 4*\vs) node[](c){$\prob[N_1']\prob[N_2']$};
+            \draw (2*\hs, 4*\vs) node[](ac){$N_1' \ancestralindep N_2'$};
+            \draw (2*\hs, 4*\vs + 0.7*\vs) node[]{$N_1' \cup N_2' = N$};
+            \draw (4*\hs, 2*\vs) node[](cd){$N_1', N_2' \in \Inj[\graph]{\graph'}$};
+            \draw (4*\hs, 0*\vs) node[](d){$\prob[N_1]\prob[N_2]$};
+            \draw (0, 0) node[](b){??};
+            \draw[thick, ] (a) -- (ab);
+            \draw[thick, ] (c) -- (cd);
+            \draw[thick, ] (a) -- (ac);
+            \draw[thick, ->] (ac) -- (c);
+            \draw[thick, ->] (ab) -- (b);
+            \draw[thick, ->] (cd) -- (d);
+            \draw[very thick, red]
+            (+ \cross, 1*\vs + \cross) -- (- \cross, 1*\vs - \cross)
+            (+ \cross, 1*\vs - \cross) -- (- \cross, 1*\vs + \cross)
+            ;
+        \end{tikzpicture}
+    \end{center}
+
+    Not all sets $N' \subseteq \nodes'$ can be written as the disjoint union of injectable sets, but those that can are called the \term{pre-injectable sets}. A set $N' \subseteq \nodes'$ is a pre-injectable set if it can be decomposed into the disjoint union of injectable sets $N' = \coprod_{i} N'_i \mid N'_i \in \Inj[\graph]{\graph'}$ and all pairs $N_i', N_j'$ are ancestrally independent: $\forall i, j : N_i' \ancestralindep N_j'$.
+
+    A pre-injectable set $N'$ is of primal importance to the inflation technique because any distribution over $N'$ will factorize according to graphical $d$-separation conditions~\cite{Pearl_2009},
+    \[ \prob[N'] = \prob[\coprod_i N'_i] = \prod_{i}\prob[N'_i] \]
+    Application of the inflation lemma to linear inequalities constraining pre-injectable distributions $\prob[N']$ transforms those inequalities into polynomial inequalities over the injectable distributions, allowing one to replace all terms with probability distributions defined over variables in $\nodes$. Throughout the body of this work, we let $\PreInj[\graph]{\graph'}$ denote the set of all pre-injectable sets. Naturally, the pre-injectable sets will define a marginal scenario $\mscenario$ that are used to derive compatibility inequalities in \cref{sec:deriving_inequalities}\footnote{Analogously for a marginal scenario $\mscenario$, the pre-injectable sets $\PreInj[\graph]{\graph'}$ form an \textit{abstract simplicial complex}. Therefore, in practice, it is completely sufficient to focus on the maximal pre-injectable sets}.
+
+    \begin{center}
+    \begin{figure}
+    \begin{subfigure}[b]{.45\linewidth}
+    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure_cut}}
+    \caption{The Cut inflation}\label{fig:cut_inflation}
+    \end{subfigure}
+    \begin{subfigure}[b]{.45\linewidth}
+    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral}}
+    \caption{The Spiral inflation}\label{fig:spiral_inflation}
+    \end{subfigure}
+
+    \begin{subfigure}[b]{.45\linewidth}
+    \scalebox{1.0}{\input{../../figures/causal_structures/inflated_triangle_structure_wagon_wheel}}
+    \caption{The Wagon-Wheel inflation}\label{fig:wagon_wheel_inflation}
+    \end{subfigure}
+    \begin{subfigure}[b]{.45\linewidth}
+    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure}}
+    \caption{The Web Inflation}\label{fig:the_web_inflation}
+    \end{subfigure}
+    \caption{Some inflations of the Triangle structure.}
+    \label{fig:inflations}
+    \end{figure}
+    \end{center}
+
+    \clearpage
+    \section{Quantum Parameterization of Triangle Structure}
+
+    \subsection{Unitary Group}
     \label{sec:unitary_group}
     To facilitate the parameterization of quantum states states and PVMs, a parameterization of the unitary group of dimension $d$ (denoted $\s{U}\br{d}$) by Spengler, Huber and Hiesmayr~\cite{Spengler_2010_Unitary} is introduced. Discussions of its application to states and measurements are deferred to \cref{sec:states} and \cref{sec:measurements} respectively.
 
@@ -772,7 +863,7 @@
     For example, $R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}}$ applies a rotation to the sub-space spanned by $\ket{m}$ and $\ket{n}$ for $m < n$. Analogously, $RP_{n,m}$ generates the relative phase between $\ket{m}$ and $\ket{n}$ for $m > n$ and $GP_l$ fixes the global phase of $\ket{l}$. Possessing a parameterization that maintains this physical interpretation is useful as it allows one to readily eliminate any degeneracies. For the purposes of quantum distributions such as \cref{eq:quantum_model_triangle}, it should be clear that any contributions to global phase are irrelevant. The SSH parameterization becomes especially attractive because it readily permits one to drop the global phase terms by setting $\la_{l,l} = 0$ for all $l = 1, \ldots, d$. It is convenient to denote the set of all unitaries up to global phase considerations as $\ti {\s{U}}\br{d}$ and express $\ti {U} \in \ti {\s{U}}\br{d}$ using $d\br{d-1}$ real-valued parameters:
     \[ \ti U = \prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} RP_{n,m}R_{m,n}} \eq \label{eq:spengler_unitary_gp} \]
     Another attractive feature of the SSH parameterization not mentioned in~\cite{Spengler_2010_Unitary} is that \cref{eq:spengler_unitary}, and thus \cref{eq:spengler_unitary_gp}, can be implemented in a computationally efficient manner. This is discussed in \cref{sec:comp_spengler}.
-    \subsubsection{Measurements}
+    \subsection{Measurements}
     \label{sec:measurements}
     For each measurement set $M$ in \cref{eq:quantum_model_triangle}, we consider a $d$-element projective-valued measure (PVM) $M = \bc{M_1, \ldots, M_d}$ satisfying a number of familiar constraints:
     \begin{gather*}
@@ -785,7 +876,7 @@
     With this observation, all that is required is to parameterize the set of all unitaries $U \in \mathcal{U}\br{d}$. Specifically, the projective property each $M_i \in M$ means that the global phase of $U$ is completely arbitrary; one only needs to consider parameterizing unitaries up to global phase using \cref{eq:spengler_unitary_gp}.
     \[ M = \bc{\ti U \ket{i} \bra{i} \ti U^{\dagger} \mid i \in \bc{1, \ldots, d}} \]
     For the purposes discussed in \cref{sec:param_quantum_dist}, only $d = 4$ outcome measurements are utilized and therefore requiring $4\br{4 - 1} = 12$ real-valued parameters. This method was inspired by the measurement seeding method for iterative optimization used by \citet{Pal_2010} .
-    \subsubsection{States}
+    \subsection{States}
     \label{sec:states}
 
     Each state $\rho \in \br{\rho_{AB}, \rho_{BC}, \rho_{CA}}$ of \cref{eq:quantum_model_triangle} is modeled as a two-qubit density matrices acting on $\Hilb^2 \otimes \Hilb^2$. The space of all such states corresponds to the space of all $4\times 4$ positive semi-definite hermitian matrices with unitary trace.
@@ -808,7 +899,7 @@
     Although non-degenerate, \cref{eq:convex_param} suffers from a lack of uniformity; a randomly sampled vector of parameters $\bc{\lambda}$ \textit{does not} translate to a randomly sampled set of eigenvalues $\bc{p_i}$. Another, albeit degenerate, parameterization of $\bc{p_i}$ involves beginning with $d$ real parameters $\lambda = \br{\lambda_1, \ldots, \lambda_d}$, then forcing normalization by dividing each parameter $\la_i$ by the their sum.\footnote{Strictly speaking, \cref{eq:uniform_param} \textit{also} suffers from non-uniformity; being biased toward eigenvalues that have similar values to each other.}.
     \[ p_j = \f{\abs{\lambda_j}}{\sum_{i=1}^{n} \abs{\lambda_i}} \quad \forall j \in 1, \ldots, n \eq \label{eq:uniform_param} \]
     For various optimization tasks sensitive to initial conditions outlined \cref{sec:optimizations}, the latter parameterization of \cref{eq:uniform_param} generally performed better than the former \cref{eq:convex_param}.
-    \subsubsection{Permutation Matrix}
+    \subsection{Permutation Matrix}
     \label{sec:perm_matrix}
     \begin{figure}
         \centering
@@ -827,75 +918,32 @@
     \[ \netperm\ket{q_1q_2q_3q_4q_5q_6} = \ket{q_2q_3q_4q_5q_6q_1} \]
     $\netperm$ acts as a \textit{partial transpose} on $\br{\Hilb^2}^{\otimes 6}$ by shifting the underlying tensor structure one subsystem to the ``left''. It is uniquely defined by its action on all $2^6$ orthonormal basis elements of $\br{\Hilb^2}^{\otimes 6}$,
     \[ \netperm \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
-    \subsection{Numerical Optimization Results}
-    \label{sec:results}
+    \subsection{Computationally Efficient Parameterization of the Unitary Group}
+    \label{sec:comp_spengler}
 
-    \Cref{sec:param_quantum_dist} expounded on how we elected to parameterized the space of quantum distributions that can be realized on the quantum Triangle structure (\cref{fig:triangle_structure_quantum_model}). Specifically, we make use of fully generic $4\times 4$ density matrices (bipartite qubit) for each shared resource and $4$-element projective measurements. For each inequality $I$, we define the relative violation $V_F$ to be maximum violation relative to the violation achieved by the Fritz distribution.
-    \[ V_F = \f{\min_{P}\bc{I\br{P}}}{I\br{P_F}} \]
-
-    The first inequality in consideration is $I_1$; the non-symmetric Web inflation inequality presented in \cref{sec:web_inequality}. At best, numerical optimizations converged to a distribution (\cref{fig:maximum_violation_I_1}) with relative violation $V_F \simeq 1.501$. Almost immediately, it is evident that \cref{fig:maximum_violation_I_1} closely resembles the Fritz distribution. In fact, \cref{fig:maximum_violation_I_1} and \cref{fig:fritz_distribution_visualized} share the exact same \textit{possibilistic structure} or set of possible events. What does this reveal about $I_1$ and non-classicality in the Triangle structure? This result is not entirely unexpected. As was mentioned in \cref{sec:found_inequalities}, these inequalities are derived specifically to show incompatibility of the Triangle structure. Consequently, it seems that $I_1$ only has the capacity to demonstrate incompatibility for a specific forms of non-classicality that resemble the Fritz distribution very closely.
-
-    \begin{figure}
-    \begin{center}
-            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/plotted_dist_I_1_max_violation_2017.pdf}
-            \caption{Probability distribution that maximizes violation of $I_1$ from \cref{sec:web_inequality} ($V_F \simeq 1.501$).}
-            \label{fig:maximum_violation_I_1}
-    \end{center}
-    \end{figure}
-
-    An alternative explanation has to do with the sensitively of the initial condition $\la_{\br{0}} = \br{\la_{\br{0}, 0}, \ldots, \la_{\br{0}, n}}$ in our optimization. In \cref{sec:param_quantum_dist}, it was shown that our parameter space of choice was $2\pi$-periodic in all entries. Somewhat surprisingly, when using a uniform seed for $\la_0$, all optimization methods consistently converged to inequality saturation instead of inequality violation which of course is achievable by the Fritz distribution. Instead, only initial seeds close enough to the \textit{Fritz parameters} $\la_{\br{\fritz}}$ (the parameters that induce the Fritz distribution using the quantum implementation in \cref{sec:fritz_distribution}) where able to achieve violation. To illustrate this graphically, we let the initial seed be a small Gaussian perturbation $\de \la$ away from $\la_{\br{\fritz}}$ in parameter space.
-    \[ \la_{\br{0}} = \la_{\br{\fritz}} + \de \la  \]
-    The Gaussian perturbation was given zero mean $\mu = 0$ and variance $\si^2 = \br{2 \pi 10^{\chi}}^2$ where $\chi$ measures an order of magnitude standard deviation. For $I_1$, deviations of $\chi \gtrsim 1.3$ inhibited convergence to violation. This is depicted in \cref{fig:initial_conditions}. Therefore, it is unclear whether or not our results share the same possibilistic structure as $\prob[\fritz]$ because of the inequality itself or the ill-conditioned nature of the optimization. Most likely, this phenomena is due to a combination of both effects.
-    \begin{center}
-    \begin{figure}
-    \begin{subfigure}[t]{.48\linewidth}
-    \includegraphics[width=\linewidth]{../../figures/optimizations/Gaussian_Perturbation_Fritz_Color_Default.pdf}
-    \caption{For each iteration step $k$, the inequality target decreases.}\label{fig:initial_conditions_a}
-    \end{subfigure}
-    \begin{subfigure}[t]{.48\linewidth}
-    \includegraphics[width=\linewidth]{../../figures/optimizations/Gaussian_Perturbation_Fritz_Color_Zoomed.pdf}
-    \caption{\Cref{fig:noise} zoomed to show convergence is sensitive to initial conditions.}\label{fig:initial_conditions_b}
-    \end{subfigure}
-    \caption{Numerical optimizations aimed at violating causal compatibility inequalities are sensitive to initial conditions.}\label{fig:initial_conditions}
-    \end{figure}
-    \end{center}
-    The second inequality in consideration is $I_3$; the \textit{symmetric} Web inflation inequality presented in \cref{sec:symmetic_web_inequality}. This inequality was able to achieve a greater relative violation than $I_1$ as optimizations converged to a distribution (\cref{fig:maximum_violation_I_3}) with relative violation $V_F \simeq 2.61$. Just as before, the maximum violating distribution shares a possibilistic structure with the Fritz distribution. However, this result is far more surprising. Since the inequality is symmetric with respect to the exchange of parties $\varphi \in \Perm{A, B, C}$, one would naively expect that the maximum violating distribution is be symmetric as well. If it were not, one could construct a distribution that violates $I_3$ more by symmetrizing $\prob[\fritz]$ by summing over all possible permutations and normalizing. The symmetrized Fritz distribution is plotted in \cref{fig:symmetrized_fritz}. This distribution is also non-classical with relative violation $V_F = 3$. As it turns out, the symmetrized Fritz distribution is \textit{not} quantum-accessible in the sense that is cannot be written as \cref{eq:quantum_model_triangle}\footnote{At least numerical optimizations suggest this is the case.} Therefore we conclude that the space of quantum accessible correlations on the Triangle structure is non-convex; a reiteration of a result found in~\citet{Inflation}.
-    \begin{figure}
-    \begin{center}
-            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/plotted_dist_I_3_max_violation_2017.pdf}
-            \caption{Probability distribution that maximizes violation of $I_3$ from \cref{sec:symmetic_web_inequality} ($V_F \simeq 2.61$).}
-            \label{fig:maximum_violation_I_3}
-    \end{center}
-    \end{figure}
-    \begin{figure}
-    \begin{center}
-            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/symmetrized_fritz.pdf}
-            \caption{Symmetrized version of the Fritz distribution ($V_F \simeq 3$).}
-            \label{fig:symmetrized_fritz}
-    \end{center}
-    \end{figure}
-
-    Finally for both $I_0$ and $I_2$, the maximum relative violation happens to be $V_F = 1$ (up to numerical precision). This means that the Fritz distribution either represents a local minimum of the parameter space or is in fact \textit{the} maximally violating distribution. Without further investigations, it is unclear if this behavior is related to the universality of the Fritz distribution or if its an artifact of the methods used to derive $I_0$ and $I_2$.
-
-    \section{Conclusions}
-
-    In \cref{sec:triangle_structure}, we elucidated that non-classicality in the Triangle structure has been an unsolved problem for nearly a decade. Initially,~\citet{Branciard_2012} identified the Triangle structure as a challenging causal structure for studying non-classicality. Afterwards,~\citet{Henson_2014} were able to to classify the Triangle structure as \textit{interesting} which partially explains why it remains an enigma. Recently,~\citet{Fritz_2012} discovered the Fritz distribution as the first example of quantum non-classicality in the Triangle structure. Heretofore, researchers have been able to derive causal incompatibility inequalities~\cite{Inflation,Steudel_2010,Henson_2014} but unable to show that any are non-trivial in the context of quantum non-classicality. In \cref{sec:fritz_distribution} the Fritz distribution was introduced in detail and refinements where made to a problem originally proposed by~\citet{Fritz_2012}. For this research project, we made heavy use of the Inflation Technique of \cref{sec:inflation_technique} and the Fritz distribution in order to derive the first causal compatibility inequalities capable of having quantum violations. Finally, we used those inequalities in an attempt to discover new forms of non-classicality in the Triangle structure with partial success.
-
-    Ultimately, this work accomplishes two important tasks. First and foremost, the derivation of \cref{eq:ww_ineq} demonstrates the utility of the Inflation technique specifically for quantum causal inference problems. The Inflation Technique was able to derive causal compatibility inequalities that admit quantum violations in the Triangle structure -- a task that no other existing techniques succeeded at. Therefore, this work acts as a strong indication that the Inflation technique has the potential to solve a assortment of unsolved causal inference problems including those manifest in quantum foundations and quantum information theory.
-
-    Penultimately, the results presented here solve~\cite[Problem 2.17]{Fritz_2012} insofar as to refine the original problem into three related questions problems: \ref{r:1}, \ref{r:2} and \ref{r:3}. The methods and techniques demonstrated here provide a means of solving \ref{r:1} and gives an opportunity to begin tackling \ref{r:2} and \ref{r:3} in the form of numerical optimizations. Computational and comprehensive limitations have stunted progress towards solving \ref{r:2} and \ref{r:3}, so it still remains unclear if \ref{r:2} and \ref{r:3} have affirmative solutions in the first place.
-
-    \section*{Acknowledgments}
-    T.C. Fraser would like to thank E. Wolfe for his excellent guidance and mentor-ship throughout the duration of this research project. Moreover, T.C. Fraser would like to thank the Perimeter Institute for financing this research and providing access to much needed computational resources.
-    \clearpage
-    \bibliography{references}
-
-    \clearpage
-    \appendix
+    If \cref{sec:unitary_group}, the SSH parameterization was introduced as a non-degenerate parameterization of the unitary group $\s{U}\br{d}$. As presented, the SSH parameterization suffers due to the presence of computationally expensive matrix exponential terms~\cite{Moler_2003}. Although not explicitly mentioned in~\cite{Spengler_2010_Unitary}, it is possible to remove the reliance on matrix exponential operations in \cref{eq:spengler_unitary} by utilizing the explicit form of the exponential terms in \cref{eq:exp_terms}. As a first step, recognize the defining property of the projective operators \cref{eq:projective_operator},
+    \[ P_l^k = \br{\ket{l}\bra{l}}^k = \ket{l}\bra{l} = P_l \]
+    This greatly simplifies the global phase terms $GP_l$,
+    \[ GP_l = \exp\br{iP_l \lambda_{l,l}} = \sum_{k=0}^{\inf} \f{\br{iP_l \lambda_{l,l}}^k}{k!} = \ident + \sum_{k=1}^{\inf} \f{\br{i \lambda_{l,l}}^k}{k!}P_l^k = \ident + P_l \bs{\sum_{k=1}^{\inf} \f{\br{i \lambda_{l,l}}^k}{k!}} = \ident + P_l \br{e^{i \lambda_{l,l}} - 1} \eq \label{eq:unitary_GP} \]
+    Analogously for the relative phase terms $RP_{n,m}$,
+    \[ RP_{n,m} = \cdots = \ident + P_n \br{e^{i \lambda_{n,m}} - 1} \eq \label{eq:unitary_RP} \]
+    Finally, the rotation terms $R_{m,n}$ can also be simplified by examining powers of $i \sigma_{n,m}$,
+    \[ R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}} = \sum_{k=0}^{\inf} \f{\br{\ket{m}\bra{n} - \ket{n}\bra{m}}^k \lambda_{m,n}^k}{k!} \]
+    One can verify that the following properties hold,
+    \begin{align*}
+        \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^0 &= \ident \\
+        \forall k \in \N, k \neq 0 : \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^{2k} &= \br{-1}^k\br{\ket{m}\bra{m} + \ket{n}\bra{n}} \\
+        \forall k \in \N : \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^{2k+1} &= \br{-1}^k\br{\ket{m}\bra{n} - \ket{n}\bra{m}}
+    \end{align*}
+    Revealing the simplified form of $R_{m,n}$,
+    \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \sum_{j=1}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j}}{\br{2j}!} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sum_{j=0}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j+1}}{\br{2j+1}!} \]
+    \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sin\lambda_{n,m} \eq \label{eq:unitary_R} \]
+    By combining the optimizations of \cref{eq:unitary_GP,eq:unitary_RP,eq:unitary_R} together we arrive at an equivalent form for \cref{eq:spengler_unitary} that is computational more efficient.
+    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n}RP_{n,m}}} \cdot \bs{\prod_{l=1}^{d} GP_{l}}  \eq \label{eq:spengler_unitary_fast} \]
 
 
     \section{Common Terminology \& Notation}
-
+    \comment[TC]{keep, remove, or distribute into body where relevant?}
     \subsection{Graph Theory}
     \label{sec:graph_theory}
     \begin{definition}
@@ -951,31 +999,9 @@
         \[ \Ext[V]{s} = \bc{j \in \Events{V} \mid s = j|_{\s{D}\br{s}}} \]
     \end{definition}
 
-    \section{Computationally Efficient Parameterization of the Unitary Group}
-    \label{sec:comp_spengler}
-
-    If \cref{sec:unitary_group}, the SSH parameterization was introduced as a non-degenerate parameterization of the unitary group $\s{U}\br{d}$. As presented, the SSH parameterization suffers due to the presence of computationally expensive matrix exponential terms~\cite{Moler_2003}. Although not explicitly mentioned in~\cite{Spengler_2010_Unitary}, it is possible to remove the reliance on matrix exponential operations in \cref{eq:spengler_unitary} by utilizing the explicit form of the exponential terms in \cref{eq:exp_terms}. As a first step, recognize the defining property of the projective operators \cref{eq:projective_operator},
-    \[ P_l^k = \br{\ket{l}\bra{l}}^k = \ket{l}\bra{l} = P_l \]
-    This greatly simplifies the global phase terms $GP_l$,
-    \[ GP_l = \exp\br{iP_l \lambda_{l,l}} = \sum_{k=0}^{\inf} \f{\br{iP_l \lambda_{l,l}}^k}{k!} = \ident + \sum_{k=1}^{\inf} \f{\br{i \lambda_{l,l}}^k}{k!}P_l^k = \ident + P_l \bs{\sum_{k=1}^{\inf} \f{\br{i \lambda_{l,l}}^k}{k!}} = \ident + P_l \br{e^{i \lambda_{l,l}} - 1} \eq \label{eq:unitary_GP} \]
-    Analogously for the relative phase terms $RP_{n,m}$,
-    \[ RP_{n,m} = \cdots = \ident + P_n \br{e^{i \lambda_{n,m}} - 1} \eq \label{eq:unitary_RP} \]
-    Finally, the rotation terms $R_{m,n}$ can also be simplified by examining powers of $i \sigma_{n,m}$,
-    \[ R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}} = \sum_{k=0}^{\inf} \f{\br{\ket{m}\bra{n} - \ket{n}\bra{m}}^k \lambda_{m,n}^k}{k!} \]
-    One can verify that the following properties hold,
-    \begin{align*}
-        \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^0 &= \ident \\
-        \forall k \in \N, k \neq 0 : \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^{2k} &= \br{-1}^k\br{\ket{m}\bra{m} + \ket{n}\bra{n}} \\
-        \forall k \in \N : \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^{2k+1} &= \br{-1}^k\br{\ket{m}\bra{n} - \ket{n}\bra{m}}
-    \end{align*}
-    Revealing the simplified form of $R_{m,n}$,
-    \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \sum_{j=1}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j}}{\br{2j}!} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sum_{j=0}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j+1}}{\br{2j+1}!} \]
-    \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sin\lambda_{n,m} \eq \label{eq:unitary_R} \]
-    By combining the optimizations of \cref{eq:unitary_GP,eq:unitary_RP,eq:unitary_R} together we arrive at an equivalent form for \cref{eq:spengler_unitary} that is computational more efficient.
-    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n}RP_{n,m}}} \cdot \bs{\prod_{l=1}^{d} GP_{l}}  \eq \label{eq:spengler_unitary_fast} \]
-
     \clearpage
     \section{Large Triangle Structure Inequalities}
+    \label{sec:web_inequalities}
     \subsection{Web Inflation Inequality}
     \label{sec:web_inequality}
     The following is a causal compatibility inequality for the Triangle structure that is violated by the Fritz distribution outlined in \cref{sec:fritz_distribution} and was derived using the Web inflation of \cref{fig:the_web_inflation}.
