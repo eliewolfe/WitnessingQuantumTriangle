@@ -26,70 +26,51 @@
     \end{abstract}
     \maketitle
     \tableofcontents
-    \setlength{\parskip}{1em}
+    % \setlength{\parskip}{1em}
     \clearpage
 
     \section{Introduction}
     \label{sec:introduction}
-    In recent decades, the technical utility of quantum mechanics has become abundantly clear. In the realm of computation, quantum algorithms -- such as Shor's algorithm~\cite{Shor_1997} and numerous others~\cite{Jordan_2016} -- scale exponentially better than their classical counterparts. In the realm of secure communication, quantum protocols --- a popular example being Quantum Key Distribution~\cite{Bennett_2014} -- are able to provide privacy even against hypothetical adversaries with unlimited computational power, a desideratum which classical protocols are unable to fulfill. History, every opportunity of quantum phenomena which fails to be emulated by classical resources has led to a practical exploitation of the non-classical feature in order to solve a some computational of communicational problem~\cite{Neilsen_Chaung_2011}. Motivated by past successes, a primal objective of modern quantum information theory is the discovery of new situations wherein quantum mechanics offers an advantage, and certification that the quantum advantage is genuine.
+    In recent decades, the technical utility of quantum mechanics has become abundantly clear. In the realm of computation, quantum algorithms --- such as Shor's algorithm~\cite{Shor_1997} and numerous others~\cite{Jordan_2016} --- scale exponentially better than their classical counterparts. In the realm of secure communication, quantum protocols --- a popular example being Quantum Key Distribution~\cite{Bennett_2014} --- are able to provide privacy even against hypothetical adversaries with unlimited computational power, a desideratum which classical protocols are unable to fulfill. Throughout history, every aspect of quantum phenomena which fails to be emulated by classical resources has led to a practical exploitation of the non-classical feature in order to solve a some computational of communicational problem~\cite{Neilsen_Chaung_2011}. Motivated by past successes, a primal objective of modern quantum information theory is the discovery of new situations wherein quantum mechanics offers an advantage, and certification that the quantum advantage is genuine.
 
-    From a foundational prospective, the most robust demonstrations of quantum phenomena with no classical emulation have involved Bell inequalities~\cite{Bell_1964}. Originally, Bell inequalities were derived as a way to show that no hidden variable theory could ever account for quantum mechanics; in this sense Bell inequalities are a response to the famous EPR paradox~\cite{EPR_Orig}. The enumeration of Bell inequalities has since become a widespread systematic way of demonstration the \textit{non-classicality} of a given observation. More recently it has been appreciated that Bell inequalities can understood as consequences of \term{causal inference}~\cite{Wood_2012}. Causal inference is concerned with classifying observations into those which can and cannot be explained by a hypothesized causal structure. The abstract nature of causal inference is responsible for its presence in numerous scientific fields including machine learning and biology~\cite{Pearl_2009,Pearl_2009_tr}. Causal compatibility inequalities, such as Bell of Instrumental inequalities, characterizer the space of observations that are compatible with a hypothesized causal structure, albeit the characterization offered by practically derivable inequalities often only an approximation. To derive the traditional Bell inequalities from causal inference one starts with a (classical) causal structure known as the Bell structure, as depicted in \cref{fig:bell_scenario}. The fundamental Bell structure involves non-communicating parties making measurements on some hidden shared resource $\la$, where the measurement outcomes ($A, B$) are presumed to be stochastic functions of the the local choices of measurement settings ($S_A, S_B$) and the shared resource $\la$. Quantum non-classicality in the Bell structure has been thoroughly studied since Bell's original work~\cite{Brunner_2013}. More complex scenarios, however, such as the correlation scenarios proposed by Fritz~\cite{Fritz_2012,Fritz_2014}, are much less understood. Here we investigate one particular causal structure: the Triangle structure (\cref{fig:triangle_structure}).
+    From a foundational prospective, the most robust demonstrations of quantum phenomena with no classical emulation have involved Bell inequalities~\cite{Bell_1964}. Originally, Bell inequalities were derived as a way to show that no hidden variable theory could ever account for quantum mechanics; in this sense Bell inequalities are a response to the famous EPR paradox~\cite{EPR_Orig}. The enumeration of Bell inequalities has since become a widespread systematic way of demonstration the \textit{non-classicality} of a given observation. More recently it has been appreciated that Bell inequalities can understood as consequences of \term{causal inference}~\cite{Wood_2012}. Causal inference is concerned with classifying observations into those which can and cannot be explained by a hypothesized causal structure. The abstract nature of causal inference is responsible for its presence in numerous scientific fields including machine learning and biology~\cite{Pearl_2009,Pearl_2009_tr}. Causal compatibility inequalities, such as Bell and Instrumental inequalities, characterize the space of observations that are compatible with a hypothesized causal structure, albeit the characterization offered by practically derivable inequalities is often only an approximation. To derive the traditional Bell inequalities from causal inference one starts with a (classical) causal structure known as the Bell structure, as depicted in \cref{fig:bell_scenario}. The fundamental Bell structure involves non-communicating parties making measurements on some hidden shared resource $\la$, where the measurement outcomes ($A, B$) are presumed to be stochastic functions of the the local choices of measurement settings ($S_A, S_B$) and the shared resource $\la$. Quantum non-classicality in the Bell structure has been thoroughly studied since Bell's original work~\cite{Brunner_2013}. More complex structures, however, such as the correlation scenarios proposed by Fritz~\cite{Fritz_2012,Fritz_2014}, are much less understood. Here we investigate one particular causal structure: the Triangle structure (\cref{fig:triangle_structure}).
 
-    The Triangle structure (\cref{fig:triangle_structure}) is a causal structure composed of $3$ parties labeled $A, B, C$ arranged in a triangular configuration while pair-wise sharing hidden/latent variables $X, Y, Z$. It has been extensively studied previously (see~\cite[Fig. 1]{Steudel_2010},~\cite[Fig. 6]{Chaves_2014},~\cite[Fig. 8]{Branciard_2012},~\cite[Fig. 8, App. E]{Henson_2014},~\cite[Fig. 3]{Fritz_2012},~\cite[Fig. 1]{Inflation}, $\ldots$). An overview of some milestone results is provided in \cref{sec:triangle_structure}. Identifying causal compatibility inequalities for this configuration has been seen as particularly challenging~\citet{Branciard_2012}. Further identifying causal compatibility inequalities of such high resolution that such inequalities can be violated by quantum-accessible distributions has remained out-of-reach for the Triangle structure.
+    The Triangle structure (\cref{fig:triangle_structure}) is a causal structure composed of $3$ parties labeled $A, B, C$ arranged in a triangular configuration while pair-wise sharing hidden/latent variables $X, Y, Z$. It has been extensively studied previously (see~\cite[Fig. 1]{Steudel_2010},~\cite[Fig. 6]{Chaves_2014},~\cite[Fig. 8]{Branciard_2012},~\cite[Fig. 8, App. E]{Henson_2014},~\cite[Fig. 3]{Fritz_2012},~\cite[Fig. 1]{Inflation}, $\ldots$). An overview of some milestone results is provided in \cref{sec:triangle_structure}. Identifying causal compatibility inequalities for this configuration has been seen as particularly challenging~\cite{Branciard_2012}. Further identifying causal compatibility inequalities of such high resolution that such inequalities can be violated by quantum-accessible distributions has remained out-of-reach for the Triangle structure.
 
     This work is the first, therefore, to find causal compatibility inequalities for the Triangle structure that are able to be violated by quantum-accessible distributions. This accomplishment was made possible through the combination of two previous developments. The first, an insight made by \citet{Fritz_2012} regarding the ability to re-interpret the Bell structure as a portion of the Triangle structure. The second, a new framework for solving causal inference problems developed by Wolfe \emph{et al.}~\cite{Inflation} called \term{The Inflation Technique}. Ultimately, this work serves as a validation that the Inflation Technique is sensitive enough to offer new insights into quantum non-classicality. Moreover, these new inequalities offer an avenue for recognizing previously unknown forms of non-classicality. The authors attempts to find such novel resources were met with only partial success, suggesting clear refinements for future exploration.
 
-    The manuscript is organized into the following sections: \Cref{sec:causal_compatibility} recalls important notions from causal inference theory and sets up the notation to be used. \Cref{sec:triangle_structure} discusses the Triangle structure and provides an overview of existing research; identifying its stark differences from the Bell structure and motivating why the Triangle structure was chosen as a case study. \Cref{sec:fritz_distribution} defines and discusses a singularly-quantum correlation first conceived of by \citet{Fritz_2012}, which we term the \term{Fritz distribution}. The Fritz distribution was proven to be non-classical without the use of inequalities --- this report fills in the desired missing inequalities. \Cref{sec:inflation_technique} briefly summaries the Inflation Technique in the specific context of this work. Although the summary presented here is designed to be self-standing, a much more pedagogical introduction is offered by the original work~\cite{Inflation}. \Cref{sec:deriving_inequalities} demonstrates how the inflation technique can be used to derive causal compatibility inequalities for the Triangle structure that are violated by quantum-accessible distributions. A sample of these inequalities are presented at the end of \cref{sec:found_inequalities} (specifically \cref{eq:ww_ineq}) as well as in \cref{sec:web_inequality,sec:symmetic_web_inequality}. Finally, \cref{sec:violations_noise} introduces the method for parameterizing the space of quantum-accessible distributions which we used to numerically optimize against our derived inequalities in search of stronger types of non-classicality. Additionally, the Fritz distribution is subjected to noise in order to measure the robustness of the derived inequalities.
+    The manuscript is organized into the following sections: \Cref{sec:causal_compatibility} recalls important notions from causal inference theory and sets up the notation to be used. \Cref{sec:bell_structure} offers a summary of the popular Bell structure and associated inequalities. \Cref{sec:triangle_structure} discusses the Triangle structure and provides an overview of existing research; identifying its stark differences from the Bell structure and motivating why the Triangle structure was chosen as a case study. \Cref{sec:fritz_distribution} defines and discusses a singularly-quantum correlation first conceived of by \citet{Fritz_2012}, which we term the \term{Fritz distribution}. The Fritz distribution was proven to be non-classical without the use of inequalities --- this report fills in the desired missing inequalities. A sample of these inequalities are presented in \cref{sec:found_inequalities} (specifically \cref{eq:ww_ineq} as well as in \cref{sec:web_inequality,sec:symmetic_web_inequality}\todo[TC]{Reorganize the location of the inequalities}). \Cref{sec:inflation_technique} briefly summaries the Inflation Technique in the specific context of this work. Although the summary presented here is designed to be self-standing, a much more pedagogical introduction is offered by the original work~\cite{Inflation}. \Cref{sec:deriving_inequalities} demonstrates how the inflation technique can be used to derive causal compatibility inequalities for the Triangle structure that are violated by quantum-accessible distributions. Finally, \cref{sec:violations_noise} introduces the method for parameterizing the space of quantum-accessible distributions which we used to numerically optimize against our derived inequalities in search of stronger types of non-classicality. Additionally, the Fritz distribution is subjected to noise in order to measure the robustness of the derived inequalities. \Cref{sec:conclusions} concludes with proposed avenues for further research.
 
 
     \section{Causal Compatibility}
-    \todo[TC]{Talk to Elie about the varying notions of compatibility}
     \label{sec:causal_compatibility}
-    The task of causal inference aims to determine the set of potentially observable probability distribution compatible with some hypothesis about causal relationships. whether or not a given family of observed probability distributions can be explained by a proposed causal mechanism~\cite{Pearl_2009}. If a set of observed distributions can be explained by the hypothesized causal mechanism, then the observations are said to be \textit{compatible} with the causal mechanism. In order to define compatibility rigorously, we first need to formally define what is meant by ``set of observations''.
+    The task of causal inference is to determine the set of potentially observable probability distributions compatible with some hypothesis about causal relationships~\cite{Pearl_2009}. If an observed distribution can be explained by the hypothesized causal mechanism, then the distribution is said to be \textit{compatible} with said causal mechanism. In order to define compatibility rigorously, we first need to formally define the notion of a causal hypothesis.
 
-    \subsection{Marginal Models}
-    Given a set of observable variables $\jointvar = \bc{v_1, \ldots, v_k}$ where each $v \in \jointvar$ is a statistical random variable, one can conceivably make a measurement over of these variables and obtain a joint probability distribution $\prob[\jointvar] = \prob[v_1,\ldots,v_n]$. More generally however, and depending on the context, it is possible to make a measurement on a set of the system $V \subset \jointvar$ in order to obtain a marginal distribution $\prob[V]$. With complete generality however, one could in principle be limited so as to only be able to record observations on portions of the system $\mscenario = \bc{V_1, \ldots, V_m \mid \forall i : V_i \subseteq \jointvar}$ obtaining a collection of marginal probability distributions $\bc{\prob[V_1], \ldots, \prob[V_m] \mid \forall i: V_i \in \mscenario}$.
+    A hypothesis of causal mechanism is formally referred to as a \term{causal structure} and can be represented as a \term{directed acyclic graph}. A directed graph $\graph$ is an ordered tuple $\br{\nodes, \edges}$ of respectively \textit{nodes} and \textit{edges} where each edge $e \in \edges$ connects a \textit{pair} of nodes $n, m \in \nodes$ with a directed arrow $e = \bc{n \to m}$. A directed graph is \textit{acyclic} if there are no paths following the directions of the edges starting from and returning to the same node. The nodes $\nodes$ of a causal structure represent random variables while the edges $\edges$ represent a casual influence from one variable to another pursuant to the prescribed direction.
 
-    The set $\mscenario = \bc{V \mid V \subseteq \jointvar}$ of subsets of $\jointvar$ is referred to as the \term{marginal scenario} and each element $V \in \mscenario$ is termed a \term{(marginal) context} of $\mscenario$. The complete set of marginal distributions is referred to as the \term{marginal model} and is denoted with an superscript $\prob^{\mscenario}$:
-    \[ \prob^{\mscenario} = \bc{\prob[V] \mid V \in \mscenario} \]
-    A marginal model acts as the most general description of a family of observations that can be made over $\jointvar$. Strictly speaking, as defined by~\cite{Fritz_2011}, a marginal scenario forms an \textit{abstract simplicial complex} where it is required that all subsets of contexts are also contexts.
-    \[ \forall V \in \mscenario, V' \subset V : V' \in \mscenario \]
-    Throughout this document, we exclusively consider (without loss of generality) the \textit{maximal} marginal scenario; restricting our focus to the largest contexts in the marginal scenario. Additionally, all marginal scenarios are taken to be \text{complete} in the sense that the marginal scenario covers the complete set of observable variables $\jointvar$.
-    \[ \jointvar = \bigcup_{V \in \mscenario} V \]
+    Henceforth, we will utilize a number of familiar notions from graph theory and denote them accordingly. The \term{parents of a node} $n \in \nodes$ are all nodes which point directly into $n$, i.e. $\Pa[\graph]{n} \defined \bc{m \mid m \to n}$. Similarly defined are the \term{children of a node} $\Ch[\graph]{n} \defined \bc{m \mid n \to m}$. Recursively defined are the \term{ancestors of a node} $\An[\graph]{n} \defined \bigcup_{i\in\mathbb{N}} \Pa[\graph][i]{n}$ where $\Pa[\graph][i]{n} \defined \Pa[\graph]{\Pa[\graph][i-1]{n}}$ and $\Pa[\graph][0]{n} = n$ and the \term{descendants of a node} $\De[\graph]{n} \defined \bigcup_{i\in\mathbb{N}} \Ch[\graph][i]{n}$ where $\Ch[\graph][i]{n} \defined \Ch[\graph]{\Ch[\graph][i-1]{n}}$ and $\Ch[\graph][0]{n} = n$. Finally, we extend this notation to a subset of nodes $N \subseteq \nodes$ by performing a union over elements. As an example, the parents of the nodes $N \subseteq \nodes$ are denoted $\Pa[\graph]{N} = \bigcup_{n \in N} \Pa[\graph]{n}$.
 
-    \subsection{Causal Structure}
-    A hypothesis of causal mechanism is formally referred to as  a \term{causal structure}. Mathematically, a causal structure can be represented as a directed acyclic graph $\graph = \br{\nodes, \edges}$ of nodes $\nodes$ and edges $\edges$ as defined in \cref{sec:graph_theory}. The nodes of a causal structure are random variables and are classified into two disjoint classes: the \term{latent nodes} $\nodes_L$ representing the set of nodes that are unobservable and the \term{observed nodes} $\nodes_O$. The latent nodes of a causal structure represent completely hidden variables that are hidden by some fundamental process or cannot be measured due to other limitations. The observed nodes represent random variables that are measurable and in practice will be observed by the marginal model $\prob^\mscenario$. The edges $\edges$ of a causal structure represent casual influence between variables within the causal structure.
+    % A number of causal structures are depicted throughout this document (see \cref{fig:bell_scenario,fig:triangle_structure,fig:inflations}). As an example, the Triangle structure has $3$ observable nodes and $3$ latent nodes,
+    % \[ \nodes_{O} = \bc{A, B, C} \qquad \nodes_{L} = \bc{X, Y, Z} \]
+    % along with $6$ edges indicating that the latent nodes $\bc{X, Y, Z}$ cause and influence the observed nodes $\bc{A, B, C}$.
+    % \[ \edges = \bc{\bc{X \to A}, \bc{Y \to A}, \bc{Y \to B}, \bc{Z \to B}, \bc{Z \to C}, \bc{X \to C}} \]
 
-    A number of causal structures are depicted throughout this document (see \cref{fig:bell_scenario,fig:triangle_structure} as well as \cref{fig:inflations}). As an example, the Triangle structure has $3$ observable nodes and $3$ latent nodes,
-    \[ \nodes_{O} = \bc{A, B, C} \qquad \nodes_{L} = \bc{X, Y, Z} \]
-    along with $6$ edges indicating that the latent nodes $\bc{X, Y, Z}$ cause and influence the observed nodes $\bc{A, B, C}$.
-    \[ \edges = \bc{\bc{X \to A}, \bc{Y \to A}, \bc{Y \to B}, \bc{Z \to B}, \bc{Z \to C}, \bc{X \to C}} \]
+    Now that the notion of a causal structure $\graph$ is defined along with some standard graph-theoretic notation, it is now possible to precisely define the notion of compatibility between $\graph$ and a probability distribution $\prob[\nodes]$ defined over the nodes of $\graph$. Intuitively, the absence of certain causal connections within $\graph$ should limit the set of possible observations that can be made on $\graph$. Specifically, the causal structure $\graph$ hypothesizes that each variable $n \in \nodes$ is causally influenced by its parents $\Pa[\graph]{n}$, then $n$ should be independent of all other variables, except its own descendants when conditioned over $\Pa[\graph]{n}$. This is known as the \term{local Markov property}:\footnote{Here $A \indep B \mid C$ denotes statistical independence between $A$ and $B$ conditional on $C$ where $A,B,C \subseteq \nodes$, i.e. for a given probability distribution $\prob[\nodes]$, $\prob[AB \mid C] = \prob[A \mid C]\prob[B \mid C]$.}
+    \[ n \indep \br{\nodes \setminus \De[\graph]{n}} \mid \Pa[\graph]{n} \quad \forall n \in \nodes \eq \label{eq:local_markov_property} \]
+    If a given distribution $\prob[\nodes]$ defined over \textit{all} of the nodes $\nodes$ of $\graph$ satisfies \cref{eq:local_markov_property}, then $\prob[\nodes]$ is said to be \term{compatible with $\graph$}. Alternatively yet equivalently, the notion of compatibility can be interpreted as follows: a distribution $\prob[\nodes]$ is compatible with $\graph$ if $\prob[\nodes]$ can be consistently factorized into conditional probability distributions for each variable $n \in \nodes$ conditioned on its parents $\Pa[\graph]{n}$:
+    \[ \prob[\nodes] = \prod_{n \in \nodes} \prob[n \mid \Pa[\graph]{n}] = \prob[n_1 \mid \Pa[\graph]{n_1}] \times \cdots \times \prob[n_k \mid \Pa[\graph]{n_k}] \eq \label{eq:local_markov_property_operation}\]
+    The conditional distributions in \cref{eq:local_markov_property_operation} (i.e. $\{\prob[n \mid \Pa[\graph]{n}] \mid n \in \nodes\}$) are referred to as a set of \term{causal parameters for $\graph$}. If a distribution $\prob[\nodes]$ violates \cref{eq:local_markov_property} or equivalently cannot be factorized according to \cref{eq:local_markov_property_operation}, $\prob[\nodes]$ is said to be \term{incompatible} with $\graph$. When one is specified with a joint distribution $\prob[\nodes]$ defined over all nodes of a causal structure $\graph$, it is trivially easy to verify whether or not $\prob[\nodes]$ is compatibility with $\graph$; \cref{sec:satisfaction_of_d_sep_relations} describes in detail how this is accomplished.
 
-    \subsection{Compatibility}
-    \label{sec:compatibility}
+    A challenge is present when one is supplied with a partial observation, i.e. a joint distribution $\prob[\nodes_{O}]$ where $\nodes_{O} \subset \nodes$ is some subset of variables referred to as the \term{observable nodes} $\nodes_O$. In such cases, \cref{eq:local_markov_property_operation} can not be verified by direction calculation because it is certainly possible that the parents of some observable node are themselves unobservable $\Pa[\graph]{\nodes_{O}} \not \subseteq \nodes_{O}$. In such cases, compatibility between $\graph$ and $\prob[\nodes_{O}]$ depends on the existence or non-existence of a set of causal parameters for $\graph$ such that $\prob[\nodes_{O}] = \prod_{n \in \nodes_{O}} \prob[n \mid \Pa[\graph]{n}]$. The unobservable nodes are termed \term{latent nodes} $\nodes_L = \nodes \setminus \nodes_{O}$ representing hidden random variables that are hidden either by some fundamental process or cannot be measured due to other limitations.
+    \todo[TC]{Explain why this is difficult more.}
+    \todo[TC]{Figure out if I should include d-sep here}
+    \todo[TC]{Explain what this work and inflation accomplishes regarding this}
 
-    Now that the notions of a causal structure $\graph$ and a marginal model $\prob^{\mscenario}$ are defined, it is now possible to precisely define the notion of compatibility between the two. Intuitively, the absence of certain causal connections within $\graph$ should restrict and limit the set of possible observations that can be made on $\graph$; equivalently, the causal connections within $\graph$ should explain $\prob^{\mscenario}$. If each variable $n \in \nodes$ is caused by its parents $\Pa[\graph]{n}$, then $n$ should be independent of all other variables that are not its descendants. This is known as the \term{local Markov property}:
-    \[ n \indep \nodes \setminus \De[\graph]{n} \mid \Pa[\graph]{n} \quad \forall n \in \nodes \eq \label{eq:local_markov_property} \]
-    Where $\indep$ denotes statistical independence. With this as motivation, we define a set of \term{causal parameters} for a causal structure $\graph$ to be a specification of a conditional distribution for every variable $n \in \nodes$ given its parents:
-    \[ \bc{\prob[n \mid \Pa[\graph]{n}] \mid n \in \nodes} \eq \label{eq:causal_parameters} \]
-    It is important to note that a set of causal parameters is not unique; the numerical nature of set of causal parameters is a \text{choice}. Altogether, a marginal model $\prob^{\mscenario}$ is \term{compatible} with a causal structure $\graph$ if there exists a choice of causal parameters such that each context $\prob[V] \in \prob^{\mscenario}$ can be \textit{recovered} from the following series of operations:
-    \begin{enumerate}
-        \item Obtain a joint probability distribution over \textit{all} variables of the causal structure using the chosen casual parameters:\footnote{Here $\prod$ denotes the product distribution $\prod_{n \in \nodes} \prob[n \mid \Pa[\graph]{n}] = \prob[n_1 \mid \Pa[\graph]{n_1}] \times \cdots \times \prob[n_k \mid \Pa[\graph]{n_k}]$.}
-        \[ \prob[\nodes] = \prod_{n \in \nodes} \prob[n \mid \Pa[\graph]{n}] \eq \label{eq:local_markov_property_operation}\]
-        This step ensures that the local Markov property (\cref{eq:causal_parameters}) holds for all variables $n \in \nodes$.
-        \item Marginalize over the latent variables of $\graph$ to obtain a joint distribution over the observed variables $\nodes_O$:
-        \[ \prob[\nodes_O] = \sum_{\nodes_L} \prob[\nodes] \eq \label{eq:observable_marginalization} \]
-        \item Finally marginalize over the observed nodes not in $V$ to obtain $\prob[V]$:
-        \[ \prob[V] = \sum_{\nodes_O \setminus V} \prob[\nodes_O] \eq \label{eq:context_marginalization} \]
-    \end{enumerate}
-    It is important to note that compatibility between $\prob^{\mscenario}$ and $\graph$ requires that it is possible to recover \textit{each} context $\prob[V] \in \prob^{\mscenario}$ from the \textit{same} set of causal parameters. If it is not possible for $\prob^{\mscenario}$ to be recovered for \textit{any} choice of causal parameters, then $\prob^{\mscenario}$ is \term{incompatible}.
+    In practice however, checking causal parameters systemically is intractable, especially when the cardinality (number of outcomes) of the latent variables is unspecified. Instead, \term{causal compatibility inequalities}\footnote{We refer to these inequalities as ``causal compatibility inequalities'' instead of simply Bell inequalities for two reasons. Firstly, ``Bell inequalities'' usually are associated specifically with the Bell structure. Secondly, the inequalities derived in this work are fundamentally distinct from a typical Bell inequality in that these inequalities are \textit{polynomial} over $\prob[\nodes_{O}]$ instead of \textit{linear}.} are probabilistic inequalities defined over $\prob[\nodes_{O}]$ and its induced marginals which constraint the set of compatible probability distributions. If a probability distribution $\prob[\nodes_{O}]$ happens to \textit{violate} any causal compatibility inequality, then that distribution deemed \textit{incompatible}. In \cref{sec:deriving_inequalities}, a brief discussion of existing techniques for deriving these inequalities will take place.
 
-    \subsection{Inequalities}
-    As defined in \cref{sec:compatibility}, determining compatibility is equivalent to determining if a set of causal parameters exists with the above-mentioned properties. In practice however, checking causal parameters systemically is intractable, especially when the cardinality (number of outcomes) of the latent variables is unspecified. Instead, \term{causal compatibility inequalities}\footnote{We refer to these inequalities as ``causal compatibility inequalities'' instead of simply Bell inequalities for two reasons. Firstly, ``Bell inequalities'' usually are associated specifically with the Bell structure/Bell causal structure. Secondly, the inequalities derived in this work are fundamentally distinct from a typical Bell inequality in that these inequalities are \textit{polynomial} over $\prob^{\mscenario}$ instead of \textit{linear}.} are probabilistic inequalities defined over the marginal contexts $\prob[V] \in \prob^{\mscenario}$ within the marginal model. If a marginal model $\prob^{\mscenario}$ happens to \textit{violate} any causal compatibility inequality, then that marginal model is definitely \textit{incompatible}. In \cref{sec:deriving_inequalities}, a brief discussion of existing techniques for deriving these inequalities will take place.
+    Unfortunately, a singular inequality cannot prove that a given distribution is \textit{compatible}, only \textit{incompatible}. Instead, a \textit{complete characterization} of compatibility would consist of a complete set of all valid causal compatibility inequalities; satisfaction of a complete set of inequalities does prove compatibility. Currently however, it is unknown how to obtain a complete characterization for any given causal structure, including the Triangle structure.
 
-    Unfortunately, a singular inequality can not prove that a given marginal model is \textit{compatible}, only \textit{incompatible}. Instead, a \textit{complete characterization} of compatibility would consist of a complete set of all valid causal compatibility inequalities; satisfaction of a complete set of inequalities does prove compatibility. Currently however, it is unknown how to obtain a complete characterization for any given causal structure, including the Triangle structure.
-
-    From the perspective of identifying quantum non-classicality, the causal structure $\graph$ acts as the classical hypothesis for a particular marginal model $\prob^{\mscenario}$. Therefore, non-classicality becomes synonymous with incompatibility: if a marginal model $\prob^{\mscenario}$ is incompatible, then it is non-classical. Henceforth, we will use these two terms interchangeably. From a resource standpoint, if the non-classicality of $\prob^{\mscenario}$ can be witnessed by an inequality $I$, but $\prob^{\mscenario}$ can be implemented using quantum states and measurements, then the causal compatibility inequality $I$ represents a concrete task where quantum resources out-perform classical resources.
+    From the perspective of identifying quantum non-classicality, a causal structure $\graph$ adopts the role of a classical hypothesis. Therefore, non-classicality becomes synonymous with incompatibility: if a distribution $\prob[\nodes_{O}]$ is incompatible, then it is non-classical. Henceforth, we will use these two terms interchangeably. From a resource standpoint, if the non-classicality of $\prob[\nodes_{O}]$ can be witnessed by an inequality $I$, but $\prob[\nodes_{O}]$ can be implemented using quantum states and measurements, then the causal compatibility inequality $I$ represents a physical task where quantum resources out-perform classical resources.
 
     \section{Bell Structure}
     \label{sec:bell_structure}
@@ -314,96 +295,6 @@
 
     In summary, these causal compatibility inequalities represent a completion of objective \cref{r:1} from \cref{sec:fritz_distribution}. These inequalities are derived without making use of Bell's theorem and instead use the Inflation Technique which is completely independent of Bell's theorems. Additionally, the derivation of causal compatibility inequalities allows one prove incompatibility even when perfect correlations are absent. Moreover, they allow one to probe the amount of noise the Fritz distribution can sustain before becoming compatible (see \cref{sec:violations_noise}). Unfortunately, infeasibility certificates are found by linear programing software to certify the infeasibility of a \textit{particular distribution}. This means that inequalities like \cref{eq:ww_ineq}, the one presented in \cref{sec:web_inequality}, and others are specifically manufactured in order witness a particular type of quantum non-classicality. In an effort to derive inequalities that could lead to potentially new forms of non-classicality, we searched for inequalities that did not admit biased towards the Fritz distribution.
 
-    \section{Symmetric Inequalities}
-    \label{sec:symmetric_inequalities}
-
-    Quite surprisingly, it is possible to derive causal compatibility inequalities for the Triangle structure that are symmetric under the exchange of parties. This is done by grouping marginal events $m \in \Events{\mscenario}$ into orbits under the action of party exchange. Even more interestingly, these inequalities are violated by the Fritz distribution. This comes as a surprise because the Fritz distribution is \text{not} invariant under the exchange of parties; in fact the Fritz distribution is noticeably biased toward $C$.
-
-    In general, exploiting symmetries of the marginal scenario is useful for a few distinct reasons. First, \citet{Bancal_2010} discuss computational advantages in considering symmetric versions of marginal polytopes mentioned in \cref{sec:deriving_inequalities}; the number of extremal points typically grows exponentially in $\jointvar$, but only polynomial for the symmetric polytope. They also note a number of interesting inequalities (such as CHSH~\cite{CHSH_Original}) can be written in a way that is symmetric under the exchange of parties, demonstrating that non-trivial inequalities can be recovered from facets of a symmetric polytope. Secondly, numerical optimizations against symmetric inequalities lead to one of two interesting cases: either the extremal distribution is symmetric itself or it is not. The latter case generates a family of incompatible distributions obtained by applying symmetry operations on the extremal distribution\footnote{If the extremal distribution happens to not be symmetric, there is indication that the space of accessible distributions is non-convex.}.
-
-    To demonstrate what types of symmetries we have in mind, we present the following example:
-    \begin{example}
-        \label[example]{ex:symmetries}
-        First consider the marginal scenario $\mscenario = \bc{\bc{A, B, C}, \bc{C, D}, \bc{A, D}}$ where each variable in $\jointvar = \bc{A,B,C,D}$ has binary outcomes: $O_A = O_B = O_C = O_D = \bc{0,1}$. Moreover, let $I_{\mscenario}$ be the following compatibility inequality over $\mscenario$ for some causal structure $\graph$,
-        \[ I_{\mscenario} = \bc{\prob[ABC][010] \leq \prob[CD][00] + \prob[AD][01]}  \]
-        Intuitively, the compatibility of $\probvec^{\mscenario}$ is \textit{independent} of the how one labels outcomes. Suppose $\varphi : \jointvar \to \jointvar : \bc{a,b,c,d} \mapsto \varphi\bs{\bc{a,b,c,d}} = \bc{c,a,d,b}$ is a permutation of the variables $\jointvar$. Intuitively $\varphi$ acts on $I_{\mscenario}$ in the following way,
-        \begin{align*}
-        \varphi\bs{I_{\mscenario}} &= \bc{\prob[\varphi\bs{abc}][010] \leq \prob[\varphi\bs{cd}][00] + \prob[\varphi\bs{ad}][01]} \\
-        &= \bc{\prob[cad][010] \leq \prob[db][00] + \prob[cb][01]} \\
-        &= \bc{\prob[acd][100] \leq \prob[bd][00] + \prob[bc][10]}
-        \end{align*}
-        In general (as in this example), permutations over all variables can modify the marginal scenario $\varphi\bs{\mscenario} \neq \mscenario$; in general we write $\varphi\bs{I_{\mscenario}} = \varphi\bs{I}_{\varphi\bs{\mscenario}}$. Although $\varphi\bs{I_{\mscenario}}$ is still a valid causal compatibility inequality, in constrains marginal models of a different marginal scenario $\varphi\bs{\mscenario}$ and are in general of no interest.
-    \end{example}
-
-    Following the observations of \cref{ex:symmetries}, it is always possible to permute the random variables in a marginal scenario to produce new and valid inequalities. The symmetry group over a the complete set of variables $\jointvar$ is simply the \text{permutation group}\footnote{The permutation group over a set $S$ is the set of all bijective maps $\varphi : S \to S$.} $\Perm{\jointvar}$. As was noted in \cref{ex:symmetries}, some permutations $\varphi \in \Perm{\jointvar}$ have the undesired possibility of transforming $\mscenario$ into a different marginal scenario.
-    \[ \varphi\bs{\mscenario} \defined \bc{\varphi\bs{V_1}, \ldots, \varphi\bs{V_k}} \neq \mscenario \]
-    This means that there could exist $V \in \mscenario$ such that $\varphi\bs{V} \not \in \mscenario$. Permutations $\varphi$ retaining this property are unable to generate compatibility inequalities over the same marginal scenario. Therefore, the desired set of symmetries is a subgroup that takes $\mscenario$ to $\mscenario$.
-
-    \begin{definition}
-        The \term{variable permutation group} $\gp$ for a marginal scenario $\mscenario$ is the joint permutation subgroup that stabilizes the marginal scenario.
-        \[ \Phi\br{\mscenario} \defined \bc{\varphi \in \Perm{\jointvar} \mid \forall V \in \mscenario : \varphi\bs{V} \in \mscenario} \]
-    \end{definition}
-
-    Obtaining the variable permutation group $\gp\br{\mscenario}$ is a simple application of a group stabilizer algorithm. After obtaining $\gp\br{\mscenario}$, one can take known compatibility inequalities $I_{\mscenario}$ can create a whole family of inequalities $\bc{\varphi\bs{I_{\mscenario}} \mid \varphi \in \gp\br{\mscenario}}$ that are valid for the same marginal scenario $\varphi\bs{I_{\mscenario}} = \varphi\bs{I}_{\varphi\bs{\mscenario}} = \varphi\bs{I}_{\mscenario}$.
-
-    Although very useful for reducing computational complexity~\cite{Bancal_2010}, we divert our attention to finding \textit{symmetric} inequalities themselves.
-    \[ \forall \varphi \in \gp\br{\mscenario} :  \varphi\bs{I_{\mscenario}} = I_{\mscenario} \]
-    In order to do this, we must first define how elements $\varphi \in \gp$ act on marginal events. The action of $\varphi \in \gp$ on any outcome $f \in \Events{V}$ (denoted $\geo\bs{f}$) is defined as,
-    \[ \forall v \in \Dom{\varphi\bs{f}} : \br{\varphi\bs{f}}\br{v} \defined f\br{\varphi^{-1}\bs{v}} \eq \label{eq:act_on_variable}\]
-    \Cref{eq:act_on_variable} is nothing more than a mathematical definition for the intuitive action used in \cref{ex:symmetries}.
-    Through repeated action of $\varphi \in \gp$ on marginal outcomes $m \in \Events{\mscenario}$ and joint outcomes $j \in \Events{\jointvar}$, one can define \term{group orbits} of $\gp$ in $\Events{\mscenario}$ and $\Events{\jointvar}$.
-    \begin{align*}
-        \Orb[\gp]{m} &\defined \bc{\varphi\bs{m} \mid \varphi \in \gp} \\
-        \Orb[\gp]{j} &\defined \bc{\varphi\bs{j} \mid \varphi \in \gp}
-    \end{align*}
-    Using these group orbits, it is possible to contract the incidence matrix $M$ of a marginal scenario into a symmetrized version.
-
-    \begin{definition}
-        The \term{symmetric incidence matrix} $M_{\gp}$ for a marginal scenario $\mscenario$ and the variable permutation group $\gp$ is a contracted version of the incidence matrix $M$ for $\mscenario$. Each row of $M_{\gp}$ corresponds to a marginal orbit $\Orb[\gp]{m}$. Analogously each column of $M_{\gp}$ corresponds to a joint orbit $\Orb[\gp]{j}$. The entries of $M_{\gp}$ are integers and correspond to summing over the rows and columns of $M$ that belong to each orbit.
-        \[ \br{M_{\gp}}_{\Orb[\gp]{m}, \Orb[\gp]{j}} = \sum_{\substack{j' \in \Orb[\gp]{j} \\ m' \in \Orb[\gp]{m}}} M_{m',j'} \]
-    \end{definition}
-    It is possible to analogously define a \term{symmetric joint distribution vector} $\probvec^{\jointvar}_{\Phi}$ indexed by $\Orb[\gp]{j}$,
-    \[ \br{\probvec^{\jointvar}_{\Phi}}_{\Orb[\gp]{j}} = \sum_{j' \in \Orb[\gp]{j}} \probvec^{\jointvar}_{j} \]
-    And a \term{symmetric marginal distribution vector} $\probvec^{\mscenario}_{\Phi}$ indexed by $\Orb[\gp]{m}$,
-    \[ \br{\probvec^{\mscenario}_{\Phi}}_{\Orb[\gp]{m}} = \sum_{m' \in \Orb[\gp]{m}} \probvec^{\mscenario}_{m} \]
-    Which altogether define a new, \term{symmetric marginal problem},
-    \[ \probvec^{\mscenario}_{\Phi} = M_{\gp} \cdot \probvec^{\jointvar}_{\Phi} \]
-    The symmetric marginal problem can be solved using the same computational methods discussed in \cref{sec:deriving_inequalities} and will produce symmetric inequalities.
-
-    In the context of the Inflation technique, a variable symmetry $\Phi\br{\mscenario'}$ over an inflated marginal scenario $\mscenario'$ does not always correspond to a variable symmetry under deflation $\Phi\br{\mscenario}$. In order to derive deflated inequalities that are symmetric under an exchange of parties, it is required that $\Phi\br{\mscenario'} \sim \Phi\br{\mscenario}$ are equivalent up to copy-index.
-
-    For the Triangle structure in particular, the variable permutation group is simply the set of permutations on $A, B, C$: $\Phi\br{\mscenario} = \Perm{A, B, C}$. For the Web inflation (\cref{fig:the_web_inflation}), we have obtained $\gp\br{\PreInj[\graph]{\graph'}}$ which is an order $48$ group with the following $4$ generators:
-    \begin{equation*}
-    \begin{aligned}[c]
-    &\hspace{1mm}\varphi_1 \\
-    A_1 &\to A_4 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_1 \\B_1 &\to B_4 \\B_2 &\to B_3 \\B_3 &\to B_2 \\B_4 &\to B_1 \\C_1 &\to C_4 \\C_2 &\to C_3 \\C_3 &\to C_2 \\C_4 &\to C_1
-    \end{aligned}
-    \quad
-    \begin{aligned}[c]
-    &\hspace{1mm}\varphi_2 \\
-    A_1 &\to A_1 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_4 \\B_1 &\to C_1 \\B_2 &\to C_3 \\B_3 &\to C_2 \\B_4 &\to C_4 \\C_1 &\to B_1 \\C_2 &\to B_3 \\C_3 &\to B_2 \\C_4 &\to B_4
-    \end{aligned}
-    \quad
-    \begin{aligned}[c]
-    &\hspace{1mm}\varphi_3 \\
-    A_1 &\to C_1 \\A_2 &\to C_2 \\A_3 &\to C_3 \\A_4 &\to C_4 \\B_1 &\to A_1 \\B_2 &\to A_2 \\B_3 &\to A_3 \\B_4 &\to A_4 \\C_1 &\to B_1 \\C_2 &\to B_2 \\C_3 &\to B_3 \\C_4 &\to B_4
-    \end{aligned}
-    \quad
-    \begin{aligned}[c]
-    &\hspace{1mm}\varphi_4 \\
-    A_1 &\to A_1 \\A_2 &\to A_2 \\A_3 &\to A_3 \\A_4 &\to A_4 \\B_1 &\to B_2 \\B_2 &\to B_1 \\B_3 &\to B_4 \\B_4 &\to B_3 \\C_1 &\to C_3 \\C_2 &\to C_4 \\C_3 &\to C_1 \\C_4 &\to C_2
-    \end{aligned}
-    \end{equation*}
-    % ((3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8),
-    %  (0, 2, 1, 3, 8, 10, 9, 11, 4, 6, 5, 7),
-    %  (8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 6, 7),
-    %  (0, 1, 2, 3, 5, 4, 7, 6, 10, 11, 8, 9))
-    It is easy to verify that $\varphi_1, \varphi_2, \varphi_3, \varphi_4$ are all automorphisms of the web inflation. Moreover they stabilize the pre-injectable sets of \cref{eq:pre_injectable_triangle_structure_web}. Importantly,
-    \[ \gp\br{\PreInj[\graph]{\graph'}} \sim \Perm{A,B,C} \]
-    To see this, $\varphi_1$ and $\varphi_4$ become the identity element $\ident$ in $\Perm{A,B,C}$ upon removal of the copy-index, leaving $\varphi_2$ to generate reflections and $\varphi_3$ to generate rotations.
-
-    The symmetric incidence matrix $M_{\Phi}$ for the Web inflation is considerably smaller than $M$. The number of rows of $M_{\Phi}$ is a number of distinct orbits $\Orb[\Phi]{m}$ in $\Events{\mscenario}$. Likewise the number of columns is the number of distinct orbits $\Orb[\Phi]{j}$ in $\Events{\jointvar}$. For the Web inflation in particular, $M_{\Phi}$ is $450 \times 358,120$. Using the symmetric incidence matrix and linear programing methods, an infeasibility certificate was found that is capable of witnessing the Fritz distribution. This inequality is reproduced in \cref{sec:symmetic_web_inequality}.
-
     \section{Noisy Distributions \& Numerical Optimizations}
     \label{sec:violations_noise}
     Causal compatibility inequalities for the Triangle structure (such as those derived in \cref{sec:deriving_inequalities}) offer an avenue into studying quantum non-classicality. In this section, we make use of two methods, exposure to noise and numerical optimization, to further understand the nature of quantum non-classicality in connection to compatibility inequalities.
@@ -563,12 +454,36 @@
     \label{sec:inflation_technique}
 
     \subsection{Satisfaction of d-Separation Relations}
+    \label{sec:satisfaction_of_d_sep_relations}
     \todo[TC]{Absorb the relevant components of the next section into this one}
+    \todo[TC]{Given a distribution and a causal structure, does the distribution satisfy the conditional d-Separation relations?}
 
     \subsection{Marginal Satisfiability and Inequalities}
-    \label{sec:deriving_inequalities}
+    \label{sec:marginal_satisfiability}
+    \label{sec:marginal_linear}\label{sec:linear_programs}
 
-    In \cref{sec:causal_compatibility}, we defined the notion of a causal compatibility inequality without providing a means for deriving/computing them. This section aims to delineate algorithms and methods that can be used to derive causal compatibility inequalities for generic causal inference problems. Recalling the definition of causal compatibility presented in \cref{sec:compatibility}, a marginal model $\prob^{\mscenario}$ is compatible with a causal structure $\graph = \br{\nodes, \edges}$ if it can be recovered from a series of operations. First choose a set of causal parameters $\bc{\prob[n\mid\Pa[\graph]{n}] \mid n \in \nodes}$ and then construct a joint distribution $\prob[\nodes] = \prod_{n \in \nodes} \prob[n \mid \Pa[\graph]{n}]$ over all nodes $\nodes$ (this step is \cref{eq:local_markov_property_operation}). Afterwards, each marginal distribution $\prob[V] \in \mscenario$ should be recoverable from a marginalization over $\prob[\nodes]$ (this step is the combination of \cref{eq:observable_marginalization,eq:context_marginalization}). Intuitively, these two requirements for a compatible marginal model $\prob^{\mscenario}$ provide two necessary components of compatibility:
+    Given a set of observable variables $\jointvar = \bc{v_1, \ldots, v_k}$ where each $v \in \jointvar$ is a statistical random variable, one can conceivably make a measurement over of these variables and obtain a joint probability distribution $\prob[\jointvar] = \prob[v_1,\ldots,v_n]$. More generally however, and depending on the context, it is possible to make a measurement on a set of the system $V \subset \jointvar$ in order to obtain a marginal distribution $\prob[V]$. With complete generality however, one could in principle be limited so as to only be able to record observations on portions of the system $\mscenario = \bc{V_1, \ldots, V_m \mid \forall i : V_i \subseteq \jointvar}$ obtaining a collection of marginal probability distributions $\bc{\prob[V_1], \ldots, \prob[V_m] \mid \forall i: V_i \in \mscenario}$.
+
+    The set $\mscenario = \bc{V \mid V \subseteq \jointvar}$ of subsets of $\jointvar$ is referred to as the \term{marginal scenario} and each element $V \in \mscenario$ is termed a \term{(marginal) context} of $\mscenario$. The complete set of marginal distributions is referred to as the \term{marginal model} and is denoted with an superscript $\prob^{\mscenario}$:
+    \[ \prob^{\mscenario} = \bc{\prob[V] \mid V \in \mscenario} \]
+    A marginal model acts as the most general description of a family of observations that can be made over $\jointvar$. Strictly speaking, as defined by~\cite{Fritz_2011}, a marginal scenario forms an \textit{abstract simplicial complex} where it is required that all subsets of contexts are also contexts.
+    \[ \forall V \in \mscenario, V' \subset V : V' \in \mscenario \]
+    Throughout this document, we exclusively consider (without loss of generality) the \textit{maximal} marginal scenario; restricting our focus to the largest contexts in the marginal scenario. Additionally, all marginal scenarios are taken to be \text{complete} in the sense that the marginal scenario covers the complete set of observable variables $\jointvar$.
+    \[ \jointvar = \bigcup_{V \in \mscenario} V \]
+
+
+    % For a causal structure $\graph$, a chosen specification of a conditional distributions for each variable  is referred to as a set of \term{causal parameters for $\graph$}:
+    % \[  \eq \label{eq:causal_parameters} \]
+    It is important to note that a set of causal parameters is not unique; the numerical nature of set of causal parameters is a \text{choice}. Altogether, a marginal model $\prob^{\mscenario}$ is \term{compatible} with a causal structure $\graph$ if there exists a choice of causal parameters such that each context $\prob[V] \in \prob^{\mscenario}$ can be \textit{recovered} from the following series of operations:
+    \begin{enumerate}
+        \item Obtain a joint probability distribution over \textit{all} variables of the causal structure using the chosen casual parameters:\footnote{Here $\prod$ denotes the product distribution $\prod_{n \in \nodes} \prob[n \mid \Pa[\graph]{n}] = $.}
+        \item Marginalize over the latent variables of $\graph$ to obtain a joint distribution over the observed variables $\nodes_O$:
+        \[ \prob[\nodes_O] = \sum_{\nodes_L} \prob[\nodes] \eq \label{eq:observable_marginalization} \]
+        \item Finally marginalize over the observed nodes not in $V$ to obtain $\prob[V]$:
+        \[ \prob[V] = \sum_{\nodes_O \setminus V} \prob[\nodes_O] \eq \label{eq:context_marginalization} \]
+    \end{enumerate}
+    It is important to note that compatibility between $\prob^{\mscenario}$ and $\graph$ requires that it is possible to recover \textit{each} context $\prob[V] \in \prob^{\mscenario}$ from the \textit{same} set of causal parameters. If it is not possible for $\prob^{\mscenario}$ to be recovered for \textit{any} choice of causal parameters, then $\prob^{\mscenario}$ is \term{incompatible}.
+    In \cref{sec:causal_compatibility}, we defined the notion of a causal compatibility inequality without providing a means for deriving/computing them. This section aims to delineate algorithms and methods that can be used to derive causal compatibility inequalities for generic causal inference problems. Recalling the definition of causal compatibility presented in \cref{sec:causal_compatibility}, a marginal model $\prob^{\mscenario}$ is compatible with a causal structure $\graph = \br{\nodes, \edges}$ if it can be recovered from a series of operations. First choose a set of causal parameters $\bc{\prob[n\mid\Pa[\graph]{n}] \mid n \in \nodes}$ and then construct a joint distribution $\prob[\nodes] = \prod_{n \in \nodes} \prob[n \mid \Pa[\graph]{n}]$ over all nodes $\nodes$ (this step is \cref{eq:local_markov_property_operation}). Afterwards, each marginal distribution $\prob[V] \in \mscenario$ should be recoverable from a marginalization over $\prob[\nodes]$ (this step is the combination of \cref{eq:observable_marginalization,eq:context_marginalization}). Intuitively, these two requirements for a compatible marginal model $\prob^{\mscenario}$ provide two necessary components of compatibility:
     \begin{enumerate}
         \item The marginal model $\prob^{\mscenario}$ must admit a joint distribution $\prob[\nodes]$ (\cref{eq:observable_marginalization,eq:context_marginalization}).
         \item The joint distribution $\prob[\nodes]$ must satisfy the Markov separability criteria (\cref{eq:local_markov_property_operation}).
@@ -582,9 +497,6 @@
     The marginal problem is distinct from the second necessary condition, which we term the \term{Markov separability problem} in numerous ways. First of all, the marginal problem as applied to causal inference tasks is only concerned with the observable variables $\nodes_{O}$ of $\graph$. This differs from the Markov separability problem which depends directly on the entire graphical structure of $\graph$ and thus must include the latent variables $\nodes_{L}$. The purpose of latent variables is to have unspecified behavior which makes checking the local Markov property exceedingly difficult in comparison to the marginal problem. Secondly, \cref{eq:def:marginal_problem} is inherently a linear system of constraints which be solved rather efficiently using linear programs (to be discussed in \cref{sec:marginal_linear}). The local Markov property concerns itself with probabilistic independence constraints which are polynomial. Fortunately, the Inflation Technique (summarized in \cref{sec:inflation_technique}) is able to cast (at least partially) the Markov separability problem as a marginal problem over an inflated causal structure. As such the Inflation Technique in many ways can be considered a relaxation technique which turns polynomial constraints into linear constraints.
 
     In consideration of these observations, we will now endeavor to discuss how causal compatibility inequalities can be derived by casting the marginal problem as a linear program. After doing, it becomes possible to discuss existing methods for deriving constraints on the set of contextual marginal models.
-
-    \subsubsection{The Marginal Problem as a Linear Program}
-    \label{sec:marginal_linear}\label{sec:linear_programs}
 
     Heretofore, our discussions of compatibility and the marginal problem have been general in the sense of making no reference to the nature the random variables $v \in \jointvar$. In particular, whether the outcomes of $v$ are discrete or continuous, finite or unbounded, or otherwise. In the case of infinite outcomes, the marginal problem can be used to derive entropic inequalities defined over the mutual information between variables $v \in \jointvar$~\cite{Fritz_2011}. Entropic inequalities however have been shown to be less constraining than inequalities defined over variables with finite cardinality~\cite{Inflation}. Throughout this document, we restrict our attention to finite outcomes. To assist with the subsequent analysis, we recall some familiar notions of probability theory.
 
@@ -725,10 +637,20 @@
     Most linear program software packages such as Mosek~\cite{Mosek_2016}, Gurobi~\cite{Gurobi_2016}, CPLEX~\cite{Cplex_2016} and CVX/CVX OPT~\cite{CVX_2016,CVX_Opt_2016} are capable of producing infeasibility certificates.
     Furthermore, for every $y$ satisfying $y \cdot M \succeq 0$ there corresponds a \term{certificate inequality} that constraints the set of non-contextual marginal models. If $y$ is an infeasibility certificate, then all non-contextual marginal models $\probvec^{\mscenario}$ must satisfy \cref{eq:dual_marginal_ineq} making $y \cdot \probvec^{\mscenario} \geq 0$ a valid causal compatibility inequality.
 
-    \subsection{Causal Inflations}
+    \subsection{Inflation Technique}
+    \label{sec:deriving_inequalities}
+    \label{sec:inflation_technique_main_summary}
     The \term{Inflation Technique}, invented by \citet{Inflation} and inspired by the \textit{do calculus} and \textit{twin networks} of \citet{Pearl_2009}, is a family of causal inference techniques that can be used to determine if a marginal model $\prob^{\mscenario}$ is compatible or incompatible with a given causal structure $\graph$. As a preliminary summary, the inflation technique begins by \textit{augmenting} a causal structure with additional copies of its nodes, producing an \textit{inflated} causal structure, and then exposes how causal inference tasks on the inflated causal structure can be used to make inferences on the original causal structure. As a example, inflations of the Triangle structure are depicted in \cref{fig:inflations}. Copies of nodes in the inflated causal structure are distinguished by an additional subscript called the \term{copy-index}. For example node $A$ of \cref{fig:triangle_structure} has copies $A_1, A_2, A_3, A_4$ in the \textit{Web inflation} of \cref{fig:the_web_inflation}. All such copies are deemed equivalent via a \term{copy-index equivalence} relation denoted `$\sim$'. A copy-index is effectively arbitrary, so we will refer to an arbitrary inflated copy of $A$ as $A'$.
     \[ A \sim A_1 \sim A' \not\sim B \sim B_1 \sim B' \]
-    We preemptively generalize the notion of copy-index equivalence to other mathematical objects like sets, graphs, and groups by saying that $X \sim Y$ if and only if $X = Y$ upon removal of the copy-index. Equipped with the common graph-theoretic terminology and notation of \cref{def:graph_terms}, an inflation can be formally defined as follows:
+    We preemptively generalize the notion of copy-index equivalence to other mathematical objects like sets, graphs, and groups by saying that $X \sim Y$ if and only if $X = Y$ upon removal of the copy-index. Equipped with the common graph-theoretic terminology and notation presented in \cref{sec:causal_compatibility}, an inflation can be formally defined as follows:
+
+    \todo[TC]{Incorporate these definitions into the discussion}
+    \begin{definition}
+        An \term{induced subgraph} of $\graph$ for a subset of nodes $N \subseteq \nodes$ is another graph composed of nodes $N$ and all edges $e$ of the original graph that are contained in $N$.
+        An \term{ancestral subgraph} of $\graph$ for a subset of nodes $N \subseteq \nodes$ is the induced subgraph due to the ancestry of $N$.
+        \[ \AnSub[\graph]{N} \defined \Sub[\graph]{\An[\graph]{N}} \]
+    \end{definition}
+
     \begin{definition}
         An \term{inflation} of a causal structure $\graph$ is another causal structure $\graph'$ such that:
         \[ \forall n' \in \nodes': \AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \eq \label{eq:inflation_defn}\]
@@ -808,6 +730,9 @@
     \[ \prob[N'] = \prob[\coprod_i N'_i] = \prod_{i}\prob[N'_i] \]
     Application of the inflation lemma to linear inequalities constraining pre-injectable distributions $\prob[N']$ transforms those inequalities into polynomial inequalities over the injectable distributions, allowing one to replace all terms with probability distributions defined over variables in $\nodes$. Throughout the body of this work, we let $\PreInj[\graph]{\graph'}$ denote the set of all pre-injectable sets. Naturally, the pre-injectable sets will define a marginal scenario $\mscenario$ that are used to derive compatibility inequalities in \cref{sec:deriving_inequalities}\footnote{Analogously for a marginal scenario $\mscenario$, the pre-injectable sets $\PreInj[\graph]{\graph'}$ form an \textit{abstract simplicial complex}. Therefore, in practice, it is completely sufficient to focus on the maximal pre-injectable sets}.
 
+    \subsection{Exemplary Inflations of The Triangle Structure}
+    \label{sec:exemplary_inflations_of_the_triangle structure}
+
     \begin{center}
     \begin{figure}
     \begin{subfigure}[b]{.45\linewidth}
@@ -831,6 +756,98 @@
     \label{fig:inflations}
     \end{figure}
     \end{center}
+
+    \subsection{Deriving Symmetric Causal Compatibility Inequalities}
+    \label{sec:symmetric_inequalities}
+
+    Quite surprisingly, it is possible to derive causal compatibility inequalities for the Triangle structure that are symmetric under the exchange of parties. This is done by grouping marginal events $m \in \Events{\mscenario}$ into orbits under the action of party exchange. Even more interestingly, these inequalities are violated by the Fritz distribution. This comes as a surprise because the Fritz distribution is \text{not} invariant under the exchange of parties; in fact the Fritz distribution is noticeably biased toward $C$.
+
+    In general, exploiting symmetries of the marginal scenario is useful for a few distinct reasons. First, \citet{Bancal_2010} discuss computational advantages in considering symmetric versions of marginal polytopes mentioned in \cref{sec:deriving_inequalities}; the number of extremal points typically grows exponentially in $\jointvar$, but only polynomial for the symmetric polytope. They also note a number of interesting inequalities (such as CHSH~\cite{CHSH_Original}) can be written in a way that is symmetric under the exchange of parties, demonstrating that non-trivial inequalities can be recovered from facets of a symmetric polytope. Secondly, numerical optimizations against symmetric inequalities lead to one of two interesting cases: either the extremal distribution is symmetric itself or it is not. The latter case generates a family of incompatible distributions obtained by applying symmetry operations on the extremal distribution\footnote{If the extremal distribution happens to not be symmetric, there is indication that the space of accessible distributions is non-convex.}.
+
+    To demonstrate what types of symmetries we have in mind, we present the following example:
+    \begin{example}
+        \label[example]{ex:symmetries}
+        First consider the marginal scenario $\mscenario = \bc{\bc{A, B, C}, \bc{C, D}, \bc{A, D}}$ where each variable in $\jointvar = \bc{A,B,C,D}$ has binary outcomes: $O_A = O_B = O_C = O_D = \bc{0,1}$. Moreover, let $I_{\mscenario}$ be the following compatibility inequality over $\mscenario$ for some causal structure $\graph$,
+        \[ I_{\mscenario} = \bc{\prob[ABC][010] \leq \prob[CD][00] + \prob[AD][01]}  \]
+        Intuitively, the compatibility of $\probvec^{\mscenario}$ is \textit{independent} of the how one labels outcomes. Suppose $\varphi : \jointvar \to \jointvar : \bc{a,b,c,d} \mapsto \varphi\bs{\bc{a,b,c,d}} = \bc{c,a,d,b}$ is a permutation of the variables $\jointvar$. Intuitively $\varphi$ acts on $I_{\mscenario}$ in the following way,
+        \begin{align*}
+        \varphi\bs{I_{\mscenario}} &= \bc{\prob[\varphi\bs{abc}][010] \leq \prob[\varphi\bs{cd}][00] + \prob[\varphi\bs{ad}][01]} \\
+        &= \bc{\prob[cad][010] \leq \prob[db][00] + \prob[cb][01]} \\
+        &= \bc{\prob[acd][100] \leq \prob[bd][00] + \prob[bc][10]}
+        \end{align*}
+        In general (as in this example), permutations over all variables can modify the marginal scenario $\varphi\bs{\mscenario} \neq \mscenario$; in general we write $\varphi\bs{I_{\mscenario}} = \varphi\bs{I}_{\varphi\bs{\mscenario}}$. Although $\varphi\bs{I_{\mscenario}}$ is still a valid causal compatibility inequality, in constrains marginal models of a different marginal scenario $\varphi\bs{\mscenario}$ and are in general of no interest.
+    \end{example}
+
+    Following the observations of \cref{ex:symmetries}, it is always possible to permute the random variables in a marginal scenario to produce new and valid inequalities. The symmetry group over a the complete set of variables $\jointvar$ is simply the \text{permutation group}\footnote{The permutation group over a set $S$ is the set of all bijective maps $\varphi : S \to S$.} $\Perm{\jointvar}$. As was noted in \cref{ex:symmetries}, some permutations $\varphi \in \Perm{\jointvar}$ have the undesired possibility of transforming $\mscenario$ into a different marginal scenario.
+    \[ \varphi\bs{\mscenario} \defined \bc{\varphi\bs{V_1}, \ldots, \varphi\bs{V_k}} \neq \mscenario \]
+    This means that there could exist $V \in \mscenario$ such that $\varphi\bs{V} \not \in \mscenario$. Permutations $\varphi$ retaining this property are unable to generate compatibility inequalities over the same marginal scenario. Therefore, the desired set of symmetries is a subgroup that takes $\mscenario$ to $\mscenario$.
+
+    \begin{definition}
+        The \term{variable permutation group} $\gp$ for a marginal scenario $\mscenario$ is the joint permutation subgroup that stabilizes the marginal scenario.
+        \[ \Phi\br{\mscenario} \defined \bc{\varphi \in \Perm{\jointvar} \mid \forall V \in \mscenario : \varphi\bs{V} \in \mscenario} \]
+    \end{definition}
+
+    Obtaining the variable permutation group $\gp\br{\mscenario}$ is a simple application of a group stabilizer algorithm. After obtaining $\gp\br{\mscenario}$, one can take known compatibility inequalities $I_{\mscenario}$ can create a whole family of inequalities $\bc{\varphi\bs{I_{\mscenario}} \mid \varphi \in \gp\br{\mscenario}}$ that are valid for the same marginal scenario $\varphi\bs{I_{\mscenario}} = \varphi\bs{I}_{\varphi\bs{\mscenario}} = \varphi\bs{I}_{\mscenario}$.
+
+    Although very useful for reducing computational complexity~\cite{Bancal_2010}, we divert our attention to finding \textit{symmetric} inequalities themselves.
+    \[ \forall \varphi \in \gp\br{\mscenario} :  \varphi\bs{I_{\mscenario}} = I_{\mscenario} \]
+    In order to do this, we must first define how elements $\varphi \in \gp$ act on marginal events. The action of $\varphi \in \gp$ on any outcome $f \in \Events{V}$ (denoted $\geo\bs{f}$) is defined as,
+    \[ \forall v \in \Dom{\varphi\bs{f}} : \br{\varphi\bs{f}}\br{v} \defined f\br{\varphi^{-1}\bs{v}} \eq \label{eq:act_on_variable}\]
+    \Cref{eq:act_on_variable} is nothing more than a mathematical definition for the intuitive action used in \cref{ex:symmetries}.
+    Through repeated action of $\varphi \in \gp$ on marginal outcomes $m \in \Events{\mscenario}$ and joint outcomes $j \in \Events{\jointvar}$, one can define \term{group orbits} of $\gp$ in $\Events{\mscenario}$ and $\Events{\jointvar}$.
+    \begin{align*}
+        \Orb[\gp]{m} &\defined \bc{\varphi\bs{m} \mid \varphi \in \gp} \\
+        \Orb[\gp]{j} &\defined \bc{\varphi\bs{j} \mid \varphi \in \gp}
+    \end{align*}
+    Using these group orbits, it is possible to contract the incidence matrix $M$ of a marginal scenario into a symmetrized version.
+
+    \begin{definition}
+        The \term{symmetric incidence matrix} $M_{\gp}$ for a marginal scenario $\mscenario$ and the variable permutation group $\gp$ is a contracted version of the incidence matrix $M$ for $\mscenario$. Each row of $M_{\gp}$ corresponds to a marginal orbit $\Orb[\gp]{m}$. Analogously each column of $M_{\gp}$ corresponds to a joint orbit $\Orb[\gp]{j}$. The entries of $M_{\gp}$ are integers and correspond to summing over the rows and columns of $M$ that belong to each orbit.
+        \[ \br{M_{\gp}}_{\Orb[\gp]{m}, \Orb[\gp]{j}} = \sum_{\substack{j' \in \Orb[\gp]{j} \\ m' \in \Orb[\gp]{m}}} M_{m',j'} \]
+    \end{definition}
+    It is possible to analogously define a \term{symmetric joint distribution vector} $\probvec^{\jointvar}_{\Phi}$ indexed by $\Orb[\gp]{j}$,
+    \[ \br{\probvec^{\jointvar}_{\Phi}}_{\Orb[\gp]{j}} = \sum_{j' \in \Orb[\gp]{j}} \probvec^{\jointvar}_{j} \]
+    And a \term{symmetric marginal distribution vector} $\probvec^{\mscenario}_{\Phi}$ indexed by $\Orb[\gp]{m}$,
+    \[ \br{\probvec^{\mscenario}_{\Phi}}_{\Orb[\gp]{m}} = \sum_{m' \in \Orb[\gp]{m}} \probvec^{\mscenario}_{m} \]
+    Which altogether define a new, \term{symmetric marginal problem},
+    \[ \probvec^{\mscenario}_{\Phi} = M_{\gp} \cdot \probvec^{\jointvar}_{\Phi} \]
+    The symmetric marginal problem can be solved using the same computational methods discussed in \cref{sec:deriving_inequalities} and will produce symmetric inequalities.
+
+    In the context of the Inflation technique, a variable symmetry $\Phi\br{\mscenario'}$ over an inflated marginal scenario $\mscenario'$ does not always correspond to a variable symmetry under deflation $\Phi\br{\mscenario}$. In order to derive deflated inequalities that are symmetric under an exchange of parties, it is required that $\Phi\br{\mscenario'} \sim \Phi\br{\mscenario}$ are equivalent up to copy-index.
+
+    For the Triangle structure in particular, the variable permutation group is simply the set of permutations on $A, B, C$: $\Phi\br{\mscenario} = \Perm{A, B, C}$. For the Web inflation (\cref{fig:the_web_inflation}), we have obtained $\gp\br{\PreInj[\graph]{\graph'}}$ which is an order $48$ group with the following $4$ generators:
+    \begin{equation*}
+    \begin{aligned}[c]
+    &\hspace{1mm}\varphi_1 \\
+    A_1 &\to A_4 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_1 \\B_1 &\to B_4 \\B_2 &\to B_3 \\B_3 &\to B_2 \\B_4 &\to B_1 \\C_1 &\to C_4 \\C_2 &\to C_3 \\C_3 &\to C_2 \\C_4 &\to C_1
+    \end{aligned}
+    \quad
+    \begin{aligned}[c]
+    &\hspace{1mm}\varphi_2 \\
+    A_1 &\to A_1 \\A_2 &\to A_3 \\A_3 &\to A_2 \\A_4 &\to A_4 \\B_1 &\to C_1 \\B_2 &\to C_3 \\B_3 &\to C_2 \\B_4 &\to C_4 \\C_1 &\to B_1 \\C_2 &\to B_3 \\C_3 &\to B_2 \\C_4 &\to B_4
+    \end{aligned}
+    \quad
+    \begin{aligned}[c]
+    &\hspace{1mm}\varphi_3 \\
+    A_1 &\to C_1 \\A_2 &\to C_2 \\A_3 &\to C_3 \\A_4 &\to C_4 \\B_1 &\to A_1 \\B_2 &\to A_2 \\B_3 &\to A_3 \\B_4 &\to A_4 \\C_1 &\to B_1 \\C_2 &\to B_2 \\C_3 &\to B_3 \\C_4 &\to B_4
+    \end{aligned}
+    \quad
+    \begin{aligned}[c]
+    &\hspace{1mm}\varphi_4 \\
+    A_1 &\to A_1 \\A_2 &\to A_2 \\A_3 &\to A_3 \\A_4 &\to A_4 \\B_1 &\to B_2 \\B_2 &\to B_1 \\B_3 &\to B_4 \\B_4 &\to B_3 \\C_1 &\to C_3 \\C_2 &\to C_4 \\C_3 &\to C_1 \\C_4 &\to C_2
+    \end{aligned}
+    \end{equation*}
+    % ((3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8),
+    %  (0, 2, 1, 3, 8, 10, 9, 11, 4, 6, 5, 7),
+    %  (8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 6, 7),
+    %  (0, 1, 2, 3, 5, 4, 7, 6, 10, 11, 8, 9))
+    It is easy to verify that $\varphi_1, \varphi_2, \varphi_3, \varphi_4$ are all automorphisms of the web inflation. Moreover they stabilize the pre-injectable sets of \cref{eq:pre_injectable_triangle_structure_web}. Importantly,
+    \[ \gp\br{\PreInj[\graph]{\graph'}} \sim \Perm{A,B,C} \]
+    To see this, $\varphi_1$ and $\varphi_4$ become the identity element $\ident$ in $\Perm{A,B,C}$ upon removal of the copy-index, leaving $\varphi_2$ to generate reflections and $\varphi_3$ to generate rotations.
+
+    The symmetric incidence matrix $M_{\Phi}$ for the Web inflation is considerably smaller than $M$. The number of rows of $M_{\Phi}$ is a number of distinct orbits $\Orb[\Phi]{m}$ in $\Events{\mscenario}$. Likewise the number of columns is the number of distinct orbits $\Orb[\Phi]{j}$ in $\Events{\jointvar}$. For the Web inflation in particular, $M_{\Phi}$ is $450 \times 358,120$. Using the symmetric incidence matrix and linear programing methods, an infeasibility certificate was found that is capable of witnessing the Fritz distribution. This inequality is reproduced in \cref{sec:symmetic_web_inequality}.
+
+
 
     \clearpage
     \section{Quantum Parameterization of Triangle Structure}
@@ -943,43 +960,6 @@
 
     \section{Common Terminology \& Notation}
     \comment[TC]{keep, remove, or distribute into body where relevant?}
-    \subsection{Graph Theory}
-    \label{sec:graph_theory}
-    \begin{definition}
-        \label{def:graph}
-        A \term{graph} $\graph$ is an ordered tuple $\br{\nodes, \edges}$ of \textit{nodes} and \textit{edges} respectively where the nodes have the capacity to represent any object while the edges are defined as \textit{pairs} of nodes $\edges \subseteq \nodes \times \nodes$. A \term{directed graph} $\graph$ is a graph where each edge $e \in \edges$ is assigned an order or \term{direction} $e = \bc{n \to n'}$.
-    \end{definition}
-
-    \begin{definition}
-        \label{def:graph_terms}
-        The following definitions are common language in directed graph theory. Let $n, m \in \nodes$ be example nodes of the graph $\graph$.
-        \begin{itemize}
-            \item The \term{parents of a node}: $\Pa[\graph]{n} \defined \bc{m \mid m \to n}$
-            \item The \term{children of a node}: $\Ch[\graph]{n} \defined \bc{m \mid n \to m}$
-            \item The \term{ancestry of a node}: $\An[\graph]{n} \defined \bigcup_{i\in\mathbb{W}} \Pa[\graph][i]{n}$ where $\Pa[\graph][i]{n} \defined \Pa[\graph]{\Pa[\graph][i-1]{n}}$ and $\Pa[\graph][0]{n} = n$
-            \item The \term{descendants of a node}:  $\De[\graph]{n} \defined \bigcup_{i\in\mathbb{N}} \Ch[\graph][i]{n}$ where $\Ch[\graph][i]{n} \defined \Ch[\graph]{\Ch[\graph][i-1]{n}}$ and $\Ch[\graph][1]{n} = \Ch[\graph]{n}$
-        \end{itemize}
-        All of these terms can be generalized to sets of nodes $N \subseteq \nodes$ through union over the elements,
-        \begin{itemize}
-            \item The \term{parents of a node set}: $\Pa[\graph]{N} \defined \bigcup_{n\in N}\Pa[\graph]{n}$
-            \item The \term{children of a node set}: $\Ch[\graph]{N} \defined \bigcup_{n\in N}\Ch[\graph]{n}$
-            \item The \term{ancestry of a node set}: $\An[\graph]{N} \defined \bigcup_{n\in N}\An[\graph]{n}$
-        \end{itemize}
-    \end{definition}
-
-    \begin{definition}
-        An \term{induced subgraph} of $\graph$ for a subset of nodes $N \subseteq \nodes$ is another graph composed of nodes $N$ and all edges $e$ of the original graph that are contained in $N$.
-        \[ \Sub[\graph]{N} \defined \br{N, \bc{e = \bc{n \to n'} \mid n, n' \in N, e \in \edges}} \]
-        An \term{ancestral subgraph} of $\graph$ for a subset of nodes $N \subseteq \nodes$ is the induced subgraph due to the ancestry of $N$.
-        \[ \AnSub[\graph]{N} \defined \Sub[\graph]{\An[\graph]{N}} \]
-    \end{definition}
-
-    \begin{definition}
-        \label{def:dag}
-        A \term{directed acyclic graph} or \term{DAG} $\graph = \br{\nodes, \edges}$ is an directed graph with the additional property that no node $n$ is in its set of \term{ancestors}.
-        \[ \forall n \in \nodes : n \notin \bigcup_{i\in\mathbb{N}} \Pa[\graph][i]{n}\]
-        It is critical to note the difference in language between \textit{ancestors} from \textit{ancestry}. The ancestry $\An[\graph]{n}$ of a node $n$ is defined using \textit{whole} numbers $\mathbb{W}$. In contrast, the ancestors of a node are defined similarly with \textit{natural} numbers $\mathbb{N}$.
-    \end{definition}
 
     \subsection{Probability Theory}
     \label{sec:probability_theory}
