@@ -27,7 +27,6 @@
     \maketitle
     \tableofcontents
     % \setlength{\parskip}{1em}
-    \clearpage
 
     \section{Introduction}
     \label{sec:introduction}
@@ -182,7 +181,7 @@
 
     Upon reflection, the Fritz distribution can rightly be considered slightly manufactured. The phenomenology associated with Bell non-locality or Bell incompatibility are well understood; examining these distributions embedded in the Triangle structure offers no additional perspective onto the types of entanglement resources made accessible by quantum mechanics. Therefore, it is desirable to find incompatible quantum distributions that are qualitatively different than those previously considered for the Bell structure. Pursuant to this, \citet{Fritz_2012} presented the following problem~\cite[Problem 2.17]{Fritz_2012}:%TODO figure out best way to link to this problem
 
-    \term{Fritz's Problem}: Find an example of non-classical quantum correlations in the Triangle structure together with a proof of its non-classicality which does not hinge on Bell’s theorem.\footnote{In the way Fritz defines, \textit{non-classical} correlations are the class of \textit{incompatible} correlations.}
+    \term{Fritz's Problem}: Find an example of non-classical quantum correlations in the Triangle structure together with a proof of its non-classicality which does not hinge on Bell’s theorem.
 
     Understandably, Fritz's Problem is stated ambiguously as it is not yet entirely clear how to distinguish between non-classical distributions on differing causal structures. The remainder of this paper focuses on our advancement toward solving Fritz's Problem. \Cref{sec:conclusions} proposes three refinements of Fritz's Problem which are to be labeled \ref{r:1},\ref{r:2} and \ref{r:3} respectively. Specifically, \ref{r:1} embodies the degree in which the results of \cref{sec:found_inequalities} solve Fritz's problem while \ref{r:2} and \ref{r:3} characterize interpretations of Fritz's Problem that remain partially solved.
 
@@ -295,9 +294,9 @@
 
     In summary, these causal compatibility inequalities represent a completion of objective \cref{r:1} from \cref{sec:fritz_distribution}. These inequalities are derived without making use of Bell's theorem and instead use the Inflation Technique which is completely independent of Bell's theorems. Additionally, the derivation of causal compatibility inequalities allows one prove incompatibility even when perfect correlations are absent. Moreover, they allow one to probe the amount of noise the Fritz distribution can sustain before becoming compatible (see \cref{sec:violations_noise}). Unfortunately, infeasibility certificates are found by linear programing software to certify the infeasibility of a \textit{particular distribution}. This means that inequalities like \cref{eq:ww_ineq}, the one presented in \cref{sec:web_inequality}, and others are specifically manufactured in order witness a particular type of quantum non-classicality. In an effort to derive inequalities that could lead to potentially new forms of non-classicality, we searched for inequalities that did not admit biased towards the Fritz distribution.
 
-    \section{Noisy Distributions \& Numerical Optimizations}
+    \section{Numerical Optimizations \& Noisy Distributions}
     \label{sec:violations_noise}
-    Causal compatibility inequalities for the Triangle structure (such as those derived in \cref{sec:deriving_inequalities}) offer an avenue into studying quantum non-classicality. In this section, we make use of two methods, exposure to noise and numerical optimization, to further understand the nature of quantum non-classicality in connection to compatibility inequalities.
+    Causal compatibility inequalities for the Triangle structure (such as those derived in \cref{sec:deriving_inequalities}) offer an avenue into studying quantum non-classicality. In this section, we make use of two methods, exposure to noise and numerical optimization, to further understand the nature of quantum non-classicality in connection to compatibility inequalities. In order to compare different inequalities simultaneously, our convention is to rearrange each inequality $I$ so $I\br{\prob} < 0$ represent a violation of $I$ while $I\br{\prob} \leq 0$ represents satisfaction of $I$ (with $I\br{\prob} = 0$ corresponding to complete saturation of the inequality). For the subsequent analysis, $4$ inequalities where chosen. First, $I_0$ is the inequality derived using the Wagon-Wheel wheel inflation \cref{eq:ww_ineq}. The other three inequalities $I_1, I_2, I_3$ were all derived using the Web inflation; $I_1$ can be found in \cref{sec:web_inequality} while $I_3$ is the symmetric inequality in \cref{sec:symmetic_web_inequality}. Inequality $I_2$ is not reproduced anywhere in this document but is similar to \cref{sec:web_inequality}.
 
     \subsection{Noisy Distributions}
     \label{sec:noise}
@@ -314,7 +313,7 @@
 
     For Triangle structure, we define a completely noisy observation as the uniform probability distribution $\s{U}\br{abc} = \s{U}_{ABC}\br{abc} = \f{1}{64} \quad \forall a,b,c\in \bc{0,1,2,3}$ (see \cref{fig:uniform_distribution}). Since the uniform distribution $\s{U}$ is trivially compatible with the Triangle structure, the objective of this section is to determine how much uniform noise needs to be added to the Fritz distribution $\prob[\fritz]$ before it transitions from incompatible to compatible. We do this by defining an affine noise parameter $\vep$ such that $0 \leq \vep \leq 1$ along with the \term{noisy variant} $\s{N}_{\vep}$ of the Fritz distribution,
     \[ \s{N}_{\vep} = \br{1 - \vep} \prob[\fritz] + \vep \s{U} \]
-    Therefore as $\vep$ varies from $0$ to $1$, more and more noise is added to the Fritz distribution and $\s{N}_{\vep}$ transitions from an incompatible distribution $\s{N}_{0} = \prob[\fritz]$ to a compatible distribution $\s{N}_{1} = \s{U}$. For each inequality $I$ and distribution $\prob$, let $I\br{\prob}$ denote a scalar value representing the amount of violation seen by $\prob$. In order to compare different inequalities simultaneously, let $I\br{\prob} < 0$ represent a violation of $I$ while $I\br{\prob} \leq 0$ represents satisfaction of $I$ (with $I\br{\prob} = 0$ corresponding to complete saturation of the inequality). To analyze noise, $4$ inequalities where chosen. First, $I_0$ is the inequality derived using the Wagon-Wheel wheel inflation \cref{eq:ww_ineq}. The other three inequalities $I_1, I_2, I_3$ were all derived using the Web inflation; $I_1$ can be found in \cref{sec:web_inequality} while $I_3$ is the symmetric inequality in \cref{sec:symmetic_web_inequality}. Inequality $I_2$ is not reproduced anywhere in this document but is similar to \cref{sec:web_inequality}. Our tests suggest that inequality $I_1$ (\cref{sec:web_inequality}) is most robust to noise and demonstrates that the Fritz distribution remains incompatible with the Triangle structure up to at least a noise parameter of $\vep \simeq 0.085$. The associated distribution $\s N_{0.085}\br{\prob[\fritz]}$ is plotted in \cref{fig:noisy_fritz}. Of course, there remains the possibility that another inequality will be able to withstand a larger degree of noise than $I_1$.
+    Therefore as $\vep$ varies from $0$ to $1$, more and more noise is added to the Fritz distribution and $\s{N}_{\vep}$ transitions from an incompatible distribution $\s{N}_{0} = \prob[\fritz]$ to a compatible distribution $\s{N}_{1} = \s{U}$. For each inequality $I$ and distribution $\prob$, let $I\br{\prob}$ denote a scalar value representing the amount of violation seen by $\prob$.  Our tests suggest that inequality $I_1$ (\cref{sec:web_inequality}) is most robust to noise and demonstrates that the Fritz distribution remains incompatible with the Triangle structure up to at least a noise parameter of $\vep \simeq 0.085$. The associated distribution $\s N_{0.085}$ is plotted in \cref{fig:noisy_fritz}. Of course, there remains the possibility that another inequality will be able to withstand a larger degree of noise than $I_1$.
 
     % Given that $I_0, I_1, I_2, I_3$ are far from a representative inequalities and are likely not facets of any inflated marginal polytope, it is save to say that this is possible.
 
@@ -346,11 +345,24 @@
 
     \subsection{Numerical Optimizations}
     \label{sec:optimizations}
-    Causal compatibility inequalities act as a \textit{measure} of non-classicality. If two non-classical distributions $\prob[1]$ and $\prob[2]$ violate the same inequality $I$ with violations $I\br{\prob[1]}$ and $I\br{\prob[2]}$ respectively, it is somewhat reasonable to say that $\prob[1]$ is \textit{more} non-classical than $\prob[2]$ whenever ${I\br{\prob[1]}} < I\br{\prob[2]}$\footnote{Remember that larger violations are more negative when the inequalities are written in the proposed canonical form.} Nonetheless, this statement comes from several caveats. First, it is possible (and frequently the case) for ${I\br{\prob[1]}} < I\br{\prob[2]}$ to hold for one inequality $I$ but have ${\ti I\br{\prob[2]}} < \ti I\br{\prob[1]}$ hold for another inequality $\ti I$. In this case, all one can claim is that $\prob[1]$ is more incompatible than $\prob[2]$ with respective to $I$ but the contrary is true with respect to $\ti I$. Second, not all inequalities $I$ are \textit{good} measures of non-classicality. In the case of the Bell structure, the linear inequality constraints associated with the facets of the marginal polytope are the best measures of non-classicality. This is because the facets form a necessary and sufficient set with all other inequalities following from positive mixtures of the facets. However, good measures of incompatibility are less understood in the Triangle structure where the space of classical correlations is non-convex. At the very least, the inequalities derived in this report are likely \textit{not} the best measures of incompatibility (especially because they are curated toward the Fritz distribution). Nonetheless, these inequalities act the \textit{first} measures of non-classicality in the Triangle structure.
+    Causal compatibility inequalities act as a \textit{measure} of non-classicality. If two non-classical distributions $\prob[1]$ and $\prob[2]$ violate the same inequality $I$ with violations $I\br{\prob[1]}$ and $I\br{\prob[2]}$ respectively, it is somewhat reasonable to say that $\prob[1]$ is \textit{more} non-classical than $\prob[2]$ whenever ${I\br{\prob[1]}} < I\br{\prob[2]}$. However, this statement is accompanied by a few caveats. First, it is possible (and frequently the case) for ${I\br{\prob[1]}} < I\br{\prob[2]}$ to hold for one inequality $I$ but have ${\ti I\br{\prob[2]}} < \ti I\br{\prob[1]}$ hold for another inequality $\ti I$. In this case, all one can claim is that $\prob[1]$ is more incompatible than $\prob[2]$ with respective to $I$ but the contrary is true with respect to $\ti I$. Second, not all inequalities $I$ are \textit{good} measures of non-classicality. In the case of the Bell structure, the linear inequality constraints associated with the facets of the marginal polytope are the best measures of non-classicality because the facets form a necessary and sufficient of constraints with all other inequalities following from positive mixtures. However, good measures of incompatibility are less understood in the Triangle structure where the space of classical correlations is non-convex. At the very least, the inequalities derived in this report are likely \textit{not} the best measures of incompatibility simply because they have be curated toward the Fritz distribution. Nonetheless, these inequalities act the \textit{first} measures of non-classicality in the Triangle structure.
 
-    In order to find quantum distributions that are more non-classical than the Fritz, we performed numerical optimizations against a objective scalar function $f: \R^n \in \R$ using the following pipeline: To begin, a set of real-valued parameters $\la = \br{\la_0, \ldots, \la_n} \in \R^{n}$ are used to parameterize a set of quantum states $\rho_{AB}, \rho_{BC}, \rho_{CA}$ and measurements $M_A, M_B, M_C$ in agreement with the quantum version of the Triangle structure in \cref{fig:triangle_structure_quantum_model}. Second, a $4$-outcome distribution $\prob[ABC]$ is obtained via \cref{eq:quantum_model_triangle} and supplanted into an inequality $I$ in homogeneous and canonical form $I\br{\prob[ABC]} \leq 0$. The objective value is simply the degree of violation $f = I\br{\prob[ABC]}$ and used to make adjustments to $\la$ in order to achieve largest and larger violations.
+    In order to find quantum distributions that are more non-classical than the Fritz, we performed numerical optimizations against each inequality $I$ by parameterizing the space of quantum-accessible probability distributions that can be expressed as follows:
+    \[ \prob[\p{ABC}]\br{abc} = \Tr\bs{\netperm^\intercal \rho_{\p{AB}}\otimes\rho_{\p{BC}}\otimes\rho_{\p{CA}} \netperm M_{\p{A},a}\otimes M_{\p{B},b} \otimes M_{\p{C},c}} \eq \label{eq:quantum_model_triangle}\]
+    Where $\rho_{\p{AB}}, \rho_{\p{BC}}, \rho_{\p{CA}}$ are bipartite density matrices, $M_{\p{A}}, M_{\p{B}}, M_{\p{C}}$ are generic measurements sets and $\netperm$ is a permutation matrix that aligns the states and measurements appropriately. In order to parameterize all such distributions, we elect to parameterize the states and measurements separately. In order to qualify the scope of \cref{eq:quantum_model_triangle} and associated computational complexity of the parameterization, there are a two restrictions that are made with justification. Motivated by the fact that the Fritz distribution (\cref{sec:fritz_distribution}) only requires qubit states, the states $\rho$ are taken to be bipartite \textit{qubit} states. Qubit states are more computationally feasible compared to $n$-dimensional states whereby the joint density matrix $\rho_{\p{AB}}\otimes\rho_{\p{BC}}\otimes\rho_{\p{CA}}$ becomes an $n^6 \times n^6$ matrix. Additionally, we restrict our focus to projective-valued measures (PVMs) instead of projective-operator valued measures (POVMs) for three reasons. First, \cref{sec:fritz_distribution} demonstrates that PVMs are sufficient for witnessing incompatible quantum distributions in the Triangle structure. Second, although generating $k$-outcome POVM measurements is possible using rejection sampling techniques~\cite{Petz_2015}, a valid, unbiased parameterization was not found for $k > 2$. Finally, PVMs provide considerable computational advantage over POVMs as they permit \cref{eq:quantum_model_triangle} to be re-written as \cref{eq:quantum_model_triangle_pvms}.
+    \[ \prob[\p{ABC}]\br{abc} = \bramidket{m_{\p{A},a}m_{\p{B},b}m_{\p{C},c}}{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm}{m_{\p{A},a}m_{\p{B},b}m_{\p{C},c}} \eq \label{eq:quantum_model_triangle_pvms}\]
 
-    Finding larger violations to compatibility inequalities is nothing more that a numerical optimization (specifically minimization) of $f\br{\la}$. Since the inequalities themselves are polynomial and the space of quantum-accessible distributions is non-convex, a number of optimization methods were used in an attempt to eliminate any issues associated with local minima or ill-conditioned convergence. Specifically, the BFGS method~\cite[p. 142]{Nocedal_2000} and the Nelder-Mead simplex method~\cite[p. 238]{Nocedal_2000} were used along with a method called Basin Hopping~\cite{Wales_1997}, which is a hybrid between simulated annealing and gradient descent-based methods.
+    Although there are numerous techniques that can used when parameterizing quantum states and measurements~\cite{Petz_2015, Hedemann_2013,Fujii_2005,James_2001,Grasmair_2014,Neilsen_Chaung_2011}, a single technique by \citet{Spengler_2010_Unitary} was found to be most computationally suitable for our purposes. \Citet{Spengler_2010_Unitary} demonstrated that all $d\times d$ unitary matrices $U$ can be parameterized without degeneracy as follows:
+    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} \exp\br{i P_n \lambda_{n,m}}\exp\br{i \si_{m,n} \lambda_{m,n}}}} \cdot \bs{\prod_{l=1}^{d} \exp\br{iP_l \lambda_{l,l}}}  \eq \label{eq:spengler_unitary} \]
+    Where the real valued parameters $\la = \bc{\la_{n,m} \mid n,m \in 1, \ldots, d}$ have periodicities $\la_{m,n} \in \bs{0, \f{\pi}{2}}$ for $m < n$ and $\la_{m,n} \in \bs{0, 2 \pi}$ for $m \geq n$. Moreover, $P_l$ are one-dimensional projective operators $P_l = \ket{l}\bra{l}$ and the $\si_{m,n}$ are generalized anti-symmetric $\si$-matrices $\sigma_{m,n} = -i \ket{m}\bra{n} +i \ket{n}\bra{m}$ where $1 \leq m < n \leq d$. This parameterization has the useful feature that each of the real-valued parameters $\la_{n,m}$ a direct and intuitive physical affect on each element of a computational basis $\bc{\ket{1}, \ldots, \ket{d}}$. Explicitly, $\exp\br{i \si_{m,n} \lambda_{m,n}}$ applies a rotation to the sub-space spanned by $\ket{m}$ and $\ket{n}$ for $m < n$. Analogously, $\exp\br{i P_n \lambda_{n,m}}$ generates the relative phase between $\ket{m}$ and $\ket{n}$ for $m > n$ and $\exp\br{iP_l \lambda_{l,l}}$ fixes the global phase of $\ket{l}$. Finally, although not explicitly mentioned in~\cite{Spengler_2010_Unitary}, it is possible to remove the reliance on the computationally expensive matrix exponential operations in \cref{eq:spengler_unitary}~\cite{Moler_2003}.
+
+    By parameterizing unitary matrices, it becomes possible to parameterize $d$-dimensional density matrices and $d$-element PVMs by recognizing that any orthonormal basis $\bc{\ket{\psi_j}}$ (where $1 \leq j \leq d$) can be transformed into the computational basis $\bc{\ket{j}}$ by a unitary transformation $U$, i.e. $U \ket{\psi_j} = \ket{j}$. First consider a $d$-element PVM $M = \bc{\ket{m_j}\bra{m_j} \mid 1 \leq j \leq d}$. Since $\bc{\ket{m_j}}$ forms an orthonormal basis, one can parameterize $M$ by writing $M = \bc{U^{\dagger}\ket{j}\bra{j}U \mid 1 \leq j \leq d}$ and parameterizing $U$ using \cref{eq:spengler_unitary}. This method was inspired by the measurement seeding method for iterative optimization used by \citet{Pal_2010}. Analogously, this argument can be extended to full-rank $d$-dimensional density matrices $\rho$ by performing a spectral decomposition $\rho = \sum_{j=1}^{d} p_j \ket{p_j} \bra{p_j}$ into eigenvalues $\bc{p_j}$ and eigenstates $\bc{\ket{p_j}}$. Since $\Tr\bc{\rho} = \sum_{j = 1}^{d} p_j = 1$ the eigenvalues of $\rho$ are parameterized without degeneracy using a tuple of $d-1$ real-valued parameters with periodicity $\bs{0, 2 \pi}$ using hyper-spherical coordinates~\cite{Hedemann_2013, Spengler_2010_Unitary}. Additionally, since $\rho$ is Hermitian, the eigenstates $\bc{\ket{p_j}}$ form an orthonormal basis and therefore the eigenstates are analogously parameterized using \cref{eq:spengler_unitary}: $\rho = \sum_{j=1}^{d} p_j U^{\dagger} \ket{j} \bra{j} U$. For our purposes, we have set $d = 4$ and fixed $\la_{l, l} = 0$ for $1 \leq l \leq d$ in \cref{eq:spengler_unitary} because the global phase contributions are irrelevant in \cref{eq:quantum_model_triangle_pvms}.
+    \[  \]
+    % \Cref{sec:param_quantum_dist} expounds on our parameterized of the space of quantum distributions that can be realized on the quantum Triangle structure (\cref{fig:triangle_structure_quantum_model}) pursuant to \cref{eq:quantum_model_triangle_pvms}. Specifically, each bipartite quantum resource is modeled $2$-qubit, $4\times 4$ density matrix and each measurement is modeled as a $4$-element projective-value measure.
+
+    % the a objective scalar function $f: \R^n \in \R$ using the following pipeline: To begin, a set of real-valued parameters $\la = \br{\la_0, \ldots, \la_n} \in \R^{n}$ are used to parameterize a set of quantum states $\rho_{AB}, \rho_{BC}, \rho_{CA}$ and measurements $M_A, M_B, M_C$ in agreement with the quantum version of the Triangle structure in \cref{fig:triangle_structure_quantum_model}. Second, a $4$-outcome distribution $\prob[ABC]$ is obtained via \cref{eq:quantum_model_triangle} and supplanted into an inequality $I$ in homogeneous and canonical form $I\br{\prob[ABC]} \leq 0$. The objective value is simply the degree of violation $f = I\br{\prob[ABC]}$ and used to make adjustments to $\la$ in order to achieve largest and larger violations.
+
+    Since the inequalities themselves are polynomial and the space of quantum-accessible distributions is non-convex, a number of optimization methods were used in an attempt to eliminate any issues associated with local minima or ill-conditioned convergence. Specifically, the BFGS method~\cite[p. 142]{Nocedal_2000} and the Nelder-Mead simplex method~\cite[p. 238]{Nocedal_2000} were used along with a method called Basin Hopping~\cite{Wales_1997}, which is a hybrid between simulated annealing and gradient descent-based methods.
 
     % \subsection{Parameterizing Quantum Distributions}
     \begin{figure}
@@ -360,14 +372,7 @@
             \label{fig:triangle_structure_quantum_model}
     \end{center}
     \end{figure}
-    In search of new, incompatible, quantum distributions that can be realized on the Triangle structure, numerical optimizations over the the space of quantum-accessible probability distributions are performed. To do so, we are interested in a parameterization all distributions that can be expressed as follows:
-    \[ \prob[\p{ABC}]\br{abc} = \Tr\bs{\netperm^\intercal \rho_{\p{AB}}\otimes\rho_{\p{BC}}\otimes\rho_{\p{CA}} \netperm M_{\p{A},a}\otimes M_{\p{B},b} \otimes M_{\p{C},c}} \eq \label{eq:quantum_model_triangle}\]
-    Where $\rho_{\p{AB}}, \rho_{\p{BC}}, \rho_{\p{CA}}$ are bipartite density matrices, $M_{\p{A}}, M_{\p{B}}, M_{\p{C}}$ are generic measurements sets and $\netperm$ is a permutation matrix that aligns the states and measurements appropriately\footnote{$\netperm$ is discussed more thoroughly in \cref{sec:perm_matrix}.}.
 
-    In order to qualify the scope of \cref{eq:quantum_model_triangle} and associated computational complexity of the parameterization, there are a two restrictions that are made with justification. The states $\rho$ are taken to be bipartite \textit{qubit} states acting on $\s{H}^{2} \otimes \s{H}^{2}$. This is motivated by \cref{sec:fritz_distribution} in which the Fritz distribution only requires qubit states. In generality, one could consider $n$-dimensional states acting on $\s{H}^{n} \otimes \s{H}^{n}$. However, in such cases the joint density matrix $\rho_{\p{AB}}\otimes\rho_{\p{BC}}\otimes\rho_{\p{CA}}$ then acts on $\br{\Hilb^{n}}^{\otimes 6}$ requiring a $n^6 \times n^6$ matrix with $n^{12}$ entries. Therefore, $n = 2$ is far more computationally feasible than $n > 2$. Additionally, restrict our focus to projective-valued measures (PVMs) instead of projective-operator valued measures (POVMs) for three reasons. First, \cref{sec:fritz_distribution} demonstrates that PVMs are sufficient for witnessing incompatible quantum distributions in the Triangle structure. Second, generating $k$-outcome POVM measurements is possible using rejection sampling techniques~\cite{Petz_2015}, however a valid, unbiased parameterization was not found for $k > 2$. Finally, PVMs provide considerable computational advantage over POVMs as they permit \cref{eq:quantum_model_triangle} to be re-written as follows:
-    \[ \prob[\p{ABC}]\br{abc} = \bramidket{m_{\p{A},a}m_{\p{B},b}m_{\p{C},c}}{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm}{m_{\p{A},a}m_{\p{B},b}m_{\p{C},c}} \eq \label{eq:quantum_model_triangle_pvms}\]
-
-    In order to parameterize all such distributions, we elect to parameterize the states and measurements separately. Although there are numerous techniques that can used when parameterizing quantum states and measurements~\cite{Petz_2015, Hedemann_2013,Fujii_2005,James_2001,Grasmair_2014,Neilsen_Chaung_2011}, although a single technique is presented in \cref{sec:unitary_group} that was found to be most computationally suitable for our purposes. \Cref{sec:param_quantum_dist} expounds on our parameterized of the space of quantum distributions that can be realized on the quantum Triangle structure (\cref{fig:triangle_structure_quantum_model}) pursuant to \cref{eq:quantum_model_triangle_pvms}. Specifically, each bipartite quantum resource is modeled $2$-qubit, $4\times 4$ density matrix and each measurement is modeled as a $4$-element projective-value measure.
 
     % \subsection{Numerical Optimization Results}
     \label{sec:results}
@@ -445,7 +450,6 @@
     This research was supported in part by Perimeter Institute for Theoretical Physics. Research at Perimeter Institute is supported by the Government of Canada through the Department of Innovation, Science and Economic Development Canada and by the Province of Ontario through the Ministry of Research, Innovation and Science.
     \end{acknowledgments}
 
-    \clearpage
     \appendix
 
     \section{Summary of Inflation Technique}
@@ -845,138 +849,113 @@
 
     The symmetric incidence matrix $M_{\Phi}$ for the Web inflation is considerably smaller than $M$. The number of rows of $M_{\Phi}$ is a number of distinct orbits $\Orb[\Phi]{m}$ in $\Events{\mscenario}$. Likewise the number of columns is the number of distinct orbits $\Orb[\Phi]{j}$ in $\Events{\jointvar}$. For the Web inflation in particular, $M_{\Phi}$ is $450 \times 358,120$. Using the symmetric incidence matrix and linear programing methods, an infeasibility certificate was found that is capable of witnessing the Fritz distribution. This inequality is reproduced in \cref{sec:symmetic_web_inequality}.
 
+    % \section{Quantum Parameterization of Triangle Structure}
+    % \label{sec:param_quantum_dist}
+    % \subsection{Unitary Group}
+    % \label{sec:unitary_group}
+    % To facilitate the parameterization of quantum states states and PVMs, a parameterization of the unitary group of dimension $d$ (denoted $\s{U}\br{d}$) by Spengler, Huber and Hiesmayr~\cite{Spengler_2010_Unitary} is introduced. Discussions of its application to states and measurements are deferred to \cref{sec:states} and \cref{sec:measurements} respectively.
 
+    % In Ref.~\cite{Spengler_2010_Unitary}, Spengler \textit{et al.} proved that all unitaries $U \in \s{U}\br{d}$ can be parameterized without degeneracy as follows:
+    % \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} \exp\br{i P_n \lambda_{n,m}}\exp\br{i \si_{m,n} \lambda_{m,n}}}} \cdot \bs{\prod_{l=1}^{d} \exp\br{iP_l \lambda_{l,l}}}  \eq \label{eq:spengler_unitary_old} \]
+    % Where $\la = \bc{\la_{n,m} \mid n,m \in 1, \ldots, d}$ form a $d \times d$ matrix of real-valued parameters with periodicities $\la_{m,n} \in \bs{0, \f{\pi}{2}}$ for $m < n$ and $\la_{m,n} \in \bs{0, 2 \pi}$ for $m \geq n$.
+    % \[ \la = \begin{pmatrix}
+    %     \la_{1,1} & \cdots & \la_{1, d} \\
+    %     \vdots & \ddots & \vdots \\
+    %     \la_{d,1} & \cdots & \la_{d, d} \\
+    % \end{pmatrix} \]
+    % And where $P_l$ are one-dimensional projective operators,
+    % \[ P_l = \ket{l}\bra{l} \qquad 1 \leq l \leq d \eq \label{eq:projective_operator} \]
+    % and the $\si_{m,n}$ are generalized anti-symmetric $\si$-matrices,
+    % \[ \sigma_{m,n} = -i \ket{m}\bra{n} +i \ket{n}\bra{m} \qquad 1 \leq m < n \leq d\]
+    % The SSH parameterization (\cref{eq:spengler_unitary}) is unique in that each of the real-valued parameters $\la_{n,m}$ has physical significance. For the sake of reference, let us label the matrix exponential terms in \cref{eq:spengler_unitary} in a manner that corresponds to their affect on an orthonormal basis $\bc{\ket{1}, \ldots, \ket{d}}$.
+    % \begin{align*}
+    % \begin{split}
+    %     GP_l &= \exp\br{iP_l \lambda_{l,l}} \\
+    %     RP_{n,m} &= \exp\br{i P_n \lambda_{n,m}} \\
+    %     R_{m,n} &= \exp\br{i \si_{m,n} \lambda_{m,n}}
+    % \end{split} \eq \label{eq:exp_terms}
+    % \end{align*}
+    % For example, $R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}}$ applies a rotation to the sub-space spanned by $\ket{m}$ and $\ket{n}$ for $m < n$. Analogously, $RP_{n,m}$ generates the relative phase between $\ket{m}$ and $\ket{n}$ for $m > n$ and $GP_l$ fixes the global phase of $\ket{l}$. Possessing a parameterization that maintains this physical interpretation is useful as it allows one to readily eliminate any degeneracies. For the purposes of quantum distributions such as \cref{eq:quantum_model_triangle}, it should be clear that any contributions to global phase are irrelevant. The SSH parameterization becomes especially attractive because it readily permits one to drop the global phase terms by setting $\la_{l,l} = 0$ for all $l = 1, \ldots, d$. It is convenient to denote the set of all unitaries up to global phase considerations as $\ti {\s{U}}\br{d}$ and express $\ti {U} \in \ti {\s{U}}\br{d}$ using $d\br{d-1}$ real-valued parameters:
+    % \[ \ti U = \prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} RP_{n,m}R_{m,n}} \eq \label{eq:spengler_unitary_gp} \]
+    % Another attractive feature of the SSH parameterization not mentioned in~\cite{Spengler_2010_Unitary} is that \cref{eq:spengler_unitary}, and thus \cref{eq:spengler_unitary_gp}, can be implemented in a computationally efficient manner. This is discussed in \cref{sec:comp_spengler}.
+    % \subsection{Measurements}
+    % \label{sec:measurements}
+    % For each measurement set $M$ in \cref{eq:quantum_model_triangle}, we consider a $d$-element projective-valued measure (PVM) $M = \bc{M_1, \ldots, M_d}$ satisfying a number of familiar constraints:
+    % \begin{gather*}
+    % \forall \ket{\phi} \in \Hilb^d: \bra{\phi} M_i \ket{\phi} \geq 0 \qquad \sum_{i=1}^{d} M_i = \ident_{d} \\
+    % M_i = \ket{m_i}\bra{m_i} \qquad M_i M_j = \de_{ij} M_i
+    % \end{gather*}
+    % Therefore, parameterizing $M$ corresponds to parameterizing the set of all orthonormal basis $\bc{\ket{\psi_1}, \ldots, \ket{\psi_d}}$ of $\Hilb^d$.
+    % First note that any such basis can be transformed into the computational basis $\bc{\ket{1}, \ldots, \ket{d}}$ by a unitary denoted $U^{-1} \in \mathcal{U}\br{d}$.
+    % \[ \forall i : U^{-1} \ket{\psi_i} = \ket{i} \eq \label{eq:unitary_transform}\]
+    % With this observation, all that is required is to parameterize the set of all unitaries $U \in \mathcal{U}\br{d}$. Specifically, the projective property each $M_i \in M$ means that the global phase of $U$ is completely arbitrary; one only needs to consider parameterizing unitaries up to global phase using \cref{eq:spengler_unitary_gp}.
+    % \[ M = \bc{\ti U \ket{i} \bra{i} \ti U^{\dagger} \mid i \in \bc{1, \ldots, d}} \]
+    % For the purposes discussed in \cref{sec:param_quantum_dist}, only $d = 4$ outcome measurements are utilized and therefore requiring $4\br{4 - 1} = 12$ real-valued parameters. This method was inspired by the measurement seeding method for iterative optimization used by \citet{Pal_2010} .
+    % \subsection{States}
+    % \label{sec:states}
 
-    \clearpage
-    \section{Quantum Parameterization of Triangle Structure}
-    \label{sec:param_quantum_dist}
-    \subsection{Unitary Group}
-    \label{sec:unitary_group}
-    To facilitate the parameterization of quantum states states and PVMs, a parameterization of the unitary group of dimension $d$ (denoted $\s{U}\br{d}$) by Spengler, Huber and Hiesmayr~\cite{Spengler_2010_Unitary} is introduced. Discussions of its application to states and measurements are deferred to \cref{sec:states} and \cref{sec:measurements} respectively.
+    % Each state $\rho \in \br{\rho_{AB}, \rho_{BC}, \rho_{CA}}$ of \cref{eq:quantum_model_triangle} is modeled as a two-qubit density matrices acting on $\Hilb^2 \otimes \Hilb^2$. The space of all such states corresponds to the space of all $4\times 4$ positive semi-definite hermitian matrices with unitary trace.
+    % \[ \forall \ket{\phi} \in \Hilb^d: \bra{\phi} \rho \ket{\phi} \geq 0 \qquad \rho^{\dagger} = \rho \qquad \Tr\br{\rho} = 1 \eq \label{eq:density_matrix}\]
+    % Although is common to parameterize all such matrices using a Cholesky decomposition~\cite{Grasmair_2014}, we make use of the non-degenerate SHH parameterization~\cite{Spengler_2010_Unitary} and the spectral decomposition of $\rho$. Retaining full generality, consider full-rank density matrices:
+    % \[ \rho = \sum_{i=1}^{d} p_i \ket{\psi_i}\bra{\psi_i} \qquad \sum_{i=1}^{d} p_i = 1, p_i \geq 0 \eq \label{eq:param_density} \]
+    % Where $\bc{p_i}$ are the eigenvalues of $\rho$ and $\bc{\ket{\psi_i}}$ are its eigenstates. It is here that one recognizes the reapplication of \cref{eq:unitary_transform}: any orthonormal basis $\bc{\ket{\psi_i}}$ of $\Hilb^d$ can be transformed into a computational basis $\bc{\ket{i}}$ by a unitary transformation $U \in \mathcal{U}\br{d}$ such that $\ket{\psi_i} = U\ket{i}$. Analogous to the projective measurements considered in \cref{sec:measurements}, the global phase contributions are redundant.
+    % \[ \rho = \sum_{i=1}^{d} p_i \ti U\ket{i}\bra{i} \ti U^{\dagger} \]
+    % Parameterizing the eigenvalues requires $d - 1$ real-valued parameters due to the trace constraint of \cref{eq:density_matrix}. The eigenvalues are parameterized without degeneracy using a tuple of $d-1$ parameters $\lambda = \br{\lambda_1, \ldots, \lambda_{d-1}}, \lambda_i \in \bs{0, 2 \pi}$ using hyper-spherical coordinates~\cite{Hedemann_2013, Spengler_2010_Unitary}:
+    % \begin{align*}
+    % \eq \label{eq:convex_param}
+    % \begin{split}
+    %     p_n &= \prod_{i=1}^{n-1} \sin^2 \lambda_i \\
+    %     p_j &= \cos^2 \lambda_j \prod_{i=1}^{j-1} \sin^2 \lambda_i \quad \forall j \in 1, \ldots, n - 1
+    % \end{split}
+    % \end{align*}
 
-    In Ref.~\cite{Spengler_2010_Unitary}, Spengler \textit{et al.} proved that all unitaries $U \in \s{U}\br{d}$ can be parameterized without degeneracy as follows:
-    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} \exp\br{i P_n \lambda_{n,m}}\exp\br{i \si_{m,n} \lambda_{m,n}}}} \cdot \bs{\prod_{l=1}^{d} \exp\br{iP_l \lambda_{l,l}}}  \eq \label{eq:spengler_unitary} \]
-    Where $\la = \bc{\la_{n,m} \mid n,m \in 1, \ldots, d}$ form a $d \times d$ matrix of real-valued parameters with periodicities $\la_{m,n} \in \bs{0, \f{\pi}{2}}$ for $m < n$ and $\la_{m,n} \in \bs{0, 2 \pi}$ for $m \geq n$.
-    \[ \la = \begin{pmatrix}
-        \la_{1,1} & \cdots & \la_{1, d} \\
-        \vdots & \ddots & \vdots \\
-        \la_{d,1} & \cdots & \la_{d, d} \\
-    \end{pmatrix} \]
-    And where $P_l$ are one-dimensional projective operators,
-    \[ P_l = \ket{l}\bra{l} \qquad 1 \leq l \leq d \eq \label{eq:projective_operator} \]
-    and the $\si_{m,n}$ are generalized anti-symmetric $\si$-matrices,
-    \[ \sigma_{m,n} = -i \ket{m}\bra{n} +i \ket{n}\bra{m} \qquad 1 \leq m < n \leq d\]
-    The SSH parameterization (\cref{eq:spengler_unitary}) is unique in that each of the real-valued parameters $\la_{n,m}$ has physical significance. For the sake of reference, let us label the matrix exponential terms in \cref{eq:spengler_unitary} in a manner that corresponds to their affect on an orthonormal basis $\bc{\ket{1}, \ldots, \ket{d}}$.
-    \begin{align*}
-    \begin{split}
-        GP_l &= \exp\br{iP_l \lambda_{l,l}} \\
-        RP_{n,m} &= \exp\br{i P_n \lambda_{n,m}} \\
-        R_{m,n} &= \exp\br{i \si_{m,n} \lambda_{m,n}}
-    \end{split} \eq \label{eq:exp_terms}
-    \end{align*}
-    For example, $R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}}$ applies a rotation to the sub-space spanned by $\ket{m}$ and $\ket{n}$ for $m < n$. Analogously, $RP_{n,m}$ generates the relative phase between $\ket{m}$ and $\ket{n}$ for $m > n$ and $GP_l$ fixes the global phase of $\ket{l}$. Possessing a parameterization that maintains this physical interpretation is useful as it allows one to readily eliminate any degeneracies. For the purposes of quantum distributions such as \cref{eq:quantum_model_triangle}, it should be clear that any contributions to global phase are irrelevant. The SSH parameterization becomes especially attractive because it readily permits one to drop the global phase terms by setting $\la_{l,l} = 0$ for all $l = 1, \ldots, d$. It is convenient to denote the set of all unitaries up to global phase considerations as $\ti {\s{U}}\br{d}$ and express $\ti {U} \in \ti {\s{U}}\br{d}$ using $d\br{d-1}$ real-valued parameters:
-    \[ \ti U = \prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} RP_{n,m}R_{m,n}} \eq \label{eq:spengler_unitary_gp} \]
-    Another attractive feature of the SSH parameterization not mentioned in~\cite{Spengler_2010_Unitary} is that \cref{eq:spengler_unitary}, and thus \cref{eq:spengler_unitary_gp}, can be implemented in a computationally efficient manner. This is discussed in \cref{sec:comp_spengler}.
-    \subsection{Measurements}
-    \label{sec:measurements}
-    For each measurement set $M$ in \cref{eq:quantum_model_triangle}, we consider a $d$-element projective-valued measure (PVM) $M = \bc{M_1, \ldots, M_d}$ satisfying a number of familiar constraints:
-    \begin{gather*}
-    \forall \ket{\phi} \in \Hilb^d: \bra{\phi} M_i \ket{\phi} \geq 0 \qquad \sum_{i=1}^{d} M_i = \ident_{d} \\
-    M_i = \ket{m_i}\bra{m_i} \qquad M_i M_j = \de_{ij} M_i
-    \end{gather*}
-    Therefore, parameterizing $M$ corresponds to parameterizing the set of all orthonormal basis $\bc{\ket{\psi_1}, \ldots, \ket{\psi_d}}$ of $\Hilb^d$.
-    First note that any such basis can be transformed into the computational basis $\bc{\ket{1}, \ldots, \ket{d}}$ by a unitary denoted $U^{-1} \in \mathcal{U}\br{d}$.
-    \[ \forall i : U^{-1} \ket{\psi_i} = \ket{i} \eq \label{eq:unitary_transform}\]
-    With this observation, all that is required is to parameterize the set of all unitaries $U \in \mathcal{U}\br{d}$. Specifically, the projective property each $M_i \in M$ means that the global phase of $U$ is completely arbitrary; one only needs to consider parameterizing unitaries up to global phase using \cref{eq:spengler_unitary_gp}.
-    \[ M = \bc{\ti U \ket{i} \bra{i} \ti U^{\dagger} \mid i \in \bc{1, \ldots, d}} \]
-    For the purposes discussed in \cref{sec:param_quantum_dist}, only $d = 4$ outcome measurements are utilized and therefore requiring $4\br{4 - 1} = 12$ real-valued parameters. This method was inspired by the measurement seeding method for iterative optimization used by \citet{Pal_2010} .
-    \subsection{States}
-    \label{sec:states}
+    % Furthermore due to the periodicity of the parameter space $\bc{\lambda}$, \cref{eq:convex_param} can be used for either constrained or unconstrained optimization problems. For continuity reasons, unconstrained optimizations are performed whenever possible. In conclusion, it is possible to parametrize all $d$-dimensional density matrices satisfying \cref{eq:density_matrix} using $d\br{d - 1} + d - 1 = d^2 -1$ real-valued parameters.
 
-    Each state $\rho \in \br{\rho_{AB}, \rho_{BC}, \rho_{CA}}$ of \cref{eq:quantum_model_triangle} is modeled as a two-qubit density matrices acting on $\Hilb^2 \otimes \Hilb^2$. The space of all such states corresponds to the space of all $4\times 4$ positive semi-definite hermitian matrices with unitary trace.
-    \[ \forall \ket{\phi} \in \Hilb^d: \bra{\phi} \rho \ket{\phi} \geq 0 \qquad \rho^{\dagger} = \rho \qquad \Tr\br{\rho} = 1 \eq \label{eq:density_matrix}\]
-    Although is common to parameterize all such matrices using a Cholesky decomposition~\cite{Grasmair_2014}, we make use of the non-degenerate SHH parameterization~\cite{Spengler_2010_Unitary} and the spectral decomposition of $\rho$. Retaining full generality, consider full-rank density matrices:
-    \[ \rho = \sum_{i=1}^{d} p_i \ket{\psi_i}\bra{\psi_i} \qquad \sum_{i=1}^{d} p_i = 1, p_i \geq 0 \eq \label{eq:param_density} \]
-    Where $\bc{p_i}$ are the eigenvalues of $\rho$ and $\bc{\ket{\psi_i}}$ are its eigenstates. It is here that one recognizes the reapplication of \cref{eq:unitary_transform}: any orthonormal basis $\bc{\ket{\psi_i}}$ of $\Hilb^d$ can be transformed into a computational basis $\bc{\ket{i}}$ by a unitary transformation $U \in \mathcal{U}\br{d}$ such that $\ket{\psi_i} = U\ket{i}$. Analogous to the projective measurements considered in \cref{sec:measurements}, the global phase contributions are redundant.
-    \[ \rho = \sum_{i=1}^{d} p_i \ti U\ket{i}\bra{i} \ti U^{\dagger} \]
-    Parameterizing the eigenvalues requires $d - 1$ real-valued parameters due to the trace constraint of \cref{eq:density_matrix}. The eigenvalues are parameterized without degeneracy using a tuple of $d-1$ parameters $\lambda = \br{\lambda_1, \ldots, \lambda_{d-1}}, \lambda_i \in \bs{0, 2 \pi}$ using hyper-spherical coordinates~\cite{Hedemann_2013, Spengler_2010_Unitary}:
-    \begin{align*}
-    \eq \label{eq:convex_param}
-    \begin{split}
-        p_n &= \prod_{i=1}^{n-1} \sin^2 \lambda_i \\
-        p_j &= \cos^2 \lambda_j \prod_{i=1}^{j-1} \sin^2 \lambda_i \quad \forall j \in 1, \ldots, n - 1
-    \end{split}
-    \end{align*}
+    % Although non-degenerate, \cref{eq:convex_param} suffers from a lack of uniformity; a randomly sampled vector of parameters $\bc{\lambda}$ \textit{does not} translate to a randomly sampled set of eigenvalues $\bc{p_i}$. Another, albeit degenerate, parameterization of $\bc{p_i}$ involves beginning with $d$ real parameters $\lambda = \br{\lambda_1, \ldots, \lambda_d}$, then forcing normalization by dividing each parameter $\la_i$ by the their sum.\footnote{Strictly speaking, \cref{eq:uniform_param} \textit{also} suffers from non-uniformity; being biased toward eigenvalues that have similar values to each other.}.
+    % \[ p_j = \f{\abs{\lambda_j}}{\sum_{i=1}^{n} \abs{\lambda_i}} \quad \forall j \in 1, \ldots, n \eq \label{eq:uniform_param} \]
+    % For various optimization tasks sensitive to initial conditions outlined \cref{sec:optimizations}, the latter parameterization of \cref{eq:uniform_param} generally performed better than the former \cref{eq:convex_param}.
+    % % \subsection{Permutation Matrix}
+    % % \label{sec:perm_matrix}
+    % % \begin{figure}
+    % %     \centering
+    % %     \includegraphics[trim={1cm 1.2cm 1.0cm 1cm},clip,width=0.4\textwidth]{../../figures/perm_mtrx.pdf}
+    % %     \caption{The permutation matrix $\netperm$ acting on $\br{\Hilb^2}^{\otimes 6}$ for the Triangle structure. Black entries represents a value of $1$ and white represents $0$.}
+    % %     \label{fig:perm_mtrx}
+    % % \end{figure}
+    % % Finally, we introduce the a permutation matrix $\netperm$ for the Triangle structure. For bipartite qubit states, $\netperm$ is the $64\times64$ bit-wise matrix depicted in \cref{fig:perm_mtrx}. Upon examination of \cref{eq:quantum_model_triangle_pvms}, we consider $\netperm$ to be acting on the joint global state $\rho_{\p{AB}} \otimes \rho_{\p{BC}} \otimes \rho_{\p{CA}}$. To illuminate its necessity, consider \cref{eq:quantum_model_triangle} in the absence of $\netperm$.
+    % % \begin{align*}
+    % % \prob[\p{ABC}]\br{abc} &\stackrel{?}{=} \Tr\bs{\br{\rho_{\p{AB}} \otimes \rho_{\p{BC}} \otimes \rho_{\p{CA}}} \br{M^a_{\p{A}}\otimes M^b_{\p{B}} \otimes M^c_{\p{C}}}}\\
+    % % &= \Tr\bs{\br{\rho_{\p{AB}}M^a_{\p{A}}}\otimes\br{\rho_{\p{BC}}M^b_{\p{B}}}\otimes\br{\rho_{\p{CA}}M^c_{\p{C}}}}\\
+    % % &= \Tr\br{\rho_{\p{AB}}M^a_{\p{A}}}\Tr\br{\rho_{\p{BC}}M^b_{\p{B}}}\Tr\br{\rho_{\p{CA}}M^c_{\p{C}}}\\
+    % % &= \prob[\p{A}\mid \rho_{\p{AB}}]\br{a}\prob[\p{B}\mid \rho_{\p{BC}}]\br{b}\prob[\p{C}\mid \rho_{\p{CA}}]\br{c}
+    % % \end{align*}
+    % % On an operational level, this corresponds to $A$ making a measurement on \textit{both} subsystems of $\rho_{AB}$ and \textit{not} on any component of $\rho_{CA}$. This is analogously troubling for $B$ and $C$ as well. To resolve this issue, the permutation matrix $\netperm$ corresponds to \textit{aligning} the underlying $6$-qubit joint state $\rho$ with the joint measurement $M$. To understand its effect, consider its effect on $6$-qubit pure state $\ket{q_1} \otimes \cdots \otimes \ket{q_6} = \ket{q_1q_2q_3q_4q_5q_6}$ where $\forall i : \ket{q_i} \in \Hilb^2$.
+    % % \[ \netperm\ket{q_1q_2q_3q_4q_5q_6} = \ket{q_2q_3q_4q_5q_6q_1} \]
+    % % $\netperm$ acts as a \textit{partial transpose} on $\br{\Hilb^2}^{\otimes 6}$ by shifting the underlying tensor structure one subsystem to the ``left''. It is uniquely defined by its action on all $2^6$ orthonormal basis elements of $\br{\Hilb^2}^{\otimes 6}$,
+    % % \[ \netperm \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
+    % \subsection{Computationally Efficient Parameterization of the Unitary Group}
+    % \label{sec:comp_spengler}
 
-    Furthermore due to the periodicity of the parameter space $\bc{\lambda}$, \cref{eq:convex_param} can be used for either constrained or unconstrained optimization problems. For continuity reasons, unconstrained optimizations are performed whenever possible. In conclusion, it is possible to parametrize all $d$-dimensional density matrices satisfying \cref{eq:density_matrix} using $d\br{d - 1} + d - 1 = d^2 -1$ real-valued parameters.
+    % If \cref{sec:unitary_group}, the SSH parameterization was introduced as a non-degenerate parameterization of the unitary group $\s{U}\br{d}$. As presented, the SSH parameterization suffers due to the presence of computationally expensive matrix exponential terms~\cite{Moler_2003}. Although not explicitly mentioned in~\cite{Spengler_2010_Unitary}, it is possible to remove the reliance on matrix exponential operations in \cref{eq:spengler_unitary} by utilizing the explicit form of the exponential terms in \cref{eq:exp_terms}. As a first step, recognize the defining property of the projective operators \cref{eq:projective_operator},
+    % \[ P_l^k = \br{\ket{l}\bra{l}}^k = \ket{l}\bra{l} = P_l \]
+    % This greatly simplifies the global phase terms $GP_l$,
+    % \[ GP_l = \exp\br{iP_l \lambda_{l,l}} = \sum_{k=0}^{\inf} \f{\br{iP_l \lambda_{l,l}}^k}{k!} = \ident + \sum_{k=1}^{\inf} \f{\br{i \lambda_{l,l}}^k}{k!}P_l^k = \ident + P_l \bs{\sum_{k=1}^{\inf} \f{\br{i \lambda_{l,l}}^k}{k!}} = \ident + P_l \br{e^{i \lambda_{l,l}} - 1} \eq \label{eq:unitary_GP} \]
+    % Analogously for the relative phase terms $RP_{n,m}$,
+    % \[ RP_{n,m} = \cdots = \ident + P_n \br{e^{i \lambda_{n,m}} - 1} \eq \label{eq:unitary_RP} \]
+    % Finally, the rotation terms $R_{m,n}$ can also be simplified by examining powers of $i \sigma_{n,m}$,
+    % \[ R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}} = \sum_{k=0}^{\inf} \f{\br{\ket{m}\bra{n} - \ket{n}\bra{m}}^k \lambda_{m,n}^k}{k!} \]
+    % One can verify that the following properties hold,
+    % \begin{align*}
+    %     \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^0 &= \ident \\
+    %     \forall k \in \N, k \neq 0 : \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^{2k} &= \br{-1}^k\br{\ket{m}\bra{m} + \ket{n}\bra{n}} \\
+    %     \forall k \in \N : \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^{2k+1} &= \br{-1}^k\br{\ket{m}\bra{n} - \ket{n}\bra{m}}
+    % \end{align*}
+    % Revealing the simplified form of $R_{m,n}$,
+    % \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \sum_{j=1}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j}}{\br{2j}!} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sum_{j=0}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j+1}}{\br{2j+1}!} \]
+    % \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sin\lambda_{n,m} \eq \label{eq:unitary_R} \]
+    % By combining the optimizations of \cref{eq:unitary_GP,eq:unitary_RP,eq:unitary_R} together we arrive at an equivalent form for \cref{eq:spengler_unitary} that is computational more efficient.
+    % \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n}RP_{n,m}}} \cdot \bs{\prod_{l=1}^{d} GP_{l}}  \eq \label{eq:spengler_unitary_fast} \]
 
-    Although non-degenerate, \cref{eq:convex_param} suffers from a lack of uniformity; a randomly sampled vector of parameters $\bc{\lambda}$ \textit{does not} translate to a randomly sampled set of eigenvalues $\bc{p_i}$. Another, albeit degenerate, parameterization of $\bc{p_i}$ involves beginning with $d$ real parameters $\lambda = \br{\lambda_1, \ldots, \lambda_d}$, then forcing normalization by dividing each parameter $\la_i$ by the their sum.\footnote{Strictly speaking, \cref{eq:uniform_param} \textit{also} suffers from non-uniformity; being biased toward eigenvalues that have similar values to each other.}.
-    \[ p_j = \f{\abs{\lambda_j}}{\sum_{i=1}^{n} \abs{\lambda_i}} \quad \forall j \in 1, \ldots, n \eq \label{eq:uniform_param} \]
-    For various optimization tasks sensitive to initial conditions outlined \cref{sec:optimizations}, the latter parameterization of \cref{eq:uniform_param} generally performed better than the former \cref{eq:convex_param}.
-    \subsection{Permutation Matrix}
-    \label{sec:perm_matrix}
-    \begin{figure}
-        \centering
-        \includegraphics[trim={1cm 1.2cm 1.0cm 1cm},clip,width=0.4\textwidth]{../../figures/perm_mtrx.pdf}
-        \caption{The permutation matrix $\netperm$ acting on $\br{\Hilb^2}^{\otimes 6}$ for the Triangle structure. Black entries represents a value of $1$ and white represents $0$.}
-        \label{fig:perm_mtrx}
-    \end{figure}
-    Finally, we introduce the a permutation matrix $\netperm$ for the Triangle structure. For bipartite qubit states, $\netperm$ is the $64\times64$ bit-wise matrix depicted in \cref{fig:perm_mtrx}. Upon examination of \cref{eq:quantum_model_triangle_pvms}, we consider $\netperm$ to be acting on the joint global state $\rho_{\p{AB}} \otimes \rho_{\p{BC}} \otimes \rho_{\p{CA}}$. To illuminate its necessity, consider \cref{eq:quantum_model_triangle} in the absence of $\netperm$.
-    \begin{align*}
-    \prob[\p{ABC}]\br{abc} &\stackrel{?}{=} \Tr\bs{\br{\rho_{\p{AB}} \otimes \rho_{\p{BC}} \otimes \rho_{\p{CA}}} \br{M^a_{\p{A}}\otimes M^b_{\p{B}} \otimes M^c_{\p{C}}}}\\
-    &= \Tr\bs{\br{\rho_{\p{AB}}M^a_{\p{A}}}\otimes\br{\rho_{\p{BC}}M^b_{\p{B}}}\otimes\br{\rho_{\p{CA}}M^c_{\p{C}}}}\\
-    &= \Tr\br{\rho_{\p{AB}}M^a_{\p{A}}}\Tr\br{\rho_{\p{BC}}M^b_{\p{B}}}\Tr\br{\rho_{\p{CA}}M^c_{\p{C}}}\\
-    &= \prob[\p{A}\mid \rho_{\p{AB}}]\br{a}\prob[\p{B}\mid \rho_{\p{BC}}]\br{b}\prob[\p{C}\mid \rho_{\p{CA}}]\br{c}
-    \end{align*}
-    On an operational level, this corresponds to $A$ making a measurement on \textit{both} subsystems of $\rho_{AB}$ and \textit{not} on any component of $\rho_{CA}$. This is analogously troubling for $B$ and $C$ as well. To resolve this issue, the permutation matrix $\netperm$ corresponds to \textit{aligning} the underlying $6$-qubit joint state $\rho$ with the joint measurement $M$. To understand its effect, consider its effect on $6$-qubit pure state $\ket{q_1} \otimes \cdots \otimes \ket{q_6} = \ket{q_1q_2q_3q_4q_5q_6}$ where $\forall i : \ket{q_i} \in \Hilb^2$.
-    \[ \netperm\ket{q_1q_2q_3q_4q_5q_6} = \ket{q_2q_3q_4q_5q_6q_1} \]
-    $\netperm$ acts as a \textit{partial transpose} on $\br{\Hilb^2}^{\otimes 6}$ by shifting the underlying tensor structure one subsystem to the ``left''. It is uniquely defined by its action on all $2^6$ orthonormal basis elements of $\br{\Hilb^2}^{\otimes 6}$,
-    \[ \netperm \defined \sum_{\ket{q_i} \in \bc{\ket{0}, \ket{1}}}\ket{q_2q_3q_4q_5q_6q_1}\bra{q_1q_2q_3q_4q_5q_6} \]
-    \subsection{Computationally Efficient Parameterization of the Unitary Group}
-    \label{sec:comp_spengler}
-
-    If \cref{sec:unitary_group}, the SSH parameterization was introduced as a non-degenerate parameterization of the unitary group $\s{U}\br{d}$. As presented, the SSH parameterization suffers due to the presence of computationally expensive matrix exponential terms~\cite{Moler_2003}. Although not explicitly mentioned in~\cite{Spengler_2010_Unitary}, it is possible to remove the reliance on matrix exponential operations in \cref{eq:spengler_unitary} by utilizing the explicit form of the exponential terms in \cref{eq:exp_terms}. As a first step, recognize the defining property of the projective operators \cref{eq:projective_operator},
-    \[ P_l^k = \br{\ket{l}\bra{l}}^k = \ket{l}\bra{l} = P_l \]
-    This greatly simplifies the global phase terms $GP_l$,
-    \[ GP_l = \exp\br{iP_l \lambda_{l,l}} = \sum_{k=0}^{\inf} \f{\br{iP_l \lambda_{l,l}}^k}{k!} = \ident + \sum_{k=1}^{\inf} \f{\br{i \lambda_{l,l}}^k}{k!}P_l^k = \ident + P_l \bs{\sum_{k=1}^{\inf} \f{\br{i \lambda_{l,l}}^k}{k!}} = \ident + P_l \br{e^{i \lambda_{l,l}} - 1} \eq \label{eq:unitary_GP} \]
-    Analogously for the relative phase terms $RP_{n,m}$,
-    \[ RP_{n,m} = \cdots = \ident + P_n \br{e^{i \lambda_{n,m}} - 1} \eq \label{eq:unitary_RP} \]
-    Finally, the rotation terms $R_{m,n}$ can also be simplified by examining powers of $i \sigma_{n,m}$,
-    \[ R_{m,n} = \exp\br{i \si_{m,n} \lambda_{m,n}} = \sum_{k=0}^{\inf} \f{\br{\ket{m}\bra{n} - \ket{n}\bra{m}}^k \lambda_{m,n}^k}{k!} \]
-    One can verify that the following properties hold,
-    \begin{align*}
-        \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^0 &= \ident \\
-        \forall k \in \N, k \neq 0 : \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^{2k} &= \br{-1}^k\br{\ket{m}\bra{m} + \ket{n}\bra{n}} \\
-        \forall k \in \N : \br{\ket{m}\bra{n} - \ket{n}\bra{m}}^{2k+1} &= \br{-1}^k\br{\ket{m}\bra{n} - \ket{n}\bra{m}}
-    \end{align*}
-    Revealing the simplified form of $R_{m,n}$,
-    \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \sum_{j=1}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j}}{\br{2j}!} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sum_{j=0}^{\inf} \br{-1}^j\f{\lambda_{n,m}^{2j+1}}{\br{2j+1}!} \]
-    \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sin\lambda_{n,m} \eq \label{eq:unitary_R} \]
-    By combining the optimizations of \cref{eq:unitary_GP,eq:unitary_RP,eq:unitary_R} together we arrive at an equivalent form for \cref{eq:spengler_unitary} that is computational more efficient.
-    \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n}RP_{n,m}}} \cdot \bs{\prod_{l=1}^{d} GP_{l}}  \eq \label{eq:spengler_unitary_fast} \]
-
-
-    \section{Common Terminology \& Notation}
-    \comment[TC]{keep, remove, or distribute into body where relevant?}
-
-    \subsection{Probability Theory}
-    \label{sec:probability_theory}
-
-    \begin{definition}
-        The \term{product distribution} of two disjoint probability distributions $\prob[V]$ and $\prob[W]$ (where $V \cap W = \emptyset$) is denoted as $\prob[V] \times \prob[W]$.
-        \[ \forall s \in \Events{V \cup W} : \br{\prob[V] \times \prob[W]}\br{s} \defined \prob[V][s|_{V}]\cdot\prob[W][s|_{W}] \]
-        A product distribution of $k$ mutually disjoint distributions is defined as,
-        \[ \prod_{i\in\bs{k}} \prob[V_i] \defined \br{\prob[V_1] \times \cdots \times \prob[V_k]} \]
-    \end{definition}
-
-    \begin{definition}
-        The \term{marginalization} of a distribution $\prob[V]$ to a distribution over $W \subseteq V$ is denoted $\sum_{V \setminus W} \prob[V]$ and is defined such that,
-        \[ \forall s \in \Events{W} : \br{\sum_{V \setminus W} \prob[V]}\br{s} \defined \sum_{j \in \Ext[V]{s}} \prob[V][j] \]
-        Where $\Ext[V]{s}$ denotes the set of all events $j \in \Events{V}$ that can be restricted to $s$,
-        \[ \Ext[V]{s} = \bc{j \in \Events{V} \mid s = j|_{\s{D}\br{s}}} \]
-    \end{definition}
-
-    \clearpage
     \section{Large Triangle Structure Inequalities}
     \label{sec:web_inequalities}
     \subsection{Web Inflation Inequality}
@@ -987,7 +966,6 @@
         \includegraphics[width=\linewidth]{../../figures/inequalities/no_symwitness_ineq_print_standalone}
     \end{center}
     Note: $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$.
-    \clearpage
     \subsection{Symmetric Web Inflation Inequality}
     \label{sec:symmetic_web_inequality}
     The following is a symmetric causal compatibility inequality for the Triangle structure that is violated by the Fritz distribution outlined in \cref{sec:fritz_distribution} and was derived using the Web inflation of \cref{fig:the_web_inflation}.
@@ -998,7 +976,6 @@
     Note: $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$ and $\bs{P(113)P(330)}_3$ is shorthand for the sum over permutations:
     \[ \bs{P(113)P(330)}_3 = P(113)P(330) + P(131)P(303) + P(311)P(033) \]
 
-    \clearpage
     \setlength{\bibsep}{3pt plus 3pt minus 2pt}
     \bibliographystyle{apsrev4-1}
     \nocite{apsrev41Control}
