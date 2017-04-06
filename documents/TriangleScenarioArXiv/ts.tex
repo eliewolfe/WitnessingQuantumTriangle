@@ -75,6 +75,8 @@
     \label{sec:bell_structure}
     \todo[TC]{Review of Bell structure, Tsirelson-box, CHSH inequality}
 
+    \[ \ba{\p A\p B | S_{\p{A}} = 0, S_{\p{B}} = 0} + \ba{\p A\p B | S_{\p{A}} = 0, S_{\p{B}} = 1} + \ba{\p A\p B | S_{\p{A}} = 1, S_{\p{B}} = 0} - \ba{\p A\p B | S_{\p{A}} = 1, S_{\p{B}} = 1} \leq 2 \eq \label{eq:CHSH_ineq_orig} \]
+
     \section{Triangle Structure}
     \label{sec:triangle_structure}
 
@@ -127,9 +129,9 @@
     \end{center}
     \end{figure}
 
-    As was originally noticed by \citet{Fritz_2012}, it is possible to construct quantum distributions incompatible with the Triangle structure by utilizing quantum distributions incompatible with the familiar Bell structure. To explain, imagine rearranging the triangle into the configuration depicted in \cref{fig:triangle_structure_with_fritz_bell_embedded} and contrast it with the Bell structure of \cref{fig:bell_scenario}. Evidently, under the correct relabeling, large portions of the Triangle structure resemble the Bell structure. The crucial distinction is that the measurement settings $S_{\p{A}}, S_{\p{B}}$ are \textit{observable variables} in the Bell structure but become \textit{latent variables} in the Triangle structure. In order to embed distributions that are incompatible with the Bell structure into the Triangle structure, the latent nodes $S_{\p{A}}, S_{\p{B}}$ need to be observable and independent of the shared latent node $\la$. This can be accomplished by having $C$ ``measure'' the measurement settings $S_{\p{A}}, S_{\p{B}}$ and announce them as an outcome. Consequently, any distribution over $\p{A}, \p{B}, S_{\p{A}}, S_{\p{B}}$ that is incompatible with Bell structure is also incompatible with the Triangle structure provided that $C$ is \textit{perfectly correlated} with $S_{\p{A}}, S_{\p{B}}$. Understandably there are numerous ways that this can be accomplished, albeit we will focus on elucidating an exemplary method.
+    As was originally noticed by \citet{Fritz_2012}, it is possible to construct quantum distributions incompatible with the Triangle structure by utilizing quantum distributions incompatible with the familiar Bell structure. To explain, imagine rearranging the triangle into the configuration depicted in \cref{fig:triangle_structure_with_fritz_bell_embedded} and contrast it with the Bell structure of \cref{fig:bell_scenario}. Evidently, under the correct relabeling, large portions of the Triangle structure resemble the Bell structure. The crucial distinction is that the measurement settings $S_{\p{A}}, S_{\p{B}}$ are \textit{observable variables} in the Bell structure but become \textit{latent variables} in the Triangle structure. In order to embed distributions that are incompatible with the Bell structure into the Triangle structure, the latent nodes $S_{\p{A}}, S_{\p{B}}$ need to be observable and independent of the shared latent node $\la$. This can be accomplished by having $C$ ``measure'' the measurement settings $S_{\p{A}}, S_{\p{B}}$ and announce them as an outcome. Consequently, any distribution over $\p{A}, \p{B}, S_{\p{A}}, S_{\p{B}}$ that is incompatible with Bell structure is also incompatible with the Triangle structure provided that $C$ is \textit{perfectly correlated} with $S_{\p{A}}, S_{\p{B}}$~\cite{Fritz_2012}. Understandably there are numerous ways that this can be accomplished, albeit we will focus on elucidating an exemplary method.
 
-    The \term{Fritz distribution}, denoted $\prob[\fritz]$, is a quantum-accessible distribution known to be incompatible with the Triangle structure~\cite{Fritz_2012}. In the Fritz distribution, each of the variables $A,B,C$ have $4$ possible outcomes. Explicitly, $\prob[\fritz]$ can be written as:
+    The \term{Fritz distribution}, denoted $\prob[\fritz]$, is a quantum-accessible distribution incompatible with the Triangle structure~\cite{Fritz_2012}. In the Fritz distribution, each of the variables $A,B,C$ have $4$ possible outcomes. Explicitly, $\prob[\fritz]$ can be written as:
     \begin{align*}
     \eq \label{eq:fritz_dist}
     \begin{split}
@@ -137,7 +139,7 @@
         \prob[\fritz][010] = \prob[\fritz][100] = \prob[\fritz][031] = \prob[\fritz][121] = \prob[\fritz][212] = \prob[\fritz][302] = \prob[\fritz][223] = \prob[\fritz][333] &= \f{1}{32}\br{2 - \sqrt{2}}
     \end{split}
     \end{align*}
-    Here the notation $\prob[\fritz][abc] = \prob[\p{ABC}][abc] = \prob[][\p A=a,\p B=b,\p C=c]$ is used as shorthand. The Fritz distribution is best visualized as a $4 \times 4 \times 4$ grid of possible outcomes as depicted in \cref{fig:fritz_distribution_visualized}. From this diagram, it can be seen that each of $\p{C}$'s outcomes restricts the possible outcomes for $\p A,\p B$ into a $2 \times 2$ block. If one writes the outcome labels $\bc{0,1,2,3}$ in binary $\bc{00,01,10,11}$, it can be seen that the left-hand bits for $\p A$ and $\p B$ (respectively denoted $\p A_l$, $\p B_l$) are fixed by the outcome of $\p C$. Pursuant to the embedding of~\cref{fig:triangle_structure_with_fritz_bell_embedded} the left-hand bits emulate the measurement settings $S_{\p A}$ and $S_{\p B}$ and the right-hand bits emulate a two-outcome measurement performed by $A, B$ as they would in~\cref{fig:bell_scenario}. Specifically, $\p C$'s bits are perfectly correlated with the left-bits of $A,B$; $\p C_l = \p A_l$ and $\p C_r = \p B_l$.
+    Here the notation $\prob[\fritz][abc] = \prob[\p{ABC}][abc] = \prob[][\p A=a,\p B=b,\p C=c]$ is used as shorthand. The Fritz distribution is quantum-accessible in the sense that $\prob[\fritz]$ can be implemented using a set of quantum states $\rho_{AB}, \rho_{BC}, \rho_{CA}$ and measurements $M_A, M_B, M_C$ realized on \cref{fig:triangle_structure} using \cref{eq:quantum_model_triangle}~\cite{Fritz_2012}. The Fritz distribution is best visualized as a $4 \times 4 \times 4$ grid of possible outcomes as depicted in \cref{fig:fritz_distribution_visualized}. From this diagram, it can be seen that each of $\p{C}$'s outcomes restricts the possible outcomes for $\p A,\p B$ into a $2 \times 2$ block. If one writes the outcome labels $\bc{0,1,2,3}$ in binary $\bc{00,01,10,11}$, it can be seen that the left-hand bits for $\p A$ and $\p B$ (respectively denoted $\p A_l$, $\p B_l$) are fixed by the outcome of $\p C$. Pursuant to the embedding of~\cref{fig:triangle_structure_with_fritz_bell_embedded} the left-hand bits emulate the measurement settings $S_{\p A}$ and $S_{\p B}$ and the right-hand bits emulate a two-outcome measurement performed by $A, B$ as they would in~\cref{fig:bell_scenario}. Specifically, $\p C$'s bits are perfectly correlated with the left-bits of $A,B$; $\p C_l = \p A_l$ and $\p C_r = \p B_l$.
     \begin{figure}
     \begin{center}
             \includegraphics[scale=0.6]{../../figures/distributions/fritz_dist_plotted_bits.pdf}
@@ -147,39 +149,32 @@
             \label{fig:fritz_distribution_visualized}
     \end{center}
     \end{figure}
-    Consequently, it is possible to define the correlation between the right-hand bits of $A$ and $B$ as the probability that $A_r$ and $B_r$ are equal less the probability that they differ:
+    Consequently, it is possible to define the correlation $\ba{\p A_r \p B_r}$ between the right-hand bits of $\p A$ and $\p B$:
     \[ \ba{\p A_r \p B_r} = \prob[\p A_r \p B_r][00] + \prob[\p A_r \p B_r][11] - \prob[\p A_r \p B_r][01] - \prob[\p A_r \p B_r][10] \]
-    Provided that $C$ is perfectly correlated with $A_l$ and $B_l$, any Bell inequality for the Bell structure defined over $\p{A}, \p{B}, S_{\p{A}}, S_{\p{B}}$ can be directly converted to an inequality for the Triangle structure using the following mapping:
-    \[ \p{A}, \p{B}, S_{\p{A}}, S_{\p{B}} \mapsto \p{A_r}, \p{B_r}, \p A_l, \p B_l \]
-    As an example, the famous CHSH inequality~\cite{CHSH_Original},
-    \[ \ba{\p A\p B | S_{\p{A}} = 0, S_{\p{B}} = 0} + \ba{\p A\p B | S_{\p{A}} = 0, S_{\p{B}} = 1} + \ba{\p A\p B | S_{\p{A}} = 1, S_{\p{B}} = 0} - \ba{\p A\p B | S_{\p{A}} = 1, S_{\p{B}} = 1} \leq 2 \]
-    Can be written for the right-bits of $A$ and $B$,
-    \[ \ba{\p A_r \p B_r|\p C = 00} + \ba{\p A_r \p B_r|\p C = 01} + \ba{\p A_r \p B_r|\p C = 10} - \ba{\p A_r \p B_r|\p C = 11} \leq 2 \eq \label{eq:CHSH} \]
-    Therefore, every compatible distribution $\prob[ABC]$ where $C$ is perfectly correlated $A_l,B_l$ must satisfy \cref{eq:CHSH}. Substituting the Fritz distribution (\cref{eq:fritz_dist}) into \cref{eq:CHSH} yields maximal violation~\cite{Cirelson_1980},
-    \[ 3 \br{\f{1}{\sqrt{2}}} - \br{-\f{1}{\sqrt{2}}} = 2\sqrt{2} \not \leq 2 \]
-    Therefore, the Fritz distribution is incompatible with the Triangle structure as promised.
+    Provided that $C$ is perfectly correlated with $A_l$ and $B_l$, any Bell inequality for the Bell structure defined over $\p{A}, \p{B}, S_{\p{A}}, S_{\p{B}}$ can be directly converted to an inequality for the Triangle structure by performing a simple relabeling: $\p{A}, \p{B}, S_{\p{A}}, S_{\p{B}} \mapsto \p{A}_r, \p{B}_r, \p A_l, \p B_l$. As an example, the famous CHSH inequality~\cite{CHSH_Original} (\cref{eq:CHSH_ineq_orig}) constrains the correlation between the right-bits of $A$ and $B$,
+    \[ \ba{\p A_r \p B_r|\p C = 00} + \ba{\p A_r \p B_r|\p C = 01} + \ba{\p A_r \p B_r|\p C = 10} - \ba{\p A_r \p B_r|\p C = 11} \leq 2 \eq \label{eq:CHSH_intriangle} \]
+    Every compatible distribution $\prob[ABC]$ for which $C$ is perfectly correlated $A_l,B_l$ must satisfy \cref{eq:CHSH_intriangle}. Substituting the \cref{eq:fritz_dist} into \cref{eq:CHSH_intriangle} yields the maximal violation~\cite{Cirelson_1980}: $3 \br{1/\sqrt{2}} - \br{-1/\sqrt{2}} = 2\sqrt{2} \not \leq 2$. Therefore, we conclude the Fritz distribution is incompatible with the Triangle structure. Before continuing it is worth noting that \cref{eq:fritz_dist} is non-unique. Nonetheless for concreteness, \cref{eq:fritz_dist} is taken as \textit{the} Fritz distribution throughout this manuscript.
 
-    The Fritz distribution $\prob[\fritz]$ is of special interest because it can be realized as a set of quantum states and measurements. The shared resource between $A$ and $B$ (graphically denoted $\la$ in \cref{fig:triangle_structure_with_fritz_bell_embedded}) is the maximally entangled Bell state:
-    \[ \ket{\Phi^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}} \qquad \rho_{AB} = \ket{\Phi^+}\bra{\Phi^+} \]
-    While the states shared with $C$ are the following mixed states:
-    \[ \rho_{BC} = \rho_{CA} = \f{\ket{00}\bra{00} + \ket{11}\bra{11}}{2} \]
-    The measurements employed by $A,B$ and $C$ are separable, projective measurements,
-    \begin{align*}
-        M_{A} &= \bc{\ket{0\psi_{1}}\bra{0\psi_{1}}, \ket{0\psi_{5}}\bra{0\psi_{5}}, \ket{1\psi_{3}}\bra{1\psi_{3}}, \ket{1\psi_{7}}\bra{1\psi_{7}}} \\
-        M_{B} &= \bc{\ket{\psi_{6}0}\bra{\psi_{6}0}, \ket{\psi_{2}0}\bra{\psi_{2}0}, \ket{\psi_{0}1}\bra{\psi_{0}1}, \ket{\psi_{4}1}\bra{\psi_{4}1}} \\
-        M_{C} &= \bc{\ket{00}\bra{00}, \ket{10}\bra{10}, \ket{01}\bra{01}, \ket{11}\bra{11}}
-    \end{align*}
-    Where $\ket{\psi_n}$ is shorthand for,
-    \[ \ket{\psi_n} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{in/4}\ket{1}} \]
-    Using the above states and measurements, the Fritz distribution $\prob[\fritz]$ can be recovered using the following:
-    \[ \prob[ABC] = \Tr\bs{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm M_{A}\otimes M_{B} \otimes M_{C}} \]
-    Where $\netperm$ is a $64 \times 64$ permutation matrix to be elaborated in \cref{sec:perm_matrix}.
+    % The shared resource between $A$ and $B$ (graphically denoted $\la$ in \cref{fig:triangle_structure_with_fritz_bell_embedded}) is the maximally entangled Bell state:
+    % \[ \ket{\Phi^+} = \f{1}{\sqrt{2}}\br{\ket{00} + \ket{11}} \qquad \rho_{AB} = \ket{\Phi^+}\bra{\Phi^+} \]
+    % While the states shared with $C$ are the following mixed states:
+    % \[ \rho_{BC} = \rho_{CA} = \f{\ket{00}\bra{00} + \ket{11}\bra{11}}{2} \]
+    % The measurements employed by $A,B$ and $C$ are separable, projective measurements,
+    % \begin{align*}
+    %     M_{A} &= \bc{\ket{0\psi_{1}}\bra{0\psi_{1}}, \ket{0\psi_{5}}\bra{0\psi_{5}}, \ket{1\psi_{3}}\bra{1\psi_{3}}, \ket{1\psi_{7}}\bra{1\psi_{7}}} \\
+    %     M_{B} &= \bc{\ket{\psi_{6}0}\bra{\psi_{6}0}, \ket{\psi_{2}0}\bra{\psi_{2}0}, \ket{\psi_{0}1}\bra{\psi_{0}1}, \ket{\psi_{4}1}\bra{\psi_{4}1}} \\
+    %     M_{C} &= \bc{\ket{00}\bra{00}, \ket{10}\bra{10}, \ket{01}\bra{01}, \ket{11}\bra{11}}
+    % \end{align*}
+    % Where $\ket{\psi_n}$ is shorthand for,
+    % \[ \ket{\psi_n} = \f{1}{\sqrt{2}}\br{\ket{0} + e^{in/4}\ket{1}} \]
+    % Using the above states and measurements, the Fritz distribution $\prob[\fritz]$ can be recovered using the following:
+    % \[ \prob[ABC] = \Tr\bs{\netperm^\intercal \rho_{AB}\otimes\rho_{BC}\otimes\rho_{CA} \netperm M_{A}\otimes M_{B} \otimes M_{C}} \]
+    % Where $\netperm$ is a $64 \times 64$ permutation matrix to be elaborated in \cref{sec:perm_matrix}.
+    % Moreover, the quantum implementation of the Fritz distribution presented above is non-unique also. For example, it is possible to implement the Fritz distribution using maximally entangled Bell states for each shared resource  provided there is an appropriate adjustment to the measurements . Ultimately however, only $\rho_{AB}$ is required to be entangled in order to reproduce the Fritz; after-all, $C$ is simply classically announcing $A_r$ and $B_r$ as he receives them.
 
-    Before continuing it is worth noting that \cref{eq:fritz_dist} is non-unique. Any distribution that is equal to \cref{eq:fritz_dist} via a permutation of outcomes or exchange of parties is should also be referred to as a Fritz distribution. Moreover, the quantum realization presented here is not unique either. Nonetheless for concreteness, \cref{eq:fritz_dist} is taken as \textit{the} Fritz distribution throughout this paper. Moreover, the quantum implementation of the Fritz distribution presented above is non-unique also. For example, it is possible to implement the Fritz distribution using maximally entangled Bell states for each shared resource $\rho_{AB}, \rho_{BC}, \rho_{CA}$ provided there is an appropriate adjustment to the measurements $M_A, M_B, M_C$. Ultimately however, only $\rho_{AB}$ is required to be entangled in order to reproduce the Fritz; after-all, $C$ is simply classically announcing $A_r$ and $B_r$ as he receives them.
+    It is important to understand the domain in which Fritz's proof of incompatibility is valid; the details of which can found in the original work~\cite{Fritz_2012}. Specifically, \cref{eq:CHSH_intriangle} only acts as a valid causal compatibility inequalty for the Triangle structure if there exists perfect correlation between $\p C$'s outcomes and the measurement pseudo-settings (left-bits) of $\p A$ and $\p B$. As a result, the incompatibility proof employed by Fritz is not applicable to any distribution that significantly deviates from the Fritz distribution presented above. For example, if one combines \cref{eq:fritz_dist} with more and more uniform noise, at what point does the resultant distribution transition from incompatibility to compatibility? This question is partially answered in \cref{sec:noise}.
 
-    Additionally, it is important to understand the domain in which Fritz's proof of incompatibility is valid. Specifically, \cref{eq:CHSH} can only be applied to the Triangle structure where there exists perfect correlation between $\p C$'s outcomes and the measurement pseudo-settings (left-bits) of $\p A$ and $\p B$. The details of this restriction are discussed and proven in Fritz's original work~\cite{Fritz_2012}. As such, the incompatibility proof employed by Fritz is not applicable to any distribution that significantly deviates from the Fritz distribution presented above. For example, if one combines \cref{eq:fritz_dist} with more and more uniform noise, at what point does the resultant distribution transition from incompatibility to compatibility? This problem is discussed more in \cref{sec:noise}.
-
-    Upon reflection, the Fritz distribution can rightly be considered slightly manufactured. The phenomenology associated with Bell non-locality or Bell incompatibility are well understood; examining these distributions embedded in the Triangle structure offers no additional perspective onto the types of entanglement resources made accessible by quantum mechanics. Therefore, it is desirable to find incompatible quantum distributions that are qualitatively different than those previously considered for the Bell structure. Pursuant to this, \citet{Fritz_2012} presented the following problem~\cite[Problem 2.17]{Fritz_2012}:%TODO figure out best way to link to this problem
+    Upon reflection, the Fritz distribution can be considered \textit{manufactured}. The phenomenology associated with Bell non-locality or Bell incompatibility are well understood; examining these distributions embedded in the Triangle structure offers no additional perspective onto the types of entanglement resources made accessible by quantum mechanics. Therefore, it is desirable to find incompatible quantum distributions that are qualitatively different than those previously considered for the Bell structure. Pursuant to this, \citet{Fritz_2012} presented the following problem~\cite[Problem 2.17]{Fritz_2012}:%TODO figure out best way to link to this problem
 
     \term{Fritz's Problem}: Find an example of non-classical quantum correlations in the Triangle structure together with a proof of its non-classicality which does not hinge on Bell’s theorem.
 
@@ -395,10 +390,26 @@
             \label{fig:maximum_violation_I_1}
     \end{center}
     \end{figure}
+    \begin{figure}
+    \begin{center}
+            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/plotted_dist_I_3_max_violation_2017.pdf}
+            \caption{Probability distribution that maximizes violation of $I_3$ from \cref{eq:symmetic_web_inequality} ($V_F \simeq 2.61$).}
+            \label{fig:maximum_violation_I_3}
+    \end{center}
+    \end{figure}
+    \begin{figure}
+    \begin{center}
+            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/symmetrized_fritz.pdf}
+            \caption{Symmetrized version of the Fritz distribution ($V_F \simeq 3$).}
+            \label{fig:symmetrized_fritz}
+    \end{center}
+    \end{figure}
 
     To quantify the degree in which each inequality $I$ could be further violated, we define a relative violation $V_F$ to be the maximum violation relative to the violation achieved by the Fritz distribution, i.e. $V_F \defined \min_{P}\bc{I\br{P}}/I\br{P_F}$. The first inequality in consideration is $I_1$; the non-symmetric Web inflation inequality presented in \cref{eq:web_inequality}. At best, numerical optimizations converged to a distribution (\cref{fig:maximum_violation_I_1}) with relative violation $V_F \simeq 1.501$. Almost immediately, it is evident that \cref{fig:maximum_violation_I_1} closely resembles the Fritz distribution. In fact, \cref{fig:maximum_violation_I_1} and \cref{fig:fritz_distribution_visualized} share the exact same \textit{possibilistic structure}, i.e. the same set of possible events. This result is not entirely unexpected. As was mentioned in \cref{sec:found_inequalities}, these inequalities are derived specifically to prove the incompatibility of the Fritz distribution and the Triangle structure. Consequently, it seems that $I_1$ only has the capacity to demonstrate incompatibility for distributions that resemble the Fritz distribution very closely.
 
-    An alternative explanation for qualitative similarities between \cref{fig:maximum_violation_I_1} and \cref{fig:fritz_distribution_visualized} is related to the sensitively of the initial parameters to our optimization. Above it was shown that our parameter space of choice was $2\pi$-periodic in all entries. Somewhat surprisingly, when supplied with randomly sampled initial parameters, all optimization methods consistently converged to inequality \textit{saturation} instead of inequality \textit{violation} which is achievable by the Fritz distribution $\prob[\fritz]$. Instead, it was observed that only parameters close enough to the \textit{Fritz parameters} (the parameters that induce the Fritz distribution using the quantum implementation in \cref{sec:fritz_distribution}) were able to any violation. Since the inequalities themselves are polynomial and the space of quantum-accessible distributions is non-convex, a number of optimization methods were used in an attempt to eliminate any issues associated with local minima or ill-conditioned convergence. Specifically, the BFGS method~\cite[p. 142]{Nocedal_2000} and the Nelder-Mead simplex method~\cite[p. 238]{Nocedal_2000} were used along with a method called Basin Hopping~\cite{Wales_1997}, which is a hybrid between simulated annealing and gradient descent-based methods. Despite our varied efforts, it remains unclear whether or not our results share the same possibilistic structure as $\prob[\fritz]$ because of the inequality itself or the ill-conditioned nature of the optimization. More likely, this phenomena is due to a combination of both effects.
+    An alternative explanation for qualitative similarities between \cref{fig:maximum_violation_I_1} and \cref{fig:fritz_distribution_visualized} is related to the sensitively of the initial parameters to our optimization. Above it was shown that our parameter space of choice was $2\pi$-periodic in all entries. Somewhat surprisingly, when supplied with randomly sampled initial parameters, all optimization methods consistently converged to inequality \textit{saturation} instead of inequality \textit{violation} which is achievable by the Fritz distribution $\prob[\fritz]$. Instead, it was observed that only parameters close enough to the \textit{Fritz parameters} (i.e. any non-unique set of parameters that induce the Fritz distribution) were able to achieve violation. Since the inequalities themselves are polynomial and the space of quantum-accessible distributions is non-convex, a number of optimization methods were used in an attempt to eliminate any issues associated with local minima or ill-conditioned convergence. Specifically, the BFGS method~\cite[p.142]{Nocedal_2000} and the Nelder-Mead simplex method~\cite[p.238]{Nocedal_2000} were used along with a method called Basin Hopping~\cite{Wales_1997}, which is a hybrid between simulated annealing and gradient descent-based methods. Despite our varied efforts, it remains unclear whether or not our results share the same possibilistic structure as $\prob[\fritz]$ because of the inequality itself or the ill-conditioned nature of the optimization. More likely, this phenomena is due to a combination of both effects.
+
+    It is also worth reporting that the distribution in \cref{fig:maximum_violation_I_1} is not accessible when the bipartite states in \cref{eq:quantum_model_triangle} are restricted to maximally entangled states. This result resembles a feature of quantum mechanics originally presented by~\citet{Methot_2006} which demonstrates that entanglement and non-classicality are different resources.
 
     % The Gaussian perturbation was given zero mean $\mu = 0$ and variance $\si^2 = \br{2 \pi 10^{\chi}}^2$ where $\chi$ measures an order of magnitude standard deviation. For $I_1$, deviations of $\chi \gtrsim 1.3$ inhibited convergence to violation. This is depicted in \cref{fig:initial_conditions}.
 
@@ -414,21 +425,7 @@
     % \caption{Numerical optimizations aimed at violating causal compatibility inequalities are sensitive to initial conditions.}\label{fig:initial_conditions}
     % \end{figure}
 
-    The second inequality in consideration is the \textit{symmetric} inequality $I_3$ ($\cref{eq:symmetic_web_inequality}$). This inequality was able to achieve a greater relative violation than $I_1$ as optimizations converged to a distribution (\cref{fig:maximum_violation_I_3}) with relative violation $V_F \simeq 2.61$. Just as before, the maximum violating distribution shares a possibilistic structure with the Fritz distribution. However, this result is far more surprising. Since the inequality is symmetric with respect to the permutation of parties, one would naively expect that the maximum violating distribution be symmetric as well. If it were not, one could construct a distribution that violates $I_3$ more by symmetrizing $\prob[\fritz]$ by summing over all possible permutations and normalizing. The symmetrized Fritz distribution is plotted in \cref{fig:symmetrized_fritz}. This distribution is also non-classical with relative violation $V_F = 3$. As it turns out, numerical optimizations suggest that the symmetrized Fritz distribution is \textit{not} quantum-accessible in the sense that is cannot be written as \cref{eq:quantum_model_triangle}. Therefore we conclude that the space of quantum accessible correlations on the Triangle structure is non-convex; a reiteration of a result mentioned in~\citet{Inflation}.
-    \begin{figure}
-    \begin{center}
-            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/plotted_dist_I_3_max_violation_2017.pdf}
-            \caption{Probability distribution that maximizes violation of $I_3$ from \cref{eq:symmetic_web_inequality} ($V_F \simeq 2.61$).}
-            \label{fig:maximum_violation_I_3}
-    \end{center}
-    \end{figure}
-    \begin{figure}
-    \begin{center}
-            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/symmetrized_fritz.pdf}
-            \caption{Symmetrized version of the Fritz distribution ($V_F \simeq 3$).}
-            \label{fig:symmetrized_fritz}
-    \end{center}
-    \end{figure}
+    The second inequality in consideration is the \textit{symmetric} inequality $I_3$ (\cref{eq:symmetic_web_inequality}). This inequality was able to achieve a greater relative violation than $I_1$ as optimizations converged to a distribution (\cref{fig:maximum_violation_I_3}) with relative violation $V_F \simeq 2.61$. Just as before, the maximum violating distribution shares a possibilistic structure with the Fritz distribution. However, this result is far more surprising. Since the inequality is symmetric with respect to the permutation of parties, one would naively expect that the maximum violating distribution be symmetric as well. If it were not, one could construct a distribution that violates $I_3$ more by symmetrizing $\prob[\fritz]$ by summing over all possible permutations and normalizing. The symmetrized Fritz distribution is plotted in \cref{fig:symmetrized_fritz}. This distribution is also non-classical with relative violation $V_F = 3$. As it turns out, numerical optimizations suggest that the symmetrized Fritz distribution is \textit{not} quantum-accessible in the sense that is cannot be written as \cref{eq:quantum_model_triangle}. Therefore we conclude that the space of quantum accessible correlations on the Triangle structure is non-convex; a reiteration of a result mentioned in~\citet{Inflation}.
 
     Finally for both $I_0$ and $I_2$, the maximum relative violation happens to be $V_F = 1$ (up to numerical precision). This means that the Fritz distribution either represents a local minimum of the parameter space or is in fact \textit{the} maximally violating distribution. Without further investigations, it remains unclear if this behavior is related to the universality of the Fritz distribution or if its an artifact of the methods used to derive $I_0$ and $I_2$.
 
