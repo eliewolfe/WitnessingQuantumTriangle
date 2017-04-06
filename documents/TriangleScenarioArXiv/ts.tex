@@ -312,29 +312,27 @@
     \end{figure}
     In his original work, \citet{Fritz_2012} was able to find quantum non-classicality in the Triangle structure by embedding Bell non-classicality. As was mentioned in \cref{sec:fritz_distribution}, this embedding required a very idealistic condition to hold: perfect correlations between $C$ and $A_l, B_l$. From an experimental point of view, it is impossible to use Fritz's original argument to confirm non-classicality because every observable distribution is subject to \text{noise}. It is possible to minimize noise by developing more accurate measurement channels but perfect correlations are too idealistic. Causal compatibility inequalities not only permit there to be noise within a set of observations, but they also provide a means of quantifying the amount of noise that is allowed before non-classicality breaks down.
 
-    In the Triangle structure, we define a completely noisy observation as the uniform probability distribution $\s{U} = \s{U}_{ABC}$ (see \cref{fig:uniform_distribution})
-    \[ \s{U}\br{abc} = \s{U}_{ABC}\br{abc} = \f{1}{64} \quad \forall a,b,c\in \bc{0,1,2,3}  \]
-    Since the uniform distribution $\s{U}$ is trivially compatible with the Triangle structure, the objective of this section is to determine how much uniform noise needs to be added to the Fritz distribution $\prob[\fritz]$ before it transitions from incompatible to compatible. We do this by defining an affine noise parameter $\vep$ such that $0 \leq \vep \leq 1$ along with the \term{noisy variant} $\s{N}_{\vep}$ of the Fritz distribution,
+    For Triangle structure, we define a completely noisy observation as the uniform probability distribution $\s{U}\br{abc} = \s{U}_{ABC}\br{abc} = \f{1}{64} \quad \forall a,b,c\in \bc{0,1,2,3}$ (see \cref{fig:uniform_distribution}). Since the uniform distribution $\s{U}$ is trivially compatible with the Triangle structure, the objective of this section is to determine how much uniform noise needs to be added to the Fritz distribution $\prob[\fritz]$ before it transitions from incompatible to compatible. We do this by defining an affine noise parameter $\vep$ such that $0 \leq \vep \leq 1$ along with the \term{noisy variant} $\s{N}_{\vep}$ of the Fritz distribution,
     \[ \s{N}_{\vep} = \br{1 - \vep} \prob[\fritz] + \vep \s{U} \]
-    Therefore as $\vep$ varies from $0$ to $1$, more and more noise is added to the Fritz distribution as $\s{N}_{\vep}$ transitions from an incompatible distribution $\s{N}_{0} = \prob[\fritz]$ to a compatible distribution $\s{N}_{1} = \s{U}$. For each inequality $I$ and distribution $\prob$, let $I\br{\prob}$ denote a scalar value representing the amount of violation seen by $\prob$. As a standard, let $I\br{\prob} < 0$ represent violations while $I\br{\prob} \leq 0$ represents satisfaction of $I$ (with $I\br{\prob} = 0$ corresponding to complete saturations of the inequality).
+    Therefore as $\vep$ varies from $0$ to $1$, more and more noise is added to the Fritz distribution and $\s{N}_{\vep}$ transitions from an incompatible distribution $\s{N}_{0} = \prob[\fritz]$ to a compatible distribution $\s{N}_{1} = \s{U}$. For each inequality $I$ and distribution $\prob$, let $I\br{\prob}$ denote a scalar value representing the amount of violation seen by $\prob$. In order to compare different inequalities simultaneously, let $I\br{\prob} < 0$ represent a violation of $I$ while $I\br{\prob} \leq 0$ represents satisfaction of $I$ (with $I\br{\prob} = 0$ corresponding to complete saturation of the inequality). To analyze noise, $4$ inequalities where chosen. First, $I_0$ is the inequality derived using the Wagon-Wheel wheel inflation \cref{eq:ww_ineq}. The other three inequalities $I_1, I_2, I_3$ were all derived using the Web inflation; $I_1$ can be found in \cref{sec:web_inequality} while $I_3$ is the symmetric inequality in \cref{sec:symmetic_web_inequality}. Inequality $I_2$ is not reproduced anywhere in this document but is similar to \cref{sec:web_inequality}. Our tests suggest that inequality $I_1$ (\cref{sec:web_inequality}) is most robust to noise and demonstrates that the Fritz distribution remains incompatible with the Triangle structure up to at least a noise parameter of $\vep \simeq 0.085$. The associated distribution $\s N_{0.085}\br{\prob[\fritz]}$ is plotted in \cref{fig:noisy_fritz}. Of course, there remains the possibility that another inequality will be able to withstand a larger degree of noise than $I_1$.
 
-    To analyze noise, $4$ inequalities where chosen. First, $I_0$ is the inequality derived using the Wagon-Wheel wheel inflation \cref{eq:ww_ineq}. The other three inequalities $I_1, I_2, I_3$ were all derived using the Web inflation; $I_1$ can be found in \cref{sec:web_inequality} while $I_3$ is the symmetric inequality in \cref{sec:symmetic_web_inequality}. Inequality $I_2$ is not reproduced anywhere in this document but is similar to \cref{sec:web_inequality}.
+    % Given that $I_0, I_1, I_2, I_3$ are far from a representative inequalities and are likely not facets of any inflated marginal polytope, it is save to say that this is possible.
 
-    \begin{figure}
-    \begin{subfigure}[b]{.48\linewidth}
-    {\centering\includegraphics[width=\linewidth]{../../figures/noise/noise_2017.pdf}}
-    \caption{Complete range of noise parameters $\vep$.}\label{fig:noise}
-    \end{subfigure}
-    \begin{subfigure}[b]{.48\linewidth}
-    {\centering\includegraphics[width=\linewidth]{../../figures/noise/noise_2017_lims.pdf}}
-    \caption{\Cref{fig:noise} zoomed onto relevant region.}\label{fig:noise_zoomed}
-    \end{subfigure}
-    \caption{Inequality violations when subjected to uniform noise. Each inequality is normalized so that maximum violation is $-1$.}\label{fig:master_noise}
-    \end{figure}
+    % \begin{figure}
+    % \begin{subfigure}[b]{.48\linewidth}
+    % {\centering\includegraphics[width=\linewidth]{../../figures/noise/noise_2017.pdf}}
+    % \caption{Complete range of noise parameters $\vep$.}\label{fig:noise}
+    % \end{subfigure}
+    % \begin{subfigure}[b]{.48\linewidth}
+    % {\centering\includegraphics[width=\linewidth]{../../figures/noise/noise_2017_lims.pdf}}
+    % \caption{\Cref{fig:noise} zoomed onto relevant region.}\label{fig:noise_zoomed}
+    % \end{subfigure}
+    % \caption{Inequality violations when subjected to uniform noise. Each inequality is normalized so that maximum violation is $-1$.}\label{fig:master_noise}
+    % \end{figure}
 
-    The results of our experiments are plotted in \cref{fig:master_noise}. \Cref{fig:noise} illustrates that each curve $I\br{\s{N}_{\vep}\br{\prob[\fritz]}}$ as a function of $\vep$ is monotonically increasing as expected; the more noise added to the probability distribution, the more classical it becomes. \Cref{fig:noise_zoomed} is the same plot as \cref{fig:noise} zoomed onto the interval $\vep \in \bs{0, 0.12}$. These tests suggest that inequality $I_1$ (\cref{sec:web_inequality}), when compared against all others is most robust to noise.
+    % The results of our experiments are plotted in \cref{fig:master_noise}. \Cref{fig:noise} illustrates that each curve $I\br{\s{N}_{\vep}\br{\prob[\fritz]}}$ as a function of $\vep$ is monotonically increasing as expected; the more noise added to the probability distribution, the more classical it becomes. \Cref{fig:noise_zoomed} is the same plot as \cref{fig:noise} zoomed onto the interval $\vep \in \bs{0, 0.12}$.
 
-    Overall, this noise model demonstrates that the Fritz distribution remains incompatible with the Triangle structure up to at least a noise parameter of $\vep \simeq 0.085$. The associated distribution $\s N_{0.085}\br{\prob[\fritz]}$ is plotted in \cref{fig:noisy_fritz}. There remains the possibility that another inequality will be able to withstand a larger degree of noise that $I_1$. Given that $I_0, I_1, I_2, I_3$ are far from a representative inequalities and are likely not facets of any inflated marginal polytope, it is save to say that this is possible.
+
 
     \begin{figure}
     \begin{center}
