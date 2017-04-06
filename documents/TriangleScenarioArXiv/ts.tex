@@ -294,6 +294,21 @@
 
     In summary, these causal compatibility inequalities represent a completion of objective \cref{r:1} from \cref{sec:fritz_distribution}. These inequalities are derived without making use of Bell's theorem and instead use the Inflation Technique which is completely independent of Bell's theorems. Additionally, the derivation of causal compatibility inequalities allows one prove incompatibility even when perfect correlations are absent. Moreover, they allow one to probe the amount of noise the Fritz distribution can sustain before becoming compatible (see \cref{sec:violations_noise}). Unfortunately, infeasibility certificates are found by linear programing software to certify the infeasibility of a \textit{particular distribution}. This means that inequalities like \cref{eq:ww_ineq}, the one presented in \cref{sec:web_inequality}, and others are specifically manufactured in order witness a particular type of quantum non-classicality. In an effort to derive inequalities that could lead to potentially new forms of non-classicality, we searched for inequalities that did not admit biased towards the Fritz distribution.
 
+    The following is a causal compatibility inequality for the Triangle structure that is violated by the Fritz distribution and was derived using the Web inflation of \cref{fig:the_web_inflation}.
+    \begin{equation}
+        \label{sec:web_inequality}
+        \includegraphics[width=\linewidth]{../../figures/inequalities/no_symwitness_ineq_print_standalone}
+    \end{equation}
+    Note: $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$.
+    The following is a symmetric causal compatibility inequality for the Triangle structure that is violated by the Fritz distribution and was derived using the Web inflation of \cref{fig:the_web_inflation}.
+    \begin{equation}
+        \label{sec:symmetic_web_inequality}
+        \includegraphics[width=\linewidth]{../../figures/inequalities/MosekCertFritzSym_ineq_standalone}
+    \end{equation}
+    Note: $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$ and $\bs{P(113)P(330)}_3$ is shorthand for the sum over permutations:
+    \[ \bs{P(113)P(330)}_3 \defined P(113)P(330) + P(131)P(303) + P(311)P(033) \]
+
+
     \section{Numerical Optimizations \& Noisy Distributions}
     \label{sec:violations_noise}
     Causal compatibility inequalities for the Triangle structure (such as those derived in \cref{sec:deriving_inequalities}) offer an avenue into studying quantum non-classicality. In this section, we make use of two methods, exposure to noise and numerical optimization, to further understand the nature of quantum non-classicality in connection to compatibility inequalities. In order to compare different inequalities simultaneously, our convention is to rearrange each inequality $I$ so $I\br{\prob} < 0$ represent a violation of $I$ while $I\br{\prob} \leq 0$ represents satisfaction of $I$ (with $I\br{\prob} = 0$ corresponding to complete saturation of the inequality). For the subsequent analysis, $4$ inequalities where chosen. First, $I_0$ is the inequality derived using the Wagon-Wheel wheel inflation \cref{eq:ww_ineq}. The other three inequalities $I_1, I_2, I_3$ were all derived using the Web inflation; $I_1$ can be found in \cref{sec:web_inequality} while $I_3$ is the symmetric inequality in \cref{sec:symmetic_web_inequality}. Inequality $I_2$ is not reproduced anywhere in this document but is similar to \cref{sec:web_inequality}.
@@ -955,26 +970,6 @@
     % \[ R_{m,n} = \ident + \br{\ket{m}\bra{m} + \ket{n}\bra{n}} \br{\cos\lambda_{n,m} - 1} + \br{\ket{m}\bra{n} - \ket{n}\bra{m}} \sin\lambda_{n,m} \eq \label{eq:unitary_R} \]
     % By combining the optimizations of \cref{eq:unitary_GP,eq:unitary_RP,eq:unitary_R} together we arrive at an equivalent form for \cref{eq:spengler_unitary} that is computational more efficient.
     % \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n}RP_{n,m}}} \cdot \bs{\prod_{l=1}^{d} GP_{l}}  \eq \label{eq:spengler_unitary_fast} \]
-
-    \section{Large Triangle Structure Inequalities}
-    \label{sec:web_inequalities}
-    \subsection{Web Inflation Inequality}
-    \label{sec:web_inequality}
-    The following is a causal compatibility inequality for the Triangle structure that is violated by the Fritz distribution outlined in \cref{sec:fritz_distribution} and was derived using the Web inflation of \cref{fig:the_web_inflation}.
-    \begin{center}
-        \vspace{-0.2in}
-        \includegraphics[width=\linewidth]{../../figures/inequalities/no_symwitness_ineq_print_standalone}
-    \end{center}
-    Note: $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$.
-    \subsection{Symmetric Web Inflation Inequality}
-    \label{sec:symmetic_web_inequality}
-    The following is a symmetric causal compatibility inequality for the Triangle structure that is violated by the Fritz distribution outlined in \cref{sec:fritz_distribution} and was derived using the Web inflation of \cref{fig:the_web_inflation}.
-    \begin{center}
-        \vspace{-0.2in}
-        \includegraphics[width=\linewidth]{../../figures/inequalities/MosekCertFritzSym_ineq_standalone}
-    \end{center}
-    Note: $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$ and $\bs{P(113)P(330)}_3$ is shorthand for the sum over permutations:
-    \[ \bs{P(113)P(330)}_3 = P(113)P(330) + P(131)P(303) + P(311)P(033) \]
 
     \setlength{\bibsep}{3pt plus 3pt minus 2pt}
     \bibliographystyle{apsrev4-1}
