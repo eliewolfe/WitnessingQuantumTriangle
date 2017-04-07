@@ -185,6 +185,7 @@
     \end{equation*}
     By construction, every distribution $\prob[ABC]$ that is compatible with the Triangle Structure (i.e. factorizes according to \cref{eq:compatibility_as_factorization}) must satisfy \cref{eq:ww_ineq}. As a demonstration, the Fritz distribution violates \cref{eq:ww_ineq}. Notice the final term $\prob[ABC]\br{000}\prob[C]\br{3}$ has a coefficient $-1$. For the Fritz distribution, $\prob[ABC]\br{000}\prob[C]\br{3} = \f{1}{128}\br{2 + \sqrt{2}} \simeq 0.0267$ but all of the remaining terms in \cref{eq:ww_ineq} sum to $\simeq 0.0136$ meaning that the Fritz distribution violates this inequality with violation $-0.0129\ldots \not \geq 0$. Consequently we conclude that the Fritz distribution is incompatible with the Triangle Structure, a fact that was previously only demonstrated without the use of causal compatibility inequalities.
 
+    To reiterate, the methods used to derive \cref{eq:ww_ineq} can be found in \cref{sec:marginal_satisfiability,sec:inflation_technique_main_summary} and more details can be found in \cref{sec:exemplary_inflations_of_the_triangle structure}.
 
     It is possible to simplify \cref{eq:ww_ineq} identifying sets of terms such as $P_{ABC}(300)P_{C}(0) + P_{ABC}(300)P_{C}(1) + P_{ABC}(300)P_{C}(2) + P_{ABC}(300)P_{C}(3)$ which can be simplified to $P_{ABC}(300)$ by recognizing that $P_{C}(0) + P_{C}(1) + P_{C}(2) + P_{C}(3) = 1$. Upon doing so, one obtains the following,
     \begin{gather*}
@@ -535,7 +536,64 @@
     \subsection{Exemplary Inflations of The Triangle Structure}
     \label{sec:exemplary_inflations_of_the_triangle structure}
 
+    \Cref{sec:inflation_technique_main_summary} explains how the Inflation Technique~\cite{Inflation} was used to derive novel causal compatibility inequalities for the Triangle Structure by constructing inflations of the Triangle Structure satisfying \cref{eq:inflation_defn}. Explicitly, for a given inflation $\graph'$ of the Triangle Structure, one constructs a marginal problem (see \cref{sec:marginal_satisfiability}) for the marginal scenario $\mscenario$ composed of the maximal pre-injectable sets of $\graph'$, i.e. $\mscenario = \PreInj[\graph]{\graph'}$. This section acts as a reference for the particular inflations of the Triangle scenario that are mentioned throughout this manuscript. Contained within this section is a depiction of each of these inflations in \cref{fig:inflations} as well as a their pre-injectable sets. An efficient algorithm for computing the injectable and pre-injectable sets of an inflation can be found in~\cite{Inflation}.
+    \begin{center}
+    \begin{figure}
+    \begin{subfigure}[b]{.45\linewidth}
+    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure_cut}}
+    \caption{The Cut inflation.}\label{fig:cut_inflation}
+    \end{subfigure}
+    \begin{subfigure}[b]{.45\linewidth}
+    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral}}
+    \caption{The Spiral inflation.}\label{fig:spiral_inflation}
+    \end{subfigure}
 
+    \begin{subfigure}[b]{.45\linewidth}
+    \scalebox{1.0}{\input{../../figures/causal_structures/inflated_triangle_structure_wagon_wheel}}
+    \caption{The Wagon-Wheel inflation.}\label{fig:wagon_wheel_inflation}
+    \end{subfigure}
+    \begin{subfigure}[b]{.45\linewidth}
+    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure}}
+    \caption{The Web Inflation.}\label{fig:the_web_inflation}
+    \end{subfigure}
+    \caption{Some inflations of the Triangle structure.}
+    \label{fig:inflations}
+    \end{figure}
+    \end{center}
+
+    The first inequality presented in \cref{sec:found_inequalities} was \cref{eq:ww_ineq}. \cref{eq:ww_ineq} was derived using the Wagon-Wheel inflation in \cref{fig:wagon_wheel_inflation}. The Wagon-Wheel inflation possesses $4$ copies of $C$ ($C_1, C_2, C_3, C_4$) and $2$ copies of $A$ ($A_1, A_2$) and $B$ ($B_1, B_2$) arranged in the shape of a Wagon-Wheel. The maximal pre-injectable sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{eq:pre_injectable_triangle_structure_wagon_wheel}. These maximal pre-injectable sets define the following marginal scenario where the joint variables $\jointvar$ are simply the set of observable nodes in the Wagon-Wheel inflation $\jointvar = \nodes'_O$:
+    \[ \mscenario = \PreInj[\graph]{\graph'} = \bc{\bc{A_2, B_1, C_3, C_1}, \bc{A_1, B_1, C_4, C_2}, \bc{A_1, B_2, C_1, C_3}, \bc{A_2, B_2, C_2, C_4}} \eq \label{eq:wagon_wheel_marginal_model}\]
+    Given that the Fritz distribution is defined over $4$-outcomes variables, the variables in the marginal scenario are assigned $4$-outcomes as well. This marginal scenario $\mscenario$ then defines an incidence matrix $M$ capable of accommodating the Fritz distribution that has $\abs{\Events{\mscenario}} = 4 \cdot 4^{4} = 1024$ rows and $\abs{\Events{\jointvar}} = 4^8 = 65,536$ columns. Understandably, this matrix is not reproduced here. The sheer size of the incidence matrix used here makes complete solutions of the marginal problem using tools such as linear-quantifier elimination intractable.
+
+    \begin{equation*}
+        \eq \label{eq:pre_injectable_triangle_structure_wagon_wheel}
+        \begin{gathered}
+            \textbf{Maximal Pre-injectable Sets} \\
+            \bc{A_2, B_1, C_3, C_1} \\
+            \bc{A_1, B_1, C_4, C_2} \\
+            \bc{A_1, B_2, C_1, C_3} \\
+            \bc{A_2, B_2, C_2, C_4} \\
+        \end{gathered}
+        \qquad
+        \begin{gathered}
+            \textbf{Ancestral Independences} \\
+            \bc{A_2, B_1, C_3} \ancestralindep \bc{C_1} \\
+            \bc{A_1, B_1, C_4} \ancestralindep \bc{C_2} \\
+            \bc{A_1, B_2, C_1} \ancestralindep \bc{C_3} \\
+            \bc{A_2, B_2, C_2} \ancestralindep \bc{C_4} \\
+        \end{gathered}
+    \end{equation*}
+    To construct the marginal distribution vector $\probvec^{\mscenario}$ for the Fritz distribution, one begins with $\probvec^{\mscenario}$ defined in a \textit{symbolic} form,
+    \[ {\probvec^{\mscenario}}^{\intercal} = \underbrace{\br{\prob[A_2B_1C_3C_1]\br{0000}, \ldots, \prob[A_1B_1C_4C_2]\br{3232}, \ldots, \prob[A_2B_2C_2C_4]\br{3333}}}_{1024 \text{ entries}} \eq \label{eq:marginal_vector_wagon_wheel} \]
+    Which can be factored into the ancestrally independent injectable sets using \cref{eq:pre_injectable_triangle_structure_wagon_wheel},
+    \[ {\probvec^{\mscenario}}^{\intercal} = \br{\prob[A_2B_1C_3]\br{000}\prob[C_1]\br{0}, \ldots, \prob[A_1B_1C_4]\br{323}\prob[C_2]\br{2}, \ldots, \prob[A_2B_2C_2]\br{333}\prob[C_4]\br{3}} \eq \label{eq:marginal_vector_wagon_wheel_factors}\]
+    And penultimately, each probability distribution in \cref{eq:marginal_vector_wagon_wheel_factors} is deflated by dropping copy-indices.
+    \[ {\probvec^{\mscenario}}^{\intercal} = \br{\prob[ABC]\br{000}\prob[C]\br{0}, \ldots, \prob[ABC]\br{323}\prob[C]\br{2}, \ldots, \prob[ABC]\br{333}\prob[C]\br{3}} \eq \label{eq:marginal_vector_wagon_wheel_factors_dropped}\]
+    This step is permitted because all of the remaining distributions in \cref{eq:marginal_vector_wagon_wheel_factors} are defined over the injectable sets of the Wagon-Wheel inflation. Finally, each of the elements of $\probvec^{\mscenario}$ are replaced with numerical values pursuant to the Fritz distribution. For example, $\prob[ABC]\br{323}\prob[C]\br{2}$ is assigned the following numerical value:
+    \[ \prob[ABC]\br{323}\prob[C]\br{2} = \f{1}{32}\br{2 + \sqrt{2}} \cdot \f{1}{4} \simeq 0.0267  \]
+    The same is applied to all other entries of $\probvec^{\mscenario}$. Finally, this numerical version of $\probvec^{\mscenario}$ and $M$ are subjected to linear programing software and an infeasibility certificate $y$ was obtained, corresponding precisely to \cref{eq:ww_ineq} using \cref{eq:marginal_vector_wagon_wheel_factors_dropped}.
+
+    The remaining inequalities in \cref{sec:found_inequalities} were derived using the Web inflation of \cref{fig:the_web_inflation}. The maximal pre-injectable sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{eq:pre_injectable_triangle_structure_web}.
     \begin{equation*}
         \eq \label{eq:pre_injectable_triangle_structure_web}
         \begin{gathered}
@@ -570,69 +628,7 @@
             \bc{A_4} \ancestralindep \bc{B_2} \ancestralindep \bc{C_1}
         \end{gathered}
     \end{equation*}
-    Again, analogously to \cref{ex:incidence_matrix}, this marginal scenario defines an incidence matrix $M$ that has $\abs{\Events{\mscenario}} = 4 \cdot 4^{6} + 8 \cdot 4^3 = 16,896$ rows, $\abs{\Events{\jointvar}} = 4^{12} = 16,777,216$ and $201,326,592$ non-zero entires. Using this incidence matrix, a number of incompatibility certificates were derived. For inspection, one is reproduced in \cref{eq:web_inequality}.
-
-     First select an inflation $\graph'$ of the Triangle structure $\graph$ and identify the maximal pre-injectable sets $\PreInj[\graph]{\graph'}$. These sets define the marginal scenario to be used in the Inflation Technique. Next, inflate the Fritz distribution into the pre-injectable sets as described by the Inflation lemma (\cref{lem:inflation}). Finally, obtain infeasibility certificates using some linear programing software and obtain a valid causal compatibility inequality that witnesses the Fritz distribution's incompatibility.
-
-    As a first demonstration, we make use of the Wagon-Wheel inflation (\cref{fig:wagon_wheel_inflation}) to find these inequalities. The Wagon-Wheel inflation possesses $4$ copies of $C$ ($C_1, C_2, C_3, C_4$) and $2$ copies of $A$ ($A_1, A_2$) and $B$ ($B_1, B_2$) arranged in the shape of a Wagon-Wheel. By inspection\footnote{Computing the injectable and pre-injectable sets computationally is possible and a technique is discussed in~\citet{Inflation}.}, the maximal pre-injectable sets of the Wagon-Wheel inflation are as follows:
-    \begin{equation*}
-        \eq \label{eq:pre_injectable_triangle_structure_wagon_wheel}
-        \begin{gathered}
-            \textbf{Maximal Pre-injectable Sets} \\
-            \bc{A_2, B_1, C_3, C_1} \\
-            \bc{A_1, B_1, C_4, C_2} \\
-            \bc{A_1, B_2, C_1, C_3} \\
-            \bc{A_2, B_2, C_2, C_4} \\
-        \end{gathered}
-        \qquad
-        \begin{gathered}
-            \textbf{Ancestral Independences} \\
-            \bc{A_2, B_1, C_3} \ancestralindep \bc{C_1} \\
-            \bc{A_1, B_1, C_4} \ancestralindep \bc{C_2} \\
-            \bc{A_1, B_2, C_1} \ancestralindep \bc{C_3} \\
-            \bc{A_2, B_2, C_2} \ancestralindep \bc{C_4} \\
-        \end{gathered}
-    \end{equation*}
-
-    These maximal pre-injectable sets define a marginal scenario where $\graph'$ is the Wagon-Wheel inflation of the Triangle structure $\graph$.
-    \[ \mscenario = \PreInj[\graph]{\graph'} = \bc{\bc{A_2, B_1, C_3, C_1}, \bc{A_1, B_1, C_4, C_2}, \bc{A_1, B_2, C_1, C_3}, \bc{A_2, B_2, C_2, C_4}} \eq \label{eq:wagon_wheel_marginal_model}\]
-    The complete set of variables $\jointvar$ is simply the set of observable nodes in the Wagon-Wheel inflation,
-    \[ \jointvar = \nodes'_O = \bc{A_1, A_2, B_1, B_2, C_1, C_2, C_3, C_4} \]
-    Given that the Fritz distribution is defined over $4$-outcomes variables, the variables in the marginal scenario are assigned $4$-outcomes as well. This marginal scenario $\mscenario$ then defines an incidence matrix capable of accommodating the Fritz distribution.
-    Analogously to \cref{ex:incidence_matrix}, this marginal scenario defines an incidence matrix $M$ that has $\abs{\Events{\mscenario}} = \sum_{V \in \mscenario} \abs{\Events{V}} = 4 \cdot 4^{4} = 1024$ rows and $\abs{\Events{\jointvar}} = \prod_{v \in \jointvar} \abs{\Events{v}} = 4^{\abs{\jointvar}} = 4^8 = 65,536$ columns. Understandably, this matrix is not reproduced here. The sheer size of the incidence matrix used here makes complete solutions of the marginal problem using tools such as linear-quantifier elimination intractable.
-
-    The marginal distribution vector $\probvec^{\mscenario}$ is indexed by $1024$ marginal outcomes $m \in \Events{\mscenario}$ of the following \textit{symbolic} form,
-    \[ {\probvec^{\mscenario}}^{\intercal} = \underbrace{\br{\prob[A_2B_1C_3C_1]\br{0000}, \ldots, \prob[A_1B_1C_4C_2]\br{3232}, \ldots, \prob[A_2B_2C_2C_4]\br{3333}}}_{1024 \text{ entries}} \eq \label{eq:marginal_vector_wagon_wheel} \]
-    Which can be factored into the ancestrally independent injectable sets using \cref{eq:pre_injectable_triangle_structure_wagon_wheel},
-    \[ {\probvec^{\mscenario}}^{\intercal} = \br{\prob[A_2B_1C_3]\br{000}\prob[C_1]\br{0}, \ldots, \prob[A_1B_1C_4]\br{323}\prob[C_2]\br{2}, \ldots, \prob[A_2B_2C_2]\br{333}\prob[C_4]\br{3}} \eq \label{eq:marginal_vector_wagon_wheel_factors}\]
-    And finally, each probability distribution in \cref{eq:marginal_vector_wagon_wheel_factors} is deflated by dropping copy-indices.
-    \[ {\probvec^{\mscenario}}^{\intercal} = \br{\prob[ABC]\br{000}\prob[C]\br{0}, \ldots, \prob[ABC]\br{323}\prob[C]\br{2}, \ldots, \prob[ABC]\br{333}\prob[C]\br{3}} \eq \label{eq:marginal_vector_wagon_wheel_factors_dropped}\]
-    This step is permitted because all of the remaining distributions in \cref{eq:marginal_vector_wagon_wheel_factors} are defined over the injectable sets of the Wagon-Wheel inflation. Numerically however, each of the elements of $\probvec^{\mscenario}$ are replaced with numerical values corresponding to the Fritz distribution upon deflation. Pursuant to \cref{eq:fritz_dist}, $\prob[ABC]\br{323}\prob[C]\br{2}$, for example, is assigned the following numerical value.
-    \[ \prob[ABC]\br{323}\prob[C]\br{2} = \f{1}{32}\br{2 + \sqrt{2}} \cdot \f{1}{4} \simeq 0.0267  \]
-    The same is applied to all other entries of $\probvec^{\mscenario}$. Finally, this numerical version of $\probvec^{\mscenario}$ and $M$ are subjected to linear programing software and an infeasibility certificate $y$ was obtained. Below is an example of an infeasibility inequality obtained over the entries of \cref{eq:marginal_vector_wagon_wheel_factors_dropped}.
-    \begin{center}
-    \begin{figure}
-    \begin{subfigure}[b]{.45\linewidth}
-    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure_cut}}
-    \caption{The Cut inflation}\label{fig:cut_inflation}
-    \end{subfigure}
-    \begin{subfigure}[b]{.45\linewidth}
-    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral}}
-    \caption{The Spiral inflation}\label{fig:spiral_inflation}
-    \end{subfigure}
-
-    \begin{subfigure}[b]{.45\linewidth}
-    \scalebox{1.0}{\input{../../figures/causal_structures/inflated_triangle_structure_wagon_wheel}}
-    \caption{The Wagon-Wheel inflation}\label{fig:wagon_wheel_inflation}
-    \end{subfigure}
-    \begin{subfigure}[b]{.45\linewidth}
-    \scalebox{1}{\input{../../figures/causal_structures/inflated_triangle_structure}}
-    \caption{The Web Inflation}\label{fig:the_web_inflation}
-    \end{subfigure}
-    \caption{Some inflations of the Triangle structure.}
-    \label{fig:inflations}
-    \end{figure}
-    \end{center}
+    Analogously to the Wagon-Wheel inflation, these pre-injectable sets form a marginal scenario $\mscenario$ which defines an incidence matrix $M$ that has $\abs{\Events{\mscenario}} = 4 \cdot 4^{6} + 8 \cdot 4^3 = 16,896$ rows, $\abs{\Events{\jointvar}} = 4^{12} = 16,777,216$ and $201,326,592$ non-zero entires.
 
     \subsection{Deriving Symmetric Causal Compatibility Inequalities}
     \label{sec:symmetric_inequalities}
