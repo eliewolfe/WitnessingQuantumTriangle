@@ -173,28 +173,28 @@
     \begin{equation*}
     \begin{gathered}
     \eq\label{eq:ww_ineq}
-    2P_{ABC}(203)P_{C}(0) + 2P_{ABC}(303)P_{C}(0) + P_{ABC}(003)P_{C}(0) + P_{ABC}(013)P_{C}(0) + \cdots \\
-    \cdots + P_{ABC}(020)P_{C}(2) + P_{ABC}(022)P_{C}(2) + P_{ABC}(023)P_{C}(0) + P_{ABC}(023)P_{C}(2) + \cdots \\
-    \cdots + P_{ABC}(030)P_{C}(2) + P_{ABC}(031)P_{C}(2) + P_{ABC}(032)P_{C}(2) + P_{ABC}(033)P_{C}(0) + \cdots \\
-    \cdots + P_{ABC}(033)P_{C}(2) + P_{ABC}(103)P_{C}(0) + P_{ABC}(113)P_{C}(0) + P_{ABC}(123)P_{C}(0) + \cdots \\
-    \cdots + P_{ABC}(133)P_{C}(0) + P_{ABC}(200)P_{C}(0) + P_{ABC}(200)P_{C}(1) + P_{ABC}(200)P_{C}(2) + \cdots \\
-    \cdots + P_{ABC}(200)P_{C}(3) + P_{ABC}(201)P_{C}(0) + P_{ABC}(201)P_{C}(1) + P_{ABC}(201)P_{C}(2) + \cdots \\
-    \cdots + P_{ABC}(201)P_{C}(3) + P_{ABC}(203)P_{C}(1) + P_{ABC}(203)P_{C}(2) + P_{ABC}(203)P_{C}(3) + \cdots \\
-    \cdots + P_{ABC}(213)P_{C}(0) + P_{ABC}(223)P_{C}(0) + P_{ABC}(300)P_{C}(0) + P_{ABC}(300)P_{C}(1) + \cdots \\
-    \cdots + P_{ABC}(300)P_{C}(2) + P_{ABC}(300)P_{C}(3) + P_{ABC}(301)P_{C}(0) + P_{ABC}(301)P_{C}(1) + \cdots \\
-    \cdots + P_{ABC}(301)P_{C}(2) + P_{ABC}(301)P_{C}(3) + P_{ABC}(302)P_{C}(1) + P_{ABC}(303)P_{C}(1) + \cdots \\
-    \cdots + P_{ABC}(303)P_{C}(2) + P_{ABC}(303)P_{C}(3) + P_{ABC}(313)P_{C}(0) - P_{ABC}(000)P_{C}(3) \geq 0
+    + P_{ABC}(000)P_{C}(3) - 2P_{ABC}(203)P_{C}(0) - 2P_{ABC}(303)P_{C}(0) - P_{ABC}(003)P_{C}(0) \\
+    - P_{ABC}(013)P_{C}(0) - P_{ABC}(020)P_{C}(2) - P_{ABC}(022)P_{C}(2) - P_{ABC}(023)P_{C}(0) \\
+    - P_{ABC}(023)P_{C}(2) - P_{ABC}(030)P_{C}(2) - P_{ABC}(031)P_{C}(2) - P_{ABC}(032)P_{C}(2) \\
+    - P_{ABC}(033)P_{C}(0) - P_{ABC}(033)P_{C}(2) - P_{ABC}(103)P_{C}(0) - P_{ABC}(113)P_{C}(0) \\
+    - P_{ABC}(123)P_{C}(0) - P_{ABC}(133)P_{C}(0) - P_{ABC}(200)P_{C}(0) - P_{ABC}(200)P_{C}(1) \\
+    - P_{ABC}(200)P_{C}(2) - P_{ABC}(200)P_{C}(3) - P_{ABC}(201)P_{C}(0) - P_{ABC}(201)P_{C}(1) \\
+    - P_{ABC}(201)P_{C}(2) - P_{ABC}(201)P_{C}(3) - P_{ABC}(203)P_{C}(1) - P_{ABC}(203)P_{C}(2) \\
+    - P_{ABC}(203)P_{C}(3) - P_{ABC}(213)P_{C}(0) - P_{ABC}(223)P_{C}(0) - P_{ABC}(300)P_{C}(0) \\
+    - P_{ABC}(300)P_{C}(1) - P_{ABC}(300)P_{C}(2) - P_{ABC}(300)P_{C}(3) - P_{ABC}(301)P_{C}(0) \\
+    - P_{ABC}(301)P_{C}(1) - P_{ABC}(301)P_{C}(2) - P_{ABC}(301)P_{C}(3) - P_{ABC}(302)P_{C}(1) \\
+    - P_{ABC}(303)P_{C}(1) - P_{ABC}(303)P_{C}(2) - P_{ABC}(303)P_{C}(3) - P_{ABC}(313)P_{C}(0) \leq 0
     \end{gathered}
     \end{equation*}
-    By construction, every distribution $\prob[ABC]$ that is compatible with the Triangle structure (i.e. factorizes according to \cref{eq:compatibility_as_factorization}) must satisfy \cref{eq:ww_ineq}. As a demonstration, the Fritz distribution violates \cref{eq:ww_ineq}. Notice the final term $\prob[ABC]\br{000}\prob[C]\br{3}$ has a coefficient $-1$. For the Fritz distribution, $\prob[ABC]\br{000}\prob[C]\br{3} = \f{1}{128}\br{2 + \sqrt{2}} \simeq 0.0267$ but all of the remaining terms in \cref{eq:ww_ineq} sum to $\simeq 0.0136$ meaning that the Fritz distribution violates this inequality with violation $-0.0129\ldots \not \geq 0$. Consequently we conclude that the Fritz distribution is incompatible with the Triangle structure, a fact that was previously only demonstrated without the use of causal compatibility inequalities.
+    By construction, every distribution $\prob[ABC]$ that is compatible with the Triangle structure (i.e. factorizes according to \cref{eq:compatibility_as_factorization}) must satisfy \cref{eq:ww_ineq}. As a demonstration, the Fritz distribution violates \cref{eq:ww_ineq}. Notice the first term $\prob[ABC]\br{000}\prob[C]\br{3}$ has a coefficient $+1$. For the Fritz distribution, $\prob[ABC]\br{000}\prob[C]\br{3} = \f{1}{128}\br{2 + \sqrt{2}} \simeq 0.0267$ but all of the remaining terms in \cref{eq:ww_ineq} sum to $\simeq 0.0136$ meaning that the Fritz distribution violates this inequality with violation $0.0129\ldots \not \leq 0$. Consequently we conclude that the Fritz distribution is incompatible with the Triangle structure, a fact that was previously only demonstrated without the use of causal compatibility inequalities.
 
     To reiterate, the methods used to derive \cref{eq:ww_ineq} can be found in \cref{sec:marginal_satisfiability,sec:inflation_technique_main_summary} and more details can be found in \cref{sec:exemplary_inflations_of_the_triangle structure}.
 
-    It is possible to simplify \cref{eq:ww_ineq} identifying sets of terms such as $P_{ABC}(300)P_{C}(0) + P_{ABC}(300)P_{C}(1) + P_{ABC}(300)P_{C}(2) + P_{ABC}(300)P_{C}(3)$ which can be simplified to $P_{ABC}(300)$ by recognizing that $P_{C}(0) + P_{C}(1) + P_{C}(2) + P_{C}(3) = 1$. Upon doing so, one obtains the following,
+    It is possible to simplify \cref{eq:ww_ineq} by identifying sets of terms such as $P_{ABC}(300)P_{C}(0) + P_{ABC}(300)P_{C}(1) + P_{ABC}(300)P_{C}(2) + P_{ABC}(300)P_{C}(3)$ which can be simplified to $P_{ABC}(300)$ by recognizing that $P_{C}(0) + P_{C}(1) + P_{C}(2) + P_{C}(3) = 1$. Upon doing so, one obtains the following,
     \begin{gather*}
-        P_{ABC}(303)P_{C}(0) + P_{ABC}(313)P_{C}(0) + P_{ABC}(302)P_{C}(1) + P_{AB}(02)P_{C}(2) + P_{AB}(03)P_{C}(2) + \cdots \\
-        \cdots + P_{AB}(20) + P_{AB}(30) + P_{C}(3)P_{C}(0) - P_{ABC}(000)P_{C}(3) - P_{ABC}(021)P_{C}(2) + \cdots \\
-        \cdots - P_{ABC}(202) - P_{ABC}(302) - P_{ABC}(233)P_{C}(0) - P_{AC}(33)P_{C}(0) \geq 0
+        + P_{ABC}(000)P_{C}(3) + P_{ABC}(021)P_{C}(2) + P_{ABC}(202) + P_{ABC}(302) + P_{ABC}(233)P_{C}(0) + P_{AC}(33)P_{C}(0) \\
+        - P_{ABC}(303)P_{C}(0) - P_{ABC}(313)P_{C}(0) - P_{ABC}(302)P_{C}(1) - P_{AB}(02)P_{C}(2) - \\
+        - P_{AB}(03)P_{C}(2) - P_{AB}(20) - P_{AB}(30) - P_{C}(3)P_{C}(0) \leq 0
     \end{gather*}
 
     In order to understand the importance of \cref{eq:ww_ineq}, there are a couple of important concepts to understand. First, the Fritz distribution was originally known to be incompatible with the Triangle structure due to the perfect correlation between $C$ and the measurement pseudo-settings $A_l, B_l$. The inequality of \cref{eq:ww_ineq} represents a significant advancement in our understanding of non-classicality in the Triangle structure. For example, \cref{eq:ww_ineq} is violated by distributions that do not exhibit perfect correlation between $C$ and $A_l, B_l$. Furthermore, the existence of an inequality capable of witnessing Fritz distribution \textit{is guaranteed}, albeit there was \textit{no guarantee} that the Inflation Technique would be capable of producing such an inequality. In fact, \cref{eq:ww_ineq} was derived using the Wagon-Wheel inflation depicted in \cref{fig:wagon_wheel_inflation}; smaller inflations of the Triangle structure such as the Spiral inflation (\cref{fig:spiral_inflation}) and Cut inflation (\cref{fig:cut_inflation}) are \textit{not} able to produce causal compatibility inequalities that witness the Fritz distribution. This result demonstrates that the Inflation Technique is the first tool-set powerful enough to produce causal compatibility inequalities such as \cref{eq:ww_ineq} strong enough to witness incompatible quantum distributions for the Triangle structure. More universally, this result shows that the Inflation Technique is a promising tool for understanding quantum non-classical in more general causal structures.
