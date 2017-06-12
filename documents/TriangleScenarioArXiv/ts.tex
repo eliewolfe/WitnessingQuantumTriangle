@@ -536,16 +536,16 @@
         \end{tikzpicture}
     \end{center}
 
-    Not all sets $N' \subseteq \nodes'$ can be written as the disjoint union of injectable sets, but those that \textit{can} are called the \term{pre-injectable sets} of $\graph'$. A set $N' \subseteq \nodes'$ is a pre-injectable set if it can be decomposed into the disjoint union of injectable sets $N' = \coprod_{i} N'_i \mid N'_i \in \Inj[\graph]{\graph'}$ and all pairs $N_i', N_j'$ are ancestrally independent: $\forall i, j : N_i' \ancestralindep N_j'$.
+    Not all sets $N' \subseteq \nodes'$ can be written as the disjoint union of injectable sets, but those that \textit{can} are called the \term{ai-expressible sets} of $\graph'$. A set $N' \subseteq \nodes'$ is a ai-expressible set if it can be decomposed into the disjoint union of injectable sets $N' = \coprod_{i} N'_i \mid N'_i \in \Inj[\graph]{\graph'}$ and all pairs $N_i', N_j'$ are ancestrally independent: $\forall i, j : N_i' \ancestralindep N_j'$.
 
-    A pre-injectable set $N'$ is of primal importance to the Inflation Technique because any distribution over $N'$ will factorize according to its ancestral independence conditions~\cite{Pearl_2009}\footnote{In~\cite{Inflation}, this concept is generalized into terms which can be factorized via d-separation conditions and the corresponding inflated sets are termed \textit{expressible sets}. This generalization was not required for this work in particular because the ancestral independence relations formed a generating set of d-separation conditions for all of the inflations considered in \cref{fig:inflations}.},
+    A ai-expressible set $N'$ is of primal importance to the Inflation Technique because any distribution over $N'$ will factorize according to its ancestral independence conditions~\cite{Pearl_2009}\footnote{In~\cite{Inflation}, this concept is generalized into terms which can be factorized via d-separation conditions and the corresponding inflated sets are termed \textit{expressible sets}. This generalization was not required for this work in particular because the ancestral independence relations formed a generating set of d-separation conditions for all of the inflations considered in \cref{fig:inflations}.},
     \[ \prob[N'] = \prob[\coprod_i N'_i] = \prod_{i}\prob[N'_i] \]
-    Application of the inflation lemma to linear inequalities constraining pre-injectable distributions $\prob[N']$ transforms those inequalities into polynomial inequalities over the injectable distributions, allowing one to replace all terms with probability distributions defined over variables in $\nodes$. Throughout the body of this work, we let $\PreInj[\graph]{\graph'}$ denote the set of all pre-injectable sets. To derive inequalities for the inflated causal structure $\graph'$, the pre-injectable sets define a marginal scenario $\mscenario$\footnote{Analogously for a marginal scenario $\mscenario$, the pre-injectable sets $\PreInj[\graph]{\graph'}$ form an \textit{abstract simplicial complex}. Therefore, in practice, it is completely sufficient to focus on the maximal pre-injectable sets.} that are used to derive inequalities using methods discussed in \cref{sec:marginal_satisfiability}.
+    Application of the inflation lemma to linear inequalities constraining ai-expressible distributions $\prob[N']$ transforms those inequalities into polynomial inequalities over the injectable distributions, allowing one to replace all terms with probability distributions defined over variables in $\nodes$. Throughout the body of this work, we let $\AI[\graph]{\graph'}$ denote the set of all ai-expressible sets. To derive inequalities for the inflated causal structure $\graph'$, the ai-expressible sets define a marginal scenario $\mscenario$\footnote{Analogously for a marginal scenario $\mscenario$, the ai-expressible sets $\AI[\graph]{\graph'}$ form an \textit{abstract simplicial complex}. Therefore, in practice, it is completely sufficient to focus on the maximal ai-expressible sets.} that are used to derive inequalities using methods discussed in \cref{sec:marginal_satisfiability}.
 
     \subsection{Exemplary Inflations of The Triangle structure}
     \label{sec:exemplary_inflations_of_the_triangle structure}
 
-    \Cref{sec:inflation_technique_main_summary} explains how the Inflation Technique~\cite{Inflation} was used to derive novel causal compatibility inequalities for the Triangle structure by constructing inflations of the Triangle structure satisfying \cref{eq:inflation_defn}. Explicitly, for a given inflation $\graph'$ of the Triangle structure, one constructs a marginal problem (see \cref{sec:marginal_satisfiability}) for the marginal scenario $\mscenario$ composed of the maximal pre-injectable sets of $\graph'$, i.e. $\mscenario = \PreInj[\graph]{\graph'}$. This section acts as a reference for the particular inflations of the Triangle structure that are mentioned throughout this manuscript. Contained within this section is a depiction of each of these inflations in \cref{fig:inflations} as well as a their pre-injectable sets. An efficient algorithm for computing the injectable and pre-injectable sets of an inflation can be found in~\cite{Inflation}.
+    \Cref{sec:inflation_technique_main_summary} explains how the Inflation Technique~\cite{Inflation} was used to derive novel causal compatibility inequalities for the Triangle structure by constructing inflations of the Triangle structure satisfying \cref{eq:inflation_defn}. Explicitly, for a given inflation $\graph'$ of the Triangle structure, one constructs a marginal problem (see \cref{sec:marginal_satisfiability}) for the marginal scenario $\mscenario$ composed of the maximal ai-expressible sets of $\graph'$, i.e. $\mscenario = \AI[\graph]{\graph'}$. This section acts as a reference for the particular inflations of the Triangle structure that are mentioned throughout this manuscript. Contained within this section is a depiction of each of these inflations in \cref{fig:inflations} as well as a their ai-expressible sets. An efficient algorithm for computing the injectable and ai-expressible sets of an inflation can be found in~\cite{Inflation}.
     \begin{center}
     \begin{figure}
     \begin{subfigure}[b]{.45\linewidth}
@@ -570,14 +570,14 @@
     \end{figure}
     \end{center}
 
-    The first inequality presented in \cref{sec:found_inequalities} was \cref{eq:ww_ineq}. \cref{eq:ww_ineq} was derived using the Wagon-Wheel inflation in \cref{fig:wagon_wheel_inflation}. The Wagon-Wheel inflation possesses $4$ copies of $C$ ($C_1, C_2, C_3, C_4$) and $2$ copies of $A$ ($A_1, A_2$) and $B$ ($B_1, B_2$) arranged in the shape of a Wagon-Wheel. The maximal pre-injectable sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{eq:pre_injectable_triangle_structure_wagon_wheel}. These maximal pre-injectable sets define the following marginal scenario where the joint variables $\jointvar$ are simply the set of observable nodes in the Wagon-Wheel inflation $\jointvar = \nodes'_O$:
-    \[ \mscenario = \PreInj[\graph]{\graph'} = \bc{\bc{A_2, B_1, C_3, C_1}, \bc{A_1, B_1, C_4, C_2}, \bc{A_1, B_2, C_1, C_3}, \bc{A_2, B_2, C_2, C_4}} \eq \label{eq:wagon_wheel_marginal_model}\]
+    The first inequality presented in \cref{sec:found_inequalities} was \cref{eq:ww_ineq}. \cref{eq:ww_ineq} was derived using the Wagon-Wheel inflation in \cref{fig:wagon_wheel_inflation}. The Wagon-Wheel inflation possesses $4$ copies of $C$ ($C_1, C_2, C_3, C_4$) and $2$ copies of $A$ ($A_1, A_2$) and $B$ ($B_1, B_2$) arranged in the shape of a Wagon-Wheel. The maximal ai-expressible sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{eq:pre_injectable_triangle_structure_wagon_wheel}. These maximal ai-expressible sets define the following marginal scenario where the joint variables $\jointvar$ are simply the set of observable nodes in the Wagon-Wheel inflation $\jointvar = \nodes'_O$:
+    \[ \mscenario = \AI[\graph]{\graph'} = \bc{\bc{A_2, B_1, C_3, C_1}, \bc{A_1, B_1, C_4, C_2}, \bc{A_1, B_2, C_1, C_3}, \bc{A_2, B_2, C_2, C_4}} \eq \label{eq:wagon_wheel_marginal_model}\]
     Given that the Fritz distribution is defined over $4$-outcomes variables, the variables in the marginal scenario are assigned $4$-outcomes as well. This marginal scenario $\mscenario$ then defines an incidence matrix $M$ capable of accommodating the Fritz distribution that has $\abs{\Events{\mscenario}} = 4 \cdot 4^{4} = 1024$ rows and $\abs{\Events{\jointvar}} = 4^8 = 65,536$ columns. Understandably, this matrix is not reproduced here. The sheer size of the incidence matrix used here makes complete solutions of the marginal problem using tools such as linear-quantifier elimination intractable.
 
     \begin{equation*}
         \eq \label{eq:pre_injectable_triangle_structure_wagon_wheel}
         \begin{gathered}
-            \textbf{Maximal Pre-injectable Sets} \\
+            \textbf{Maximal AI-Expressible Sets} \\
             \bc{A_2, B_1, C_3, C_1} \\
             \bc{A_1, B_1, C_4, C_2} \\
             \bc{A_1, B_2, C_1, C_3} \\
@@ -602,11 +602,11 @@
     \[ \prob[ABC]\br{323}\prob[C]\br{2} = \f{1}{32}\br{2 + \sqrt{2}} \cdot \f{1}{4} \simeq 0.0267  \]
     The same is applied to all other entries of $\probvec^{\mscenario}$. Finally, this numerical version of $\probvec^{\mscenario}$ and $M$ are subjected to linear programing software and an infeasibility certificate $y$ was obtained, corresponding precisely to \cref{eq:ww_ineq} using \cref{eq:marginal_vector_wagon_wheel_factors_dropped}.
 
-    The remaining inequalities in \cref{sec:found_inequalities} were derived using the Web inflation of \cref{fig:the_web_inflation}. The maximal pre-injectable sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{eq:pre_injectable_triangle_structure_web}.
+    The remaining inequalities in \cref{sec:found_inequalities} were derived using the Web inflation of \cref{fig:the_web_inflation}. The maximal ai-expressible sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{eq:pre_injectable_triangle_structure_web}.
     \begin{equation*}
         \eq \label{eq:pre_injectable_triangle_structure_web}
         \begin{gathered}
-            \textbf{Maximal Pre-injectable Sets} \\
+            \textbf{Maximal AI-Expressible Sets} \\
             \bc{A_1, B_1, C_1, A_4, B_4, C_4} \\
             \bc{A_1, B_2, C_3, A_4, B_3, C_2} \\
             \bc{A_2, B_3, C_1, A_3, B_2, C_4} \\
@@ -637,7 +637,7 @@
             \bc{A_4} \ancestralindep \bc{B_2} \ancestralindep \bc{C_1}
         \end{gathered}
     \end{equation*}
-    Analogously to the Wagon-Wheel inflation, these pre-injectable sets form a marginal scenario $\mscenario$ which defines an incidence matrix $M$ that has $\abs{\Events{\mscenario}} = 4 \cdot 4^{6} + 8 \cdot 4^3 = 16,896$ rows, $\abs{\Events{\jointvar}} = 4^{12} = 16,777,216$ columns and $201,326,592$ non-zero entires.
+    Analogously to the Wagon-Wheel inflation, these ai-expressible sets form a marginal scenario $\mscenario$ which defines an incidence matrix $M$ that has $\abs{\Events{\mscenario}} = 4 \cdot 4^{6} + 8 \cdot 4^3 = 16,896$ rows, $\abs{\Events{\jointvar}} = 4^{12} = 16,777,216$ columns and $201,326,592$ non-zero entires.
 
     \subsection{Deriving Symmetric Causal Compatibility Inequalities}
     \label{sec:symmetric_inequalities}
@@ -666,7 +666,7 @@
 
     In the context of the Inflation Technique, a variable symmetry $\Phi\br{\mscenario'}$ over an inflated marginal scenario $\mscenario'$ does not always correspond to a variable symmetry under deflation $\Phi\br{\mscenario}$. In order to derive deflated inequalities that are symmetric under an exchange of parties, it is required that $\Phi\br{\mscenario'} \sim \Phi\br{\mscenario}$ are equivalent up to copy-index.
 
-    For the Triangle structure in particular, the variable permutation group is simply the set of permutations on $A, B, C$: $\Phi\br{\mscenario} = \Perm{A, B, C}$. For the Web inflation (\cref{fig:the_web_inflation}), we have obtained $\gp\br{\PreInj[\graph]{\graph'}}$ which is an order $48$ group with the following $4$ generators:
+    For the Triangle structure in particular, the variable permutation group is simply the set of permutations on $A, B, C$: $\Phi\br{\mscenario} = \Perm{A, B, C}$. For the Web inflation (\cref{fig:the_web_inflation}), we have obtained $\gp\br{\AI[\graph]{\graph'}}$ which is an order $48$ group with the following $4$ generators:
     \begin{equation*}
     \begin{aligned}[c]
     &\hspace{1mm}\varphi_1 \\
@@ -692,8 +692,8 @@
     %  (0, 2, 1, 3, 8, 10, 9, 11, 4, 6, 5, 7),
     %  (8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 6, 7),
     %  (0, 1, 2, 3, 5, 4, 7, 6, 10, 11, 8, 9))
-    It is easy to verify that $\varphi_1, \varphi_2, \varphi_3, \varphi_4$ are all automorphisms of the web inflation. Moreover they stabilize the pre-injectable sets of \cref{eq:pre_injectable_triangle_structure_web}. Importantly,
-    \[ \gp\br{\PreInj[\graph]{\graph'}} \sim \Perm{A,B,C} \]
+    It is easy to verify that $\varphi_1, \varphi_2, \varphi_3, \varphi_4$ are all automorphisms of the web inflation. Moreover they stabilize the ai-expressible sets of \cref{eq:pre_injectable_triangle_structure_web}. Importantly,
+    \[ \gp\br{\AI[\graph]{\graph'}} \sim \Perm{A,B,C} \]
     To see this, $\varphi_1$ and $\varphi_4$ become the identity element in $\Perm{A,B,C}$ upon removal of the copy-index, leaving $\varphi_2$ to generate reflections and $\varphi_3$ to generate rotations.
 
     The symmetric incidence matrix $M_{\Phi}$ for the Web inflation is considerably smaller than $M$. The number of rows of $M_{\Phi}$ is a number of distinct orbits $\Orb[\Phi]{m}$ in $\Events{\mscenario}$. Likewise the number of columns is the number of distinct orbits $\Orb[\Phi]{j}$ in $\Events{\jointvar}$. For the Web inflation in particular, $M_{\Phi}$ is $450 \times 358,120$. Using the symmetric incidence matrix and linear programing methods, an infeasibility certificate was found that is capable of witnessing the Fritz distribution. The corresponding deflated inequality is presented in \cref{sec:found_inequalities} as \cref{eq:symmetic_web_inequality}.
