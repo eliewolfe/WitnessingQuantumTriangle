@@ -473,88 +473,15 @@
     \subsection{Inflation Technique}
     \label{sec:deriving_inequalities}
     \label{sec:inflation_technique_main_summary}
-    The \term{Inflation Technique}, invented by \citet{Inflation} and inspired by the \textit{do calculus} and \textit{twin networks} of \citet{Pearl_2009}, is a family of causal inference techniques that can be used to determine if a probability distribution $\prob[\nodes_{O}]$ is compatible or incompatible with a given causal structure $\graph$. As a preliminary summary, the Inflation Technique begins by \textit{augmenting} a causal structure with additional copies of its nodes, producing an \textit{inflated} causal structure, and then exposes how causal inference tasks on the inflated causal structure can be used to make inferences on the original causal structure. As a example, four inflations of the Triangle structure are depicted in \cref{fig:inflations}. Copies of nodes in the inflated causal structure are distinguished by an additional subscript called the \term{copy-index}. For example, node $A$ of \cref{fig:triangle_structure} has copies $A_1, A_2, A_3, A_4$ in the inflated causal structure in \cref{fig:the_web_inflation}. All such copies are deemed equivalent via a \term{copy-index equivalence} relation denoted `$\sim$'. A copy-index is effectively arbitrary, so we will refer to an arbitrary inflated copy of $A$ as $A'$.
+    The \term{Inflation Technique}, invented by \citet{Inflation} and inspired by the \textit{do calculus} and \textit{twin networks} of \citet{Pearl_2009}, is a family of causal inference techniques that can be used to determine if an observable probability distribution $\prob[\nodes_{O}]$ is compatible or incompatible with a given causal structure $\graph$. As a precursor, the Inflation Technique begins by \textit{augmenting} a causal structure with additional copies of its nodes, producing an \textit{inflated} causal structure, and then exposes how causal inference tasks on the inflated causal structure can be used to make inferences on the original causal structure. As a example, a few inflations of the Triangle structure are depicted in \cref{fig:inflations}. Copies of nodes in the inflated causal structure are distinguished by an additional subscript called the \term{copy-index}. For example, node $A$ of \cref{fig:triangle_structure} has copies $A_1, A_2, A_3, A_4$ in the inflated causal structure in \cref{fig:the_web_inflation}. All such copies are deemed equivalent via a \term{copy-index equivalence} relation denoted `$\sim$'. A copy-index is effectively arbitrary, so we will refer to an arbitrary inflated copy of $A$ as $A'$.
     \[ A \sim A_1 \sim A' \not\sim B \sim B_1 \sim B' \]
     We preemptively generalize the notion of copy-index equivalence to other mathematical objects like sets, graphs, and groups by saying that $X \sim Y$ if and only if $X = Y$ upon removal of the copy-index. In addition to the common graph-theoretic terminology and notation presented in \cref{sec:causal_compatibility}, we define two more concepts necessary to formally define an inflation of $\graph$. First, an \term{induced subgraph} of $\graph$ for a subset of nodes $N \subseteq \nodes$ is another graph composed of nodes $N$ and all edges $e$ of the original graph that are contained in $N$: $\Sub[\graph]{N} \defined \br{N, \bc{e = \bc{n \to m} \mid n, m \in N}}$. An \term{ancestral subgraph} of $\graph$ for a subset of nodes $N \subseteq \nodes$ is the induced subgraph due to the ancestry of $N$: $\AnSub[\graph]{N} \defined \Sub[\graph]{\An[\graph]{N}}$.
 
     \begin{definition}
+        \label{def:inflation}
         An \term{inflation} of a causal structure $\graph$ is another causal structure $\graph'$ such that:
         \[ \forall n' \in \nodes': \AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \eq \label{eq:inflation_defn}\]
     \end{definition}
-    Verbally, for each inflated node $n'$, the ancestral sub-graph of $n'$ in $\graph'$ is equivalent to its counterpart in $\graph$ up to copy-index. The motivation behind this definition is that if the ancestry of each node $n'$ in $\graph'$ plays the \textit{exact same} role as the ancestry of its source copy $n$ in $\graph$, then every compatible distribution $\prob[N]$ on $\graph$ can be used to \textit{create} compatible joint distributions on $\graph'$. To do this, first notice that for every distribution $\prob[N]$ compatible with $\graph$, there must exist a set of causal parameters $\{\prob[n\mid \Pa[\graph]{n}] \mid n \in \nodes\}$ for $\graph$ such that $\prob[N] = \prod_{n \in N} \prob[n\mid \Pa[\graph]{n}]$. Since the inflation criteria (\cref{eq:inflation_defn}) requires that $\Pa[\graph']{n'} \sim \Pa[\graph]{n}$ one can create a set of \term{inflated causal parameters} by matching causal parameters according to respective copy-indices.
-    \[ \forall n' \in \nodes' : \prob[n'\mid \Pa[\graph']{n'}] \defined \prob[n\mid \Pa[\graph]{n}] \eq \label{eq:inflated_causal_parameters} \]
-    Which in turn uniquely defines a compatible joint distribution $\prob[\nodes']$ on $\graph'$\footnote{Of course, there exists compatible joint distributions on $\nodes'$ that can not be constructed in this manner. The claim is that all joint distributions that are constructed in this way are compatible.}.
-    \[ \prob[\nodes'] = \prod_{n' \in \nodes'} \prob[n'\mid \Pa[\graph']{n'}] \eq \label{eq:unique_causal_parameters_inflated}\]
-    % \cref{eq:unique_causal_parameters,eq:inflated_causal_parameters,eq:unique_causal_parameters_inflated}
-    In essence, a compatible joint distribution over $\nodes$ can be \textit{inflated} to induce compatible joint distributions over $\nodes'$. Before generalizing this idea, a careful observation needs to be made. For any pair of subsets of nodes $N \subseteq \nodes$ and $N' \subseteq \nodes'$ that are equivalent up to copy-index $N \sim N'$, if $\AnSub[\graph]{N} \sim \AnSub[\graph']{N'}$ then any compatible \textit{marginal} distribution $\prob[N]$, where $N \subset \nodes$, induces a compatible marginal distribution $\prob[N']$ over $N'$. In fact, $N'$ must contain no duplicate nodes up to copy index and thus $\prob[N] = \prob[N']$. These subsets of nodes are so essential to the Inflation Technique they are assigned a special name: sets $N' \subseteq \nodes'$ as called the \term{injectable sets} of $\graph'$ and $N \subset \nodes$ the \term{images of the injectable sets} of $\graph$.
-    \begin{align*}
-        \Inj[\graph]{\graph'} &\defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : N \sim N'} \\
-        \ImInj[\graph]{\graph'} &\defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : N \sim N'}
-    \end{align*}
-    Injectable sets are incredibly useful for causal compatibility because they permit one to inflate compatibility over a particular subset of \textit{marginal models}. A marginal model is compatible with a given causal structure $\graph$ if it admits a joint distribution (see \cref{sec:marginal_satisfiability}) that is compatible with $\graph$.
-
-    \begin{lemma}
-        \label[lemma]{lem:inflation}
-        \term{The Inflation Lemma}~\cite[Lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$ and a marginal model $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ compatible with $\graph$ then all marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
-    \end{lemma}
-    Diagrammatically, \cref{lem:inflation} can be visualized as follows:
-
-    \begin{center}
-        \begin{tikzpicture}
-            \pgfmathsetmacro{\vs}{2.2};
-            \pgfmathsetmacro{\hs}{5.2};
-            \draw (0*\hs,0*\vs) node[](pn){$\underbrace{\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}}_{\text{compatible with $\graph$}}$};
-            \draw (1*\hs,0*\vs) node[](cp){$\bc{\prob[n\mid \Pa[\graph]{n}] \mid n \in \nodes}$};
-            \draw (1*\hs,-1*\vs) node[](cp_){$\bc{\prob[n'\mid \Pa[\graph']{n'}] \mid n' \in \nodes'}$};
-            \draw (0*\hs,-1*\vs) node[](pn_){$\underbrace{\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}}_{\text{compatible with $\graph'$}}$};
-            \draw[very thick, ->] (pn) -- (cp);
-            \draw[very thick, ->] (cp) -- (cp_) node [midway, above, sloped]{{\footnotesize define}};
-            \draw[very thick, ->] (cp_) -- (pn_);
-        \end{tikzpicture}
-    \end{center}
-
-    The inflation lemma is the most important result of the causal Inflation Technique. The contrapositive version of \cref{lem:inflation} is a powerful tool for deriving causal compatibility constraints. Any causal compatibility constraint, such as a causal compatibility inequality, that constrains injectable marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ can be \textit{deflated} into a valid compatibility constraint on marginal models $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ of the original causal structure by dropping all references to the copy-indices. Additionally, the inflation lemma holds when considering any subset of $\Inj[\graph]{\graph'}$ (analogously $\ImInj[\graph]{\graph'}$). Therefore, one only needs to consider injectable sets that are composed of \textit{observable nodes}.
-
-    Heretofore, the Inflation Technique as stated by \cref{lem:inflation} does not facilitate the derivation of any non-trivial inequalities. The Inflation lemma simply casts causal inference problems on $\graph$ to causal inference problems on $\graph'$. Fortunately, an inflated causal structure $\graph'$ possesses its own conditional independence relations which can be exploited to turn linear inequalities on $\graph'$ into polynomial inequalities on $\graph$. After obtaining an inequality for $\graph'$, each of its term is generically of the form $\prob[N']$ where $N'$ may not be injectable $N' \not \in \Inj[\graph]{\graph'}$. At this point, the Inflation lemma is not applicable because it requires probabilistic constraints to consist entirely of distributions $\prob[N']$ where $N'$ is injectable. If for example, $N' \not \in \Inj[\graph]{\graph'}$ could be partitioned into two injectable subsets $N_1' \in \Inj[\graph]{\graph'}$ and $N_2' \in \Inj[\graph]{\graph'}$ that where \term{ancestrally independent} in $\graph'$,\footnote{Ancestral independence is equivalent to d-separation conditioned on the empty set $\emptyset$~\cite{Pearl_2009}.}
-    \[ N_1' \ancestralindep N_2' \iff \An[\graph']{N_1'} \cap \An[\graph']{N_2'}= \emptyset \]
-    Then the compatible marginal context $\prob[N']$ must be probabilistically separable $\prob[N'] = \prob[N_1']\prob[N_2']$ due to \cref{eq:compatibility_as_factorization}. Since $N_1'$ and $N_2'$ are both injectable, the inflation lemma now applies and the original inequality can be deflated.
-
-    \begin{center}
-        \begin{tikzpicture}[scale=0.8]
-            \pgfmathsetmacro{\hs}{1.4};
-            \pgfmathsetmacro{\vs}{0.6};
-            \pgfmathsetmacro{\cross}{0.2};
-            \draw (0*\hs, 4*\vs) node[](a){$\prob[N']$};
-            \draw (0*\hs, 2*\vs) node[](ab){$N' \not \in \Inj[\graph]{\graph'}$};
-            \draw (4*\hs, 4*\vs) node[](c){$\prob[N_1']\prob[N_2']$};
-            \draw (2*\hs, 4*\vs) node[](ac){$N_1' \ancestralindep N_2'$};
-            \draw (2*\hs, 4*\vs + 0.7*\vs) node[]{$N_1' \cup N_2' = N$};
-            \draw (4*\hs, 2*\vs) node[](cd){$N_1', N_2' \in \Inj[\graph]{\graph'}$};
-            \draw (4*\hs, 0*\vs) node[](d){$\prob[N_1]\prob[N_2]$};
-            \draw (0, 0) node[](b){??};
-            \draw[thick, ] (a) -- (ab);
-            \draw[thick, ] (c) -- (cd);
-            \draw[thick, ] (a) -- (ac);
-            \draw[thick, ->] (ac) -- (c);
-            \draw[thick, ->] (ab) -- (b);
-            \draw[thick, ->] (cd) -- (d);
-            \draw[very thick, red]
-            (+ \cross, 1*\vs + \cross) -- (- \cross, 1*\vs - \cross)
-            (+ \cross, 1*\vs - \cross) -- (- \cross, 1*\vs + \cross)
-            ;
-        \end{tikzpicture}
-    \end{center}
-
-    Not all sets $N' \subseteq \nodes'$ can be written as the disjoint union of injectable sets, but those that \textit{can} are called the \term{ai-expressible sets} of $\graph'$. A set $N' \subseteq \nodes'$ is a ai-expressible set if it can be decomposed into the disjoint union of injectable sets $N' = \coprod_{i} N'_i \mid N'_i \in \Inj[\graph]{\graph'}$ and all pairs $N_i', N_j'$ are ancestrally independent: $\forall i, j : N_i' \ancestralindep N_j'$.
-
-    A ai-expressible set $N'$ is of primal importance to the Inflation Technique because any distribution over $N'$ will factorize according to its ancestral independence conditions~\cite{Pearl_2009}\footnote{In~\cite{Inflation}, this concept is generalized into terms which can be factorized via d-separation conditions and the corresponding inflated sets are termed \textit{expressible sets}. This generalization was not required for this work in particular because the ancestral independence relations formed a generating set of d-separation conditions for all of the inflations considered in \cref{fig:inflations}.},
-    \[ \prob[N'] = \prob[\coprod_i N'_i] = \prod_{i}\prob[N'_i] \]
-    Application of the inflation lemma to linear inequalities constraining ai-expressible distributions $\prob[N']$ transforms those inequalities into polynomial inequalities over the injectable distributions, allowing one to replace all terms with probability distributions defined over variables in $\nodes$. Throughout the body of this work, we let $\AI[\graph]{\graph'}$ denote the set of all ai-expressible sets. To derive inequalities for the inflated causal structure $\graph'$, the ai-expressible sets define a marginal scenario $\mscenario$\footnote{Analogously for a marginal scenario $\mscenario$, the ai-expressible sets $\AI[\graph]{\graph'}$ form an \textit{abstract simplicial complex}. Therefore, in practice, it is completely sufficient to focus on the maximal ai-expressible sets.} that are used to derive inequalities using methods discussed in \cref{sec:marginal_satisfiability}.
-
-    \subsection{Exemplary Inflations of The Triangle structure}
-    \label{sec:exemplary_inflations_of_the_triangle structure}
-
-    \Cref{sec:inflation_technique_main_summary} explains how the Inflation Technique~\cite{Inflation} was used to derive novel causal compatibility inequalities for the Triangle structure by constructing inflations of the Triangle structure satisfying \cref{eq:inflation_defn}. Explicitly, for a given inflation $\graph'$ of the Triangle structure, one constructs a marginal problem (see \cref{sec:marginal_satisfiability}) for the marginal scenario $\mscenario$ composed of the maximal ai-expressible sets of $\graph'$, i.e. $\mscenario = \AI[\graph]{\graph'}$. This section acts as a reference for the particular inflations of the Triangle structure that are mentioned throughout this manuscript. Contained within this section is a depiction of each of these inflations in \cref{fig:inflations} as well as a their ai-expressible sets. An efficient algorithm for computing the injectable and ai-expressible sets of an inflation can be found in~\cite{Inflation}.
     \begin{center}
     \begin{figure}
     \begin{subfigure}[b]{.30\linewidth}
@@ -573,6 +500,123 @@
     \label{fig:inflations}
     \end{figure}
     \end{center}
+    \begin{center}
+    \begin{figure}
+    \begin{subfigure}[b]{.23\linewidth}
+    \scalebox{0.8}{\input{../../figures/causal_structures/triangle_structure_injectable_highlight_1}}
+    \caption{$\AnSub[\graph]{A}$}\label{fig:spiral_inflation_iminj1}
+    \end{subfigure}
+    \begin{subfigure}[b]{.23\linewidth}
+    \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_1}}
+    \caption{$\AnSub[\graph']{A_1}$}\label{fig:spiral_inflation_inj1}
+    \end{subfigure}
+    % \par\bigskip % For vertical spacing https://tex.stackexchange.com/questions/120700/vertical-spacing-using-subcaption-package
+    \begin{subfigure}[b]{.23\linewidth}
+    \scalebox{0.8}{\input{../../figures/causal_structures/triangle_structure_injectable_highlight_2}}
+    \caption{$\AnSub[\graph]{A,C}$}\label{fig:spiral_inflation_iminj2}
+    \end{subfigure}
+    \begin{subfigure}[b]{.23\linewidth}
+    \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_2}}
+    \caption{$\AnSub[\graph']{A_2, C_1}$}\label{fig:spiral_inflation_inj2}
+    \end{subfigure}
+    \caption{Some injectable sets $\Inj[\graph]{\graph'}$ of the Spiral inflation ($\graph'$) and their corresponding images $\ImInj[\graph]{\graph'}$ in the Triangle structure ($\graph$).}
+    \label{fig:injectablesets}
+    \end{figure}
+    \end{center}
+    Verbally, for each inflated node $n'$, the ancestral sub-graph of $n'$ in $\graph'$ is homomorphic to its counterpart in $\graph$ where the homomorphism is the removal of the copy-index. For example, the ancestral subgraph of $A$ in the Triangle structure (denoted $\AnSub[\graph]{A}$) is highlighted in \cref{fig:spiral_inflation_iminj1} and is clearly homomorphic to the ancestral subgraph of $A_1$ in the Spiral inflation (denoted $\AnSub[\graph]{A_1}$) depicted in \cref{fig:spiral_inflation_inj1}. Since this ancestral homomorphism exists for each node $n'$ of the Spiral inflation (\cref{fig:spiral_inflation}), it qualifies as a valid inflation of the Triangle structure (\cref{fig:triangle_structure}).
+
+    \begin{definition}
+        Given a causal structure $\graph$ and an inflation $\graph'$ of $\graph$, define the \term{injectable sets} in $\graph'$ and the \term{images of the injectable sets} in $\graph$, (respectively denoted $\Inj[\graph]{\graph'}$ and $\ImInj[\graph]{\graph'}$), as follows:
+        \begin{align*}
+            \Inj[\graph]{\graph'} &\defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : \AnSub[\graph']{N'} \sim \AnSub[\graph]{N}} \\
+            \ImInj[\graph]{\graph'} &\defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : \AnSub[\graph']{N'} \sim \AnSub[\graph]{N}}
+        \end{align*}
+    \end{definition}
+
+    As defined, the injectable sets of an inflation are also simple to comprehend. As an example, the set $\bc{A_2, C_1}$ of the Spiral inflation ($\graph'$) (\cref{fig:spiral_inflation}) is an injectable set of $\graph'$ because its ancestral subgraph $\AnSub[\graph']{A_2, C_1}$ (highlighted in \cref{fig:spiral_inflation_inj2}) is homomorphic (via copy-index removal) to the ancestral subgraph of $\bc{A, C}$ in the Triangle structure $(\graph)$ (\cref{fig:spiral_inflation_iminj2}). The injectable sets of an inflation are of \textit{principle importance} to the inflation technique. The Inflation Technique begins with joint distribution $\prob[\nodes_O]$ defined over the observable nodes of $\graph$ and the a priori assumption that it is compatible with $\graph$ as defined in \cref{sec:causal_compatibility}. For each injectable set $N' \subseteq \Inj[\graph]{\graph'}$ and image $N \subseteq \ImInj[\graph]{\graph'}$ consisting entirely of observable nodes ($N \subseteq \nodes_O$), there is a pair $\prob[N], \prob[N']$ of marginal distributions induced by $\prob[\nodes_O]$ where $\prob[N']$ assigns the same probability to all events of $\prob[N]$ whenever the events are equivalent under the removal of copy-indices. These pairs of distributions can be raveled to form a pair of marginal models defined over the injectable sets $\prob^{\Inj[\graph]{\graph'}} = \bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ and their images $\prob^{\ImInj[\graph]{\graph'}} = \bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$.
+
+    \begin{lemma}
+        \label[lemma]{lem:inflation}
+        \term{The Inflation Lemma}~\cite[Lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$ and a marginal model $\prob^{\ImInj[\graph]{\graph'}}$ compatible with $\graph$ then all marginal models $\prob^{\Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
+    \end{lemma}
+
+    \begin{proof}
+        Given that $\prob^{\ImInj[\graph]{\graph'}}$ is compatible with $\graph$, it admits a joint distribution $\prob[\nodes]$ that can be factorized into its causal parameters $\prob[\nodes] = \prod_{n \in \nodes} \prob[n\mid \Pa[\graph]{n}]$. Given \cref{eq:inflation_defn}, one can create a set of \textit{inflated} causal parameters by matching causal parameters according to respective copy-indices: $\forall n' \in \nodes' : \prob[n'\mid \Pa[\graph']{n'}] \defined \prob[n\mid \Pa[\graph]{n}]$. This uniquely induces a compatible joint distribution $\prob[\nodes']$ on $\graph'$\footnote{Of course, there exists compatible joint distributions on $\nodes'$ that can not be constructed in this manner. The claim is that all joint distributions that are constructed in this way are compatible.}: $\prob[\nodes'] = \prod_{n' \in \nodes'} \prob[n'\mid \Pa[\graph']{n'}]$. The proof is completed by demonstrating that the marginals of $\prob[\nodes']$ are members of the marginal model $\prob^{\Inj[\graph]{\graph'}}$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$. Given $N' \in \Inj[\graph]{\graph'}$ and $N \sim N'$:
+        \[ \sum_{\nodes' \setminus N'} \prob[\nodes'] = \sum_{\nodes' \setminus N'} \prod_{n' \in \nodes'} \prob[n'\mid \Pa[\graph']{n'}] = \prod_{n' \in N'} \prob[n'\mid \Pa[\graph]{n'}] = \prod_{n \in N} \prob[n\mid \Pa[\graph]{n}] = \prob[N] = \prob[N']  \]
+    \end{proof}
+
+    % The motivation behind \cref{def:inflation} is that if the ancestry of each node $n'$ in $\graph'$ plays the \textit{exact same} role as the ancestry of its source copy $n$ in $\graph$, then every compatible distribution $\prob[N]$ on $\graph$ can be used to \textit{create} compatible joint distributions on $\graph'$. To do this, first notice that for every distribution $\prob[N]$ compatible with $\graph$, there must exist a set of causal parameters $\{\prob[n\mid \Pa[\graph]{n}] \mid n \in \nodes\}$ for $\graph$ such that $\prob[N] = \prod_{n \in N} \prob[n\mid \Pa[\graph]{n}]$. Since the inflation criteria (\cref{eq:inflation_defn}) requires that $\Pa[\graph']{n'} \sim \Pa[\graph]{n}$.
+    % \[ ss \eq \label{eq:inflated_causal_parameters} \]
+    % \[ \prob[\nodes'] = \prod_{n' \in \nodes'} \prob[n'\mid \Pa[\graph']{n'}] \eq \label{eq:unique_causal_parameters_inflated}\]
+
+    % % \cref{eq:unique_causal_parameters,eq:inflated_causal_parameters,eq:unique_causal_parameters_inflated}
+    % In essence, a compatible joint distribution over $\nodes$ can be \textit{inflated} to induce compatible joint distributions over $\nodes'$. Before generalizing this idea, a careful observation needs to be made. For any pair of subsets of nodes $N \subseteq \nodes$ and $N' \subseteq \nodes'$ that are equivalent up to copy-index $N \sim N'$, if $\AnSub[\graph]{N} \sim \AnSub[\graph']{N'}$ then any compatible \textit{marginal} distribution $\prob[N]$, where $N \subset \nodes$, induces a compatible marginal distribution $\prob[N']$ over $N'$. In fact, $N'$ must contain no duplicate nodes up to copy-index and thus $\prob[N] = \prob[N']$. These subsets of nodes are so essential to the Inflation Technique they are assigned a special name:
+
+    % % Injectable sets are incredibly useful for causal compatibility because they permit one to inflate compatibility over a particular subset of \textit{marginal models}. A marginal model is compatible with a given causal structure $\graph$ if it admits a joint distribution (see \cref{sec:marginal_satisfiability}) that is compatible with $\graph$.
+
+    % % Diagrammatically, \cref{lem:inflation} can be visualized as follows:
+
+    % % \begin{center}
+    % %     \begin{tikzpicture}
+    % %         \pgfmathsetmacro{\vs}{2.2};
+    % %         \pgfmathsetmacro{\hs}{5.2};
+    % %         \draw (0*\hs,0*\vs) node[](pn){$\underbrace{\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}}_{\text{compatible with $\graph$}}$};
+    % %         \draw (1*\hs,0*\vs) node[](cp){$\bc{\prob[n\mid \Pa[\graph]{n}] \mid n \in \nodes}$};
+    % %         \draw (1*\hs,-1*\vs) node[](cp_){$\bc{\prob[n'\mid \Pa[\graph']{n'}] \mid n' \in \nodes'}$};
+    % %         \draw (0*\hs,-1*\vs) node[](pn_){$\underbrace{\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}}_{\text{compatible with $\graph'$}}$};
+    % %         \draw[very thick, ->] (pn) -- (cp);
+    % %         \draw[very thick, ->] (cp) -- (cp_) node [midway, above, sloped]{{\footnotesize define}};
+    % %         \draw[very thick, ->] (cp_) -- (pn_);
+    % %     \end{tikzpicture}
+    % % \end{center}
+
+    % The inflation lemma is the most important result of the causal Inflation Technique. The contrapositive version of \cref{lem:inflation} is a powerful tool for deriving causal compatibility constraints. Any causal compatibility constraint, such as a causal compatibility inequality, that constrains injectable marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ can be \textit{deflated} into a valid compatibility constraint on marginal models $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ of the original causal structure by dropping all references to the copy-indices. Additionally, the inflation lemma holds when considering any subset of $\Inj[\graph]{\graph'}$ (analogously $\ImInj[\graph]{\graph'}$). Therefore, one only needs to consider injectable sets that are composed of \textit{observable nodes}.
+
+    The contrapositive of the Inflation Lemma (\cref{lem:inflation}) casts the compatibility problem for $\prob^{\ImInj[\graph]{\graph'}}$ (which exhibits equivalent compatibility as $\prob[\nodes_O]$) into a compatibility problem for $\prob^{\Inj[\graph]{\graph'}}$ of any non-trivial inequalities. If $\prob^{\Inj[\graph]{\graph'}}$ is found to be incompatible with $\graph'$, then $\prob[\nodes_O]$ is subsequently incompatible with $\graph$. Fortunately, the inflated causal structure $\graph'$ possesses its own \textit{d-separation relations} which enforces conditional independence equality constraints on $\prob^{\Inj[\graph]{\graph'}}$. A useful subset of d-separation relations are those corresponding to unconditional d-separations, known as \term{ancestrally independent} sets~\cite{Pearl_2009}. Two sets $N_1', N_2'$ are ancestrally independent ($N_1' \ancestralindep N_2'$) if they have distinct ancestry in $\graph'$.
+    \[ N_1' \ancestralindep N_2' \iff \An[\graph']{N_1'} \cap \An[\graph']{N_2'}= \emptyset \]
+    Ancestral independence implies an unconditional probabilistic independence --- if $N_1' \ancestralindep N_2'$ then $\prob[N_1' \cup N_2'] = \prob[N_1']\prob[N_2']$. If $N_1', N_2' \in \Inj[\graph]{\graph'}$, then the associated probabilistic constraint is an applicable constraint for $\prob^{\Inj[\graph]{\graph'}}$. This notion generalizes to more than two ancestrally independent sets. A set $N' \subseteq \nodes'$ is an \term{ai-expressible set} if it can be decomposed into the disjoint union of injectable sets $N' = \coprod_{i} N'_i \mid N'_i \in \Inj[\graph]{\graph'}$ and all pairs $N_i', N_j'$ are ancestrally independent: $\forall i, j : N_i' \ancestralindep N_j'$. The analogous probabilistic constraint is: $\prob[N'] = \prob[\coprod_i N'_i] = \prod_{i}\prob[N'_i]$~\cite{Pearl_2009}.\footnote{In~\cite{Inflation}, this concept is generalized into terms which can be factorized via d-separation conditions and the corresponding inflated sets are termed \textit{expressible sets}. This generalization was not required for this work in particular because the ancestral independence relations formed a generating set of d-separation conditions for all of the inflations considered in \cref{fig:inflations}.} Throughout this work, we let $\AI[\graph]{\graph'}$ denote the set of all ai-expressible sets.\footnote{Analogously to a marginal scenario $\mscenario$, the ai-expressible sets $\AI[\graph]{\graph'}$ form an \textit{abstract simplicial complex}. Therefore, in practice, it is completely sufficient to focus on the \textit{maximal} ai-expressible sets.}
+
+    Unlike $\prob^{\ImInj[\graph]{\graph'}}$, which is non-contextual by construction, $\prob^{\Inj[\graph]{\graph'}}$ contains overlapping marginals meaning its contextuality remains unknown and must be determined using any of the techniques discussed in~\cref{sec:marginal_satisfiability}. More importantly, the Inflation Technique introduces new constraints relating to the ai-expressible sets. In practice, the equality constraints implied by $\AI[\graph]{\graph'}$ permits one to construct a marginal model defined over the ai-expressible sets $\AI[\graph]{\graph'}$ resulting in greater resolution in classifying the compatibility of $\prob[\nodes_O]$. In summary, the Inflation Technique partially transforms the compatibility problem into a marginal problem, wherein one can solve the marginal problem (see \cref{sec:marginal_satisfiability}) to either determine the compatibility of an observable distribution $\prob[\nodes_O]$ with $\graph$ or derive compatibility inequalities for $\graph$.
+
+
+      % that are used to derive inequalities using methods discussed in \cref{sec:marginal_satisfiability}.
+
+    % \begin{center}
+    %     \begin{tikzpicture}[scale=0.8]
+    %         \pgfmathsetmacro{\hs}{1.4};
+    %         \pgfmathsetmacro{\vs}{0.6};
+    %         \pgfmathsetmacro{\cross}{0.2};
+    %         \draw (0*\hs, 4*\vs) node[](a){$\prob[N']$};
+    %         \draw (0*\hs, 2*\vs) node[](ab){$N' \not \in \Inj[\graph]{\graph'}$};
+    %         \draw (4*\hs, 4*\vs) node[](c){$\prob[N_1']\prob[N_2']$};
+    %         \draw (2*\hs, 4*\vs) node[](ac){$N_1' \ancestralindep N_2'$};
+    %         \draw (2*\hs, 4*\vs + 0.7*\vs) node[]{$N_1' \cup N_2' = N$};
+    %         \draw (4*\hs, 2*\vs) node[](cd){$N_1', N_2' \in \Inj[\graph]{\graph'}$};
+    %         \draw (4*\hs, 0*\vs) node[](d){$\prob[N_1]\prob[N_2]$};
+    %         \draw (0, 0) node[](b){??};
+    %         \draw[thick, ] (a) -- (ab);
+    %         \draw[thick, ] (c) -- (cd);
+    %         \draw[thick, ] (a) -- (ac);
+    %         \draw[thick, ->] (ac) -- (c);
+    %         \draw[thick, ->] (ab) -- (b);
+    %         \draw[thick, ->] (cd) -- (d);
+    %         \draw[very thick, red]
+    %         (+ \cross, 1*\vs + \cross) -- (- \cross, 1*\vs - \cross)
+    %         (+ \cross, 1*\vs - \cross) -- (- \cross, 1*\vs + \cross)
+    %         ;
+    %     \end{tikzpicture}
+    % \end{center}
+
+    % Not all sets $N' \subseteq \nodes'$ can be written as the disjoint union of injectable sets, but those that \textit{can} are called the \term{ai-expressible sets} of $\graph'$.
+
+    % A ai-expressible set $N'$ is of primal importance to the Inflation Technique because any distribution over $N'$ will factorize according to its ancestral independence conditions
+    % \[  \]
+    % Application of the inflation lemma to linear inequalities constraining ai-expressible distributions $\prob[N']$ transforms those inequalities into polynomial inequalities over the injectable distributions, allowing one to replace all terms with probability distributions defined over variables in $\nodes$.
+
+    \subsection{Exemplary Inflations of The Triangle structure}
+    \label{sec:exemplary_inflations_of_the_triangle structure}
+
+    \Cref{sec:inflation_technique_main_summary} explains how the Inflation Technique~\cite{Inflation} was used to derive novel causal compatibility inequalities for the Triangle structure by constructing inflations of the Triangle structure satisfying \cref{eq:inflation_defn}. Explicitly, for a given inflation $\graph'$ of the Triangle structure, one constructs a marginal problem (see \cref{sec:marginal_satisfiability}) for the marginal scenario $\mscenario$ composed of the maximal ai-expressible sets of $\graph'$, i.e. $\mscenario = \AI[\graph]{\graph'}$. This section acts as a reference for the particular inflations of the Triangle structure that are mentioned throughout this manuscript. Contained within this section is a depiction of each of these inflations in \cref{fig:inflations} as well as a their ai-expressible sets. An efficient algorithm for computing the injectable and ai-expressible sets of an inflation can be found in~\cite{Inflation}.
 
     The first inequality presented in \cref{sec:found_inequalities} was \cref{eq:ww_ineq}. \cref{eq:ww_ineq} was derived using the Wagon-Wheel inflation in \cref{fig:wagon_wheel_inflation}. The Wagon-Wheel inflation possesses $4$ copies of $C$ ($C_1, C_2, C_3, C_4$) and $2$ copies of $A$ ($A_1, A_2$) and $B$ ($B_1, B_2$) arranged in the shape of a Wagon-Wheel. The maximal ai-expressible sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{eq:pre_injectable_triangle_structure_wagon_wheel}. These maximal ai-expressible sets define the following marginal scenario where the joint variables $\jointvar$ are simply the set of observable nodes in the Wagon-Wheel inflation $\jointvar = \nodes'_O$:
     \[ \mscenario = \AI[\graph]{\graph'} = \bc{\bc{A_2, B_1, C_3, C_1}, \bc{A_1, B_1, C_4, C_2}, \bc{A_1, B_2, C_1, C_3}, \bc{A_2, B_2, C_2, C_4}} \eq \label{eq:wagon_wheel_marginal_model}\]

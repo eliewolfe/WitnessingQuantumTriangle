@@ -1,0 +1,33 @@
+\newcommand{\ift}{2.3}
+\begin{tikzpicture}[scale=2]
+    \begin{scope}[every node/.style=observed, fade]
+        \node         (C2) at ({-2 + 2*1/\ift}, {2*1/(\ift*sqrt(3))}) {$\p{C}_2$};
+        \node         (C1) at ({-2 + 3*1/\ift}, {3*1/(\ift*sqrt(3))}) {$\p{C}_1$};
+        \node         (B2) at ({2 - 2*1/\ift}, {2*1/(\ift*sqrt(3))}) {$\p{B}_2$};
+        \node         (B1) at ({2 - 3*1/\ift}, {3*1/(\ift*sqrt(3))}) {$\p{B}_1$};
+        \node         (A2) at (0, {2*sqrt(3) - 2*2/sqrt(3)*(1/\ift)}) {$\p{A}_2$};
+        \node[unfade] (A1) at (0, {2*sqrt(3) - 3*2/sqrt(3)*(1/\ift)}) {$\p{A}_1$};
+    \end{scope}
+    \begin{scope}[every node/.style=latent, fade]
+        \node         (X2) at (-1, {sqrt(3)}) {$\p{X}_2$};
+        \node[unfade] (X1) at ({-1 + 1/\ift}, {sqrt(3) - 1/(\ift*sqrt(3))}) {$\p{X}_1$};
+        \node         (Y2) at (1, {sqrt(3)}) {$\p{Y}_2$};
+        \node[unfade] (Y1) at ({1 - 1/\ift}, {sqrt(3) - 1/(\ift*sqrt(3))}) {$\p{Y}_1$};
+        \node         (Z1) at (0, 0.5) {$\p{Z}_1$};
+        \node         (Z2) at (0, 0) {$\p{Z}_2$};
+    \end{scope}
+    \begin{scope}[every path/.style={draw=cause, thick}, fade]
+        \path[postaction={on each segment={mid arrow}}]
+        (Y1) -- (B1) (Y1) -- (B2) (Z1) -- (B1) (Z2) -- (B2)
+        ;
+        \path[postaction={on each segment={mid arrow}}]
+        (X1) -- (A2) (X1) -- (C1) (Z1) -- (C1) (Y2) -- (A2)
+        ;
+        \path[postaction={on each segment={mid arrow}}]
+        (X2) -- (C2) (Z1) -- (C2)
+        ;
+        \path[postaction={on each segment={mid arrow}}, unfade]
+        (Y1) -- (A1) (X1) -- (A1)
+        ;
+    \end{scope}
+\end{tikzpicture}
