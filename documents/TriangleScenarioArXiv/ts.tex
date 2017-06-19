@@ -82,7 +82,7 @@
     Finally, must like any causal structure, Bell inequalities act as a measure of the non-classical character of a given distribution. In particular, the antecedent of \cref{eq:CHSH_ineq_orig} has a classical upper-bound of $2$ and it can be shown to have a quantum upper-bound of $2\sqrt{2}$~\cite{Cirelson_1980}. Furthermore, non-classical distributions that are also non-quantum such as the PR-box correlations are upper-bounded by $4$~\cite{PR_1995}. In \cref{sec:found_inequalities}, newly discovered and analogous inequalities for the Triangle structure are presented. Although their associated quantum and post-quantum upper-bounds are currently unknown, an attempt to numerical compute these is discussed in \cref{sec:optimizations}.
 
     \begin{figure}
-    \begin{center}
+    \begin{nscenter}
         \begin{minipage}[t]{.48\textwidth}
             \centering
             \scalebox{1.0}{\input{../../figures/causal_structures/bell_scenario}}
@@ -95,7 +95,7 @@
             \caption{The casual structure of the Triangle structure. Three variables $A,B,C$ are observable, while $X, Y, Z$ are latent variables.}
             \label{fig:triangle_structure}
         \end{minipage}
-    \end{center}
+    \end{nscenter}
     \end{figure}
     \section{Triangle structure}
     \label{sec:triangle_structure}
@@ -121,11 +121,11 @@
     \section{Fritz Distribution}
     \label{sec:fritz_distribution}
     \begin{figure}
-    \begin{center}
+    \begin{nscenter}
         \scalebox{1.0}{\input{../../figures/causal_structures/triangle_structure_operational_fritz_bell}}
         \caption{The Triangle structure re-imagined to mimic the Bell structure. The measurement settings $S_{\p{A}},S_{\p{B}}$ are latent nodes unlike the Bell structure (\cref{fig:bell_structure}).}
         \label{fig:triangle_structure_with_fritz_bell_embedded}
-    \end{center}
+    \end{nscenter}
     \end{figure}
 
     As was originally noticed by \citet{Fritz_2012}, it is possible to construct quantum distributions incompatible with the Triangle structure by utilizing quantum distributions incompatible with the familiar Bell structure. To explain, imagine rearranging the triangle into the configuration depicted in \cref{fig:triangle_structure_with_fritz_bell_embedded} and contrast it with the Bell structure of \cref{fig:bell_structure}. Evidently, under the correct relabeling, large portions of the Triangle structure resemble the Bell structure. The crucial distinction is that the measurement settings $S_{\p{A}}, S_{\p{B}}$ are \textit{observable variables} in the Bell structure but become \textit{latent variables} in the Triangle structure. In order to embed distributions that are incompatible with the Bell structure into the Triangle structure, the latent nodes $S_{\p{A}}, S_{\p{B}}$ need to be observable and independent of the shared latent node $\la$. This can be accomplished by having $C$ ``measure'' the measurement settings $S_{\p{A}}, S_{\p{B}}$ and announce them as an outcome. Consequently, any distribution over $\p{A}, \p{B}, S_{\p{A}}, S_{\p{B}}$ that is incompatible with Bell structure is also incompatible with the Triangle structure provided that $C$ is \textit{perfectly correlated} with $S_{\p{A}}, S_{\p{B}}$~\cite{Fritz_2012}. There are numerous ways this can be accomplished, albeit we will focus on elucidating an exemplary method.
@@ -140,13 +140,13 @@
     \end{align*}
     Here the notation $\prob[\fritz][abc] = \prob[\p{ABC}][abc] = \prob[][\p A\mapsto a,\p B\mapsto b,\p C\mapsto c]$ is used as shorthand. The Fritz distribution is quantum-accessible in the sense that $\prob[\fritz]$ can be implemented using a set of quantum states $\rho_{AB}, \rho_{BC}, \rho_{CA}$ and measurements $M_A, M_B, M_C$ realized on \cref{fig:triangle_structure} using \cref{eq:quantum_model_triangle}~\cite{Fritz_2012}. The Fritz distribution is best visualized as a $4 \times 4 \times 4$ grid of possible outcomes as depicted in \cref{fig:fritz_distribution_visualized}. From this diagram, it can be seen that each of $\p{C}$'s outcomes restricts the possible outcomes for $\p A,\p B$ into a $2 \times 2$ block. If one writes the outcome labels $\bc{0,1,2,3}$ in binary $\bc{00,01,10,11}$, it can be seen that the left-hand bits for $\p A$ and $\p B$ (respectively denoted $\p A_l$, $\p B_l$) are fixed by the outcome of $\p C$. Pursuant to the embedding of~\cref{fig:triangle_structure_with_fritz_bell_embedded} the left-hand bits emulate the measurement settings $S_{\p A}$ and $S_{\p B}$ and the right-hand bits emulate a two-outcome measurement performed by $A, B$ as they would in~\cref{fig:bell_structure}. Specifically, $\p C$'s bits are perfectly correlated with the left-bits of $A,B$; $\p C_l = \p A_l$ and $\p C_r = \p B_l$.
     \begin{figure}
-    \begin{center}
+    \begin{nscenter}
             \includegraphics[scale=0.6]{../../figures/distributions/fritz_dist_plotted_bits.pdf}
             \vspace{-0.2in}
             \[ \probplotvalue{253, 253, 84} = \f{1}{32}\br{2 - \sqrt{2}} \qquad \probplotvalue{11, 1, 0} = \f{1}{32}\br{2 + \sqrt{2}}\]
             \caption{The Fritz distribution visualized using a $4 \times 4 \times 4$ grid. The $4$ outcomes of $A,B,C$ are written in binary as a doublet of bits to illustrate that certain bits act as measurement pseudo-settings.}
             \label{fig:fritz_distribution_visualized}
-    \end{center}
+    \end{nscenter}
     \end{figure}
     Consequently, it is possible to define the correlation $\ba{\p A_r \p B_r}$ between the right-hand bits of $\p A$ and $\p B$:
     \[ \ba{\p A_r \p B_r} = \prob[\p A_r \p B_r][00] + \prob[\p A_r \p B_r][11] - \prob[\p A_r \p B_r][01] - \prob[\p A_r \p B_r][10] \]
@@ -194,7 +194,7 @@
     - P_{ABC}(303)P_{C}(1) - P_{ABC}(303)P_{C}(2) - P_{ABC}(303)P_{C}(3) - P_{ABC}(313)P_{C}(0) \leq 0
     \end{gathered}
     \end{equation*}
-    \Cref{eq:ww_ineq} is termed the Wagon Wheel inequality and denoted $I\tsb{WagonWheel}$ after the identically named inflation (\cref{fig:wagon_wheel_inflation}) utilized to derive it. To reiterate, a summary of the methods used to derive \cref{eq:ww_ineq} can be found in \cref{sec:marginal_satisfiability,sec:inflation_technique_main_summary,sec:exemplary_inflations_of_the_triangle_structure}.
+    \Cref{eq:ww_ineq} is termed the Wagon Wheel inequality and denoted $I\tsb{WagonWheel}$ after the identically named inflation (\cref{fig:wagon_wheel_inflation}) utilized to derive it. To reiterate, a summary of the methods used to derive \cref{eq:ww_ineq} can be found in \cref{sec:marginal_satisfiability,sec:inflation_technique_main_summary,sec:deriving_inequalities_from_the_inflation_technique}.
 
     By construction, every distribution $\prob[ABC]$ that is compatible with the Triangle structure (i.e. factorizes according to \cref{eq:triangle_compatibility}) must satisfy $I\tsb{WagonWheel}$. As a demonstration, the first term in \cref{eq:ww_ineq} for the Fritz distribution is $\prob[ABC]\br{000}\prob[C]\br{3} = \f{1}{128}\br{2 + \sqrt{2}} \simeq 0.0267$ while all of the remaining terms sum to $\simeq 0.0136$. Therefore, the Fritz distribution violates $I\tsb{WagonWheel}$ with violation $0.0129\ldots \not \leq 0$. Consequently we conclude that the Fritz distribution is incompatible with the Triangle structure, a fact that was previously only demonstrated without the use of causal compatibility inequalities.
 
@@ -242,13 +242,13 @@
     \subsection{Noisy Distributions}
     \label{sec:noise}
     % \begin{figure}
-    % \begin{center}
+    % \begin{nscenter}
     %         \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/uniform_dist_plot.pdf}
     %         \vspace{-0.2in}
     %         \[ \probplotvalue{255, 255, 109} = \f{1}{64} \]
     %         \caption{The completely uniform distribution $\s{U}$ visualized using a $4 \times 4 \times 4$ grid.}
     %         \label{fig:uniform_distribution}
-    % \end{center}
+    % \end{nscenter}
     % \end{figure}
     In his original work, \citet{Fritz_2012} was able to find quantum non-classicality in the Triangle structure by embedding Bell non-classicality. As was mentioned in \cref{sec:fritz_distribution}, this embedding required an idealistic condition to hold: perfect correlations between $C$ and $A_l, B_l$. From an experimental point of view, it is impossible to use Fritz's original argument to confirm non-classicality because every observable distribution is subject to \text{noise}. It is possible to minimize noise by developing more accurate measurement channels but perfect correlations are too idealistic. Causal compatibility inequalities not only permit there to be noise within a set of observations, but they also provide a means of quantifying the amount of noise that is allowed before non-classicality breaks down.
 
@@ -275,13 +275,13 @@
 
 
     \begin{figure}
-    \begin{center}
+    \begin{nscenter}
             \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/noise/noisy_yet_non_local_fritz.pdf}
             \vspace{-0.2in}
             \[ \probplotvalue{255, 255, 243} = 0.00133 \]
             \caption{$\s{N}_{0.085}$: A noisy yet still non-classical variant of the Fritz distribution.}
             \label{fig:noisy_fritz}
-    \end{center}
+    \end{nscenter}
     \end{figure}
 
     \subsection{Numerical Optimizations}
@@ -304,36 +304,36 @@
 
     % \subsection{Parameterizing Quantum Distributions}
     % \begin{figure}
-    % \begin{center}
+    % \begin{nscenter}
     %         \scalebox{1.0}{\input{../../figures/causal_structures/triangle_structure_operational}}
     %         \caption{The Triangle structure as modeled by quantum states and measurements.}
     %         \label{fig:triangle_structure_quantum_model}
-    % \end{center}
+    % \end{nscenter}
     % \end{figure}
 
 
     % \subsection{Numerical Optimization Results}
 
     \begin{figure}
-    \begin{center}
+    \begin{nscenter}
             \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/plotted_dist_I_1_max_violation_2017.pdf}
             \caption{Probability distribution that maximizes violation of $I\tsb{Web}$ ($V_F \simeq 1.501$).}
             \label{fig:maximum_violation_I_1}
-    \end{center}
+    \end{nscenter}
     \end{figure}
     \begin{figure}
-    \begin{center}
+    \begin{nscenter}
             \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/plotted_dist_I_3_max_violation_2017.pdf}
             \caption{Probability distribution that maximizes violation of $I\tsb{SymmetricWeb}$ ($V_F \simeq 2.61$).}
             \label{fig:maximum_violation_I_3}
-    \end{center}
+    \end{nscenter}
     \end{figure}
     \begin{figure}
-    \begin{center}
+    \begin{nscenter}
             \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/symmetrized_fritz.pdf}
             \caption{Symmetrized version of the Fritz distribution ($V_F \simeq 3$).}
             \label{fig:symmetrized_fritz}
-    \end{center}
+    \end{nscenter}
     \end{figure}
 
     To quantify the degree in which each inequality $I$ could be further violated, we define a relative violation $V_F$ to be the maximum violation relative to the violation achieved by the Fritz distribution, i.e. $V_F \defined \max_{P}\bc{I\br{P}/I\br{P_F}}$. The first inequality in consideration is $I\tsb{Web}$. At best, numerical optimizations converged to a distribution (\cref{fig:maximum_violation_I_1}) with relative violation $V_F \simeq 1.501$. Almost immediately, it is evident that \cref{fig:maximum_violation_I_1} closely resembles the Fritz distribution. In fact, \cref{fig:maximum_violation_I_1} and \cref{fig:fritz_distribution_visualized} share the exact same \textit{possibilistic structure}, i.e. the same set of possible events. This result is not entirely unexpected. As was mentioned in \cref{sec:found_inequalities}, these inequalities are derived specifically to prove the incompatibility of the Fritz distribution and the Triangle structure. Consequently, it seems that $I\tsb{Web}$ only has the capacity to demonstrate incompatibility for distributions that resemble the Fritz distribution closely.
@@ -469,20 +469,13 @@
 
     The marginal problem can sometimes take on a more general variant that does not begin with a specific marginal model~\cite{Abramsky_2012,Mansfield_2012,Fritz_2011}: \textit{Given a marginal scenario $\mscenario$, what is the set of all non-contextual marginal models?} \citet{Pitowsky_1991} demonstrates that the set of non-contextual marginal models forms a \textit{convex} polytope called the \term{marginal polytope}. The extremal rays of a marginal polytope directly correspond to the columns of $M$ which further correspond to \textit{deterministic} joint distributions $\probvec^{\jointvar}$. Since all joint distributions $\probvec^{\jointvar}$ are probability distributions, their entries must sum to unity $\sum_{j \in \Events{\jointvar}} \probvec^{\jointvar}_j = 1$. This normalization defines the convexity of the polytope; all non-contextual marginal models are convex mixtures of the deterministic marginal models pursuant to \cref{eq:incidence_matrix_use}. The marginal polytope is a beneficial tool for understanding contextuality. First, the \textit{facets} of a marginal polytope correspond to a finite set of linear inequalities that are complete in the sense that all contextual distributions violate at least one facet inequality~\cite{Brunner_2013}. From the perspective of a marginal polytope, convex hull algorithms or linear quantifier elimination can be used to compute a representation of the complete set of linear inequalities and completely solve the marginal problem. A popular tool for linear quantifier elimination is \term{Fourier-Motzkin elimination} \cite{Dantzig_1973,Inflation,Abramsky_2012,jones_2004}. Applying the Fourier-Motzkin procedure to completely solve the marginal problem is discussed in more detail in \citet{Fritz_2011}. An excellent survey of existing techniques for solving the marginal problem including Equality Set Projection~\cite{jones_2004} and Hardy-type hypergraph transversals can be found in \citet{Inflation}. In conclusion, there are a number of computational tools available to solve the marginal problem completely whenever no marginal model is provided.
 
-    Each of the above mentioned techniques suffers from computational complexity limitations. For example, the Fourier-Motzkin procedure is in the worst case doubly exponential in the number of initial inequalities~\cite{Dantzig_1973}. For the purposes of this research, solving the marginal problem without reference to a marginal model was intractable. This will become apparent in \cref{sec:exemplary_inflations_of_the_triangle_structure} when the Inflation Technique is applied to the Triangle structure, producing considerably large marginal models. Luckily, the Fritz distribution (\cref{sec:fritz_distribution}) allows one to avoid the complexity issues of the complete marginal problem and instead focus on the original problem of determining whether or not a particular marginal model admits a joint distribution or not.
+    Each of the above mentioned techniques suffers from computational complexity limitations. For example, the Fourier-Motzkin procedure is in the worst case doubly exponential in the number of initial inequalities~\cite{Dantzig_1973}. For the purposes of this research, solving the marginal problem without reference to a marginal model was intractable. This will become apparent in \cref{sec:deriving_inequalities_from_the_inflation_technique} when the Inflation Technique is applied to the Triangle structure, producing considerably large marginal models. Luckily, the Fritz distribution (\cref{sec:fritz_distribution}) allows one to avoid the complexity issues of the complete marginal problem and instead focus on the original problem of determining whether or not a particular marginal model admits a joint distribution or not.
     \subsection{Inflation Technique}
     \label{sec:deriving_inequalities}
     \label{sec:inflation_technique_main_summary}
-    The \term{Inflation Technique}, invented by \citet{Inflation} and inspired by the \textit{do calculus} and \textit{twin networks} of \citet{Pearl_2009}, is a family of causal inference techniques that can be used to determine if an observable probability distribution $\prob[\nodes_{O}]$ is compatible or incompatible with a given causal structure $\graph$. As a precursor, the Inflation Technique begins by \textit{augmenting} a causal structure with additional copies of its nodes, producing an \textit{inflated} causal structure, and then exposes how causal inference tasks on the inflated causal structure can be used to make inferences on the original causal structure. As a example, a few inflations of the Triangle structure are depicted in \cref{fig:inflations}. Copies of nodes in the inflated causal structure are distinguished by an additional subscript called the \term{copy-index}. For example, node $A$ of \cref{fig:triangle_structure} has copies $A_1, A_2, A_3, A_4$ in the inflated causal structure in \cref{fig:the_web_inflation}. All such copies are deemed equivalent via a \term{copy-index equivalence} relation denoted `$\sim$'. A copy-index is effectively arbitrary, so we will refer to an arbitrary inflated copy of $A$ as $A'$.
-    \[ A \sim A_1 \sim A' \not\sim B \sim B_1 \sim B' \]
-    We preemptively generalize the notion of copy-index equivalence to other mathematical objects like sets, graphs, and groups by saying that $X \sim Y$ if and only if $X = Y$ upon removal of the copy-index. In addition to the common graph-theoretic terminology and notation presented in \cref{sec:causal_compatibility}, we define two more concepts necessary to formally define an inflation of $\graph$. First, an \term{induced subgraph} of $\graph$ for a subset of nodes $N \subseteq \nodes$ is another graph composed of nodes $N$ and all edges $e$ of the original graph that are contained in $N$: $\Sub[\graph]{N} \defined \br{N, \bc{e = \bc{n \to m} \mid n, m \in N}}$. An \term{ancestral subgraph} of $\graph$ for a subset of nodes $N \subseteq \nodes$ is the induced subgraph due to the ancestry of $N$: $\AnSub[\graph]{N} \defined \Sub[\graph]{\An[\graph]{N}}$.
+    The \term{Inflation Technique}, invented by \citet{Inflation} and inspired by the \textit{do calculus} and \textit{twin networks} of \citet{Pearl_2009}, is a family of causal inference techniques that can be used to determine if an observable probability distribution $\prob[\nodes_{O}]$ is compatible or incompatible with a given causal structure $\graph$. As a precursor, the Inflation Technique begins by \textit{augmenting} a causal structure $\graph$ with additional copies of its nodes, producing an \textit{inflated} causal structure $\graph'$ called an \term{inflation}, and then exposes how causal inference tasks on the inflation can be used to make inferences on the original causal structure. For reference, a few inflations of the Triangle structure are depicted in \cref{fig:inflations}. Copies of nodes in the inflated causal structure are distinguished by an additional subscript called the \term{copy-index}. For example, node $A$ of \cref{fig:triangle_structure} has copies $A_1, A_2, A_3, A_4$ in the inflated causal structure in \cref{fig:the_web_inflation}. All such copies are deemed equivalent via a \term{copy-index equivalence} relation denoted `$\sim$'. A copy-index is effectively arbitrary, so we will refer to an arbitrary inflated copy of $A$ as $A'$, i.e. $A \sim A_1 \sim A' \not\sim B \sim B_1 \sim B'$.\footnote{Note that we preemptively generalize the notion of copy-index equivalence to other mathematical objects like sets, graphs, and groups by saying that $X \sim Y$ if and only if $X$ is equivalent to $Y$ upon removal of the copy-index.}
 
-    \begin{definition}
-        \label{def:inflation}
-        An \term{inflation} of a causal structure $\graph$ is another causal structure $\graph'$ such that:
-        \[ \forall n' \in \nodes': \AnSub[\graph']{n'} \sim \AnSub[\graph]{n} \eq \label{eq:inflation_defn}\]
-    \end{definition}
-    \begin{center}
+    \begin{nscenter}
     \begin{figure}
     \begin{subfigure}[b]{.30\linewidth}
     \scalebox{0.65}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral}}
@@ -499,51 +492,57 @@
     \caption{Some inflations of the Triangle structure.}
     \label{fig:inflations}
     \end{figure}
-    \end{center}
-    \begin{center}
+    \end{nscenter}
+
+    In addition to the common graph-theoretic terminology and notation presented in \cref{sec:causal_compatibility}, two related concepts need introductions. First, an \term{induced subgraph} of $\graph$ for a subset of nodes $N \subseteq \nodes$ is the graph composed of nodes $N$ and all edges $e$ of the original graph that are contained in $N$: $\Sub[\graph]{N} \defined \br{N, \bc{e = \bc{n \to m} \mid n, m \in N}}$. An \term{ancestral subgraph} of $\graph$ for a subset of nodes $N \subseteq \nodes$ is the induced subgraph due to the ancestry of $N$: $\AnSub[\graph]{N} \defined \Sub[\graph]{\An[\graph]{N}}$.
+
+    The Inflation Technique begins with distribution $\prob[N]$ defined over some observable nodes $N$ of $\graph$ and the a priori assumption that it is compatible with $\graph$ pursuant to the definitions provided in \cref{sec:causal_compatibility}. Regarding $\graph$ as a causal hypothesis, the observable correlation $\prob[N]$ can only be influenced by the ancestry of $N$ in $\graph$. Consequently, for any set of nodes $N'$ of an inflation $\graph'$ where the ancestral subgraph $\AnSub[\graph']{N'}$ happens to be homomorphic to the ancestral subgraph $\AnSub[\graph]{N}$, one can conclude that the distribution $\prob[N']$ (induced by $\prob[N]$\footnote{The inflated distribution $\prob[N']$ assigns the same probability to all events of $\prob[N]$ whenever the events are equivalent under the removal of copy-indices.}) is compatible with $\graph'$ using the same latent explanations for $\prob[N]$ in $\graph$. This observation is known as the \term{Inflation Lemma}~\cite[Lemma 3]{Inflation}.
+
+    To formalize the Inflation Lemma, we define the \term{injectable sets of $\graph'$}, denoted $\Inj[\graph]{\graph'}$, as all sets of nodes in $\graph'$ whose ancestral subgraphs are homomorphic (via copy-index removal) to an ancestral subgraph in $\graph$: $\Inj[\graph]{\graph'} \defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : \AnSub[\graph']{N'} \sim \AnSub[\graph]{N}}$. Analogously defined are the \term{images of the injectable sets in $\graph$}: $\ImInj[\graph]{\graph'} \defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : \AnSub[\graph']{N'} \sim \AnSub[\graph]{N}}$.
+
+    To illustrate these concepts, consider the Spiral inflation $\graph'$ depicted in \cref{fig:spiral_inflation}. The ancestral subgraph of $\bc{A_1}$ in the Spiral inflation (denoted $\AnSub[\graph']{\bc{A_1}}$) is highlighted in \cref{fig:spiral_inflation_inj1} and is clearly homomorphic to the ancestral subgraph of its image $\bc{A}$ in the Triangle structure ($\graph$) (\cref{fig:spiral_inflation_iminj1}). Additionally, the set $\bc{A_2, C_1}$ is an injectable set of $\graph'$ because $\AnSub[\graph']{\bc{A_2, C_1}}$ (highlighted in \cref{fig:spiral_inflation_inj2}) is homomorphic (via copy-index removal) to the $\AnSub[\graph]{\bc{A, C}}$ in the Triangle structure $(\graph)$ (\cref{fig:spiral_inflation_iminj2}).
+
+    \begin{nscenter}
     \begin{figure}
     \begin{subfigure}[b]{.23\linewidth}
     \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_1}}
-    \caption{$\AnSub[\graph']{A_1}$}\label{fig:spiral_inflation_inj1}
+    \caption{$\AnSub[\graph']{\bc{A_1}}$}\label{fig:spiral_inflation_inj1}
     \end{subfigure}
     \begin{subfigure}[b]{.23\linewidth}
     \scalebox{0.8}{\input{../../figures/causal_structures/triangle_structure_injectable_highlight_1}}
-    \caption{$\AnSub[\graph]{A}$}\label{fig:spiral_inflation_iminj1}
+    \caption{$\AnSub[\graph]{\bc{A}}$}\label{fig:spiral_inflation_iminj1}
     \end{subfigure}
     % \par\bigskip % For vertical spacing https://tex.stackexchange.com/questions/120700/vertical-spacing-using-subcaption-package
     \begin{subfigure}[b]{.23\linewidth}
     \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_2}}
-    \caption{$\AnSub[\graph']{A_2, C_1}$}\label{fig:spiral_inflation_inj2}
+    \caption{$\AnSub[\graph']{\bc{A_2, C_1}}$}\label{fig:spiral_inflation_inj2}
     \end{subfigure}
     \begin{subfigure}[b]{.23\linewidth}
     \scalebox{0.8}{\input{../../figures/causal_structures/triangle_structure_injectable_highlight_2}}
-    \caption{$\AnSub[\graph]{A,C}$}\label{fig:spiral_inflation_iminj2}
+    \caption{$\AnSub[\graph]{\bc{A,C}}$}\label{fig:spiral_inflation_iminj2}
     \end{subfigure}
     \caption{Some injectable sets $\Inj[\graph]{\graph'}$ of the Spiral inflation ($\graph'$) and their corresponding images $\ImInj[\graph]{\graph'}$ in the Triangle structure ($\graph$).}
     \label{fig:injectablesets}
     \end{figure}
-    \end{center}
-    For each inflated node $n'$, the ancestral sub-graph of $n'$ in $\graph'$ is homomorphic to its counterpart in $\graph$ where the homomorphism is the removal of the copy-index. For example, the ancestral subgraph of $A$ in the Triangle structure (denoted $\AnSub[\graph]{A}$) is highlighted in \cref{fig:spiral_inflation_iminj1} and is clearly homomorphic to the ancestral subgraph of $A_1$ in the Spiral inflation (denoted $\AnSub[\graph]{A_1}$) depicted in \cref{fig:spiral_inflation_inj1}. Since this ancestral homomorphism exists for each node $n'$ of the Spiral inflation (\cref{fig:spiral_inflation}), it qualifies as a valid inflation of the Triangle structure (\cref{fig:triangle_structure}).
+    \end{nscenter}
+    % \begin{definition}
+    %     Given a causal structure $\graph$ and an inflation $\graph'$ of $\graph$, define the \term{injectable sets} in $\graph'$ and the \term{images of the injectable sets} in $\graph$, (respectively denoted $\Inj[\graph]{\graph'}$ and $\ImInj[\graph]{\graph'}$), as follows:
+    %     \begin{align*}
+    %         \Inj[\graph]{\graph'} &\defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : \AnSub[\graph']{N'} \sim \AnSub[\graph]{N}} \\
+    %         \ImInj[\graph]{\graph'} &\defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : \AnSub[\graph']{N'} \sim \AnSub[\graph]{N}}
+    %     \end{align*}
+    % \end{definition}
 
-    \begin{definition}
-        Given a causal structure $\graph$ and an inflation $\graph'$ of $\graph$, define the \term{injectable sets} in $\graph'$ and the \term{images of the injectable sets} in $\graph$, (respectively denoted $\Inj[\graph]{\graph'}$ and $\ImInj[\graph]{\graph'}$), as follows:
-        \begin{align*}
-            \Inj[\graph]{\graph'} &\defined \bc{N' \subseteq \nodes' \mid \exists N \subseteq \nodes : \AnSub[\graph']{N'} \sim \AnSub[\graph]{N}} \\
-            \ImInj[\graph]{\graph'} &\defined \bc{N \subseteq \nodes \mid \exists N' \subseteq \nodes' : \AnSub[\graph']{N'} \sim \AnSub[\graph]{N}}
-        \end{align*}
-    \end{definition}
 
-    As an example of an injectable set, the set $\bc{A_2, C_1}$ of the Spiral inflation ($\graph'$) (\cref{fig:spiral_inflation}) is an injectable set of $\graph'$ because its ancestral subgraph $\AnSub[\graph']{A_2, C_1}$ (highlighted in \cref{fig:spiral_inflation_inj2}) is homomorphic (via copy-index removal) to the ancestral subgraph of $\bc{A, C}$ in the Triangle structure $(\graph)$ (\cref{fig:spiral_inflation_iminj2}). The injectable sets of an inflation are of \textit{principle importance} to the inflation technique. The Inflation Technique begins with joint distribution $\prob[\nodes_O]$ defined over the observable nodes of $\graph$ and the a priori assumption that it is compatible with $\graph$ as defined in \cref{sec:causal_compatibility}. For each injectable set $N' \subseteq \Inj[\graph]{\graph'}$ and image $N \subseteq \ImInj[\graph]{\graph'}$ consisting entirely of observable nodes ($N \subseteq \nodes_O$), there is a pair $\prob[N], \prob[N']$ of marginal distributions induced by $\prob[\nodes_O]$ where $\prob[N']$ assigns the same probability to all events of $\prob[N]$ whenever the events are equivalent under the removal of copy-indices. These pairs of distributions can be raveled to form a pair of marginal models defined over the injectable sets $\prob^{\Inj[\graph]{\graph'}} = \bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ and their images $\prob^{\ImInj[\graph]{\graph'}} = \bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$.
+    % \begin{lemma}
+    %     \label[lemma]{lem:inflation}
+    %     \term{The Inflation Lemma}~\cite[Lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$ and a marginal model $\prob^{\ImInj[\graph]{\graph'}}$ compatible with $\graph$ then all marginal models $\prob^{\Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
+    % \end{lemma}
 
-    \begin{lemma}
-        \label[lemma]{lem:inflation}
-        \term{The Inflation Lemma}~\cite[Lemma 3]{Inflation} Given a particular inflation $\graph'$ of $\graph$ and a marginal model $\prob^{\ImInj[\graph]{\graph'}}$ compatible with $\graph$ then all marginal models $\prob^{\Inj[\graph]{\graph'}}$ are compatible with $\graph'$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$.
-    \end{lemma}
-
-    \begin{proof}
-        Given that $\prob^{\ImInj[\graph]{\graph'}}$ is compatible with $\graph$, it admits a joint distribution $\prob[\nodes]$ that can be factorized into its causal parameters $\prob[\nodes] = \prod_{n \in \nodes} \prob[n\mid \Pa[\graph]{n}]$. Given \cref{eq:inflation_defn}, one can create a set of \textit{inflated} causal parameters by matching causal parameters according to respective copy-indices: $\forall n' \in \nodes' : \prob[n'\mid \Pa[\graph']{n'}] \defined \prob[n\mid \Pa[\graph]{n}]$. This uniquely induces a compatible joint distribution $\prob[\nodes']$ on $\graph'$\footnote{Of course, there exists compatible joint distributions on $\nodes'$ that can not be constructed in this manner. The claim is that all joint distributions that are constructed in this way are compatible.}: $\prob[\nodes'] = \prod_{n' \in \nodes'} \prob[n'\mid \Pa[\graph']{n'}]$. The proof is completed by demonstrating that the marginals of $\prob[\nodes']$ are members of the marginal model $\prob^{\Inj[\graph]{\graph'}}$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$. Given $N' \in \Inj[\graph]{\graph'}$ and $N \sim N'$:
-        \[ \sum_{\nodes' \setminus N'} \prob[\nodes'] = \sum_{\nodes' \setminus N'} \prod_{n' \in \nodes'} \prob[n'\mid \Pa[\graph']{n'}] = \prod_{n' \in N'} \prob[n'\mid \Pa[\graph]{n'}] = \prod_{n \in N} \prob[n\mid \Pa[\graph]{n}] = \prob[N] = \prob[N']  \]
-    \end{proof}
+    % \begin{proof}
+    %     Given that $\prob^{\ImInj[\graph]{\graph'}}$ is compatible with $\graph$, it admits a joint distribution $\prob[\nodes]$ that can be factorized into its causal parameters $\prob[\nodes] = \prod_{n \in \nodes} \prob[n\mid \Pa[\graph]{n}]$. Given \cref{eq:inflation_defn}, one can create a set of \textit{inflated} causal parameters by matching causal parameters according to respective copy-indices: $\forall n' \in \nodes' : \prob[n'\mid \Pa[\graph']{n'}] \defined \prob[n\mid \Pa[\graph]{n}]$. This uniquely induces a compatible joint distribution $\prob[\nodes']$ on $\graph'$\footnote{Of course, there exists compatible joint distributions on $\nodes'$ that can not be constructed in this manner. The claim is that all joint distributions that are constructed in this way are compatible.}: $\prob[\nodes'] = \prod_{n' \in \nodes'} \prob[n'\mid \Pa[\graph']{n'}]$. The proof is completed by demonstrating that the marginals of $\prob[\nodes']$ are members of the marginal model $\prob^{\Inj[\graph]{\graph'}}$ provided that $\prob[N] = \prob[N']$ for all instances where $N \sim N'$. Given $N' \in \Inj[\graph]{\graph'}$ and $N \sim N'$:
+    %     \[ \sum_{\nodes' \setminus N'} \prob[\nodes'] = \sum_{\nodes' \setminus N'} \prod_{n' \in \nodes'} \prob[n'\mid \Pa[\graph']{n'}] = \prod_{n' \in N'} \prob[n'\mid \Pa[\graph]{n'}] = \prod_{n \in N} \prob[n\mid \Pa[\graph]{n}] = \prob[N] = \prob[N']  \]
+    % \end{proof}
 
     % The motivation behind \cref{def:inflation} is that if the ancestry of each node $n'$ in $\graph'$ plays the \textit{exact same} role as the ancestry of its source copy $n$ in $\graph$, then every compatible distribution $\prob[N]$ on $\graph$ can be used to \textit{create} compatible joint distributions on $\graph'$. To do this, first notice that for every distribution $\prob[N]$ compatible with $\graph$, there must exist a set of causal parameters $\{\prob[n\mid \Pa[\graph]{n}] \mid n \in \nodes\}$ for $\graph$ such that $\prob[N] = \prod_{n \in N} \prob[n\mid \Pa[\graph]{n}]$. Since the inflation criteria (\cref{eq:inflation_defn}) requires that $\Pa[\graph']{n'} \sim \Pa[\graph]{n}$.
     % \[ ss \eq \label{eq:inflated_causal_parameters} \]
@@ -556,7 +555,7 @@
 
     % % Diagrammatically, \cref{lem:inflation} can be visualized as follows:
 
-    % % \begin{center}
+    % % \begin{nscenter}
     % %     \begin{tikzpicture}
     % %         \pgfmathsetmacro{\vs}{2.2};
     % %         \pgfmathsetmacro{\hs}{5.2};
@@ -568,20 +567,70 @@
     % %         \draw[very thick, ->] (cp) -- (cp_) node [midway, above, sloped]{{\footnotesize define}};
     % %         \draw[very thick, ->] (cp_) -- (pn_);
     % %     \end{tikzpicture}
-    % % \end{center}
+    % % \end{nscenter}
 
     % The inflation lemma is the most important result of the causal Inflation Technique. The contrapositive version of \cref{lem:inflation} is a powerful tool for deriving causal compatibility constraints. Any causal compatibility constraint, such as a causal compatibility inequality, that constrains injectable marginal models $\bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ can be \textit{deflated} into a valid compatibility constraint on marginal models $\bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$ of the original causal structure by dropping all references to the copy-indices. Additionally, the inflation lemma holds when considering any subset of $\Inj[\graph]{\graph'}$ (analogously $\ImInj[\graph]{\graph'}$). Therefore, one only needs to consider injectable sets that are composed of \textit{observable nodes}.
 
-    The contrapositive of the Inflation Lemma (\cref{lem:inflation}) casts the compatibility problem for $\prob^{\ImInj[\graph]{\graph'}}$ (which exhibits equivalent compatibility as $\prob[\nodes_O]$) into a compatibility problem for $\prob^{\Inj[\graph]{\graph'}}$ of any non-trivial inequalities. If $\prob^{\Inj[\graph]{\graph'}}$ is found to be incompatible with $\graph'$, then $\prob[\nodes_O]$ is subsequently incompatible with $\graph$. Fortunately, the inflated causal structure $\graph'$ possesses its own \textit{d-separation relations} which enforces conditional independence equality constraints on $\prob^{\Inj[\graph]{\graph'}}$. A useful subset of d-separation relations are those corresponding to unconditional d-separations, known as \term{ancestrally separated} sets~\cite{Pearl_2009}. Two sets $N_1', N_2'$ are ancestrally separated ($N_1' \ancestralindep N_2'$) if they have distinct ancestry in $\graph'$.
+    The injectable sets of an inflation are of \textit{principle importance} to the Inflation Technique. Given a distribution $\prob[\nodes_{O}]$ defined over the observable nodes of $\graph$, one can compute a marginal model defined over the injectable sets $\prob^{\Inj[\graph]{\graph'}} = \bc{\prob[N'] \mid N' \in \Inj[\graph]{\graph'}}$ and their images $\prob^{\ImInj[\graph]{\graph'}} = \bc{\prob[N] \mid N \in \ImInj[\graph]{\graph'}}$. The contrapositive of the Inflation Lemma casts the compatibility problem for $\prob^{\ImInj[\graph]{\graph'}}$ (which exhibits equivalent compatibility as $\prob[\nodes_O]$) into a compatibility problem for $\prob^{\Inj[\graph]{\graph'}}$ of any non-trivial inequalities. If $\prob^{\Inj[\graph]{\graph'}}$ is found to be incompatible with $\graph'$, then $\prob^{\ImInj[\graph]{\graph}}$ (and also $\prob[\nodes_O]$) must be incompatible with $\graph$. Fortunately, the inflated causal structure $\graph'$ possesses its own \textit{d-separation relations} which enforces conditional independence equality constraints on $\prob^{\Inj[\graph]{\graph'}}$. A useful subset of d-separation relations are those corresponding to unconditional d-separations, known as \term{ancestrally separated} sets~\cite{Pearl_2009}. Two sets $N_1', N_2'$ are ancestrally separated ($N_1' \ancestralindep N_2'$) if they have distinct ancestry in $\graph'$.
     \[ N_1' \ancestralindep N_2' \iff \An[\graph']{N_1'} \cap \An[\graph']{N_2'}= \emptyset \]
-    Ancestral independence implies an unconditional probabilistic independence --- if $N_1' \ancestralindep N_2'$ then $\prob[N_1' \cup N_2'] = \prob[N_1']\prob[N_2']$. If $N_1', N_2' \in \Inj[\graph]{\graph'}$, then the associated probabilistic constraint is an applicable constraint for $\prob^{\Inj[\graph]{\graph'}}$. This notion generalizes to more than two ancestrally separated sets. A set $N' \subseteq \nodes'$ is an \term{as-expressible set} if it can be decomposed into the disjoint union of injectable sets $N' = \coprod_{i} N'_i \mid N'_i \in \Inj[\graph]{\graph'}$ and all pairs $N_i', N_j'$ are ancestrally separated: $\forall i, j : N_i' \ancestralindep N_j'$. The analogous probabilistic constraint is: $\prob[N'] = \prob[\coprod_i N'_i] = \prod_{i}\prob[N'_i]$~\cite{Pearl_2009}.\footnote{In~\cite{Inflation}, this concept is generalized into terms which can be factorized via d-separation conditions and the corresponding inflated sets are termed \textit{expressible sets}. This generalization was not required for this work in particular because the ancestral independence relations formed a generating set of d-separation conditions for all of the inflations considered in \cref{fig:inflations}.} Throughout this work, we let $\AnSepExpr[\graph]{\graph'}$ denote the set of all as-expressible sets.\footnote{Analogously to a marginal scenario $\mscenario$, the as-expressible sets $\AnSepExpr[\graph]{\graph'}$ form an \textit{abstract simplicial complex}. Therefore, in practice, it is completely sufficient to focus on the \textit{maximal} as-expressible sets.}
+    Ancestral independence implies an unconditional probabilistic independence --- if $N_1' \ancestralindep N_2'$ then $\prob[N_1' \cup N_2'] = \prob[N_1']\prob[N_2']$. If $N_1', N_2' \in \Inj[\graph]{\graph'}$, then the associated probabilistic constraint is an applicable constraint for $\prob^{\Inj[\graph]{\graph'}}$. This notion generalizes to more than two ancestrally separated sets. A set $N' \subseteq \nodes'$ is an \term{as-expressible set} if it can be decomposed into the disjoint union of injectable sets $N' = \coprod_{i} N'_i \mid N'_i \in \Inj[\graph]{\graph'}$ and all pairs $N_i', N_j'$ are ancestrally separated: $\forall i, j : N_i' \ancestralindep N_j'$. The analogous probabilistic constraint is: $\prob[N'] = \prob[\coprod_i N'_i] = \prod_{i}\prob[N'_i]$~\cite{Pearl_2009}.\footnote{In~\cite{Inflation}, this concept is generalized into terms which can be factorized via d-separation conditions and the corresponding inflated sets are termed \textit{expressible sets}. This generalization was not required for this work in particular because the ancestral independence relations formed a generating set of d-separation conditions for all of the inflations considered in \cref{fig:inflations}.} Throughout this work, we let $\AnSepExpr[\graph]{\graph'}$ denote the set of all as-expressible sets.\footnote{Analogously to a marginal scenario $\mscenario$, the as-expressible sets $\AnSepExpr[\graph]{\graph'}$ form an \textit{abstract simplicial complex}. Therefore, in practice, it is completely sufficient to focus on the \textit{maximal} as-expressible sets.} Efficient algorithms for computing the injectable and as-expressible sets of an inflation can be found in~\cite{Inflation}. \Cref{tab:asexpr_triangle_structure_wagon_wheel,tab:asexpr_triangle_structure_web} tabulate the as-expressible sets and the associated ancestral separations for the Wagon-Wheel and Web inflations (respectively \cref{fig:wagon_wheel_inflation,fig:the_web_inflation}).
 
-    Unlike $\prob^{\ImInj[\graph]{\graph'}}$, which is non-contextual by construction, $\prob^{\Inj[\graph]{\graph'}}$ contains overlapping marginals meaning its contextuality remains unknown and must be determined using any of the techniques discussed in~\cref{sec:marginal_satisfiability}. More importantly, the Inflation Technique introduces new constraints relating to the as-expressible sets. In practice, the equality constraints implied by $\AnSepExpr[\graph]{\graph'}$ permits one to construct a marginal model defined over the as-expressible sets $\AnSepExpr[\graph]{\graph'}$ resulting in greater resolution in classifying the compatibility of $\prob[\nodes_O]$. In summary, the Inflation Technique partially transforms the compatibility problem into a marginal problem, wherein one can solve the marginal problem (see \cref{sec:marginal_satisfiability}) to either determine the compatibility of an observable distribution $\prob[\nodes_O]$ with $\graph$ or derive compatibility inequalities for $\graph$.
+    \begin{nscenter}
+        \begin{table}
+        \parbox{.45\linewidth}{
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                \multicolumn{2}{|c|}{Maximally AS-Expressible Sets} \\
+                \multicolumn{2}{|c|}{for the Wagon-Wheel Inflation} \\
+                \hline
+                $\AnSepExpr[\graph]{\graph'}$ & Ancestral Separations \\
+                \hline
+                $\bc{A_2, B_1, C_3, C_1}$ & $\bc{A_2, B_1, C_3} \ancestralindep \bc{C_1}$ \\
+                $\bc{A_1, B_1, C_4, C_2}$ & $\bc{A_1, B_1, C_4} \ancestralindep \bc{C_2}$ \\
+                $\bc{A_1, B_2, C_1, C_3}$ & $\bc{A_1, B_2, C_1} \ancestralindep \bc{C_3}$ \\
+                $\bc{A_2, B_2, C_2, C_4}$ & $\bc{A_2, B_2, C_2} \ancestralindep \bc{C_4}$ \\
+                \hline
+            \end{tabular}
+            \caption{The maximally as-expressible sets for the Wagon-Wheel Inflation.
+            \label{tab:asexpr_triangle_structure_wagon_wheel}}
+        }
+        \hfill
+        \parbox{.45\linewidth}{
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                \multicolumn{2}{|c|}{Maximally AS-Expressible Sets} \\
+                \multicolumn{2}{|c|}{for the Web Inflation} \\
+                \hline
+                $\AnSepExpr[\graph]{\graph'}$ & Ancestral Separations \\
+                \hline
+                $\bc{A_1, B_1, C_1, A_4, B_4, C_4}$ & $\bc{A_1, B_1, C_1} \ancestralindep \bc{A_4, B_4, C_4}$ \\
+                $\bc{A_1, B_2, C_3, A_4, B_3, C_2}$ & $\bc{A_1, B_2, C_3} \ancestralindep \bc{A_4, B_3, C_2}$ \\
+                $\bc{A_2, B_3, C_1, A_3, B_2, C_4}$ & $\bc{A_2, B_3, C_1} \ancestralindep \bc{A_3, B_2, C_4}$ \\
+                $\bc{A_2, B_4, C_3, A_3, B_1, C_2}$ & $\bc{A_2, B_4, C_3} \ancestralindep \bc{A_3, B_1, C_2}$ \\
+                $\bc{A_1, B_3, C_4}$ & $\bc{A_1} \ancestralindep \bc{B_3} \ancestralindep \bc{C_4}$ \\
+                $\bc{A_1, B_4, C_2}$ & $\bc{A_1} \ancestralindep \bc{B_4} \ancestralindep \bc{C_2}$ \\
+                $\bc{A_2, B_1, C_4}$ & $\bc{A_2} \ancestralindep \bc{B_1} \ancestralindep \bc{C_4}$ \\
+                $\bc{A_2, B_2, C_2}$ & $\bc{A_2} \ancestralindep \bc{B_2} \ancestralindep \bc{C_2}$ \\
+                $\bc{A_3, B_3, C_3}$ & $\bc{A_3} \ancestralindep \bc{B_3} \ancestralindep \bc{C_3}$ \\
+                $\bc{A_3, B_4, C_1}$ & $\bc{A_3} \ancestralindep \bc{B_4} \ancestralindep \bc{C_1}$ \\
+                $\bc{A_4, B_1, C_3}$ & $\bc{A_4} \ancestralindep \bc{B_1} \ancestralindep \bc{C_3}$ \\
+                $\bc{A_4, B_2, C_1}$ & $\bc{A_4} \ancestralindep \bc{B_2} \ancestralindep \bc{C_1}$ \\
+                \hline
+            \end{tabular}
+            \caption{The maximally as-expressible sets for the Web Inflation.
+            \label{tab:asexpr_triangle_structure_web}}
+        }
+        \end{table}
+    \end{nscenter}
+
+    Unlike $\prob^{\ImInj[\graph]{\graph'}}$, which is non-contextual by construction, $\prob^{\Inj[\graph]{\graph'}}$ contains overlapping marginals meaning its contextuality remains unknown and must be determined using any of the techniques discussed in~\cref{sec:marginal_satisfiability}. More importantly, the Inflation Technique introduces new constraints relating to the as-expressible sets. In practice, the equality constraints implied by $\AnSepExpr[\graph]{\graph'}$ permits one to construct a marginal model defined over the as-expressible sets $\AnSepExpr[\graph]{\graph'}$ resulting in greater resolution in classifying the compatibility of $\prob[\nodes_O]$. In summary, the Inflation Technique partially transforms the compatibility problem into a marginal problem, wherein one can solve the marginal problem (see \cref{sec:marginal_satisfiability}) to either determine the compatibility of an observable distribution $\prob[\nodes_O]$ with $\graph$ or derive compatibility inequalities for $\graph$ --- the latter of which is discussed in \cref{sec:deriving_inequalities_from_the_inflation_technique}.
 
 
       % that are used to derive inequalities using methods discussed in \cref{sec:marginal_satisfiability}.
 
-    % \begin{center}
+    % \begin{nscenter}
     %     \begin{tikzpicture}[scale=0.8]
     %         \pgfmathsetmacro{\hs}{1.4};
     %         \pgfmathsetmacro{\vs}{0.6};
@@ -605,7 +654,7 @@
     %         (+ \cross, 1*\vs - \cross) -- (- \cross, 1*\vs + \cross)
     %         ;
     %     \end{tikzpicture}
-    % \end{center}
+    % \end{nscenter}
 
     % Not all sets $N' \subseteq \nodes'$ can be written as the disjoint union of injectable sets, but those that \textit{can} are called the \term{as-expressible sets} of $\graph'$.
 
@@ -613,36 +662,16 @@
     % \[  \]
     % Application of the inflation lemma to linear inequalities constraining as-expressible distributions $\prob[N']$ transforms those inequalities into polynomial inequalities over the injectable distributions, allowing one to replace all terms with probability distributions defined over variables in $\nodes$.
 
-    \subsection{Exemplary Inflations of The Triangle structure}
-    \label{sec:exemplary_inflations_of_the_triangle_structure}
+    \subsection{Deriving Inequalities from the Inflation Technique}
+    \label{sec:deriving_inequalities_from_the_inflation_technique}
 
-    \Cref{sec:inflation_technique_main_summary} explains how the Inflation Technique~\cite{Inflation} was used to derive novel causal compatibility inequalities for the Triangle structure by constructing inflations of the Triangle structure satisfying \cref{eq:inflation_defn}. Explicitly, for a given inflation $\graph'$ of the Triangle structure, one constructs a marginal problem (see \cref{sec:marginal_satisfiability}) for the marginal scenario $\mscenario$ composed of the maximal as-expressible sets of $\graph'$, i.e. $\mscenario = \AnSepExpr[\graph]{\graph'}$. This section acts as a reference for the particular inflations of the Triangle structure that are mentioned throughout this manuscript. Contained within this section is a depiction of each of these inflations in \cref{fig:inflations} as well as a their as-expressible sets. An efficient algorithm for computing the injectable and as-expressible sets of an inflation can be found in~\cite{Inflation}.
+    \Cref{sec:inflation_technique_main_summary} summarizes how the Inflation Technique~\cite{Inflation} can cast the compatibility problem into the marginal problem by leveraging inflations of the Triangle structure. Explicitly, for a given inflation $\graph'$ of the Triangle structure, one constructs a marginal problem (see \cref{sec:marginal_satisfiability}) for the marginal scenario $\mscenario$ composed of the maximal as-expressible sets of $\graph'$, i.e. $\mscenario = \AnSepExpr[\graph]{\graph'}$.
 
-    The first inequality presented in \cref{sec:found_inequalities} was \cref{eq:ww_ineq}. \cref{eq:ww_ineq} was derived using the Wagon-Wheel inflation in \cref{fig:wagon_wheel_inflation}. The Wagon-Wheel inflation possesses $4$ copies of $C$ ($C_1, C_2, C_3, C_4$) and $2$ copies of $A$ ($A_1, A_2$) and $B$ ($B_1, B_2$) arranged in the shape of a Wagon-Wheel. The maximal as-expressible sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{eq:pre_injectable_triangle_structure_wagon_wheel}. These maximal as-expressible sets define a marginal scenario where the joint variables $\jointvar$ are the set of observable nodes in the Wagon-Wheel inflation $\jointvar = \nodes'_O$:
+    The first inequality presented in \cref{sec:found_inequalities} was \cref{eq:ww_ineq}. \cref{eq:ww_ineq} was derived using the Wagon-Wheel inflation in \cref{fig:wagon_wheel_inflation}. The Wagon-Wheel inflation possesses $4$ copies of $C$ ($C_1, C_2, C_3, C_4$) and $2$ copies of $A$ ($A_1, A_2$) and $B$ ($B_1, B_2$) arranged in the shape of a Wagon-Wheel. The maximal as-expressible sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{tab:asexpr_triangle_structure_wagon_wheel}. These maximal as-expressible sets define a marginal scenario where the joint variables $\jointvar$ are the set of observable nodes in the Wagon-Wheel inflation $\jointvar = \nodes'_O$:
     \[ \mscenario = \AnSepExpr[\graph]{\graph'} = \bc{\bc{A_2, B_1, C_3, C_1}, \bc{A_1, B_1, C_4, C_2}, \bc{A_1, B_2, C_1, C_3}, \bc{A_2, B_2, C_2, C_4}} \eq \label{eq:wagon_wheel_marginal_model}\]
-    Given that the Fritz distribution is defined over $4$-outcomes variables, the variables in the marginal scenario are assigned $4$-outcomes as well. This marginal scenario $\mscenario$ then defines an incidence matrix $M$ capable of accommodating the Fritz distribution that has $\abs{\Events{\mscenario}} = 4 \cdot 4^{4} = 1024$ rows and $\abs{\Events{\jointvar}} = 4^8 = 65,536$ columns --- this matrix is not reproduced here. The sheer size of the incidence matrix used here makes complete solutions of the marginal problem using tools such as linear-quantifier elimination intractable.
-
-    \begin{equation*}
-        \eq \label{eq:pre_injectable_triangle_structure_wagon_wheel}
-        \begin{gathered}
-            \textbf{Maximal AS-Expressible Sets} \\
-            \bc{A_2, B_1, C_3, C_1} \\
-            \bc{A_1, B_1, C_4, C_2} \\
-            \bc{A_1, B_2, C_1, C_3} \\
-            \bc{A_2, B_2, C_2, C_4} \\
-        \end{gathered}
-        \qquad
-        \begin{gathered}
-            \textbf{Ancestral Separations} \\
-            \bc{A_2, B_1, C_3} \ancestralindep \bc{C_1} \\
-            \bc{A_1, B_1, C_4} \ancestralindep \bc{C_2} \\
-            \bc{A_1, B_2, C_1} \ancestralindep \bc{C_3} \\
-            \bc{A_2, B_2, C_2} \ancestralindep \bc{C_4} \\
-        \end{gathered}
-    \end{equation*}
-    To construct the marginal distribution vector $\probvec^{\mscenario}$ for the Fritz distribution, one begins with $\probvec^{\mscenario}$ defined in a \textit{symbolic} form,
+    Given that the Fritz distribution is defined over $4$-outcomes variables, the variables in the marginal scenario are assigned $4$-outcomes as well. This marginal scenario $\mscenario$ then defines an incidence matrix $M$ capable of accommodating the Fritz distribution that has $\abs{\Events{\mscenario}} = 4 \cdot 4^{4} = 1024$ rows and $\abs{\Events{\jointvar}} = 4^8 = 65,536$ columns --- this matrix is not reproduced here. The sheer size of the incidence matrix used here makes complete solutions of the marginal problem using tools such as linear-quantifier elimination intractable. To construct the marginal distribution vector $\probvec^{\mscenario}$ for the Fritz distribution, one begins with $\probvec^{\mscenario}$ defined in a \textit{symbolic} form,
     \[ {\probvec^{\mscenario}}^{\intercal} = \underbrace{\br{\prob[A_2B_1C_3C_1]\br{0000}, \ldots, \prob[A_1B_1C_4C_2]\br{3232}, \ldots, \prob[A_2B_2C_2C_4]\br{3333}}}_{1024 \text{ entries}} \eq \label{eq:marginal_vector_wagon_wheel} \]
-    Which can be factored into the ancestrally separated injectable sets using \cref{eq:pre_injectable_triangle_structure_wagon_wheel},
+    Which can be factored into the ancestrally separated injectable sets using \cref{tab:asexpr_triangle_structure_wagon_wheel},
     \[ {\probvec^{\mscenario}}^{\intercal} = \br{\prob[A_2B_1C_3]\br{000}\prob[C_1]\br{0}, \ldots, \prob[A_1B_1C_4]\br{323}\prob[C_2]\br{2}, \ldots, \prob[A_2B_2C_2]\br{333}\prob[C_4]\br{3}} \eq \label{eq:marginal_vector_wagon_wheel_factors}\]
     And penultimately, each probability distribution in \cref{eq:marginal_vector_wagon_wheel_factors} is deflated by dropping copy-indices.
     \[ {\probvec^{\mscenario}}^{\intercal} = \br{\prob[ABC]\br{000}\prob[C]\br{0}, \ldots, \prob[ABC]\br{323}\prob[C]\br{2}, \ldots, \prob[ABC]\br{333}\prob[C]\br{3}} \eq \label{eq:marginal_vector_wagon_wheel_factors_dropped}\]
@@ -650,42 +679,7 @@
     \[ \prob[ABC]\br{323}\prob[C]\br{2} = \f{1}{32}\br{2 + \sqrt{2}} \cdot \f{1}{4} \simeq 0.0267  \]
     The same is applied to all other entries of $\probvec^{\mscenario}$. Finally, this numerical version of $\probvec^{\mscenario}$ and $M$ are subjected to linear programing software and an infeasibility certificate $y$ was obtained, corresponding precisely to \cref{eq:ww_ineq} using \cref{eq:marginal_vector_wagon_wheel_factors_dropped}.
 
-    The remaining inequalities in \cref{sec:found_inequalities} were derived using the Web inflation of \cref{fig:the_web_inflation}. The maximal as-expressible sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{eq:pre_injectable_triangle_structure_web}.
-    \begin{equation*}
-        \eq \label{eq:pre_injectable_triangle_structure_web}
-        \begin{gathered}
-            \textbf{Maximal AS-Expressible Sets} \\
-            \bc{A_1, B_1, C_1, A_4, B_4, C_4} \\
-            \bc{A_1, B_2, C_3, A_4, B_3, C_2} \\
-            \bc{A_2, B_3, C_1, A_3, B_2, C_4} \\
-            \bc{A_2, B_4, C_3, A_3, B_1, C_2} \\
-            \bc{A_1, B_3, C_4} \\
-            \bc{A_1, B_4, C_2} \\
-            \bc{A_2, B_1, C_4} \\
-            \bc{A_2, B_2, C_2} \\
-            \bc{A_3, B_3, C_3} \\
-            \bc{A_3, B_4, C_1} \\
-            \bc{A_4, B_1, C_3} \\
-            \bc{A_4, B_2, C_1}
-        \end{gathered}
-        \qquad
-        \begin{gathered}
-            \textbf{Ancestral Separations} \\
-            \bc{A_1, B_1, C_1} \ancestralindep \bc{A_4, B_4, C_4} \\
-            \bc{A_1, B_2, C_3} \ancestralindep \bc{A_4, B_3, C_2} \\
-            \bc{A_2, B_3, C_1} \ancestralindep \bc{A_3, B_2, C_4} \\
-            \bc{A_2, B_4, C_3} \ancestralindep \bc{A_3, B_1, C_2} \\
-            \bc{A_1} \ancestralindep \bc{B_3} \ancestralindep \bc{C_4} \\
-            \bc{A_1} \ancestralindep \bc{B_4} \ancestralindep \bc{C_2} \\
-            \bc{A_2} \ancestralindep \bc{B_1} \ancestralindep \bc{C_4} \\
-            \bc{A_2} \ancestralindep \bc{B_2} \ancestralindep \bc{C_2} \\
-            \bc{A_3} \ancestralindep \bc{B_3} \ancestralindep \bc{C_3} \\
-            \bc{A_3} \ancestralindep \bc{B_4} \ancestralindep \bc{C_1} \\
-            \bc{A_4} \ancestralindep \bc{B_1} \ancestralindep \bc{C_3} \\
-            \bc{A_4} \ancestralindep \bc{B_2} \ancestralindep \bc{C_1}
-        \end{gathered}
-    \end{equation*}
-    Analogously to the Wagon-Wheel inflation, these as-expressible sets form a marginal scenario $\mscenario$ which defines an incidence matrix $M$ that has $\abs{\Events{\mscenario}} = 4 \cdot 4^{6} + 8 \cdot 4^3 = 16,896$ rows, $\abs{\Events{\jointvar}} = 4^{12} = 16,777,216$ columns and $201,326,592$ non-zero entires.
+    The remaining inequalities in \cref{sec:found_inequalities} were derived using the Web inflation of \cref{fig:the_web_inflation}. The maximal as-expressible sets of the Wagon-Wheel inflation along with their ancestral dependences can be found in \cref{tab:asexpr_triangle_structure_web}. Analogously to the Wagon-Wheel inflation, these as-expressible sets form a marginal scenario $\mscenario$ which defines an incidence matrix $M$ that has $\abs{\Events{\mscenario}} = 4 \cdot 4^{6} + 8 \cdot 4^3 = 16,896$ rows, $\abs{\Events{\jointvar}} = 4^{12} = 16,777,216$ columns and $201,326,592$ non-zero entires.
 
     \subsection{Deriving Symmetric Causal Compatibility Inequalities}
     \label{sec:symmetric_inequalities}
@@ -703,7 +697,7 @@
         &= \bc{\prob[acd][100] \leq \prob[bd][00] + \prob[bc][10]}
     \end{split}
     \end{align*}
-    Following this example, it is always possible to permute the random variables in marginal scenario to produce new and valid inequalities. In general, permutations over $\jointvar$ can modify the marginal scenario $\varphi\bs{\mscenario} \defined \bc{\varphi\bs{V_1}, \ldots, \varphi\bs{V_k}} \neq \mscenario$; this was the case for the above example. Therefore $\varphi$ has capacity to modify both the terms of the inequality as well as the set of marginal models it constrains $\varphi\bs{I_{\mscenario}} = \varphi\bs{I}_{\varphi\bs{\mscenario}}$. Permutations $\varphi$ that modify the marginal scenario have no application within the framework of the Inflation Technique because \cref{lem:inflation} requires inflated inequality to constrain injectable sets. Therefore, the desired set of symmetries for our purposes is a subgroup of $\Perm{\jointvar}$ that takes $\mscenario$ to $\mscenario$.
+    Following this example, it is always possible to permute the random variables in marginal scenario to produce new and valid inequalities. In general, permutations over $\jointvar$ can modify the marginal scenario $\varphi\bs{\mscenario} \defined \bc{\varphi\bs{V_1}, \ldots, \varphi\bs{V_k}} \neq \mscenario$; this was the case for the above example. Therefore $\varphi$ has capacity to modify both the terms of the inequality as well as the set of marginal models it constrains $\varphi\bs{I_{\mscenario}} = \varphi\bs{I}_{\varphi\bs{\mscenario}}$. Permutations $\varphi$ that modify the marginal scenario have no application within the framework of the Inflation Technique (\cref{sec:inflation_technique_main_summary}) because the Inflation Lemma only holds when the inflated inequality constrains injectable sets. Therefore, the desired set of symmetries for our purposes is a subgroup of $\Perm{\jointvar}$ that takes $\mscenario$ to $\mscenario$.
 
     The \term{variable permutation group} $\gp\br{\mscenario}$ for a marginal scenario $\mscenario$ is the joint permutation subgroup that stabilizes the marginal scenario, $\Phi\br{\mscenario} \defined \bc{\varphi \in \Perm{\jointvar} \mid \forall V \in \mscenario : \varphi\bs{V} \in \mscenario}$.
     In general, the variable permutation group $\gp\br{\mscenario}$ can be obtained using group stabilizer algorithms. After obtaining $\gp\br{\mscenario}$, one can take known compatibility inequalities $I_{\mscenario}$ can create a whole family of inequalities $\bc{\varphi\bs{I_{\mscenario}} \mid \varphi \in \gp\br{\mscenario}}$ that are valid for the same marginal scenario $\varphi\bs{I_{\mscenario}} = \varphi\bs{I}_{\varphi\bs{\mscenario}} = \varphi\bs{I}_{\mscenario}$.
@@ -740,7 +734,7 @@
     %  (0, 2, 1, 3, 8, 10, 9, 11, 4, 6, 5, 7),
     %  (8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 6, 7),
     %  (0, 1, 2, 3, 5, 4, 7, 6, 10, 11, 8, 9))
-    Notice that $\varphi_1, \varphi_2, \varphi_3, \varphi_4$ are all automorphisms of the web inflation. Moreover they stabilize the as-expressible sets of \cref{eq:pre_injectable_triangle_structure_web}. Importantly,
+    Notice that $\varphi_1, \varphi_2, \varphi_3, \varphi_4$ are all automorphisms of the web inflation. Moreover they stabilize the as-expressible sets of \cref{tab:asexpr_triangle_structure_web}. Importantly,
     \[ \gp\br{\AnSepExpr[\graph]{\graph'}} \sim \Perm{A,B,C} \]
     To see this, $\varphi_1$ and $\varphi_4$ become the identity element in $\Perm{A,B,C}$ upon removal of the copy-index, leaving $\varphi_2$ to generate reflections and $\varphi_3$ to generate rotations.
 
