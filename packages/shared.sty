@@ -6,13 +6,18 @@
 \usepackage{listings} % For code snippets
 \usepackage{amssymb} % For set symbols
 \usepackage{stmaryrd} % For Y arrows
-\usepackage[capitalise]{cleveref}
+\usepackage[capitalise,nameinlink]{cleveref}
 \Crefname{eqs}{Eqs.}{Eqs.}
-\creflabelformat{eqs}{(#2#1#3)}
-\crefrangelabelformat{equation}{(#3#1#4-#5#2#6)}
-\Crefmultiformat{equation}{Eqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
-\crefrangelabelformat{eqs}{(#3#1#4-#5#2#6)}
-\Crefmultiformat{eqs}{Eqs.~(#2#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1#3)}
+\creflabelformat{eqs}{\upshape(#2#1#3)}
+\crefrangelabelformat{equation}{{\upshape(#3#1#4-#5#2#6)}}
+\Crefmultiformat{equation}{Eqs.~\upshape(#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1\upshape)#3}
+\crefrangelabelformat{eqs}{\upshape(#3#1#4-#5#2#6)}
+\Crefmultiformat{eqs}{#2Eqs.~\upshape(#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1\upshape)#3}
+\crefname{ineq}{Ineq.}{Ineqs.}
+\creflabelformat{ineq}{#2{\upshape(#1)}#3} 
+\crefrangelabelformat{ineq}{\upshape(#3#1#4-#5#2#6)}
+\Crefmultiformat{ineq}{#2Ineqs.~\upshape(#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1\upshape)#3}
+
 % \usepackage[style=phys]{biblatex} % For physics style formatting
 \usepackage{ifthen} % For checking optional parameters
 \usepackage{color} % For Colors
@@ -55,3 +60,10 @@
 % === Drafting Declarations ===
 \draftprofile[TC Fraser]{TC}{Red}
 \draftprofile[Elie Wolfe]{E}{Green}
+%\renewcommand{\thesection}{L-\arabic{table}}
+%\renewcommand{\thesubsection}{.\arabic{\subsection}}
+%\renewcommand\thesection{\@roman\c@section}
+%\renewcommand\thesubsection{\hspace{-1em}.\@arabic\c@subsection}
+%\gdef\thesection{\@roman\c@section}
+%\gdef\thesubsection{{{.}}\@arabic\c@subsection}
+\gdef\p@subsection{\thesection-}
