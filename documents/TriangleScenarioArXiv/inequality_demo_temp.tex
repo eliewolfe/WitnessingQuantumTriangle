@@ -1,0 +1,138 @@
+% === Revtex Declaration ===
+\documentclass[aps, 10pt, english, twoside, pra, nofootinbib, tightenlines, longbibliography, superscriptaddress]{revtex4-1}
+
+% === All of the Packages I use frequently ===
+\usepackage{../../packages/document_config}
+\usepackage{../../packages/shared}
+\usepackage{../../packages/misc_commands}
+
+\begin{document}
+    The current WagonWheel inequality we are using in the paper is the following:
+    \begin{equation*}
+    \begin{gathered}
+        \eq
+        I\tsb{WagonWheel} : \\
+        + P_{ABC}(000)P_{C}(3) - 2P_{ABC}(203)P_{C}(0) - 2P_{ABC}(303)P_{C}(0) - P_{ABC}(003)P_{C}(0) \\
+        - P_{ABC}(013)P_{C}(0) - P_{ABC}(020)P_{C}(2) - P_{ABC}(022)P_{C}(2) - P_{ABC}(023)P_{C}(0) \\
+        - P_{ABC}(023)P_{C}(2) - P_{ABC}(030)P_{C}(2) - P_{ABC}(031)P_{C}(2) - P_{ABC}(032)P_{C}(2) \\
+        - P_{ABC}(033)P_{C}(0) - P_{ABC}(033)P_{C}(2) - P_{ABC}(103)P_{C}(0) - P_{ABC}(113)P_{C}(0) \\
+        - P_{ABC}(123)P_{C}(0) - P_{ABC}(133)P_{C}(0) - P_{ABC}(200)P_{C}(0) - P_{ABC}(200)P_{C}(1) \\
+        - P_{ABC}(200)P_{C}(2) - P_{ABC}(200)P_{C}(3) - P_{ABC}(201)P_{C}(0) - P_{ABC}(201)P_{C}(1) \\
+        - P_{ABC}(201)P_{C}(2) - P_{ABC}(201)P_{C}(3) - P_{ABC}(203)P_{C}(1) - P_{ABC}(203)P_{C}(2) \\
+        - P_{ABC}(203)P_{C}(3) - P_{ABC}(213)P_{C}(0) - P_{ABC}(223)P_{C}(0) - P_{ABC}(300)P_{C}(0) \\
+        - P_{ABC}(300)P_{C}(1) - P_{ABC}(300)P_{C}(2) - P_{ABC}(300)P_{C}(3) - P_{ABC}(301)P_{C}(0) \\
+        - P_{ABC}(301)P_{C}(1) - P_{ABC}(301)P_{C}(2) - P_{ABC}(301)P_{C}(3) - P_{ABC}(302)P_{C}(1) \\
+        - P_{ABC}(303)P_{C}(1) - P_{ABC}(303)P_{C}(2) - P_{ABC}(303)P_{C}(3) - P_{ABC}(313)P_{C}(0) \leq 0
+    \end{gathered}
+    \end{equation*}
+
+    Which is currently simplified to:
+    \begin{equation*}
+    \begin{gathered}
+    \eq
+    I\tsb{WagonWheel} : \\
+    + P_{ABC}(000)P_{C}(3) + P_{ABC}(021)P_{C}(2) + P_{ABC}(202) + P_{ABC}(302) + P_{ABC}(233)P_{C}(0) + P_{AC}(33)P_{C}(0) \\
+    - P_{ABC}(303)P_{C}(0) - P_{ABC}(313)P_{C}(0) - P_{ABC}(302)P_{C}(1) - P_{AB}(02)P_{C}(2) - \\
+    - P_{AB}(03)P_{C}(2) - P_{AB}(20) - P_{AB}(30) - P_{C}(3)P_{C}(0) \leq 0
+    \end{gathered}
+    \end{equation*}
+
+    I went ahead and converted to the bit-notation and obtained the following:
+    \begin{equation*}
+    \begin{gathered}
+    \eq
+    I\tsb{WagonWheel} : \\
+    - P_{A_lB_lB_r}(100) \\
+    - P_{C_lC_r}(11)P_{C_lC_r}(00) \\
+    + P_{A_lB_lB_rC_lC_r}(10010) \\
+    + P_{A_{l}A_{r}C_lC_r}(1111)P_{C_lC_r}(00)\\
+    - P_{A_lA_rB_lB_rC_lC_r}(110011)P_{C_lC_r}(00) \\
+    - P_{A_lA_rB_lB_rC_lC_r}(110010)P_{C_lC_r}(01) \\
+    + P_{A_lA_rB_lB_rC_lC_r}(001001)P_{C_lC_r}(10) \\
+    - P_{A_lA_rB_l}(001)P_{C_lC_r}(10) \\
+    + P_{A_lA_rB_lB_rC_lC_r}(000000)P_{C_lC_r}(11) \\
+    \leq 0
+    \end{gathered}
+    \end{equation*}
+
+    The following inequality is the one that Elie Wolfe found, and was proposed as a replacement for the paper due to its algebraic clarity.
+    \begin{equation*}
+    \begin{gathered}
+        \eq
+        I\tsb{WagonWheelAlternative} : \\
+        -P_{A_{l}B_{l}}(10) \\
+        +P_{A_{l}B_{l}C_{l}C_{r}}(1010) \\
+        -P_{A_{l}B_{l}}(01) P_{C_{l}C_{r}}(10) \\
+        -P_{C_{l}C_{r}}(00) P_{C_{l}C_{r}}(11) \\
+        +P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(101111) \\
+        +P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(111011) \\
+        -P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(100110) \\
+        -P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(110010) \\
+        +P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(001001) \\
+        +P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(011101) \\
+        +P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(000000) \\
+        +P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(010100) \\
+        \leq 0
+    \end{gathered}
+    \end{equation*}
+
+    There are some observations:
+    \begin{itemize}
+        \item $I\tsb{WagonWheel}$ in bit-notation is actually shorter than $I\tsb{WagonWheelAlternative}$
+        \item The paper mentions the exact violation ($0.0129 \nleq 0$) of $I\tsb{WagonWheel}$, something I would have to calculate for $I\tsb{WagonWheelAlternative}$
+    \end{itemize}
+
+    Swapping the bits $C_{r}$ and $B_{l}$,
+
+
+    \begin{equation*}
+    \begin{gathered}
+        \eq
+        I\tsb{WagonWheelAlternativeProperSwap} : \\
+        +P_{A_{l}B_{l}}(11) \\
+        -P_{A_{l}B_{l}C_{l}C_{r}}(1111) \\
+        +P_{A_{l}B_{l}}(00) P_{C_{l}C_{r}}(11) \\
+        +P_{C_{l}C_{r}}(01) P_{C_{l}C_{r}}(10) \\
+        -P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(000000) \\
+        -P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(010100) \\
+        -P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(001001) \\
+        -P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(011101) \\
+        -P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(100110) \\
+        -P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(110010) \\
+        +P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(101111) \\
+        +P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(111011) \\
+        \leq 0
+    \end{gathered}
+    \end{equation*}
+
+    The violation using $I\tsb{WagonWheelAlternativeProperSwap}$,
+
+    \begin{align*}
+        +P_{A_{l}B_{l}}(11) &= +\f{1}{4}\\
+        -P_{A_{l}B_{l}C_{l}C_{r}}(1111) &= -\f{1}{4}\\
+        +P_{A_{l}B_{l}}(00) P_{C_{l}C_{r}}(11) &= +\br{\f{1}{4}}^2 \\
+        +P_{C_{l}C_{r}}(01) P_{C_{l}C_{r}}(10) &= +\br{\f{1}{4}}^2 \\
+        -P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(100110) &= -\f{1}{4}\br{\f{1}{32}\br{2 - \sqrt{2}}} \\
+        -P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(110010) &= -\f{1}{4}\br{\f{1}{32}\br{2 - \sqrt{2}}} \\
+        -P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(101111) &= -\f{1}{4}\br{\f{1}{32}\br{2 + \sqrt{2}}} \\
+        -P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(111011) &= -\f{1}{4}\br{\f{1}{32}\br{2 + \sqrt{2}}} \\
+        -P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(000000) &= -\f{1}{4}\br{\f{1}{32}\br{2 + \sqrt{2}}} \\
+        -P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(010100) &= -\f{1}{4}\br{\f{1}{32}\br{2 + \sqrt{2}}} \\
+        +P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(001001) &= +\f{1}{4}\br{\f{1}{32}\br{2 + \sqrt{2}}} \\
+        +P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(011101) &= +\f{1}{4}\br{\f{1}{32}\br{2 + \sqrt{2}}} \\
+        0.0625 = \f{1}{16} \nleq 0
+    \end{align*}
+
+    If we restrict the domain of $I\tsb{WagonWheelAlternativeProperSwap}$ to only consider distributions where $C_{l} = A_{l}, C_{r} = B_{l}$ and $P_{C}$ is uniform, we obtain the following constraint,
+
+    \begin{equation*}
+    \begin{gathered}
+        I\tsb{WagonWheelRestricted} : \\
+        + \f{1}{2} - P_{A_{r}B_{r}C_{l}C_{r}}(0110) - P_{A_{r}B_{r}C_{l}C_{r}}(1010) - P_{A_{r}B_{r}C_{l}C_{r}}(0000) - P_{A_{r}B_{r}C_{l}C_{r}}(1100) \\
+        - P_{A_{r}B_{r}C_{l}C_{r}}(0001) - P_{A_{r}B_{r}C_{l}C_{r}}(1101) + P_{A_{r}B_{r}C_{l}C_{r}}(0111) + P_{A_{r}B_{r}C_{l}C_{r}}(1011)  \leq 0
+    \end{gathered}
+    \end{equation*}
+
+
+
+\end{document}
