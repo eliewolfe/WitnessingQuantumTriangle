@@ -19,6 +19,7 @@
     pdfpagelabels=false,
     breaklinks=true,
 ]{hyperref}
+
 \hypersetup{colorlinks,
 linkcolor=carmine,
 citecolor=medblue,
@@ -79,8 +80,245 @@ anchorcolor=OliveGreen}
 \usepackage{enumitem}
 
 % === Custom Packages ===
-\usepackage{packages/mathmacros} % For TC's custom macros for math
-\usepackage{packages/draft_scope} % For TC's custom set, const, and scope parameters configuarion, For identifying work unfinished
+% Packages
+\usepackage{amsmath}
+\usepackage{esint} % For closed integrals
+\usepackage{amssymb} % For set symbols
+\usepackage{mathtools} % For ceiling/floor brackets
+\usepackage{siunitx} % For units
+
+% Brackets
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
+\newcommand{\ba}[1]{\left< #1 \right>} % brackets angled
+\newcommand{\bs}[1]{\left[ #1 \right]} % brackets square
+\newcommand{\br}[1]{\left( #1 \right)} % brackets round
+\newcommand{\bc}[1]{\left\{ #1 \right\}} % brackets curly
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil} % brackets ceiling
+\newcommand{\bre}[1]{\left(#1\right\rvert} % evaluated at brackets
+\newcommand{\bse}[1]{\left[#1\right\rvert} % evaluated at brackets
+\newcommand{\abs}[1]{\left| #1 \right|} % brackets absolute value
+\newcommand{\bra}[1]{\left< #1 \right|} % bra
+\newcommand{\ket}[1]{\left| #1 \right>} % ket
+\newcommand{\braket}[2]{\left< #1 \middle| #2 \right>} % bra|ket
+\newcommand{\bcm}[2]{\left\{ #1 \middle| #2 \right\}} % bra|ket
+\newcommand{\bramidket}[3]{\left< #1 \middle| #2 \middle| #3 \right>} % bra|mid|ket
+
+\newcommand{\f}[2]{\frac{#1}{#2}} % fraction shorthand
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert} % norm
+\newcommand{\cross}{\times} % cross alias
+\newcommand{\tenprod}{\otimes} % tensor product alias
+\newcommand{\iso}{\cong} % isomorphic alias
+\newcommand{\del}{\nabla} % nabla alias
+\newcommand{\vdel}{\vec{\nabla}} % nabla alias
+\newcommand{\curl}{\vdel\times} % curl operator
+\renewcommand{\div}{\vdel\cdot} % divergence operator NOTE: this overrides the division symbol
+\newcommand{\lapl}{\del^2} % Laplacian
+\renewcommand{\inf}{\infty} % infty alias NOTE: this replaces the inf operator
+\newcommand{\di}{\partial} % di alias
+\newcommand{\defined}{\equiv} % defined alias
+\newcommand{\celsius}{^o C} % Simple celsius I'll likely improve later
+\newcommand{\w}{\omega} % omega alias
+\newcommand{\sL}{\mathcal{L}} % Lagrangian script
+\newcommand{\eq}{\addtocounter{equation}{1}\tag{\theequation}} % adds a number to unnumbered equation
+\newcommand{\st}{\mid} % integral with limits alias
+\newcommand{\tsb}[1]{_\text{#1}} % Text subscript
+\newcommand{\tsp}[1]{^\text{#1}} % Text superscript
+% \newcommand{\note}[1]{\quad \text{#1}} % Equation note
+\newcommand{\ident}{\mathbbm{1}}
+
+% sequences
+\newcommand{\tok}[2]{#1, \ldots, #2}
+
+% braces
+\newcommand{\untext}[2]{\underbrace{#1}_{\text{#2}}}
+\newcommand{\ovtext}[2]{\overbrace{#1}^{\text{#2}}}
+\newcommand{\iszero}[1]{\underbrace{#1}_{= 0}}
+
+% greek
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\Ga}{\Gamma}
+\newcommand{\de}{\delta}
+\newcommand{\De}{\Delta}
+\newcommand{\ep}{\epsilon}
+\newcommand{\vep}{\varepsilon}
+\newcommand{\Ep}{\epsilon}
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\te}{\theta}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ka}{\kappa}
+\newcommand{\Ka}{\Kappa}
+\newcommand{\ro}{\rho}
+\newcommand{\Ro}{\Rho}
+\renewcommand{\si}{\sigma}
+\newcommand{\Si}{\Sigma}
+
+% Operators
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\sinc}{sinc}
+
+% arrows
+\newcommand{\ar}{\rightarrow}
+\newcommand{\lar}{\leftarrow}
+
+% Horizontal Box used for drawing in post-compilation
+\newcommand{\cbox}{\begin{center}
+\fbox{\begin{minipage}{4in} \hfill\vspace{2in} \end{minipage}}
+\end{center}}
+
+% Math Sets
+\newcommand{\R}{{\mathbb{R}}}
+%\ProvideCommand{\C}{{\mathbb{C}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+\newcommand{\N}{{\mathbb{N}}}
+\newcommand{\Q}{{\mathbb{Q}}}
+
+% Script macro
+\newcommand{\s}[1]{\mathcal{#1}}
+
+% Vectors
+% see fancyvec
+% tilde
+\newcommand{\ti}[1]{\tilde{#1}\hspace{0pt}} % Note the hspace is for {\ti{a}^b}_c to render correctly
+\newcommand{\tbar}[1]{\bar{#1}\hspace{0pt}} % Note the hspace is for {\bar{a}^b}_c to render correctly
+\newcommand{\tk}[1]{\hspace{0pt}} % Note the hspace is for {\bar{a}^b}_c to render correctly
+
+% Scipt letters
+\def\rcurs{{\mbox{$\resizebox{.09in}{.08in}{\includegraphics[trim= 1em 0 14em 0,clip]{script_r/ScriptR.pdf}}$}}}
+\def\brcurs{{\mbox{$\resizebox{.09in}{.08in}{\includegraphics[trim= 1em 0 14em 0,clip]{script_r/BoldR.pdf}}$}}}
+
+% Differentials
+\newcommand{\dif}{\mathrm{d}} % differential
+\newcommand{\indif}{{\mathchar'26\mkern-12mu \mathrm{d}}} % differential
+\newcommand{\dx}{\dif x}
+\newcommand{\dy}{\dif y}
+\newcommand{\dz}{\dif z}
+\newcommand{\dt}{\dif t}
+\newcommand{\ddt}{\der{}{t}}
+\newcommand{\dphi}{\dif \phi}
+\newcommand{\dtheta}{\dif \theta}
+\newcommand{\drho}{\dif \rho}
+\newcommand{\ds}{\dif s}
+\newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}} % partial derivative
+\newcommand{\pderk}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}} % partial derivative
+\newcommand{\pdert}[3]{\br{\frac{\partial #1}{\partial #2}}_{#3}} % partial derivative
+\newcommand{\pdder}[2]{\frac{\partial^2 #1}{\partial #2^2}} % partial double derivative
+\newcommand{\der}[2]{\frac{\dif #1}{\dif #2}} % derivative
+\newcommand{\derk}[3]{\frac{\dif^{#1} #2}{\dif #3^{#1}}} % derivative
+\newcommand{\dert}[3]{\br{\frac{\dif #1}{\dif #2}}_{#3}} % partial derivative
+\newcommand{\dder}[2]{\frac{\dif^2 #1}{\dif #2^2}} % double derivative
+
+% integrals
+\newcommand{\intl}{\int\limits} % integral with limits alias
+\newcommand{\intlf}{\intl_{-\infty}^{\infty}} % integral with limits alias
+\newcommand{\ointl}{\oint\limits} % integral with limits alias
+\newcommand{\iintl}{\iint\limits} % integral with limits alias
+\newcommand{\idotsintl}{\idotsint\limits} % integral with limits alias
+\newcommand{\oiintl}{\oiint\limits} % integral with limits alias
+\newcommand{\iiintl}{\iiint\limits} % integral with limits alias
+\newcommand{\oiiintl}{\oiiint\limits} % integral with limits alias
+
+% siunitx
+\DeclareSIUnit\parsec{pc}
+\DeclareSIUnit\rot{rot}
+\DeclareSIUnit\yr{yr}
+\DeclareSIUnit\AU{AU}
+
+% Piecewise
+\newcommand{\piecewise}[4]{
+    \begin{cases}
+        #1 & #2 \\
+        #3 & #4
+    \end{cases}
+}
+
+
+% Wronskian
+\newcommand{\wron}{W[y_1,y_2](x)}
+
+% Block vector or matrix
+\newcommand{\mtrx}[1]{
+    \begin{bmatrix}
+    #1
+    \end{bmatrix}
+}
+
+% Block vector or matrix
+\newcommand{\pmtrx}[1]{
+    \begin{bmatrix}
+    #1
+    \end{bmatrix}
+}
+
+% 2 Column Vector
+\newcommand{\twovec}[2]{
+    \begin{bmatrix}
+    #1 \\
+    #2
+    \end{bmatrix}
+}
+\usepackage{color} % For Colors
+\usepackage{xspace} % For annoying horizontal space to the right of string terms.
+
+% Defining const terms with appropriate xspace.
+\newcommand{\const}[2]{%
+\expandafter\newcommand\csname#1\endcsname{#2\xspace}%
+}
+
+% Sets a command to a value
+\newcommand{\set}[2]{
+    \ifcsname #1\endcsname%
+        \expandafter\renewcommand\csname#1\endcsname{#2\xspace}%
+    \else%
+        \expandafter\newcommand\csname#1\endcsname{#2\xspace}%
+    \fi%
+}
+
+\def\declare#1{\expandafter\def\csname#1\endcsname}
+
+%\def\setcat#1{\declare{getcat#1}##1{GOT CAT ##1!}}
+
+\def\scopedelim{private}
+
+% 1st Param: The name of the command; 2nd Param: The default recall value
+\def\setscope#1#2{%
+    \declare{\scopedelim#1}{#2\xspace}%
+    \declare{#1}##1{\declare{\scopedelim#1}{##1\xspace}\xspace}%
+}
+
+% 1st Param: The name of the command
+\def\getscope#1{%
+    \csname\scopedelim#1\endcsname%
+}
+
+\usepackage{ifthen} % For checking optional parameters
+
+\def\draftscope{draftscope}
+
+\newcommand{\draftprofile}[3][]{%
+    \expandafter\newcommand\csname \draftscope color#2\endcsname{#3}%
+    \expandafter\newcommand\csname \draftscope name#2\endcsname{\ifthenelse{\equal{#1}{}}{#2}{#1}}%
+}%
+
+\draftprofile{}{Red}%
+
+\newcommand{\comment}[2][]{%
+    \textcolor{\expandafter\csname \draftscope color#1\endcsname}{Comment\ifthenelse{\equal{#1}{}}{}{ (\expandafter\csname \draftscope name#1\endcsname)}: #2}%
+}%
+\newcommand{\todo}[2][]{%
+    \textcolor{\expandafter\csname \draftscope color#1\endcsname}{Todo\ifthenelse{\equal{#1}{}}{}{ (\expandafter\csname \draftscope name#1\endcsname)}: #2}%
+}%
+
 
 % === Drafting Declarations ===
 \draftprofile[TC Fraser]{TC}{Red}
@@ -115,11 +353,6 @@ anchorcolor=OliveGreen}
 \newcommand{\term}[1]{\textcolor{medblue}{\textbf{#1}}}
 
 
-% === To allow for labeling of rows and columns of a matrix ===
-%\usepackage{kbordermatrix}
-\usepackage{packages/kbordermatrix}
-\renewcommand{\kbldelim}{(} % Left delimiter
-\renewcommand{\kbrdelim}{)} % Right delimiter
 
 % === Commonly re-occurring symbols ===
 \newcommand{\hgraph}{\mathcal{H}}
@@ -200,3 +433,161 @@ anchorcolor=OliveGreen}
 \DeclareDocumentCommand{\probvec}{O{} O{}}{\ifthenelse{\equal{#1}{}}{\mathcal{P}}{\mathcal{P}_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution vector
 
 
+%Customized for local import ~EW
+\usepackage{expl3}
+
+%\NeedsTeXFormat{LaTeX2e}
+%\ProvidesPackage{kbordermatrix}[2011/09/21 Bordered matrix with brackets]
+
+
+%   Author: Kim C Border <kcborder@caltech.edu>
+%   Date:       SuperBowl XXXVII (Go Bucs)
+
+%   Revised 2003/09/20
+%       to allow flush right option.
+%   Revised 2011/09/21
+%       at urging of Bruno Calfa (CMU)
+%       to coexist with package arydshln
+%       by adding \def\@xarraycr ...
+
+%   Defines \kbordermatrix along the lines of plain tex's
+%   \bordermatrix (which is still available in LaTeX).
+
+%   In particular, as with \bordermatrix,
+%   1.  It takes the array as an argument.  It does not use \begin{}..\end{}.
+%       Is this a feature or a bug?
+%   2.  The first row is spaced a bit further apart from the rest.
+%   3.  The lower (n-1) by (n-1) block is set off by delimiters.
+%   4.  There is an invisible bottom row of the same height as the segregated
+%       top row that adds to the height of the equation.
+
+%   Differences from \bordermatrix:
+%   1.  Square brackets are used in place of parentheses.
+%   2.  You may use \\ instead of \cr.
+%   3.  The line heights agree with LaTeX's line heights for the
+%       array environment, and \arraystretch is respected.  This means
+%       the bottom (n-1) rows align with the rows of an (n-1)-rowed
+%       \begin{array}..\end{array} (with or without delimiters).
+%   4.  All columns are centered.
+%   ** Modified 2003-9-20 to allow flush right option.
+%   5.  The first column is spaced a bit further apart from the rest.
+
+
+%   Differences from \left\[\begin{array}...\end{array}\right\]
+%   1.  It takes the array as an argument.  It does not use \begin{}..\end{}.
+%       Is this a feature or a bug?
+%   2.  Consequently, you cannot use a column specifier (e.g., {l|cr}).
+%   3.  Consequently the maximum number of columns is not specified.
+%   4.  Vertical rules must be put in each row in a separate column.
+%   5.  You can use \hline and \cline.
+
+%   At least it works in the cases I have tried, but I offer no guarantees.
+
+
+
+%   cf. \bordermatrix p. 361, and \vrulealign p. 392 of The TeXbook
+
+
+
+%   Style parameters, they may be redefined according to taste.
+    \newcommand{\kbldelim}{[}   %   Left delimiter
+    \newcommand{\kbrdelim}{]}%  Right delimiter
+
+    \newcommand{\kbrowstyle}{\scriptstyle}%  Style applied to first row
+    \newcommand{\kbcolstyle}{\scriptstyle}%   Style applied to first column
+
+    \newlength{\kbcolsep}       %   Extra separation after first border column
+    \newlength{\kbrowsep}       %   Extra separation after first border row
+
+    \setlength{\kbcolsep}{.5\arraycolsep}
+    \setlength{\kbrowsep}{.2ex}
+
+    \newif\ifkbalignright
+
+%   Scratch lengths (to be computed)
+    \newlength{\br@kwd}     %   Width of delimiter
+    \newlength{\k@bordht}   %   Height of border column
+
+%   This is it
+\newcommand{\kbordermatrix}[1]{%
+\begingroup
+    %   \br@kwd depends on font size, so compute it now.
+    \setbox0=\hbox{$\left\kbldelim\right.$}
+    \setlength{\br@kwd}{\wd0}
+        %   Compute the array strut based on current value of \arraystretch.
+    \setbox\@arstrutbox\hbox{\vrule
+        \@height\arraystretch\ht\strutbox
+        \@depth\arraystretch\dp\strutbox
+        \@width\z@}
+        %   Compute height of first row and extra space.
+    \setlength{\k@bordht}{\kbrowsep}
+    \addtolength{\k@bordht}{\ht\@arstrutbox}
+    \addtolength{\k@bordht}{\dp\@arstrutbox}
+        %   turn off mathsurround
+    \m@th
+        %   Set the first row style
+    \def\@kbrowstyle{\kbrowstyle}
+        %   Swallow the alignment into box0:
+    \setbox0=\vbox{%
+            %   Define \cr for first row to include the \kbrowsep
+            %   and to reset the row style
+        \def\cr{\crcr\noalign{\kern\kbrowsep
+            \global\let\cr=\endline
+            \global\let\@kbrowstyle=\relax}}
+            %   Redefine \\ a la LaTeX:
+        \let\\\@arraycr
+            %   The following are needed to make a solid \vrule with no gaps
+            %   between the lines.
+        \lineskip\z@skip
+        \baselineskip\z@skip
+            %   Compute the length of the skip after the first column
+        \dimen0\kbcolsep \advance\dimen0\br@kwd
+            %   Here begins the alignment:
+        \ialign{\tabskip\dimen0     %   This space will show up after the first column
+            \kern\arraycolsep\hfil\@arstrut$\kbcolstyle ##$\hfil\kern\arraycolsep&
+            \tabskip\z@skip         %   Cancel extra space for other columns
+            \kern\arraycolsep\hfil$\@kbrowstyle ##$\ifkbalignright\relax\else\hfil\fi\kern\arraycolsep&&
+            \kern\arraycolsep\hfil$\@kbrowstyle ##$\ifkbalignright\relax\else\hfil\fi\kern\arraycolsep\crcr
+                %   That ends the template.
+                %   Here is the argument:
+            #1\crcr}%       End \ialign
+    }%  End \setbox0.
+        %   \box0 now holds the array.
+        %
+        %   This next line uses \box2 to hold a throwaway
+        %   copy of \box0, leaving \box0 intact,
+        %   while putting the last row in \box5.
+    \setbox2=\vbox{\unvcopy0 \global\setbox5=\lastbox}
+        %   We want the width of the first column,
+        %   so we lop off columns until there is only one left.
+        %   It's not elegant or efficient, but at 1 gHz, who cares.
+    \loop
+        \setbox2=\hbox{\unhbox5 \unskip \global\setbox3=\lastbox}
+        \ifhbox3
+            \global\setbox5=\box2
+            \global\setbox1=\box3
+    \repeat
+        %   \box1 now holds the first column of last row.
+        %
+        %   This next line stores the alignment in \box2,
+        %   while calculating the proper
+        %   delimiter height and placement.
+    \setbox2=\hbox{$\kern\wd1\kern\kbcolsep\kern-\arraycolsep
+        \left\kbldelim
+        \kern-\wd1\kern-\kbcolsep\kern-\br@kwd
+            %
+            %   Here is the output.  The \vcenter aligns the array with the "math axis."
+            %   The negative vertical \kern only shrinks the delimiter's height.
+            %   BTW, I didn't find this in the TeXbook,
+            %   I had to try various \kerns to see what they did in a
+            %   \left[\vcenter{}\right].
+    \vcenter{\kern-\k@bordht\vbox{\unvbox0}}
+    \right\kbrdelim$}
+    \null\vbox{\kern\k@bordht\box2}
+        %
+    \endgroup
+}
+
+% === To allow for labeling of rows and columns of a matrix ===
+\renewcommand{\kbldelim}{(} % Left delimiter
+\renewcommand{\kbrdelim}{)} % Right delimiter

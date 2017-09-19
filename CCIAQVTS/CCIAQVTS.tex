@@ -97,7 +97,7 @@
     \begin{nscenter}
         \begin{minipage}[t]{.48\textwidth}
             \centering
-            \scalebox{1.0}{\input{figures/causal_structures/bell_scenario}}
+            \scalebox{1.0}{\input{figures/causal_structures/bell_structure}}
             \caption{The Bell structure consisting of two observers $A, B$ together with measurement settings $S_{A}$ and $S_{B}$ respectively. The shared latent variable is labeled $\la$.}
             \label{fig:bell_structure}
         \end{minipage}\hspace{0.04\textwidth}%
@@ -293,7 +293,7 @@
     \begin{gather}
     \label[ineq]{eq:web_inequality}
         I\tsb{Web} : \\\nonumber
-        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\linewidth]{figures/inequalities/no_symwitness_ineq_print_standalone_halfed}
+        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\linewidth]{figures/inequalities/web_ineq_standalone_halfed}
     \end{gather}
 
     % \subsection{Noisy Distributions}
@@ -325,11 +325,11 @@
 
     % \begin{figure}
     % \begin{subfigure}[b]{.48\linewidth}
-    % {\centering\includegraphics[width=\linewidth]{figures/noise/noise_2017.pdf}}
+    % {\centering\includegraphics[width=\linewidth]{figures/noise/noise.pdf}}
     % \caption{Complete range of noise parameters $\vep$.}\label{fig:noise}
     % \end{subfigure}
     % \begin{subfigure}[b]{.48\linewidth}
-    % {\centering\includegraphics[width=\linewidth]{figures/noise/noise_2017_lims.pdf}}
+    % {\centering\includegraphics[width=\linewidth]{figures/noise/noise_lims.pdf}}
     % \caption{\Cref{fig:noise} zoomed onto relevant region.}\label{fig:noise_zoomed}
     % \end{subfigure}
     % \caption{Inequality violations when subjected to uniform noise. Each inequality is normalized so that maximum violation is $-1$.}\label{fig:master_noise}
@@ -357,7 +357,7 @@
     \begin{gather}
         \label[ineq]{eq:symmetric_web_inequality}
         I\tsb{SymmetricWeb} : \\\nonumber
-        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\linewidth]{figures/inequalities/MosekCertFritzSym_ineq_standalone_halfed}
+        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\linewidth]{figures/inequalities/sym_web_ineq_standalone_halfed}
     \end{gather}
 
     Note that $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$ and $\bs{P(113)P(330)}_3$ is shorthand for a sum the over permutations of $A,B,C$, i.e. $\bs{P(113)P(330)}_3 \defined P(113)P(330) + P(131)P(303) + P(311)P(033)$.
@@ -409,14 +409,14 @@
 
     \begin{figure}
     \begin{nscenter}
-        \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{figures/distributions/plotted_dist_I_1_max_violation_2017.pdf}
+        \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{figures/distributions/plotted_dist_I_1_max_violation.pdf}
         \caption{A quantum probability distribution of the Triangle structure that maximizes violation of $I\tsb{Web}$. Notice that this distribution has precisely the same possibilistic structure as the Fritz distribution, as might be expected, since $I\tsb{Web}$ was specifically generated to witness the non-classicality of $\prob[\fritz]$.}
         \label{fig:maximum_violation_I_1}
     \end{nscenter}
     \end{figure}
     \begin{figure}
     \begin{nscenter}
-        \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{figures/distributions/plotted_dist_I_3_max_violation_2017.pdf}
+        \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{figures/distributions/plotted_dist_I_3_max_violation.pdf}
         \caption{A quantum probability distribution of the Triangle structure that maximizes violation of $I\tsb{SymmetricWeb}$. Notice that this distribution has precisely the same (assymetric!) possibilistic structure as the Fritz distribution, even though $I\tsb{SymmetricWeb}$ itself is symmetric with respect to permutations of the variables $A, B, C$. }
         \label{fig:maximum_violation_I_3}
     \end{nscenter}
@@ -432,7 +432,7 @@
     %To quantify the degree in which each inequality $I$ could be further violated, we define a relative violation $V_F$ to be the maximum violation relative to the violation achieved by the Fritz distribution, i.e. $V_F \defined \max_{P}\bc{I\br{P}/I\br{P_F}}$.
     Our best numerical optimization of $I\tsb{WagonWheel}$ was found to be the Fritz distribution itself, visualized in \cref{fig:fritz_distribution_visualized}. $\prob[\fritz]$ is therefore either a local minimum of the parameter space or is in fact \textit{the} maximally violating distribution of $I\tsb{WagonWheel}$; it remains unclear to us if this behavior is related to the global optimality of the Fritz distribution, or if it's an artifact of the methods used to derive $I\tsb{WagonWheel}$, though we suspect the former.
 
-    Our best numerical optimization of $I\tsb{Web}$ is visualized in\cref{fig:maximum_violation_I_1}. Almost immediately, it is evident that \cref{fig:maximum_violation_I_1} closely resembles the Fritz distribution; in fact \cref{fig:maximum_violation_I_1} and \cref{fig:fritz_distribution_visualized} share their \term{possibilistic structure}. A distribution's possibilistic structure is the unitization of its probabilities, i.e. the partitioning of events into disjoint subsets: one containing those events that occur with nonzero probability (possible), the other containing the zero-probability events (impossible).
+    Our best numerical optimization of $I\tsb{Web}$ is visualized in \cref{fig:maximum_violation_I_1}. Almost immediately, it is evident that \cref{fig:maximum_violation_I_1} closely resembles the Fritz distribution; in fact \cref{fig:maximum_violation_I_1} and \cref{fig:fritz_distribution_visualized} share their \term{possibilistic structure}. A distribution's possibilistic structure is the unitization of its probabilities, i.e. the partitioning of events into disjoint subsets: one containing those events that occur with nonzero probability (possible), the other containing the zero-probability events (impossible).
     That \cref{fig:maximum_violation_I_1} and \cref{fig:fritz_distribution_visualized} have the same possibilistic structure is not entirely unexpected;  As was mentioned in \cref{sec:found_inequalities}, as $I\tsb{Web}$ was derived specifically to prove the incompatibility of the Fritz distribution with the Triangle structure. Consequently, it seems that $I\tsb{Web}$ best witnesses incompatibility of those distributions that closely resemble the $\prob[\fritz]$. It could be, however, that the sharing of possibilistic structure is an artifact of unreliable convergence, such that the true optimally-violating $I\tsb{Web}$ quantum distribution might have a different structure.
 
     It is perhaps curious, however, that the distribution in \cref{fig:maximum_violation_I_1} is not accessible when the bipartite states in \cref{eq:triangle_Qcompatibility} are restricted to maximally entangled states. This distributions certainly violate $I\tsb{Web}$ more than $\prob[\fritz]$, even it is isn't the global maximum of $I\tsb{Web}$. This finding of more-violation with less-entanglement resembles a feature of quantum mechanics originally presented by~\citet{Methot_2006} demonstrating that entanglement and non-classicality are different resources.
