@@ -1,0 +1,202 @@
+\usepackage[dvipsnames]{xcolor} % For divps compatible colors
+\definecolor{purple}{RGB}{128,0,128}
+\definecolor{ultramarine}{RGB}{63, 0, 255}
+\definecolor{medblue}{RGB}{0, 0, 100}
+\definecolor{panblue}{RGB}{0,24,150}
+\definecolor{carmine}{RGB}{150, 0, 24}
+\definecolor{gray}{RGB}{150, 150, 150}
+\usepackage[
+    pdftex,
+    pdfversion=1.7,
+    pdfencoding=auto,
+    pdfnewwindow=true,
+    pdfusetitle=true,
+    bookmarks=true,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    pdfpagemode=UseThumbs,
+    bookmarksopenlevel=1,
+    pdfpagelabels=false,
+    breaklinks=true,
+]{hyperref}
+\hypersetup{colorlinks,
+linkcolor=carmine,
+citecolor=medblue,
+urlcolor=panblue,
+anchorcolor=OliveGreen}
+
+\usepackage{siunitx} % For units
+\usepackage{amsmath} % American mathematics society
+\usepackage{bbm}
+\usepackage{esint} % For closed integrals
+\usepackage{listings} % For code snippets
+\usepackage{amssymb} % For set symbols
+\usepackage{stmaryrd} % For Y arrows
+\usepackage[capitalise,nameinlink]{cleveref}
+\Crefname{eqs}{Eqs.}{Eqs.}
+\creflabelformat{eqs}{\upshape(#2#1#3)}
+\crefrangelabelformat{equation}{{\upshape(#3#1#4-#5#2#6)}}
+\Crefmultiformat{equation}{Eqs.~\upshape(#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1\upshape)#3}
+\crefrangelabelformat{eqs}{\upshape(#3#1#4-#5#2#6)}
+\Crefmultiformat{eqs}{#2Eqs.~\upshape(#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1\upshape)#3}
+\crefname{ineq}{Ineq.}{Ineqs.}
+\creflabelformat{ineq}{#2{\upshape(#1)}#3}
+\crefrangelabelformat{ineq}{\upshape(#3#1#4-#5#2#6)}
+\Crefmultiformat{ineq}{#2Ineqs.~\upshape(#1#3}{,#2#1#3)}{,#2#1#3}{,#2#1\upshape)#3}
+
+% \usepackage[style=phys]{biblatex} % For physics style formatting
+\usepackage{ifthen} % For checking optional parameters
+\usepackage{color} % For Colors
+\usepackage{array} % For better tables
+\usepackage[makeroom]{cancel} % For canceling out terms
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{lastpage} % For total page count
+\usepackage{tikz} % For drawing things on graphs
+\usetikzlibrary{calc} % For relative points
+\usetikzlibrary{decorations.markings, arrows.meta, arrows, decorations.pathreplacing, shapes.geometric} % for arrows half way
+\usepackage{pgfplots} % For Graphing
+\usepgflibrary{fpu} % To deal with dimension too large errors
+\usepackage{chngpage} % For indentation
+\usepackage{graphicx} % For images
+\usepackage[super]{nth} % For 1st, 2nd, 3rd etc.
+\usepackage{epstopdf} % For .eps figures
+\usepackage{centernot} % For doesn't implies
+\usepackage{pgfplotstable} % For linear regression on pgfplot graphs
+\pgfplotsset{compat=1.12} % Requesting a specific version
+\usepackage[utf8]{inputenc} % Font with all characters
+\usepackage[T1]{fontenc} % Font with all characters
+% \usepackage{dsfont} % For \mathds
+% \usepackage{eufrak} % For gothic font letters in mathmode Note: Redundant if amsfonts is used
+\usepackage{lmodern} % Font with all characters
+\usepackage{csquotes} % For quotes
+\setlength{\belowcaptionskip}{-10pt}
+\usepackage[justification=justified,labelfont=small]{subcaption}
+\usepackage{ragged2e}
+\DeclareCaptionJustification{justified}{\justifying}
+\captionsetup{justification=justified,singlelinecheck=false,labelfont=small}
+\PassOptionsToPackage{justification=justified}{caption}
+\usepackage{enumitem}
+
+% === Custom Packages ===
+\usepackage{packages/mathmacros} % For TC's custom macros for math
+\usepackage{packages/draft_scope} % For TC's custom set, const, and scope parameters configuarion, For identifying work unfinished
+
+% === Drafting Declarations ===
+\draftprofile[TC Fraser]{TC}{Red}
+\draftprofile[Elie Wolfe]{E}{Green}
+%\renewcommand{\thesection}{L-\arabic{table}}
+%\renewcommand{\thesubsection}{.\arabic{\subsection}}
+%\renewcommand\thesection{\@roman\c@section}
+%\renewcommand\thesubsection{\hspace{-1em}.\@arabic\c@subsection}
+%\gdef\thesection{\@roman\c@section}
+%\gdef\thesubsection{{{.}}\@arabic\c@subsection}
+\gdef\p@subsection{\thesection-}
+
+% === Numbering For amsthm theorem environments ===
+\usepackage{amsthm} % The AMS theorems package
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{problem}[theorem]{Problem}
+
+
+\newenvironment{nscenter}{\parskip=0pt\par\nopagebreak\centering}{\par\noindent\ignorespacesafterend}
+
+% When I introduce a new term or definition
+\newcommand{\term}[1]{\textcolor{medblue}{\textbf{#1}}}
+
+
+% === To allow for labeling of rows and columns of a matrix ===
+%\usepackage{kbordermatrix}
+\usepackage{packages/kbordermatrix}
+\renewcommand{\kbldelim}{(} % Left delimiter
+\renewcommand{\kbrdelim}{)} % Right delimiter
+
+% === Commonly re-occurring symbols ===
+\newcommand{\hgraph}{\mathcal{H}}
+\newcommand{\graph}{\mathcal{G}}
+\newcommand{\nodes}{\mathcal{N}}
+\newcommand{\weights}{\mathcal{W}}
+\newcommand{\edges}{\mathcal{E}}
+\newcommand{\trans}{\mathcal{T}}
+\newcommand{\ind}{S}
+\newcommand{\inhibit}{\mathcal{I}}
+\newcommand{\netperm}{\Pi}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\newcommand{\ancestralindep}{\perp}
+\newcommand{\valprod}{\times}
+\newcommand{\bigvalprod}{\prod}
+\newcommand{\com}{\mathrel{\Yright\hspace{-0.2em}\Yleft}}
+\newcommand{\ext}{\mathrel{\Yleft}}
+\newcommand{\res}{\mathrel{\Yright}}
+\newcommand{\gep}{\varphi}
+\newcommand{\gp}{\Phi}
+\newcommand{\geo}{\omega}
+\newcommand{\go}{\Omega}
+\newcommand{\mscenario}{\mathcal{M}}
+\newcommand{\jointvar}{\mathcal{J}}
+\newcommand{\supp}[1]{\si\br{#1}}
+\newcommand{\kone}{\mathbf{1}}
+\newcommand{\kzer}{\textcolor{gray}{0}}
+
+\newcommand{\probplotvalue}[1]{%
+    \definecolor{probvalcolor}{RGB}{#1}%
+    \definecolor{outlinecolor}{RGB}{127, 127, 127}%
+    \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]%
+        \pgfmathsetmacro{\size}{0.2};%
+        \draw[outlinecolor, fill=probvalcolor] (-\size,-\size) -- (-\size, +\size) -- (+\size, +\size) -- (+\size, -\size) -- cycle;%
+    \end{tikzpicture}%
+}%
+
+% \newcommand{\mext}[1]{E_{#1}}
+% \newcommand{\mul}[1]{\Gamma_{#1}}
+\newcommand{\isext}[2]{\delta_{#1 \ext #2}}
+\newcommand{\ts}{{\graph}}
+\newcommand{\tcdot}{} % Tentative cdot, not sure if I want to keep dots
+\newcommand{\fritz}{\text{F}}
+\newcommand{\p}[1]{#1}
+
+% === Mathematical operators that are denoted with words ===
+\newcommand{\setoperator}[1]{%
+\expandafter\DeclareDocumentCommand\csname#1\endcsname{O{} O{} m}{{\mathsf{#1}_{##1}^{##2}}\br{##3}}%
+}
+
+\setoperator{Pa} % Parents of a node
+\setoperator{Ch} % Children of a node
+\setoperator{An} % Ancestry of a node
+\setoperator{Sub} % subgraph
+\setoperator{AnSub} % Ancestral subgraph
+\setoperator{De} % Ancestral subgraph
+\setoperator{Ext} % Extension of outcomes
+\setoperator{Com} % Compatible equivalence relation
+\setoperator{Nec} % Necessary nodes
+\setoperator{UnNec} % Unnecessary nodes
+\setoperator{Inj} % injectable sets
+\setoperator{ImInj} % images of the injectable sets
+\setoperator{PreInj} % Pre-injectable sets
+\setoperator{AIExpr} % ai-expressible sets
+\setoperator{Expr} % expressible sets
+\setoperator{ImPreInj} % images of the Pre-injectable sets
+\setoperator{Aut} % graph automorphism
+\setoperator{Orb} % Group Orbits
+\setoperator{Perm} % Permutation group
+\newcommand{\PermM}[1]{\La_{#1}} % Permutation matrix
+% \setoperator{Out} % Outcome space
+\newcommand{\Events}[1]{\s{E}\br{#1}} % Set of events
+\newcommand{\Dom}[1]{\s{D}\br{#1}} % Domain
+
+\newcommand{\outc}[1]{o\bs{#1}} % Fritz's BBTII notation for observed outcomes
+\DeclareDocumentCommand{\prob}{O{} O{}}{\ifthenelse{\equal{#1}{}}{P}{P_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution
+\DeclareDocumentCommand{\probvec}{O{} O{}}{\ifthenelse{\equal{#1}{}}{\mathcal{P}}{\mathcal{P}_{#1}}\ifthenelse{\equal{#2}{}}{}{\br{#2}}} % probability distribution vector
+
+

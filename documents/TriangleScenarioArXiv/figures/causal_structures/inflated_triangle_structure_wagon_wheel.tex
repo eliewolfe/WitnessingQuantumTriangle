@@ -1,0 +1,47 @@
+\newcommand{\ift}{2.3}
+\newcommand{\hvspoke}{0.8}
+\newcommand{\diagspoke}{1.1}
+\begin{tikzpicture}[scale=2]
+    \begin{scope}[every node/.style=observed]
+        \node (A1) at ({0}, {\hvspoke}) {$\p{A}_1$};
+        \node (A2) at ({0}, {-\hvspoke}) {$\p{A}_2$};
+        \node (B1) at ({-\hvspoke}, {0}) {$\p{B}_1$};
+        \node (B2) at ({\hvspoke}, {0}) {$\p{B}_2$};
+        \node (C1) at ({+\diagspoke}, {+\diagspoke}) {$\p{C}_1$};
+        \node (C2) at ({+\diagspoke}, {-\diagspoke}) {$\p{C}_2$};
+        \node (C3) at ({-\diagspoke}, {-\diagspoke}) {$\p{C}_3$};
+        \node (C4) at ({-\diagspoke}, {+\diagspoke}) {$\p{C}_4$};
+    \end{scope}
+    \begin{scope}[every node/.style=latent]
+        \node (Y1) at (0, 0) {$\p{Y}_1$};
+        \node (X1) at ({0}, {2*\hvspoke}) {$\p{X}_1$};
+        \node (Z1) at ({2*\hvspoke}, {0}) {$\p{Z}_1$};
+        \node (X2) at ({0}, {-2*\hvspoke}) {$\p{X}_2$};
+        \node (Z2) at ({-2*\hvspoke}, {0}) {$\p{Z}_2$};
+    \end{scope}
+    \begin{scope}[every path/.style={draw=cause, thick}]
+        \path[postaction={on each segment={mid arrow}}]
+        % Y1
+        (Y1) -- (A1)
+        (Y1) -- (A2)
+        (Y1) -- (B1)
+        (Y1) -- (B2)
+        % X1
+        (X1) -- (C1)
+        (X1) -- (C4)
+        (X1) -- (A1)
+        % Z1
+        (Z1) -- (C1)
+        (Z1) -- (C2)
+        (Z1) -- (B2)
+        % X2
+        (X2) -- (C2)
+        (X2) -- (C3)
+        (X2) -- (A2)
+        % Z2
+        (Z2) -- (C4)
+        (Z2) -- (C3)
+        (Z2) -- (B1)
+        ;
+    \end{scope}
+\end{tikzpicture}

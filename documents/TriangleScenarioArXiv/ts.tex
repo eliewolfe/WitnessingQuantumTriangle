@@ -2,14 +2,10 @@
 \documentclass[aps, 10pt, english, twoside, pra, nofootinbib, tightenlines, longbibliography, superscriptaddress]{revtex4-1}
 
 % === All of the Packages I use frequently ===
-\usepackage{../../packages/document_config}
-\usepackage{../../packages/shared}
-\usepackage{../../packages/misc_commands}
-
-\renewcommand{\Events}[1]{\mathcal{S}\br{#1}} % This notation is conflicting
+\usepackage{packages/document_config}
 
 % === Causal structure formatting for tikz ===
-\input{../../figures/causal_structures/formatting}
+\input{figures/causal_structures/formatting}
 
 \begin{document}
     \title{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Structure}
@@ -101,13 +97,13 @@
     \begin{nscenter}
         \begin{minipage}[t]{.48\textwidth}
             \centering
-            \scalebox{1.0}{\input{../../figures/causal_structures/bell_scenario}}
+            \scalebox{1.0}{\input{figures/causal_structures/bell_scenario}}
             \caption{The Bell structure consisting of two observers $A, B$ together with measurement settings $S_{A}$ and $S_{B}$ respectively. The shared latent variable is labeled $\la$.}
             \label{fig:bell_structure}
         \end{minipage}\hspace{0.04\textwidth}%
         \begin{minipage}[t]{.48\textwidth}
             \centering
-            \scalebox{1.0}{\input{../../figures/causal_structures/triangle_structure}}
+            \scalebox{1.0}{\input{figures/causal_structures/triangle_structure}}
             \caption{The Triangle structure consisting of three observable variables $A,B,C$ and three latent variables $X, Y, Z$.}
             \label{fig:triangle_structure}
         \end{minipage}
@@ -141,7 +137,7 @@
     \label{sec:fritz_distribution}
     \begin{figure}
     \begin{nscenter}
-        \scalebox{1.0}{\input{../../figures/causal_structures/triangle_structure_operational_fritz_bell}}
+        \scalebox{1.0}{\input{figures/causal_structures/triangle_structure_operational_fritz_bell}}
         \caption{The Triangle structure re-imagined to mimic the Bell structure. The measurement settings $S_{A},S_{B}$ are latent nodes unlike the Bell structure (\cref{fig:bell_structure}).}
         \label{fig:triangle_structure_with_fritz_bell_embedded}
     \end{nscenter}
@@ -163,7 +159,7 @@
     The Fritz distribution may be visualized as a $4 \times 4 \times 4$ grid of possible outcomes as depicted in \cref{fig:fritz_distribution_visualized}. From this diagram, it can be seen that each of $C$'s outcomes restricts the possible outcomes for $A,B$ into a $2 \times 2$ block. When expressing the outcomes as pairs of binary digits, it can be seen that the left-hand bits for $A$ and $B$ (respectively denoted $A_l$, $B_l$) are fixed by (i.e. perfectly correlated with) the outcome of $C$. Pursuant to the embedding of~\cref{fig:triangle_structure_with_fritz_bell_embedded}, the left-hand bits $A_l$ and $B_l$ emulate the measurement settings $S_{A}$ and $S_{B}$, whereas the right-hand bits $A_r$ and $B_r$ emulate the outcomes which would be obtained by $A$ and $B$ back in the Bell structure (\cref{fig:bell_structure}). Critically, $C$'s bits are perfectly correlated with the left-bits of $A,B$; $C_l = A_l$ and $C_r = B_l$.
     \begin{figure}
     \begin{nscenter}
-            \includegraphics[scale=0.6]{../../figures/distributions/fritz_dist_plotted_bits.pdf}
+            \includegraphics[scale=0.6]{figures/distributions/fritz_dist_plotted_bits.pdf}
             \vspace{-0.2in}
             \[ \probplotvalue{253, 253, 84} = \f{1}{32}\br{2 - \sqrt{2}} \qquad \probplotvalue{11, 1, 0} = \f{1}{32}\br{2 + \sqrt{2}}\]
             \caption{The Fritz distribution visualized using a $4 \times 4 \times 4$ grid. The $4$ outcomes of $A,B,C$ are written in binary as a doublet of bits to illustrate that certain bits act as measurement pseudo-settings.}
@@ -297,14 +293,14 @@
     \begin{gather}
     \label[ineq]{eq:web_inequality}
         I\tsb{Web} : \\\nonumber
-        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\linewidth]{../../figures/inequalities/no_symwitness_ineq_print_standalone_halfed}
+        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\linewidth]{figures/inequalities/no_symwitness_ineq_print_standalone_halfed}
     \end{gather}
 
     % \subsection{Noisy Distributions}
 
     % \begin{figure}
     % \begin{nscenter}
-    %         \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/uniform_dist_plot.pdf}
+    %         \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{figures/distributions/uniform_dist_plot.pdf}
     %         \vspace{-0.2in}
     %         \[ \probplotvalue{255, 255, 109} = \f{1}{64} \]
     %         \caption{The completely uniform distribution $\s{U}$ visualized using a $4 \times 4 \times 4$ grid.}
@@ -329,11 +325,11 @@
 
     % \begin{figure}
     % \begin{subfigure}[b]{.48\linewidth}
-    % {\centering\includegraphics[width=\linewidth]{../../figures/noise/noise_2017.pdf}}
+    % {\centering\includegraphics[width=\linewidth]{figures/noise/noise_2017.pdf}}
     % \caption{Complete range of noise parameters $\vep$.}\label{fig:noise}
     % \end{subfigure}
     % \begin{subfigure}[b]{.48\linewidth}
-    % {\centering\includegraphics[width=\linewidth]{../../figures/noise/noise_2017_lims.pdf}}
+    % {\centering\includegraphics[width=\linewidth]{figures/noise/noise_2017_lims.pdf}}
     % \caption{\Cref{fig:noise} zoomed onto relevant region.}\label{fig:noise_zoomed}
     % \end{subfigure}
     % \caption{Inequality violations when subjected to uniform noise. Each inequality is normalized so that maximum violation is $-1$.}\label{fig:master_noise}
@@ -343,7 +339,7 @@
 
     \begin{figure}
     \begin{nscenter}
-            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/noise/noisy_yet_non_local_fritz.pdf}
+            \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{figures/noise/noisy_yet_non_local_fritz.pdf}
             \vspace{-0.2in}
             \[ \probplotvalue{255, 255, 243} = 0.00133 \]
             \caption{$\s{N}_{0.085}$: A noisy yet still non-classical variant of the Fritz distribution.}
@@ -361,7 +357,7 @@
     \begin{gather}
         \label[ineq]{eq:symmetric_web_inequality}
         I\tsb{SymmetricWeb} : \\\nonumber
-        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\linewidth]{../../figures/inequalities/MosekCertFritzSym_ineq_standalone_halfed}
+        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\linewidth]{figures/inequalities/MosekCertFritzSym_ineq_standalone_halfed}
     \end{gather}
 
     Note that $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$ and $\bs{P(113)P(330)}_3$ is shorthand for a sum the over permutations of $A,B,C$, i.e. $\bs{P(113)P(330)}_3 \defined P(113)P(330) + P(131)P(303) + P(311)P(033)$.
@@ -394,7 +390,7 @@
     % \subsection{Parameterizing Quantum Distributions}
     % \begin{figure}
     % \begin{nscenter}
-    %         \scalebox{1.0}{\input{../../figures/causal_structures/triangle_structure_operational}}
+    %         \scalebox{1.0}{\input{figures/causal_structures/triangle_structure_operational}}
     %         \caption{The Triangle structure as modeled by quantum states and measurements.}
     %         \label{fig:triangle_structure_quantum_model}
     % \end{nscenter}
@@ -413,21 +409,21 @@
 
     \begin{figure}
     \begin{nscenter}
-        \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/plotted_dist_I_1_max_violation_2017.pdf}
+        \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{figures/distributions/plotted_dist_I_1_max_violation_2017.pdf}
         \caption{A quantum probability distribution of the Triangle structure that maximizes violation of $I\tsb{Web}$. Notice that this distribution has precisely the same possibilistic structure as the Fritz distribution, as might be expected, since $I\tsb{Web}$ was specifically generated to witness the non-classicality of $\prob[\fritz]$.}
         \label{fig:maximum_violation_I_1}
     \end{nscenter}
     \end{figure}
     \begin{figure}
     \begin{nscenter}
-        \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/plotted_dist_I_3_max_violation_2017.pdf}
+        \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{figures/distributions/plotted_dist_I_3_max_violation_2017.pdf}
         \caption{A quantum probability distribution of the Triangle structure that maximizes violation of $I\tsb{SymmetricWeb}$. Notice that this distribution has precisely the same (assymetric!) possibilistic structure as the Fritz distribution, even though $I\tsb{SymmetricWeb}$ itself is symmetric with respect to permutations of the variables $A, B, C$. }
         \label{fig:maximum_violation_I_3}
     \end{nscenter}
     \end{figure}
     % \begin{figure}
     % \begin{nscenter}
-    %         \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{../../figures/distributions/symmetrized_fritz.pdf}
+    %         \includegraphics[scale=0.6,trim={0 0 0 0.4in},clip]{figures/distributions/symmetrized_fritz.pdf}
     %         \caption{An artificially-symmetrized version of the Fritz distribution, constructed by averaging the six permutations of $\prob[\fritz]$ over the variables $A, B, C$. While this construction significantly violates $I\tsb{SymmetricWeb}$, we have no reason to believe that this distribution should actually be achievable using quantum resources in the Triangle structure, so its role here is purely apophatic.}
     %         \label{fig:symmetrized_fritz}
     % \end{nscenter}
@@ -445,11 +441,11 @@
 
     % \begin{figure}
     % \begin{subfigure}[t]{.48\linewidth}
-    % {\centering\includegraphics[width=\linewidth]{../../figures/optimizations/Gaussian_Perturbation_Fritz_Color_Default.pdf}}
+    % {\centering\includegraphics[width=\linewidth]{figures/optimizations/Gaussian_Perturbation_Fritz_Color_Default.pdf}}
     % \caption{For each iteration step $k$, the inequality target decreases.}\label{fig:initial_conditions_a}
     % \end{subfigure}
     % \begin{subfigure}[t]{.48\linewidth}
-    % {\centering\includegraphics[width=\linewidth]{../../figures/optimizations/Gaussian_Perturbation_Fritz_Color_Zoomed.pdf}}
+    % {\centering\includegraphics[width=\linewidth]{figures/optimizations/Gaussian_Perturbation_Fritz_Color_Zoomed.pdf}}
     % \caption{\Cref{fig:noise} zoomed to show convergence is sensitive to initial conditions.}\label{fig:initial_conditions_b}
     % \end{subfigure}
     % \caption{Numerical optimizations aimed at violating causal compatibility inequalities are sensitive to initial conditions.}\label{fig:initial_conditions}
@@ -576,15 +572,15 @@
     \begin{nscenter}
     \begin{figure}
     \begin{subfigure}[b]{.30\linewidth}
-    \scalebox{0.65}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral}}
+    \scalebox{0.65}{\input{figures/causal_structures/inflated_triangle_structure_spiral}}
     \caption{The Spiral inflation.}\label{fig:spiral_inflation}
     \end{subfigure}
     \begin{subfigure}[b]{.30\linewidth}
-    \scalebox{0.65}{\input{../../figures/causal_structures/inflated_triangle_structure_wagon_wheel}}
+    \scalebox{0.65}{\input{figures/causal_structures/inflated_triangle_structure_wagon_wheel}}
     \caption{The Wagon-Wheel inflation.}\label{fig:wagon_wheel_inflation}
     \end{subfigure}
     \begin{subfigure}[b]{.30\linewidth}
-    \scalebox{0.65}{\input{../../figures/causal_structures/inflated_triangle_structure}}
+    \scalebox{0.65}{\input{figures/causal_structures/inflated_triangle_structure}}
     \caption{The Web Inflation.}\label{fig:the_web_inflation}
     \end{subfigure}
     \caption{Some inflations of the Triangle structure.}
@@ -603,20 +599,20 @@
     \begin{nscenter}
     \begin{figure}
     \begin{subfigure}[b]{.23\linewidth}
-    \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_1}}
+    \scalebox{0.8}{\input{figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_1}}
     \caption{$\AnSub[\graph']{\bc{A_1}}$}\label{fig:spiral_inflation_inj1}
     \end{subfigure}
     \begin{subfigure}[b]{.23\linewidth}
-    \scalebox{0.8}{\input{../../figures/causal_structures/triangle_structure_injectable_highlight_1}}
+    \scalebox{0.8}{\input{figures/causal_structures/triangle_structure_injectable_highlight_1}}
     \caption{$\AnSub[\graph]{\bc{A}}$}\label{fig:spiral_inflation_iminj1}
     \end{subfigure}
     % \par\bigskip % For vertical spacing https://tex.stackexchange.com/questions/120700/vertical-spacing-using-subcaption-package
     \begin{subfigure}[b]{.23\linewidth}
-    \scalebox{0.8}{\input{../../figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_2}}
+    \scalebox{0.8}{\input{figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_2}}
     \caption{$\AnSub[\graph']{\bc{A_2, C_1}}$}\label{fig:spiral_inflation_inj2}
     \end{subfigure}
     \begin{subfigure}[b]{.23\linewidth}
-    \scalebox{0.8}{\input{../../figures/causal_structures/triangle_structure_injectable_highlight_2}}
+    \scalebox{0.8}{\input{figures/causal_structures/triangle_structure_injectable_highlight_2}}
     \caption{$\AnSub[\graph]{\bc{A,C}}$}\label{fig:spiral_inflation_iminj2}
     \end{subfigure}
     \caption{Some injectable sets $\Inj[\graph]{\graph'}$ of the Spiral inflation ($\graph'$) and their corresponding images $\ImInj[\graph]{\graph'}$ in the Triangle structure ($\graph$).}
@@ -910,7 +906,7 @@
     % % \label{sec:perm_matrix}
     % % \begin{figure}
     % %     \centering
-    % %     \includegraphics[trim={1cm 1.2cm 1.0cm 1cm},clip,width=0.4\textwidth]{../../figures/perm_mtrx.pdf}
+    % %     \includegraphics[trim={1cm 1.2cm 1.0cm 1cm},clip,width=0.4\textwidth]{figures/perm_mtrx.pdf}
     % %     \caption{The permutation matrix $\netperm$ acting on $\br{\Hilb^2}^{\otimes 6}$ for the Triangle structure. Black entries represents a value of $1$ and white represents $0$.}
     % %     \label{fig:perm_mtrx}
     % % \end{figure}

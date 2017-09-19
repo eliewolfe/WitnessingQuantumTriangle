@@ -1,0 +1,21 @@
+\newcommand{\ift}{2.3}
+\begin{tikzpicture}[scale=2]
+    \begin{scope}[every node/.style=observed]
+        \node (C1) at ({-2 + 3*1/\ift}, {3*1/(\ift*sqrt(3))}) {$\p{C}_1$};
+        \node (B1) at ({2 - 3*1/\ift}, {3*1/(\ift*sqrt(3))}) {$\p{B}_1$};
+        \node (A1) at (0, {2*sqrt(3) - 2*2/sqrt(3)*(1/\ift)}) {$\p{A}_1$};
+    \end{scope}
+    \begin{scope}[every node/.style=latent]
+        \node (X1) at ({-1 + 1/\ift}, {sqrt(3) - 1/(\ift*sqrt(3))}) {$\p{X}_1$};
+        \node (Y2) at (1, {sqrt(3)}) {$\p{Y}_2$};
+        \node (Y1) at ({1 - 1/\ift}, {sqrt(3) - 1/(\ift*sqrt(3))}) {$\p{Y}_1$};
+        \node (Z1) at (0, 0.5) {$\p{Z}_1$};
+    \end{scope}
+    \begin{scope}[every path/.style={draw=cause, thick}]
+        \path[postaction={on each segment={mid arrow}}]
+        (X1) -- (A1) (X1) -- (C1)
+        (Y2) -- (A1) (Y1) -- (B1)
+        (Z1) -- (B1) (Z1) -- (C1)
+        ;
+    \end{scope}
+\end{tikzpicture}

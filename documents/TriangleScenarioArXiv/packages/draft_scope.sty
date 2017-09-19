@@ -1,0 +1,52 @@
+\usepackage{color} % For Colors
+\usepackage{xspace} % For annoying horizontal space to the right of string terms.
+
+% Defining const terms with appropriate xspace.
+\newcommand{\const}[2]{%
+\expandafter\newcommand\csname#1\endcsname{#2\xspace}%
+}
+
+% Sets a command to a value
+\newcommand{\set}[2]{
+    \ifcsname #1\endcsname%
+        \expandafter\renewcommand\csname#1\endcsname{#2\xspace}%
+    \else%
+        \expandafter\newcommand\csname#1\endcsname{#2\xspace}%
+    \fi%
+}
+
+\def\declare#1{\expandafter\def\csname#1\endcsname}
+
+%\def\setcat#1{\declare{getcat#1}##1{GOT CAT ##1!}}
+
+\def\scopedelim{private}
+
+% 1st Param: The name of the command; 2nd Param: The default recall value
+\def\setscope#1#2{%
+    \declare{\scopedelim#1}{#2\xspace}%
+    \declare{#1}##1{\declare{\scopedelim#1}{##1\xspace}\xspace}%
+}
+
+% 1st Param: The name of the command
+\def\getscope#1{%
+    \csname\scopedelim#1\endcsname%
+}
+
+\usepackage{ifthen} % For checking optional parameters
+
+\def\draftscope{draftscope}
+
+\newcommand{\draftprofile}[3][]{%
+    \expandafter\newcommand\csname \draftscope color#2\endcsname{#3}%
+    \expandafter\newcommand\csname \draftscope name#2\endcsname{\ifthenelse{\equal{#1}{}}{#2}{#1}}%
+}%
+
+\draftprofile{}{Red}%
+
+\newcommand{\comment}[2][]{%
+    \textcolor{\expandafter\csname \draftscope color#1\endcsname}{Comment\ifthenelse{\equal{#1}{}}{}{ (\expandafter\csname \draftscope name#1\endcsname)}: #2}%
+}%
+\newcommand{\todo}[2][]{%
+    \textcolor{\expandafter\csname \draftscope color#1\endcsname}{Todo\ifthenelse{\equal{#1}{}}{}{ (\expandafter\csname \draftscope name#1\endcsname)}: #2}%
+}%
+
