@@ -1,0 +1,33 @@
+\documentclass[preview]{standalone}
+
+\usepackage[showframe]{geometry}
+\geometry{
+paperwidth=8cm,
+paperheight=4cm,
+margin=0cm
+}
+\usepackage{../../document_config}
+\input{formatting}
+\begin{document}
+\begin{tikzpicture}[scale=1]
+    \begin{scope}[every node/.style=observed]
+        \node (C) at (-2, 0) {$C$};
+        \node (B) at (2, 0) {$B$};
+        \node (A) at (0, {2*sqrt(3)}) {$A$};
+    \end{scope}
+    \begin{scope}[every node/.style=latent]
+        \node (X) at (-1, {sqrt(3)}) {$X$};
+        \node (Y) at (1, {sqrt(3)}) {$Y$};
+        \node (Z) at (0, 0) {$Z$};
+    \end{scope}
+    \begin{scope}[every path/.style={draw=cause, thick}]
+        \path[postaction={on each segment={mid arrow}}]
+        (X) -- (A)
+        (X) -- (C)
+        (Y) -- (A)
+        (Y) -- (B)
+        (Z) -- (B)
+        (Z) -- (C);
+    \end{scope}
+\end{tikzpicture}
+\end{document}

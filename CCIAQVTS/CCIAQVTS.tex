@@ -1,11 +1,12 @@
 % === Revtex Declaration ===
 \documentclass[aps, 10pt, english, twoside, pra, nofootinbib, tightenlines, longbibliography, superscriptaddress]{revtex4-1}
 
-% === All of the Packages I use frequently ===
-\usepackage{packages/document_config}
+% === Bibliography Style Options ===
+\bibliographystyle{apsrev4-1}
+\setlength{\bibsep}{3pt plus 3pt minus 2pt}
 
-% === Causal structure formatting for tikz ===
-\input{figures/causal_structures/formatting}
+% === Packages ===
+\usepackage{document_config}
 
 \begin{document}
     \title{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Structure}
@@ -97,13 +98,13 @@
     \begin{nscenter}
         \begin{minipage}[t]{.48\textwidth}
             \centering
-            \scalebox{1.0}{\input{figures/causal_structures/bell_structure}}
+            \scalebox{1.0}{\includegraphics{figures/causal_structures/bell_structure}}
             \caption{The Bell structure consisting of two observers $A, B$ together with measurement settings $S_{A}$ and $S_{B}$ respectively. The shared latent variable is labeled $\la$.}
             \label{fig:bell_structure}
         \end{minipage}\hspace{0.04\textwidth}%
         \begin{minipage}[t]{.48\textwidth}
             \centering
-            \scalebox{1.0}{\input{figures/causal_structures/triangle_structure}}
+            \scalebox{1.0}{\includegraphics{figures/causal_structures/triangle_structure}}
             \caption{The Triangle structure consisting of three observable variables $A,B,C$ and three latent variables $X, Y, Z$.}
             \label{fig:triangle_structure}
         \end{minipage}
@@ -137,7 +138,7 @@
     \label{sec:fritz_distribution}
     \begin{figure}
     \begin{nscenter}
-        \scalebox{1.0}{\input{figures/causal_structures/triangle_structure_operational_fritz_bell}}
+        \scalebox{1.0}{\includegraphics{figures/causal_structures/triangle_structure_operational_fritz_bell}}
         \caption{The Triangle structure re-imagined to mimic the Bell structure. The measurement settings $S_{A},S_{B}$ are latent nodes unlike the Bell structure (\cref{fig:bell_structure}).}
         \label{fig:triangle_structure_with_fritz_bell_embedded}
     \end{nscenter}
@@ -390,7 +391,7 @@
     % \subsection{Parameterizing Quantum Distributions}
     % \begin{figure}
     % \begin{nscenter}
-    %         \scalebox{1.0}{\input{figures/causal_structures/triangle_structure_operational}}
+    %         \scalebox{1.0}{\includegraphics{figures/causal_structures/triangle_structure_operational}}
     %         \caption{The Triangle structure as modeled by quantum states and measurements.}
     %         \label{fig:triangle_structure_quantum_model}
     % \end{nscenter}
@@ -520,7 +521,7 @@
         \[ M_{m,j} \defined \begin{cases}
             1 & m = j|_{\s{D}\br{m}} \\
             0 & \text{otherwise}
-        \end{cases} \]
+        \end{cases} \eq \label{eq:incidence_definition}\]
         The incidence matrix has $\abs{\Events{\jointvar}}$ columns, $\abs{\Events{\mscenario}} = \sum_{i} \abs{\Events{V_i}}$ rows and $k\abs{\Events{\jointvar}}$ non-zero entries.
     \end{definition}
     To illustrate this concretely, consider the following example. Let $\jointvar$ be $3$ binary variables $\jointvar = \bc{A,B,C}$ and $\mscenario$ be the marginal scenario $\mscenario = \bc{\bc{A,B}, \bc{B,C}, \bc{A,C}}$. The incidence matrix for $\mscenario$ is:
@@ -572,15 +573,15 @@
     \begin{nscenter}
     \begin{figure}
     \begin{subfigure}[b]{.30\linewidth}
-    \scalebox{0.65}{\input{figures/causal_structures/inflated_triangle_structure_spiral}}
+    \scalebox{0.65}{\includegraphics{figures/causal_structures/inflated_triangle_structure_spiral}}
     \caption{The Spiral inflation.}\label{fig:spiral_inflation}
     \end{subfigure}
     \begin{subfigure}[b]{.30\linewidth}
-    \scalebox{0.65}{\input{figures/causal_structures/inflated_triangle_structure_wagon_wheel}}
+    \scalebox{0.65}{\includegraphics{figures/causal_structures/inflated_triangle_structure_wagon_wheel}}
     \caption{The Wagon-Wheel inflation.}\label{fig:wagon_wheel_inflation}
     \end{subfigure}
     \begin{subfigure}[b]{.30\linewidth}
-    \scalebox{0.65}{\input{figures/causal_structures/inflated_triangle_structure}}
+    \scalebox{0.65}{\includegraphics{figures/causal_structures/inflated_triangle_structure}}
     \caption{The Web Inflation.}\label{fig:the_web_inflation}
     \end{subfigure}
     \caption{Some inflations of the Triangle structure.}
@@ -599,20 +600,20 @@
     \begin{nscenter}
     \begin{figure}
     \begin{subfigure}[b]{.23\linewidth}
-    \scalebox{0.8}{\input{figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_1}}
+    \scalebox{0.8}{\includegraphics{figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_1}}
     \caption{$\AnSub[\graph']{\bc{A_1}}$}\label{fig:spiral_inflation_inj1}
     \end{subfigure}
     \begin{subfigure}[b]{.23\linewidth}
-    \scalebox{0.8}{\input{figures/causal_structures/triangle_structure_injectable_highlight_1}}
+    \scalebox{0.8}{\includegraphics{figures/causal_structures/triangle_structure_injectable_highlight_1}}
     \caption{$\AnSub[\graph]{\bc{A}}$}\label{fig:spiral_inflation_iminj1}
     \end{subfigure}
     % \par\bigskip % For vertical spacing https://tex.stackexchange.com/questions/120700/vertical-spacing-using-subcaption-package
     \begin{subfigure}[b]{.23\linewidth}
-    \scalebox{0.8}{\input{figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_2}}
+    \scalebox{0.8}{\includegraphics{figures/causal_structures/inflated_triangle_structure_spiral_injectable_highlight_2}}
     \caption{$\AnSub[\graph']{\bc{A_2, C_1}}$}\label{fig:spiral_inflation_inj2}
     \end{subfigure}
     \begin{subfigure}[b]{.23\linewidth}
-    \scalebox{0.8}{\input{figures/causal_structures/triangle_structure_injectable_highlight_2}}
+    \scalebox{0.8}{\includegraphics{figures/causal_structures/triangle_structure_injectable_highlight_2}}
     \caption{$\AnSub[\graph]{\bc{A,C}}$}\label{fig:spiral_inflation_iminj2}
     \end{subfigure}
     \caption{Some injectable sets $\Inj[\graph]{\graph'}$ of the Spiral inflation ($\graph'$) and their corresponding images $\ImInj[\graph]{\graph'}$ in the Triangle structure ($\graph$).}
@@ -944,8 +945,7 @@
     % By combining the optimizations of \cref{eq:unitary_GP,eq:unitary_RP,eq:unitary_R} together we arrive at an equivalent form for \cref{eq:spengler_unitary} that is computational more efficient.
     % \[ U = \bs{\prod_{m=1}^{d-1} \br{\prod_{n=m+1}^{d} R_{m,n}RP_{n,m}}} \cdot \bs{\prod_{l=1}^{d} GP_{l}}  \eq \label{eq:spengler_unitary_fast} \]
 
-    \setlength{\bibsep}{3pt plus 3pt minus 2pt}
-    \bibliographystyle{apsrev4-1}
+    % \bibliographystyle{apsrev4-1}
     \nocite{apsrev41Control}
     \bibliography{references}
 

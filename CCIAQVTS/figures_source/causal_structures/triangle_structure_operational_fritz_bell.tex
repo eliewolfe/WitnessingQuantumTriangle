@@ -1,13 +1,24 @@
+\documentclass[preview]{standalone}
+
+\usepackage[showframe]{geometry}
+\geometry{
+paperwidth=8cm,
+paperheight=4cm,
+margin=0cm
+}
+\usepackage{../../document_config}
+\input{formatting}
+\begin{document}
 \begin{tikzpicture}[scale=1]
     \begin{scope}[every node/.style=observed]
-        \node (C) at (0, -2.5) {$\p{C}$};
-        \node (B) at (2, 2) {$\p{B}$};
-        \node (A) at (-2, 2) {$\p{A}$};
+        \node (C) at (0, -2.5) {$C$};
+        \node (B) at (2, 2) {$B$};
+        \node (A) at (-2, 2) {$A$};
     \end{scope}
     \begin{scope}[every node/.style=latent]
-        \node (X) at (-2, 0) {$S_{\p{A}}$};
+        \node (X) at (-2, 0) {$S_{A}$};
         \node (Y) at (0, 0.5) {$\la$};
-        \node (Z) at (2, 0) {$S_{\p{B}}$};
+        \node (Z) at (2, 0) {$S_{B}$};
     \end{scope}
     \begin{scope}[every path/.style={draw=cause, thick}]
         \path[postaction={on each segment={mid arrow}}]
@@ -19,3 +30,4 @@
         (Z) -- (C);
     \end{scope}
 \end{tikzpicture}
+\end{document}

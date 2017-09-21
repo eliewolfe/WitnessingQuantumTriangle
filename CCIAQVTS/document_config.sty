@@ -5,26 +5,15 @@
 \definecolor{panblue}{RGB}{0,24,150}
 \definecolor{carmine}{RGB}{150, 0, 24}
 \definecolor{gray}{RGB}{150, 150, 150}
-\usepackage[
-    pdftex,
-    pdfversion=1.7,
-    pdfencoding=auto,
-    pdfnewwindow=true,
-    pdfusetitle=true,
-    bookmarks=true,
-    bookmarksnumbered=true,
-    bookmarksopen=true,
-    pdfpagemode=UseThumbs,
-    bookmarksopenlevel=1,
-    pdfpagelabels=false,
-    breaklinks=true,
-]{hyperref}
+\RequirePackage{hyperref} % ArXiv apparently does this automatically
 
-\hypersetup{colorlinks,
-linkcolor=carmine,
-citecolor=medblue,
-urlcolor=panblue,
-anchorcolor=OliveGreen}
+\hypersetup{
+    colorlinks,
+    linkcolor   = carmine,
+    citecolor   = medblue,
+    urlcolor    = panblue,
+    anchorcolor = OliveGreen
+}
 
 \usepackage{siunitx} % For units
 \usepackage{amsmath} % American mathematics society
@@ -186,16 +175,10 @@ anchorcolor=OliveGreen}
 % Script macro
 \newcommand{\s}[1]{\mathcal{#1}}
 
-% Vectors
-% see fancyvec
 % tilde
 \newcommand{\ti}[1]{\tilde{#1}\hspace{0pt}} % Note the hspace is for {\ti{a}^b}_c to render correctly
 \newcommand{\tbar}[1]{\bar{#1}\hspace{0pt}} % Note the hspace is for {\bar{a}^b}_c to render correctly
 \newcommand{\tk}[1]{\hspace{0pt}} % Note the hspace is for {\bar{a}^b}_c to render correctly
-
-% Scipt letters
-\def\rcurs{{\mbox{$\resizebox{.09in}{.08in}{\includegraphics[trim= 1em 0 14em 0,clip]{script_r/ScriptR.pdf}}$}}}
-\def\brcurs{{\mbox{$\resizebox{.09in}{.08in}{\includegraphics[trim= 1em 0 14em 0,clip]{script_r/BoldR.pdf}}$}}}
 
 % Differentials
 \newcommand{\dif}{\mathrm{d}} % differential
@@ -228,46 +211,6 @@ anchorcolor=OliveGreen}
 \newcommand{\iiintl}{\iiint\limits} % integral with limits alias
 \newcommand{\oiiintl}{\oiiint\limits} % integral with limits alias
 
-% siunitx
-\DeclareSIUnit\parsec{pc}
-\DeclareSIUnit\rot{rot}
-\DeclareSIUnit\yr{yr}
-\DeclareSIUnit\AU{AU}
-
-% Piecewise
-\newcommand{\piecewise}[4]{
-    \begin{cases}
-        #1 & #2 \\
-        #3 & #4
-    \end{cases}
-}
-
-
-% Wronskian
-\newcommand{\wron}{W[y_1,y_2](x)}
-
-% Block vector or matrix
-\newcommand{\mtrx}[1]{
-    \begin{bmatrix}
-    #1
-    \end{bmatrix}
-}
-
-% Block vector or matrix
-\newcommand{\pmtrx}[1]{
-    \begin{bmatrix}
-    #1
-    \end{bmatrix}
-}
-
-% 2 Column Vector
-\newcommand{\twovec}[2]{
-    \begin{bmatrix}
-    #1 \\
-    #2
-    \end{bmatrix}
-}
-\usepackage{color} % For Colors
 \usepackage{xspace} % For annoying horizontal space to the right of string terms.
 
 % Defining const terms with appropriate xspace.
@@ -351,8 +294,6 @@ anchorcolor=OliveGreen}
 
 % When I introduce a new term or definition
 \newcommand{\term}[1]{\textcolor{medblue}{\textbf{#1}}}
-
-
 
 % === Commonly re-occurring symbols ===
 \newcommand{\hgraph}{\mathcal{H}}
