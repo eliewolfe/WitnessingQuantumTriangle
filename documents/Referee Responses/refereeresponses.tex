@@ -1,0 +1,144 @@
+% === Revtex Declaration ===
+\documentclass[aps, 10pt, twoside, pra, tightenlines, superscriptaddress, notitlepage]{revtex4-1}
+
+% === Bibliography Style Options ===
+\bibliographystyle{apsrev4-1}
+\setlength{\bibsep}{3pt plus 3pt minus 2pt}
+
+% \usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{document_config}
+\newcounter{refereecounter}
+\newcounter{commentcounter}[refereecounter]
+\newcommand{\getcommentlabel}{\underline{\textbf{\arabic{refereecounter}.\arabic{commentcounter}}}}
+\newcommand{\refereecommentformat}[1]{\textcolor{darkgray}{#1}}
+
+\newcommand{\refereeresponse}[2]{
+    \stepcounter{commentcounter}
+    \begin{tabularx}{\textwidth}{rl}
+        \multicolumn{1}{m{0.8cm}}{\getcommentlabel}
+        &
+        \multicolumn{1}{p{0.92\textwidth}}{\refereecommentformat{#1}}
+        \\
+        &
+        \multicolumn{1}{p{0.92\textwidth}}{#2}
+        \\
+    \end{tabularx}
+}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+    \title{Causal compatibility Inequalities Admitting of Quantum Violations in the Triangle Structure [Referee Responses]}
+    \author{Thomas C. Fraser}
+    \email{tfraser@perimeterinstitute.ca}
+    \affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario, Canada, N2L 2Y5}
+    \affiliation{University of Waterloo, Waterloo, Ontario, Canada, N2L 3G1}
+    \author{Elie Wolfe}
+    \affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario, Canada, N2L 2Y5}
+    % \email{ewolfe@perimeterinstitute.ca}
+    \date{\today}
+    \maketitle
+
+    \stepcounter{refereecounter}
+    \section{Responses to First Referee}
+
+    \refereeresponse{This work considers the derivation of tests for discriminating classical correlations from non-classical correlations in a three-party scenario in which causal influences are pairwise shared between all three players. Hence it is a "triangle scenario". The authors apply the recently developed inflation technique to derive several new inequalities satisfied by all classical correlations in the triangle scenario. Next, they numerically study the ability of quantum theory to violate them. A quantum distribution that doesn't have a classical model has previously known -- Fritz's distribution. This distribution has a central role for how the authors approach the problem. In particular they manage to derive inequalities, robust to a small amount of noise, that detect Fritz's distribution, and some `similar' quantum distributions.}{}
+
+    \refereeresponse{This is a long and quite technical paper. Having read it, I understand that it is directed at a specialist audience knowledgeable on causal inference and/or network Bell inequalities. The comments that follow are made with this specialized audience in mind.}{}
+
+    \refereeresponse{As the original work, presented in sections VI to VIII, is heavy based on numeric and the computer-implemented inflation technique, I have not considered it reasonable to try to check the correctness of any derivations or numerical claims. I simply trust the authors on this matter.}{}
+
+    \refereeresponse{I think the paper is well-written. I had no troubles understanding the messages the authors presumably wished to convey. However, the paper is quite long. Therefore, I think it would benefit from a short and clear summary of what the main contribution of this paper is, and what the outlook is. This appears currently in the conclusions. However, I think it is worth outlining this much earlier in the paper, so that a reader knows what to expect from the long read. Practically, I am proposing that the part of the introduction in which the structure of the paper is presented, is expanded or supplemented.}{}
+
+    \refereeresponse{In general I appreciate this type of thorough basic research on a poorly understood topic by, due to currently lack of deep understanding, non-rigorous methods. I think it provides useful hints and shows the potential usefulness of the inflation technique for future work in this direction. By now, I believe it is well-established that it is a difficult matter to study quantum correlations in the triangle scenario. Therefore consider this type of investigations relevant.}{}
+
+    \refereeresponse{I consider this paper suitable for PRA, since many previous works on quantum networks have been published here and therefore the right audience will probably notice it. I recommend it for publication, given that my more detailed comments, appearing below, are taken into consideration before either being (partially) addressed or discarded with a good motivation.}{}
+
+    \refereeresponse{Regarding section VI. What is previously known about the inequalities of [21] and and [19]? Has nobody studied or attempted to violate these before? If yes, what were the results? I would be a bit surprised if triangle inequalities were derived but attempted to be violated by some super-classical model. Basically, I think it would be good to put the numerics for these inequalities into a bit more of a context.}{}
+
+    \refereeresponse{In addition, I am a bit puzzled by the following comment "These early results suggest that there is no quantum-classical gap in the Triangle structure for two-outcome measurements". Although I am personally prepared to believe this for various reasons, I do not see how the numerical study of the particular inequalities of [21] and [19] justifies it? Disregarding that (what I understand is) optimization from the interior of the quantum set, cannot prove the correctness (indeed only “suggest” the correctness) of such a statement, one would still need to know a thing or two about the properties of the inequalities considered. For example, the classical set is non-convex so there is no notion of a facet. Are the inequalities in [21] and [19] `optimal', so that the inability to violate them somehow indicates the lack of a quantum advantage for any inequality? If yes, what would it mean that an inequality in a non-convex setting is optimal? Furthermore, is it uniquely optimal, or can there be other unknown optimal inequalities where we could find a quantum violation? In summary, I wonder whether the claim is properly motivated.}{}
+
+    \refereeresponse{Regarding the new inequalities. Do the authors have some intuition for what type of inflations leads to interesting inequalities? It is stated that larger inflations were needed, as compared to those of ref [21]. Is it the case that the larger the inflation, the stronger the inequality? Furthermore, as far as I understand, a given inflations leads to many possible inequalities. Is there natural way to identify the interesting inequalities, or must check them one by one to find the interesting results? Again, if the authors have developed further intuition for such practically relevant matters of how to best use inflation, it would be good to mention it in the main text.}{}
+
+    \refereeresponse{Regarding genuine quantum triangle correlations. I fully agree with the authors that the Fritz distribution is manufactured to fit the triangle scenario based on the well-known CHSH violations. Indeed, this is not a genuine triangle correlation. This is sufficient to convince a reader that not all quantum violations of a triangle inequality are qualitatively interesting. However, an important issue would be to define what it means that a quantum triangle correlation is not based on Bell's theorem. The authors inherit this question from the work of Fritz. Although agreeing with the intuition, I think the intuition for this question is not yet sufficiently developed to be phrased as a meaningful question. Basically, what does it mean for a general probability distribution in the triangle not to be based on Bell's theorem?}{}
+
+    \refereeresponse{The authors have derived a triangle inequality with a quantum violation that is not identical to the Fritz distribution. Nevertheless, they make the following comment (in the conclusions):}{}
+
+    \refereeresponse{"Despite these advancements, the distributions we discovered hew closely to the Fritz distribution, indicating that their non-classical nature remains some recycled version of the non-classicality found in the Bell structure. Currently, it remains speculative about how to recognize whether-or-not a given distribution for the Triangle structure exhibits non-classical correlations of a fundamentally novel qualitative nature than Bell-type non-classicality."}{}
+
+    \refereeresponse{The inability to address my above question (what does it mean for triangle correlations not to be based on Bell's theorem?) hinders the authors to make a clear conclusion about their not-identical-but-quite-similar-to-Fritz's distribution. I would consider this an important question since it is essential to how strong a conclusion can be drawn from one of the key result of the paper. I am mildly surprised that the authors did not make an effort to at least partially address this matter. Perhaps the question could (at least) be rigorously formulated, i.e., a reasonable definition could be provided for what it means for triangle correlations not to be based on Bell's theorem. However, without knowing how such a definition may look, I suspect that resolving the question will not be straightforward. Nevertheless, it may be worth it for the authors to draw some attention to this poorly defined but clearly relevant idea.}{}
+
+    \stepcounter{refereecounter}
+    \section{Responses to Second Referee}
+
+    \refereeresponse{This paper reports on the use of the inflation technique to derive inequalities for the triangle causal structure that admit quantum violations. The triangle causal structure is a well-studied example and seems to be resistant to being solved elegantly. The authors make progress on this difficult problem, while still not getting to an elegant solution. However, the progress they make is interesting and qualitatively different to before, since the inequalities found are the first that are known to have quantum violations (there are many existing inequalities not known to have such violations).}{}
+
+    \refereeresponse{I am happy to recommend this be accepted subject to minor changes.}{}
+
+    \refereecommentformat{More detailed remarks/comments/questions:}
+
+    \refereecommentformat{Introduction:}
+
+    \refereeresponse{It is perhaps a bit strong to claim that *every* aspect of quantum phenomena that is non classical had led to practical exploitation for computation or communication. [note the typo "of"-\textgreater"or" shortly before [4]]}
+    {Agreed. Typo corrected. Modified sentence: ``Throughout history, numerous quantum phenomena which fail to be emulated by classical physics have been identified as resources for solving computational or communicational problems.''}
+
+    \refereeresponse{Sentence "This work is the first therefore...", should perhaps say "known" rather than "able"}
+    {Corrected.}
+
+    \refereeresponse{Related to the same paragraph, isn't is implied by [22] that such inequalities must exist in principle? Is one conclusion of the present paper that one doesn't have to go too far down the inflation chain to find one?}{}
+
+    \refereecommentformat{Sec II:}
+
+    \refereeresponse{Sentence "Specifically, the causal structure G hypothesizes..." has grammatical issues.}
+    {Agreed. Modified sentence: ``A causal structure $\graph$ hypothesizes that each variable $n \in \nodes$ is only directly influenced by its parents $\Pa[\graph]{n}$.''.}
+
+    \refereeresponse{Near the end of Sec II, "complete characterization for any causal structure": this remark clashed with a later remark on p5 that Bell's structure has a "complete classification of classicality".}{}
+
+    \refereecommentformat{Sec III:}
+
+    \refereeresponse{typo "asses"-\textgreater"assess"}
+    {Corrected.}
+
+    \refereeresponse{In (2) there is a P\_lambda missing after the sum.}
+    {This is a typo in the ArXiv submission and has was corrected for our PRA submission.}
+
+    \refereecommentformat{Sec V:}
+
+    \refereeresponse{Perhaps change "We close this loophole..." to "This loophole is closed..." to make clear this is not a new idea here.}
+    {Corrected: ``This loophole is closed by having...''.}
+
+    \refereecommentformat{Sec VII A:}
+
+    \refereeresponse{Last paragraph, maybe write P\_ABC as P\_\{A\_lA\_rB\_lB\_rC\_lC\_r\} or mention equivalence: if I understand correctly, the alphabet size must be 4 for each of A, B and C to use (11).}{}
+
+    \refereeresponse{typo "distribution very similar to P\_F itself" -\textgreater "distributions"}
+    {Corrected.}
+
+    \refereeresponse{Do you have any insights as to why the particular inflations considered turn out to be useful? Do you have any insight as to which inflations are likely to be useful?}{}
+
+    \refereeresponse{I'm not sure the figures of distributions are presented in the best way: given that (if I understand correctly) there are only 3 different values in Fig 5, for example, why not just state these individually (like is done for the white value) rather than give the scale of values.}{}
+
+    \refereecommentformat{Sec VIII:}
+
+    \refereeresponse{"..initial parameters such that the initial point of the optimization was close to P\_F.": can you say more about what "close" means? Were all parameters varied or only the nonzero parameters?}{}
+
+    \refereeresponse{"...violating it suboptimally than P\_F.": reword}
+    {Reworded sentence: ``To the contrary, out numerical optimization failed to find any symmetric quantum distributions capable of violating $I_{\text{SymmetricWeb}}$''.}
+
+    \refereecommentformat{Conclusions:}
+
+    \refereeresponse{Perhaps it is misleading to say that no noise is tolerated by Fritz's argument: his argument works for noisy entangled states (provided CHSH is still violated). Perhaps it is less obvious what happens when noise occurs elsewhere, but the other parts need only classical resources to realize in which case noise is less problematic. I would also imagine that even if it not literally robust as written that it could be made robust fairly easily.}{}
+
+    \refereeresponse{grammar: "a causal compatibility inequalities"}
+    {Corrected: ``...it was demonstrated that these causal compatibility inequalities are robust to noise...''.}
+
+    \refereeresponse{"advantages from a resource perspective": it isn't clear to me what you are referring to, so please add some explanation or reword.}{}
+
+    \refereeresponse{p14 typo: "which be solved"}
+    {Corrected: ``...which can be solved efficiently...''.}
+
+
+    % \nocite{apsrev41Control}
+    % \bibliography{references}
+
+\end{document}
