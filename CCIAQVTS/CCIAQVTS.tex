@@ -197,9 +197,9 @@
 
     As a preliminary search for quantum incompatibility in the Triangle structure, we performed numerical optimizations (in search of violation) against the previously-published compatibility inequalities of~\citet{Inflation}, as well as against the entropic inequalities of \citet{Henson_2014}. For historical context, the entropic inequalities of \cite{Henson_2014} have already been independently investigated for quantum incompatibility by \citet{Weilenmann_2016} using a variety of computational methods. Unfortunately, these methods failed to identify quantum-accessible distributions capable of violating any of the entropic inequalities considered by \cite{Weilenmann_2016}. Additionally, the inequalities presented in~\cite{Inflation} have not been previously investigated numerically.
 
-    Explicitly, we parameterized the subset of quantum distributions accessible by bipartite qubit density matrices and $2$-outcome POVM measurements\footnote{In \cref{sec:optimizations}, we discuss methods for conducting similar parameterizations of quantum states and measurements.}. This preliminary investigation did not yield interesting solutions, as none of the Triangle structure inequalities in~\cite{Inflation} or~\cite{Henson_2014} were violated\footnote{We also directly checked all 2-outcome coarse-grainings of the Fritz distribution against the inequalities in~\cite{Inflation,Henson_2014}, with no violation.}. Unfortunately, these early results are inconclusive for two reasons. First, an exhaustive search would need to consider the possibility of larger Hilbert spaces for the shared quantum states. Second, there is little reason to suggest that the inequalities considered in~\cite{Inflation} are complete; it is possible there are other constraints on two outcome distributions for the Triangle structure yet to be discovered.
+    Explicitly, we parameterized the subset of quantum distributions accessible by bipartite qubit density matrices and $2$-outcome POVM measurements\footnote{In \cref{sec:optimizations}, we discuss methods for conducting similar parameterizations of quantum states and measurements.}. This preliminary investigation did not yield interesting solutions, as none of the Triangle structure inequalities in~\cite{Inflation} or~\cite{Henson_2014} were violated\footnote{We also directly checked all 2-outcome coarse-grainings of the Fritz distribution against the inequalities in~\cite{Inflation,Henson_2014}, with no violation.}. Unfortunately, these early results are inconclusive for two reasons. First, an exhaustive search would need to consider the possibility of larger Hilbert spaces for the shared quantum states. Second, there it is known that the inequalities~\cite{Inflation} are incomplete; there exists other constraints on two outcome distributions for the Triangle structure yet to be discovered.
 
-    Nonetheless, having seen no quantum-classical gap in the Triangle structure for \textit{binary-outcome} measurements, a continued search for \emph{non}-classical distributions in the Triangle structure must expand the gamut of inequalities to optimize against to include inequalities referencing strictly more than two outcomes.
+    Nonetheless, having failed to observe a quantum-classical gap in the Triangle structure for \textit{binary-outcome} measurements, a continued search for \emph{non}-classical distributions in the Triangle structure must expand the gamut of inequalities to optimize against to include inequalities referencing strictly more than two outcomes.
 
     \section{Triangle Structure Inequalities}
     \label{sec:found_inequalities}
@@ -241,7 +241,7 @@
     \begin{gather}
     \label[ineq]{eq:web_inequality}
         I\tsb{Web} : \\\nonumber
-        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\linewidth]{ineq_web_ineq_standalone_halfed.pdf}
+        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\textwidth]{ineq_web_ineq_standalone_large.pdf}
     \end{gather}
 
     As mentioned in \cref{sec:fritz_distribution}, this original proof of the non-classicality of $\prob[\fritz]$ required an idealistic condition to hold: perfect correlations of $C$ with $A_l, B_l$. It is impossible to use Fritz's original argument to confirm non-classicality from an experimental point of view, because every laboratory-achievable distribution is subject to some amount of \text{noise}. One can minimize noise. e.g. by developing high-accuracy measurement channels, but \emph{perfect} correlations are unattainable. Causal compatibility inequalities such as  $I\tsb{Web}$ permit there to be noise within a set of observations before the ability to certify non-classicality breaks down.
@@ -273,10 +273,10 @@
     \begin{gather}
         \label[ineq]{eq:symmetric_web_inequality}
         I\tsb{SymmetricWeb} : \\\nonumber
-        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\linewidth]{ineq_sym_web_ineq_standalone_halfed.pdf}
+        \includegraphics[clip, trim=0cm 0cm 0cm 0.5cm, width=\textwidth]{ineq_sym_web_ineq_standalone_large.pdf}
     \end{gather}
 
-    Note that $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$ and $\bs{P(113)P(330)}_3$ is shorthand for a sum the over permutations of $A,B,C$, i.e. $\bs{P(113)P(330)}_3 \defined P(113)P(330) + P(131)P(303) + P(311)P(033)$.
+    Note that $\prob\br{abc}$ is shorthand for $\prob[ABC]\br{abc}$ and $\bs{P(113)P(330)}_3$ is shorthand for a sum the over permutations of $A,B,C$, e.g. $\bs{P(113)P(330)}_3 \defined P(113)P(330) + P(131)P(303) + P(311)P(033)$.
 
 
     \section{Numerical Optimization}\label{sec:optimizations}
@@ -325,7 +325,7 @@
 
     In~\cref{sec:fritz_distribution}, we defined the Fritz distribution and summarized the inequality-free proof of its     incompatibility with the Triangle structure due to~\cite{Fritz_2012}. In addition, \cref{sec:fritz_distribution} discusses Fritz's Problem as a quest to find quantum distributions incompatible with the Triangle structure that are also qualitatively distinct from those distributions which are incompatible with the Bell structure. In light of the perhaps unsatisfactory results of~\cref{sec:optimizations}, the purpose of this section is to revisit Fritz's problem and to attempt to rigorously formulate criterion for quantum non-classicality that is genuine to the Triangle structure.
 
-    When specifically concerned with entanglement resources, Bell structure non-classicality exploits the entanglement of a \textit{single} bipartite quantum state. Unlike the Bell structure in~\Cref{fig:bell_structure}, the observable nodes of the Triangle structure in~\Cref{fig:triangle_structure} have access to potentially \textit{three} different bipartite quantum states. As noted in~\cite{Fritz_2012}, the Fritz distribution can be implemented using only a \textit{single} entangled state.\footnote{Of course there exists implementations that make use of three entangled states but at \textit{minimum}, one is necessary.} Therefore, it becomes reasonable to propose that any quantum non-classicality in the Triangle structure that \textit{requires} entanglement in \textit{at least two} shared states constitutes non-classicality distinct from Bell non-classicality. At first, one might suspect that finding such distributions would affirmatively demonstrate a new form of entanglement resource unique to the Triangle structure. Unfortunately, this is not the case. By multiplying the cardinality of the outcomes for $A, B, C$ three-fold, it is possible to generate a distribution that is non-classical yet quantum and requires \textit{all three} of the shared resources to be entangled. This can be accomplished by superimposing three copies of statistically independent Fritz distributions to the Triangle structure, each of which utilizes a distinct party to announce the corresponding measurement pseudo-settings. Such a distribution would require entanglement in all three quantum states; under this construction, the removal of any entangled resource would render the distribution quantum-inaccessible\footnote{This observation was original provided by Miguel Navascués.}. Consequently, demanding the necessity of entanglement in every shared state is insufficient for finding novel non-classicality.
+    When specifically concerned with entanglement resources, Bell structure non-classicality exploits the entanglement of a \textit{single} bipartite quantum state. Unlike the Bell structure in~\Cref{fig:bell_structure}, the observable nodes of the Triangle structure in~\Cref{fig:triangle_structure} have access to potentially \textit{three} different bipartite quantum states. As noted in~\cite{Fritz_2012}, the Fritz distribution can be implemented using only a \textit{single} entangled state.\footnote{Of course there exists implementations that make use of three entangled states but at \textit{minimum}, one is necessary.} Therefore, it becomes reasonable to propose that any quantum non-classicality in the Triangle structure that \textit{requires} entanglement in \textit{at least two} shared states constitutes non-classicality distinct from Bell non-classicality. At first, one might suspect that finding such distributions would affirmatively demonstrate a new form of entanglement resource unique to the Triangle structure. Unfortunately, this is not the case. By increasing the cardinality of each variable $A, B, C$ to $4^{3} = 64$, it is possible to generate a distribution that is non-classical yet quantum and requires \textit{all three} of the shared resources to be entangled. This can be accomplished by superimposing three copies of statistically independent Fritz distributions to the Triangle structure, each of which utilizes a distinct party to announce the corresponding measurement pseudo-settings. Such a distribution would require entanglement in all three quantum states; under this construction, the removal of any entangled resource would render the distribution quantum-inaccessible\footnote{This observation was original provided by Miguel Navascués.}. Consequently, demanding the necessity of entanglement in every shared state is insufficient for finding novel non-classicality.
 
     In consideration of this particular construction, perhaps the correct assessment for novel non-classicality must incorporate a restriction on the the cardinality of the observed variables? Pursuant to this objective, we were able to prove the non-classicality of a variant of the Fritz distribution where $C$ has only two outcomes: the first corresponding to $A, B$ correlations and the second corresponding to $A, B$ anti-correlations\footnote{An inequality-free proof of the incompatibility of this distribution, using arguments analogous those presented in~\cite{Fritz_2012}, can be found in~\cite{Weilenmann_2016}. Assessing the compatibility of this variant using the methods in \cref{sec:marginal_satisfiability,sec:inflation_technique_summary,sec:deriving_inequalities} was first suggested to the authors by Denis Rosset.}. Nonetheless, such a distribution fails to deviate significantly from Bell non-classicality.
 
@@ -429,17 +429,20 @@
     \begin{figure}
     \begin{subfigure}[b]{.30\linewidth}
     \scalebox{0.65}{\includegraphics{figure_inflated_triangle_structure_spiral.pdf}}
-    \caption{The Spiral inflation.}\label{fig:spiral_inflation}
+    \caption{}
+    \label{fig:spiral_inflation}
     \end{subfigure}
     \begin{subfigure}[b]{.30\linewidth}
     \scalebox{0.65}{\includegraphics{figure_inflated_triangle_structure_wagon_wheel.pdf}}
-    \caption{The Wagon-Wheel inflation.}\label{fig:wagon_wheel_inflation}
+    \caption{}
+    \label{fig:wagon_wheel_inflation}
     \end{subfigure}
     \begin{subfigure}[b]{.30\linewidth}
     \scalebox{0.65}{\includegraphics{figure_inflated_triangle_structure.pdf}}
-    \caption{The Web Inflation.}\label{fig:the_web_inflation}
+    \caption{}
+    \label{fig:the_web_inflation}
     \end{subfigure}
-    \caption{Some inflations of the Triangle structure.}
+    \caption{Some inflations of the Triangle structure: (a) the Spiral inflation, (b) the Wagon-Wheel inflation, and (c) the Web Inflation.}
     \label{fig:inflations}
     \end{figure}
     \end{nscenter}
@@ -456,22 +459,26 @@
     \begin{figure}
     \begin{subfigure}[b]{.23\linewidth}
     \scalebox{0.8}{\includegraphics{figure_inflated_triangle_structure_spiral_injectable_highlight_1.pdf}}
-    \caption{$\AnSub[\graph']{\bc{A_1}}$}\label{fig:spiral_inflation_inj1}
+    \caption{}
+    \label{fig:spiral_inflation_inj1}
     \end{subfigure}
     \begin{subfigure}[b]{.23\linewidth}
     \scalebox{0.8}{\includegraphics{figure_triangle_structure_injectable_highlight_1.pdf}}
-    \caption{$\AnSub[\graph]{\bc{A}}$}\label{fig:spiral_inflation_iminj1}
+    \caption{}
+    \label{fig:spiral_inflation_iminj1}
     \end{subfigure}
     % \par\bigskip % For vertical spacing https://tex.stackexchange.com/questions/120700/vertical-spacing-using-subcaption-package
     \begin{subfigure}[b]{.23\linewidth}
     \scalebox{0.8}{\includegraphics{figure_inflated_triangle_structure_spiral_injectable_highlight_2.pdf}}
-    \caption{$\AnSub[\graph']{\bc{A_2, C_1}}$}\label{fig:spiral_inflation_inj2}
+    \caption{}
+    \label{fig:spiral_inflation_inj2}
     \end{subfigure}
     \begin{subfigure}[b]{.23\linewidth}
     \scalebox{0.8}{\includegraphics{figure_triangle_structure_injectable_highlight_2.pdf}}
-    \caption{$\AnSub[\graph]{\bc{A,C}}$}\label{fig:spiral_inflation_iminj2}
+    \caption{}
+    \label{fig:spiral_inflation_iminj2}
     \end{subfigure}
-    \caption{Some injectable sets $\Inj[\graph]{\graph'}$ of the Spiral inflation ($\graph'$) and their corresponding images $\ImInj[\graph]{\graph'}$ in the Triangle structure ($\graph$).}
+    \caption{Some injectable sets $\Inj[\graph]{\graph'}$ of the Spiral inflation ($\graph'$) and their corresponding images $\ImInj[\graph]{\graph'}$ in the Triangle structure ($\graph$): (a) $\AnSub[\graph']{\bc{A_1}}$, (b) $\AnSub[\graph]{\bc{A}}$, (c) $\AnSub[\graph']{\bc{A_2, C_1}}$, and (d) $\AnSub[\graph]{\bc{A,C}}$.}
     \label{fig:injectablesets}
     \end{figure}
     \end{nscenter}
