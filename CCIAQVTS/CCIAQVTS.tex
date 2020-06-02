@@ -211,11 +211,18 @@
     \begin{gathered}
         \eq\label[ineq]{eq:ww_ineq}
         I\tsb{WagonWheel} : \\
-        +P_{A_{l}B_{l}}(11) -P_{A_{l}B_{l}C_{l}C_{r}}(1111) +P_{A_{l}B_{l}}(00) P_{C_{l}C_{r}}(11) +P_{C_{l}C_{r}}(01) P_{C_{l}C_{r}}(10) \\
-        -P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(000000) -P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(010100) \\
-        -P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(001001) -P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(011101) \\
-        -P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(100110) -P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(110010) \\
-        +P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(101111) +P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(111011) \\
+        -P_{A_{l}B_{l}}(10)
+        +P_{A_{l}B_{l}C_{l}C_{r}}(1010)
+        -P_{A_{l}B_{l}}(01) P_{C_{l}C_{r}}(10)
+        -P_{C_{l}C_{r}}(00) P_{C_{l}C_{r}}(11) \\
+        -P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(100110)
+        -P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(110010) \\
+        +P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(101111)
+        +P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(111011) \\
+        +P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(001001)
+        +P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(011101) \\
+        +P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(000000)
+        +P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(010100) \\
         \leq 0
     \end{gathered}
     \end{equation*}
@@ -224,7 +231,7 @@
 
     Aside from increasing outcome cardinality, we are also forced to consider larger inflations than those analyzed in~\cite{Inflation}. This is because we found the smaller inflations considered there, such as the Spiral inflation depicted in \cref{fig:spiral_inflation}, were simply \textit{unable} to witness the incompatibility of the Fritz distribution, even when analyzed explicitly using four possible outcomes for every observable variable.
 
-    By construction, every distribution $\prob[ABC]$ that is compatible with the Triangle structure per \cref{eq:triangle_compatibility} must satisfy $I\tsb{WagonWheel}$. On the other hand, the Fritz distribution violates $I\tsb{WagonWheel}$ with violation $\f{1}{16} \not \leq 0$. Consequently we affirm that the Fritz distribution is incompatible with the Triangle structure, a fact previously only demonstrated without inequalities.
+    By construction, every distribution $\prob[ABC]$ that is compatible with the Triangle structure per \cref{eq:triangle_compatibility} must satisfy $I\tsb{WagonWheel}$. On the other hand, the Fritz distribution violates $I\tsb{WagonWheel}$ with violation $\f{1}{16}(\sqrt{2} - 1) \not \leq 0$. Consequently we affirm that the Fritz distribution is incompatible with the Triangle structure, a fact previously only demonstrated without inequalities.
 
     \subsection{The Web Inequality}
     \label{sec:noise}
