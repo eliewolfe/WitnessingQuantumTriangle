@@ -7,6 +7,61 @@
 \usepackage{../../packages/misc_commands}
 
 \begin{document}
+
+    \section{June 1, 2020:}
+    As of today, it appears that there is an error in the WagonWheel inequality that ended up in the final manuscript (i.e. $I\tsb{WagonWheelAlternativeProperSwap}$). Specifically, the uniform distribution over all six bits $A_l, A_r, B_l, B_r, C_l, C_r$, which is causally compatible with the Triangle network, actually violates $I\tsb{WagonWheelAlternativeProperSwap}$:  
+    \[ I\tsb{WagonWheelAlternativeProperSwap}\left(\frac{1}{2^6}\right) = +\left(\frac{1}{2}\right)^2-\left(\frac{1}{2}\right)^4+\left(\frac{1}{2}\right)^4+\left(\frac{1}{2}\right)^4\cdots\]
+    \[\cdots-\left(\frac{1}{2}\right)^8-\left(\frac{1}{2}\right)^8-\left(\frac{1}{2}\right)^8-\left(\frac{1}{2}\right)^8-\left(\frac{1}{2}\right)^8-\left(\frac{1}{2}\right)^8+\left(\frac{1}{2}\right)^8+\left(\frac{1}{2}\right)^8 = \frac{19}{64} \not \leq 0.\]
+    Therefore, $I\tsb{WagonWheelAlternativeProperSwap}$ is clearly an invalid inequality and a mistake was introduced somewhere. The actually inequality that Elie proposed was $I\tsb{WagonWheelAlternative}$. In order to make the inequality in the paper correspond to the Fritz distribution in the paper, wherein $C_lC_r = 11$ plays the distinguished role, I attempted to flip the bits for $C_r$ and $B_l$ and erroneously derived $I\tsb{WagonWheelAlternativeProperSwap}$. The \textit{correct} version would have been:
+    \begin{equation*}
+    \begin{gathered}
+        \eq
+        I\tsb{WagonWheelCorrectBitFlip} : \\
+        -P_{A_{l}B_{l}}(11) \\
+        +P_{A_{l}B_{l}C_{l}C_{r}}(1111) \\
+        -P_{A_{l}B_{l}}(00) P_{C_{l}C_{r}}(11) \\
+        -P_{C_{l}C_{r}}(01) P_{C_{l}C_{r}}(10) \\
+        +P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(100110) \\
+        +P_{C_{l}C_{r}}(01) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(110010) \\
+        -P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(101111) \\
+        -P_{C_{l}C_{r}}(00) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(111011) \\
+        +P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(000000) \\
+        +P_{C_{l}C_{r}}(11) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(010100) \\
+        +P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(001001) \\
+        +P_{C_{l}C_{r}}(10) P_{A_{l}A_{r}B_{l}B_{r}C_{l}C_{r}}(011101) \\
+        \leq 0
+    \end{gathered}
+    \end{equation*}
+    This inequality when evaluated at the Fritz distribution ($P_F$) reads term by term:
+    \begin{equation*}
+    \begin{gathered}
+        \eq
+        I\tsb{WagonWheelCorrectFlip}(P_F) : \\
+        -\frac{1}{4}
+        +\frac{1}{4}
+        -\left(\frac{1}{4}\right)^2
+        -\left(\frac{1}{4}\right)^2\\
+        +\frac{1}{4}\left(\frac{1}{32}\left(2-\sqrt{2}\right)\right)
+        +\frac{1}{4}\left(\frac{1}{32}\left(2-\sqrt{2}\right)\right)
+        -\frac{1}{4}\left(\frac{1}{32}\left(2+\sqrt{2}\right)\right)
+        -\frac{1}{4}\left(\frac{1}{32}\left(2+\sqrt{2}\right)\right) \\
+        +\frac{1}{4}\left(\frac{1}{32}\left(2+\sqrt{2}\right)\right)
+        +\frac{1}{4}\left(\frac{1}{32}\left(2+\sqrt{2}\right)\right)
+        +\frac{1}{4}\left(\frac{1}{32}\left(2+\sqrt{2}\right)\right)
+        +\frac{1}{4}\left(\frac{1}{32}\left(2+\sqrt{2}\right)\right) \\
+        =-\frac{1}{16} \leq 0
+    \end{gathered}
+    \end{equation*}
+    Additionally, this inequality when evaluated at the uniform distribution reads term by term:
+    \[ I\tsb{WagonWheelCorrectFlip}\left(\frac{1}{2^6}\right) = -\left(\frac{1}{2}\right)^2+\left(\frac{1}{2}\right)^4-\left(\frac{1}{2}\right)^4-\left(\frac{1}{2}\right)^4\cdots\]
+    \[\cdots+\left(\frac{1}{2}\right)^8+\left(\frac{1}{2}\right)^8-\left(\frac{1}{2}\right)^8-\left(\frac{1}{2}\right)^8+\left(\frac{1}{2}\right)^8+\left(\frac{1}{2}\right)^8+\left(\frac{1}{2}\right)^8+\left(\frac{1}{2}\right)^8 = -\frac{19}{64} \leq 0\]
+    Upon closer inspection, $I\tsb{WagonWheelCorrectFlip}$ is identical to the inequality found in the paper, with the direction of inequality reverse (i.e. it was off by an overall minus sign). 
+
+    Therefore, it appears that either 1) I have isolated the wrong variables to bit-flip in Elie's $I\tsb{WagonWheelAlternative}$, 2) $I\tsb{WagonWheelAlternative}$ was transcribed from Elie incorrectly, 3) $I\tsb{WagonWheelAlternative}$ is incapable of witnessing the Fritz distribution, or 4) $I\tsb{WagonWheelAlternative}$ is not a valid inequality in the first place.
+
+    I suspect the resolution is of type 2) because the Fritz distribution is all about the agreement or disagreement between $A_r$ and $B_r$ in four different $C_lC_r$ contexts, and $I\tsb{WagonWheelAlternative}$ seems to have $A_r = B_r$ in two contexts and $A_r \neq B_r$ in the other two contexts, which is unlike the form of the Fritz distribution.
+
+    \section{September 18, 2017:}
     The current WagonWheel inequality we are using in the paper is the following:
     \begin{equation*}
     \begin{gathered}
