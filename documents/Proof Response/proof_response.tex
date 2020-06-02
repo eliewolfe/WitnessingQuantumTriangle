@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage{verbatim}
+\makeatletter
+\newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
+\makeatother
+\verbatimfont{\footnotesize}%
+
+\usepackage[margin=1in]{geometry}
+
+
+
+\begin{document}
+    \begin{center}
+        \textbf{Proof Corrections for AN11411} \\
+        \textbf{Causal Compatibility Inequalities Admitting of Quantum Violations in the Triangle Structure} \\
+        Thomas C. Fraser and Elie Wolfe \\
+        Perimeter Institute for Theoretical Physics, Waterloo, Ontario, Canada, N2L 2Y5 \\
+        University of Waterloo, Waterloo, Ontario, Canada, N2L 3G1\\
+        August 1, 2018
+    \end{center}
+
+    \textbf{Attached Files:}
+    \begin{itemize}
+        \item {\verb|references.bib|} is a complete references file for the entire manuscript. Specifically, entries that required updating have been updated pursuant to the individual updates summarized below.
+        \item Each of the four \verb|figure_*.pdf| files are explained in correction (7.) below:
+    \end{itemize}
+
+    \textbf{Specific Questions and Comments to Address for This Paper:}
+    \begin{enumerate}
+        \item Currently, the publishing information for this reference is up-to-date.
+        \item The authors agree completely with all associated modifications made to the article pursuant to the policy on claims of priority and novelty of contributions.
+        \item The authors have checked the proof completely and have no corrections to make regarding the removal of italics or boldface.
+        \item The authors approve of all substitutions made regarding the use of slash between words throughout the document.
+        \item Thank you for pointing out this one sentence paragraph. The proof matches exactly how the authors would/will correct this mistake.
+        \item Noted and approved.
+        \item Regarding figures 4, 5, 6 and 7, the incorrect figures were used in the proof. The discrepancy between the figure files and appearance in the submitted article were a result of using the a clipping/trimming option of \verb|\includegraphics| command of the \verb|graphicx| package in order to trim whitespace and superfluous figure titles. The usage of this option is as follows:
+        \begin{verbatim}\includegraphics[trim={<left> <lower> <right> <upper>},clip]{figure_example.pdf}\end{verbatim}
+        Nonetheless, attached to this proof correction are ``corrected'' figure replacements for figures 4, 5, 6 and 7 which have the cropping already applied. As such, the figures should now appear correctly in the article and will match the figure files exactly. The figure files are respectively named:
+        \begin{verbatim}
+        figure_fritz_dist_plotted_bits.pdf
+        figure_noisy_yet_non_local_fritz.pdf
+        figure_plotted_dist_I_1_max_violation.pdf
+        figure_plotted_dist_I_3_max_violation.pdf
+        \end{verbatim}
+        Regarding figures 4 and 5 only, the colored gradient legends have been removed and replaced with the explicit legends. In the original manuscript, these explicit legends were included adjacent to the figure as an equation. These legends are now a part of the attached figure files, as they should be.
+        \item The deletion of \verb|\cdot| and addition of \verb|\times| in equation (17) is appropriate.
+        \item Broyden-Fletcher-Goldfarb-Shanno is the correct ``de-initialism'' of BFGS.
+        \item Thanks for noticing that the original sentence was missing something. However, the use of ``include'' here would be inappropriate. Ultimately, our original definition was unnecessarily complicated and confusing. The authors recommend the following substitution: ``...in fact Fig. 6 and Fig. 4 share their possibilistic structure. A distribution's possibilistic structure is the subset of events which it assigns a non-zero probability. That Fig. 6 and Fig. 4 have the same...''
+        \item This reference is correct and its link is accurate.
+        \item The reference for [13] is correct in the proof. Updated publishing information for [13]:
+        \begin{verbatim}
+@inproceedings{evans2012graphical,
+  author={R. J. Evans},
+  booktitle={2012 IEEE International Workshop on Machine Learning for Signal Processing},
+  title={Graphical methods for inequality constraints in marginalized DAGs},
+  year={2012},
+  volume={},
+  number={},
+  pages={1-6},
+  doi={10.1109/MLSP.2012.6349796},
+  ISSN={2378-928X},
+  month={Sept},
+}
+        \end{verbatim}
+        \item Updated publishing information for [13]:
+        \begin{verbatim}
+@article{Steudel_2010,
+  title={Information-theoretic inference of common ancestors},
+  author={Steudel, Bastian and Ay, Nihat},
+  journal={Entropy},
+  volume={17},
+  number={4},
+  pages={2304--2327},
+  year={2015},
+  url={http://www.mdpi.com/1099-4300/17/4/2304/htm},
+  publisher={Multidisciplinary Digital Publishing Institute}
+}
+        \end{verbatim}
+        \item The reference for [20] is correct in the proof. Updated publishing information for [20]:
+        \begin{verbatim}
+@article{Weilenmann_2016,
+  title={Non-Shannon inequalities in the entropy vector approach to causal structures},
+  author={Weilenmann, Mirjam and Colbeck, Roger},
+  journal={Quantum},
+  volume={2},
+  pages={57},
+  year={2018},
+  url={https://quantum-journal.org/papers/q-2018-03-14-57/},
+  publisher={Verein zur F{\"o}rderung des Open Access Publizierens in den Quantenwissenschaften}
+}
+        \end{verbatim}
+        \item Publishing information for [21] is accurate and up-to-date.
+        \item Publishing information for [22] is accurate and up-to-date.
+        \item Updated publishing information for [23]:
+        \begin{verbatim}
+@article {evans2015margins,
+  author = {Evans, Robin J.},
+  title = {{Graphs for Margins of Bayesian Networks}},
+  journal = {Scandinavian J. Stat.},
+  volume = {43},
+  number = {3},
+  issn = {1467-9469},
+  url = {https://arxiv.org/abs/1408.1809},
+  doi.hide = {10.1111/sjos.12194},
+  pages = {625--648},
+  keywords = {causal model, directed acyclic graph, latent variable},
+  year = {2016},
+  note = {10.1111/sjos.12194},
+}
+        \end{verbatim}
+        \item Publishing information for [24] is accurate and up-to-date. Also appeared in Conference Proceedings in 2012:
+        \begin{verbatim}
+@inproceedings{richardson2012nested,
+  title={Nested Markov properties for acyclic directed mixed graphs},
+  author={Richardson, Thomas S and Robins, James M and Shpitser, Ilya},
+  booktitle={Proceedings of the Twenty-Eighth Conference on Uncertainty in Artificial Intelligence},
+  pages={13--13},
+  year={2012},
+  organization={AUAI Press}
+}
+        \end{verbatim}
+        \item Publishing information for [29] is accurate and up-to-date.
+        \item Publishing information for [31] is accurate and up-to-date.
+        \item Publishing information for [34] is accurate, accessed today and available at:
+        \begin{verbatim}
+https://wiki.math.ntnu.no/_media/ma2501/2014v/cholesky.pdf
+        \end{verbatim}
+        \item The reference for [47] is correct in the proof.
+        \item The reference for [48] is correct in the proof.
+        \item The reference link for [51] is no longer directed to the correct documentation page as version 6.5 is no longer supported. An updated link and reference for version 8.0 is:
+        \begin{verbatim}
+@Misc{Gurobi_2016,
+  author  = {{Gurobi Optimizer}},
+  title   = {{FarkasDual}},
+  year    = {2018},
+  url     = {https://www.gurobi.com/documentation/8.0/refman/farkasdual.html},
+  urldate = {2018-08-01},
+}
+        \end{verbatim}
+        \item The reference for [52] is correct in the proof.
+        \item The reference for [53] is correct in the proof.
+        \item The reference for [54] is correct in the proof.
+        \item[FQ.] The funding information is both correct and complete.
+        \item[Q.]
+        \begin{itemize}
+            \item The references for [6,15,24] are correct in the proof.
+            \item The authors recommend that these private communications be dated: November 2016 for [27] and August 2017 for both [41] and [42].
+            \item The reference for [59] is mostly correct; this technical report was ``published'' by the Cambridge University Engineering Dept. An access url is \verb|https://infoscience.epfl.ch/record/169768/|.
+        \end{itemize}
+    \end{enumerate}
+
+    \textbf{Other Comments to Address for This Paper:}
+    \begin{itemize}
+        \item The author's names and institution's names are all spelled correctly.
+        \item The removal of the word ``of'' from the paper title is noted by the authors and approved.
+        \item The justification of items within Tables I and II are inconsistent.
+        \item In equation (C1), the addition of the \verb|\times| is incorrect. The pertinent portion of equation (C1) is intended to be a comma separated list.
+        \item Page 16 line 1097, there is an inappropriate citation to [59]; the surrounding sentence should read ``A popular tool for linear quantifier elimination is Fourier-Motzkin elimination [21,55,58].'' with [59] omitted.
+        \item Page 1 line 50, should read ``...inequalities can be understood as consequences...''. Currently, the word ``be'' is missing.
+        \item Page 3 line 169, there is a math typo: the descendants of a node $\Delta[\mathcal{G}]n$ should be $\mathsf{De}_{\mathcal{G}}(n)$. Specifically, \verb|\mathsf{De}_{\mathcal{G}}(n)| produces the desired effect.
+        \item Page 3 line 198, there is a typo in an inline equation. The surrounding sentence should read: ``...existence or non-existence of a set of causal parameters for $\mathcal G$ such that $P_{\mathcal{N}_{O}} = \sum_{n \not \in \mathcal{N}_{O}} P_{\mathcal{N}}$ where $P_{\mathcal{N}}$ is again given by Eq. (1). The complementary...''.
+        \item Page 5 line 381, there is a small typo; ``variable'' should be ``variables''. The surrounding sentence should read: ``...crucial distinction is that $S_{A}$ and $S_{B}$ are random variables representing...''.
+        % \item Page 6 line 472, ``Section VI'' should be ``Sec. VI'' to be consistent with the remainder of the document.
+        \item Page 7 line 511, ``there'' should be omitted. ``Second, it is known that the inequalities...''.
+        \item In several locations, the proof correctly replaces the usage of ``Section'' with its shorthand ``Sec.''. Should this correction also be applied to usage of ``Appendix'', i.e. ``Appendix'' becomes ``App.'' where applicable?
+    \end{itemize}
+
+\end{document}

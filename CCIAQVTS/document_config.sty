@@ -133,7 +133,7 @@
 \newcommand{\ga}{\gamma}
 \newcommand{\Ga}{\Gamma}
 \newcommand{\de}{\delta}
-\newcommand{\De}{\Delta}
+% \newcommand{\De}{\Delta}
 \newcommand{\ep}{\epsilon}
 \newcommand{\vep}{\varepsilon}
 \newcommand{\Ep}{\epsilon}
@@ -322,15 +322,6 @@
 \newcommand{\supp}[1]{\si\br{#1}}
 \newcommand{\kone}{\mathbf{1}}
 \newcommand{\kzer}{\textcolor{gray}{0}}
-
-\newcommand{\probplotvalue}[1]{%
-    \definecolor{probvalcolor}{RGB}{#1}%
-    \definecolor{outlinecolor}{RGB}{127, 127, 127}%
-    \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]%
-        \pgfmathsetmacro{\size}{0.2};%
-        \draw[outlinecolor, fill=probvalcolor] (-\size,-\size) -- (-\size, +\size) -- (+\size, +\size) -- (+\size, -\size) -- cycle;%
-    \end{tikzpicture}%
-}%
 
 % \newcommand{\mext}[1]{E_{#1}}
 % \newcommand{\mul}[1]{\Gamma_{#1}}

@@ -1,0 +1,26 @@
+\documentclass[preview]{standalone}
+
+
+\usepackage{graphicx}
+\usepackage[showframe]{geometry}
+\geometry{
+paperwidth=11cm,
+paperheight=5cm,
+margin=0cm
+}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\newcommand{\probplotvalue}[1]{%
+    \definecolor{probvalcolor}{RGB}{#1}%
+    \definecolor{outlinecolor}{RGB}{127, 127, 127}%
+    \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]%
+        \pgfmathsetmacro{\size}{0.25};%
+        \draw[outlinecolor, fill=probvalcolor] (-\size,-\size) -- (-\size, +\size) -- (+\size, +\size) -- (+\size, -\size) -- cycle;%
+    \end{tikzpicture}%
+}%
+\begin{document}
+    \includegraphics[trim={1cm 2.2cm 1cm 1cm}, clip, scale=0.6]{fritz_dist_plotted_bits_uncropped.pdf}
+    \[ \probplotvalue{253, 253, 84} = \frac{1}{32}(2 - \sqrt{2}) \qquad \probplotvalue{11, 1, 0} = \frac{1}{32}(2 + \sqrt{2}) \qquad \probplotvalue{255, 255, 255} = 0\]
+    \vspace{0cm} %whitespace hack
+\end{document}
